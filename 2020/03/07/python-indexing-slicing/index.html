@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    [파이썬] 산술연산자 |
+    [파이썬] 문자열 인덱싱 및 잘라내기 |
     
     Sohee&#39;s Dev Log !</title>
   
@@ -31,7 +31,7 @@
   <section class="outer">
   
 
-<article id="post-python-arithmetic-operators" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-python-indexing-slicing" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -39,7 +39,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      [파이썬] 산술연산자
+      [파이썬] 문자열 인덱싱 및 잘라내기
     </h1>
   
   
@@ -52,8 +52,8 @@
 
     
       <div class="article-meta">
-        <a href="/2020/03/04/python-arithmetic-operators/" class="article-date">
-  <time datetime="2020-03-04T12:50:00.000Z" itemprop="datePublished">2020-03-04</time>
+        <a href="/2020/03/07/python-indexing-slicing/" class="article-date">
+  <time datetime="2020-03-07T07:14:00.000Z" itemprop="datePublished">2020-03-07</time>
 </a>
         
       </div>
@@ -61,8 +61,6 @@
 
     
       
-    <div class="tocbot"></div>
-
 
 
 
@@ -76,47 +74,27 @@
       
 
       
-        <h4 id="산술연산자-Arithmetic-Operators"><a href="#산술연산자-Arithmetic-Operators" class="headerlink" title="산술연산자 (Arithmetic Operators) :"></a>산술연산자 (Arithmetic Operators) :</h4><table>
-<thead>
-<tr>
-<th>Operater</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>+</td>
-<td>더하기</td>
-</tr>
-<tr>
-<td>-</td>
-<td>빼기</td>
-</tr>
-<tr>
-<td>*</td>
-<td>곱하기</td>
-</tr>
-<tr>
-<td>/</td>
-<td>나누기</td>
-</tr>
-<tr>
-<td>%</td>
-<td>나머지</td>
-</tr>
-<tr>
-<td>**</td>
-<td>제곱</td>
-</tr>
-<tr>
-<td>//</td>
-<td>몫</td>
-</tr>
-</tbody></table>
+        <blockquote>
+<p>문자열 잘라내기</p>
+</blockquote>
+<p>‘hello world’ 에서 일부만 자르고 싶을 때, </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">'hello world'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>:<span class="number">5</span>]</span><br><span class="line"><span class="string">'hello'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">6</span>:<span class="number">11</span>]</span><br><span class="line"><span class="string">'world'</span></span><br></pre></td></tr></table></figure>
+
+<p><code>a[0:5]</code> 와 <code>a[:5]</code> 는 같은 문자열(‘hello’)을 출력한다.</p>
+<p>또한</p>
+<p><code>a[6:11]</code> 과 <code>a[6:]</code> 또한 같은 문자열(‘world’)을 출력한다.</p>
+<blockquote>
+<p>음수 인덱싱</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">6</span>:<span class="number">-2</span>]</span><br><span class="line"><span class="string">'wor'</span></span><br></pre></td></tr></table></figure>
+
+<p><code>a[6:-2]</code>에서 <code>-2</code>는 뒤에서 2번째까지 잘라내겠다는 것을 의미한다 따라서 맨 뒤에 문자 ld가 잘린것을 볼 수 있다.</p>
+<p><a href="https://wikidocs.net/2838" target="_blank" rel="noopener">참고</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/04/python-arithmetic-operators/" data-id="ck7dcsleo00027cw89pr701zp"
+      <a data-url="http://yoursite.com/2020/03/07/python-indexing-slicing/" data-id="ck7ha2yx60000mow87ggy0k8a"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
@@ -129,19 +107,10 @@
     
   <nav class="article-nav">
     
-      <a href="/2020/03/07/python-indexing-slicing/" class="article-nav-link">
-        <strong class="article-nav-caption">Newer</strong>
-        <div class="article-nav-title">
-          
-            [파이썬] 문자열 인덱싱 및 잘라내기
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/03/04/programmers-carpet/" class="article-nav-link">
+      <a href="/2020/03/04/python-arithmetic-operators/" class="article-nav-link">
         <strong class="article-nav-caption">Older</strong>
-        <div class="article-nav-title">[프로그래머스] 카펫 - 파이썬</div>
+        <div class="article-nav-title">[파이썬] 산술연산자</div>
       </a>
     
   </nav>
