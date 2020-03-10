@@ -64,6 +64,475 @@
         
           
 
+<article id="post-angular-property-binding" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/10/angular-property-binding/">[앵귤러/Angular] 프로퍼티 바인딩 문법</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/10/angular-property-binding/" class="article-date">
+  <time datetime="2020-03-10T06:39:00.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p><a href="https://angular.kr/guide/template-syntax#프로퍼티-바인딩" target="_blank" rel="noopener">프로퍼티 바인딩</a> 문법</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/10/angular-property-binding/" data-id="ck7ljau0z000a58w8dr6b5cm6"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-angular-input-decorater" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/10/angular-input-decorater/">[앵귤러/Angular] @Input() 데코레이터란?</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/10/angular-input-decorater/" class="article-date">
+  <time datetime="2020-03-10T06:38:00.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p><code>@Input()</code> 데코레이터</p>
+<p>– 추가예정 –</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/10/angular-input-decorater/" data-id="ck7ljau0f000358w8d3loc241"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-angular-class-binding" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/10/angular-class-binding/">[앵귤러/Angular] 클래스 바인딩 문법</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/10/angular-class-binding/" class="article-date">
+  <time datetime="2020-03-10T06:14:00.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>Angular가 제공하는 <a href="https://angular.kr/guide/template-syntax#class-binding" target="_blank" rel="noopener">클래스 바인딩</a> 문법을 사용하면 특정 조건에 따라 CSS 클래스를 추가하거나 제거할 수 있습니다. 스타일을 지정하려는 엘리먼트에 <code>[class.some-css-class]=&quot;some-condition&quot;</code>와 같은 문법을 추가하면 됩니다.</p>
+<h4 id="html파일"><a href="#html파일" class="headerlink" title="html파일"></a>html파일</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[class.selected]="hero === selectedHero"</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>hero === selectedHero인 줄에 selected CSS 클래스가 추가된다. </li>
+</ul>
+<h4 id="css파일"><a href="#css파일" class="headerlink" title="css파일"></a>css파일</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.heroes</span> <span class="selector-tag">li</span><span class="selector-class">.selected</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#CFD8DC</span>;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.heroes</span> <span class="selector-tag">li</span><span class="selector-class">.selected</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#BBD8DC</span>;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>—추가예정—</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/10/angular-class-binding/" data-id="ck7ljatyo000058w8b8t12wlb"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-angular-ngif" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/10/angular-ngif/">[앵귤러 / Angular] *ngIf</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/10/angular-ngif/" class="article-date">
+  <time datetime="2020-03-10T05:24:00.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p><code>*ngIf</code> : if와 같이 동작</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> *<span class="attr">ngIf</span>=<span class="string">"selectedHero"</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>: <code>selectedHero</code> 가 할당되어 있을 때 실행, undefined일 땐 실행 되지 않는다.</p>
+<p><code>*ngIf</code>를 넣어주지 않으면<code>ERROR TypeError: Cannot read property &#39;name&#39; of undefined</code> 에러가 난다. </p>
+<blockquote>
+<p><code>ngIf</code>앞에 별표(*)가 있다는 것을 잊지마세요. Angular에서 아주 중요한 문법입니다.</p>
+</blockquote>
+<p><a href="https://angular.kr/tutorial/toh-pt2" target="_blank" rel="noopener">출처</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/10/angular-ngif/" data-id="ck7ljau0v000858w838ixe226"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-angular-ngfor" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/10/angular-ngfor/">[앵귤러/Angular] *ngFor</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/10/angular-ngfor/" class="article-date">
+  <time datetime="2020-03-10T04:30:00.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p><a href="https://angular.kr/guide/template-syntax#ngFor" target="_blank" rel="noopener">*ngFor</a>는 <em>항목을 반복하는</em> Angular 디렉티브입니다. 이 디렉티브는 목록에 있는 항목마다 호스트 엘리먼트를 반복합니다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> *<span class="attr">ngFor</span>=<span class="string">"let hero of heroes"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p> <code>ngFor</code>앞에 별표(*)가 붙는 것에 주의하세요. 이 문법은 아주 중요합니다.</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/10/angular-ngfor/" data-id="ck7ljau0l000558w8h2c08dlp"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-angular-ng-server-open" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/10/angular-ng-server-open/">[앵귤러/Angular] Local 서버 키기</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/10/angular-ng-server-open/" class="article-date">
+  <time datetime="2020-03-10T04:30:00.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>프로젝트 폴더에 터미널을 킨 후 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ng server --open</span><br></pre></td></tr></table></figure>
+
+<p>입력하면 localhost:4200을 통해 서버를 킬 수 있다!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/10/angular-ng-server-open/" data-id="ck7ljau0i000458w82r380g2d"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-angular-event-binding" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/10/angular-event-binding/">[앵귤러/Angular] 이벤트 바인딩 문법</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/10/angular-event-binding/" class="article-date">
+  <time datetime="2020-03-10T04:30:00.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>이벤트 바인딩 문법을 사용하면 키 입력이나 마우스의 움직임, 클릭이나 터치 이벤트를 감지할 수 있습니다. 이 섹션에서 설명하는 내용은 <a href="https://angular.kr/generated/live-examples/event-binding/stackblitz.html" target="_blank" rel="noopener">이벤트 바인딩 예제</a> / <a href="https://angular.kr/generated/zips/event-binding/event-binding.zip" target="_blank" rel="noopener">다운로드 링크</a> 에서 직접 확인할 수 있습니다.</p>
+<p>예를 들어 버튼의 클릭 이벤트를 감지하고 있다가 사용자가 버튼을 클릭할 때 컴포넌트에 있는 <code>onSave()</code> 메소드를 실행하려면 다음과 같이 구현합니다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> (<span class="attr">click</span>)=<span class="string">"onSave()"</span>&gt;</span></span><br><span class="line">    Save</span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>–추가예정–</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/10/angular-event-binding/" data-id="ck7ljatz9000158w89rl87ryf"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-backjoon-13458" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -374,707 +843,6 @@ b,c= map(int,input().split())</code></p>
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/03/07/python-indexing-slicing/" data-id="ck7ha2yx60000mow87ggy0k8a"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-python-arithmetic-operators" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/04/python-arithmetic-operators/">[파이썬] 산술연산자</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/04/python-arithmetic-operators/" class="article-date">
-  <time datetime="2020-03-04T12:50:00.000Z" itemprop="datePublished">2020-03-04</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h4 id="산술연산자-Arithmetic-Operators"><a href="#산술연산자-Arithmetic-Operators" class="headerlink" title="산술연산자 (Arithmetic Operators) :"></a>산술연산자 (Arithmetic Operators) :</h4><table>
-<thead>
-<tr>
-<th>Operater</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>+</td>
-<td>더하기</td>
-</tr>
-<tr>
-<td>-</td>
-<td>빼기</td>
-</tr>
-<tr>
-<td>*</td>
-<td>곱하기</td>
-</tr>
-<tr>
-<td>/</td>
-<td>나누기</td>
-</tr>
-<tr>
-<td>%</td>
-<td>나머지</td>
-</tr>
-<tr>
-<td>**</td>
-<td>제곱</td>
-</tr>
-<tr>
-<td>//</td>
-<td>몫</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/04/python-arithmetic-operators/" data-id="ck7dcsleo00027cw89pr701zp"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-carpet" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/04/programmers-carpet/">[프로그래머스] 카펫 - 파이썬</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/04/programmers-carpet/" class="article-date">
-  <time datetime="2020-03-04T12:06:00.000Z" itemprop="datePublished">2020-03-04</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제설명"><a href="#문제설명" class="headerlink" title="문제설명"></a>문제설명</h1><p>Leo는 카펫을 사러 갔다가 아래 그림과 같이 중앙에는 빨간색으로 칠해져 있고 테두리 1줄은 갈색으로 칠해져 있는 격자 모양 카펫을 봤습니다.</p>
-<p><img src="https://grepp-programmers.s3.amazonaws.com/files/ybm/7c94563a35/2ff27ac9-97d0-43a9-9cf8-a344b8e7912e.png" alt="image.png"></p>
-<p>Leo는 집으로 돌아와서 아까 본 카펫의 빨간색과 갈색으로 색칠된 격자의 개수는 기억했지만, 전체 카펫의 크기는 기억하지 못했습니다.</p>
-<p>Leo가 본 카펫에서 갈색 격자의 수 brown, 빨간색 격자의 수 red가 매개변수로 주어질 때 카펫의 가로, 세로 크기를 순서대로 배열에 담아 return 하도록 solution 함수를 작성해주세요.</p>
-<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
-<li>갈색 격자의 수 brown은 8 이상 5,000 이하인 자연수입니다.</li>
-<li>빨간색 격자의 수 red는 1 이상 2,000,000 이하인 자연수입니다.</li>
-<li>카펫의 가로 길이는 세로 길이와 같거나, 세로 길이보다 깁니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>brown</th>
-<th>red</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>10</td>
-<td>2</td>
-<td>[4, 3]</td>
-</tr>
-<tr>
-<td>8</td>
-<td>1</td>
-<td>[3, 3]</td>
-</tr>
-<tr>
-<td>24</td>
-<td>24</td>
-<td>[8, 6]</td>
-</tr>
-</tbody></table>
-<p><a href="http://hsin.hr/coci/archive/2010_2011/contest4_tasks.pdf" target="_blank" rel="noopener">출처</a></p>
-<p>※ 공지 - 2020년 2월 3일 테스트케이스가 추가되었습니다.</p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>이 문제는 완전 탐색(exhausitve search)를 이용하여 푸는 문제이다. </p>
-<p><strong>red</strong> 의 가로를 <code>x</code> 세로를 <code>y</code>라고할 때, </p>
-<p><strong>red</strong>는 <code>x*y</code> 가 되고 <strong>brown</strong>은 <code>2(x*y)+4</code>가 된다. </p>
-<p><strong>brown</strong>의 가로와 세로는 <code>x+2</code> , <code>y+2</code> 이다.</p>
-<p>이 때 <code>x</code>는 <code>y</code>보다 길거나 같으며 <code>red = x*y</code>를 성립하기 때문에, <code>y</code>는 <strong>red</strong>의 제곱근보다 작거나 같다.</p>
-<p>처음엔</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(brown, red)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">1</span>, int(red**<span class="number">0.5</span>)+<span class="number">1</span>):</span><br><span class="line">        x = red // y</span><br><span class="line">        <span class="keyword">if</span> <span class="number">2</span>*(x+y) +<span class="number">4</span> == brown:</span><br><span class="line">            <span class="keyword">return</span> [x+<span class="number">2</span>,y+<span class="number">2</span>]</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-<p>이렇게 풀었더니 13개의 테스트 중 5개를 실패하였다.</p>
-<p>이유는 나머지가 0이 아닌 상황이 나오기 때문이었다. </p>
-<p><code>if red % y == 0</code> 를 추가하였다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(brown, red)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">1</span>, int(red**<span class="number">0.5</span>)+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> red % y ==<span class="number">0</span>:</span><br><span class="line">            x = red // y</span><br><span class="line">            <span class="keyword">if</span> <span class="number">2</span>*(x+y) +<span class="number">4</span> == brown:</span><br><span class="line">                <span class="keyword">return</span> [x+<span class="number">2</span>,y+<span class="number">2</span>]</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-<p>끝 !</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/04/programmers-carpet/" data-id="ck7dcsldz00007cw8ablu0rxb"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-scoville" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/02/25/programmers-scoville/">[프로그래머스] 더 맵게 - 파이썬</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/02/25/programmers-scoville/" class="article-date">
-  <time datetime="2020-02-25T12:10:00.000Z" itemprop="datePublished">2020-02-25</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제설명"><a href="#문제설명" class="headerlink" title="문제설명"></a>문제설명</h1><p>매운 것을 좋아하는 Leo는 모든 음식의 스코빌 지수를 K 이상으로 만들고 싶습니다. 모든 음식의 스코빌 지수를 K 이상으로 만들기 위해 Leo는 스코빌 지수가 가장 낮은 두 개의 음식을 아래와 같이 특별한 방법으로 섞어 새로운 음식을 만듭니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">섞은 음식의 스코빌 지수 &#x3D; 가장 맵지 않은 음식의 스코빌 지수 + (두 번째로 맵지 않은 음식의 스코빌 지수 * 2)</span><br></pre></td></tr></table></figure>
-
-<p>Leo는 모든 음식의 스코빌 지수가 K 이상이 될 때까지 반복하여 섞습니다.<br>Leo가 가진 음식의 스코빌 지수를 담은 배열 scoville과 원하는 스코빌 지수 K가 주어질 때, 모든 음식의 스코빌 지수를 K 이상으로 만들기 위해 섞어야 하는 최소 횟수를 return 하도록 solution 함수를 작성해주세요.</p>
-<h5 id="제한-사항"><a href="#제한-사항" class="headerlink" title="제한 사항"></a>제한 사항</h5><ul>
-<li>scoville의 길이는 1 이상 1,000,000 이하입니다.</li>
-<li>K는 0 이상 1,000,000,000 이하입니다.</li>
-<li>scoville의 원소는 각각 0 이상 1,000,000 이하입니다.</li>
-<li>모든 음식의 스코빌 지수를 K 이상으로 만들 수 없는 경우에는 -1을 return 합니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>scoville</th>
-<th>K</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>[1, 2, 3, 9, 10, 12]</td>
-<td>7</td>
-<td>2</td>
-</tr>
-</tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><ol>
-<li>스코빌 지수가 1인 음식과 2인 음식을 섞으면 음식의 스코빌 지수가 아래와 같이 됩니다.<br>새로운 음식의 스코빌 지수 = 1 + (2 * 2) = 5<br>가진 음식의 스코빌 지수 = [5, 3, 9, 10, 12]</li>
-<li>스코빌 지수가 3인 음식과 5인 음식을 섞으면 음식의 스코빌 지수가 아래와 같이 됩니다.<br>새로운 음식의 스코빌 지수 = 3 + (5 * 2) = 13<br>가진 음식의 스코빌 지수 = [13, 9, 10, 12]</li>
-</ol>
-<p>모든 음식의 스코빌 지수가 7 이상이 되었고 이때 섞은 횟수는 2회입니다.</p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(scoville, K)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> heapq</span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    heapq.heapify(scoville)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> len(scoville) &gt; <span class="number">1</span> :</span><br><span class="line">        i = heapq.heappop(scoville)</span><br><span class="line">        j = heapq.heappop(scoville)</span><br><span class="line">        <span class="keyword">if</span> i &lt; K:</span><br><span class="line">            answer += <span class="number">1</span></span><br><span class="line">            mixedK = i +j *<span class="number">2</span></span><br><span class="line">            heapq.heappush(scoville, mixedK)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> answer</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">if</span> scoville[<span class="number">0</span>] &gt; K:</span><br><span class="line">        <span class="keyword">return</span> answer</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>이를 풀기 위해 공부한 내용은 heapq 모듈이다.</p>
-</li>
-<li><p>계속 문제16번에서만 실패가 떠서 왜 그런지 찾아본 결과, <code>while len(scoville) &gt; 1</code> 을 했기 때문에 <code>if scoville[0] &gt; K: return answer</code> 를 써주지 않으면 scoville의 길이가 1일 때는 -1 이 return 되기 때문이었다.</p>
-</li>
-<li><p>scoville의 크기가 1 보다 크게 한 이유는 0보다 크게하면 RuntimeError가 발생하기 때문이다. </p>
-</li>
-<li><p>heappop은 힙에서 가장 작은 값을 반환한다. </p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/25/programmers-scoville/" data-id="ck71ut0370000ukw86qb891xd"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-python-heapq" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/02/25/python-heapq/">[파이썬] heapq 모듈</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/02/25/python-heapq/" class="article-date">
-  <time datetime="2020-02-25T09:53:00.000Z" itemprop="datePublished">2020-02-25</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <blockquote>
-<p> heapq 모듈에 대해 간략히 알아보자 ! </p>
-</blockquote>
-<h3 id="Heap-이란"><a href="#Heap-이란" class="headerlink" title="Heap 이란 ?"></a>Heap 이란 ?</h3><p>힙(heap)은 최댓값 및 최솟값을 찾아내는 연산을 빠르게 하기 위해 고안된 완전이진트리(complete binary tree)를 기본으로 한 자료구조(tree-based structure)로서 다음과 같은 힙 속성(property)을 만족한다.</p>
-<ul>
-<li>A가 B의 부모노드(parent node)이면, A의 키(key)값과 B의 키값 사이에는 대소관계가 성립한다.</li>
-</ul>
-<p>힙에는 두가지 종류가 있으며, 부모노드의 키값이 자식노드의 키값보다 항상 큰 힙을 ‘최대 힙’, 부모노드의 키값이 자식노드의 키값보다 항상 작은 힙을 ‘최소 힙’이라고 부른다.</p>
-<p><img src="images%5Cheap-example.png" alt="최대-힙-예시"></p>
-<p>출처 : <a href="https://ko.wikipedia.org/wiki/%ED%9E%99_(%EC%9E%90%EB%A3%8C_%EA%B5%AC%EC%A1%B0)" target="_blank" rel="noopener">위키백과 ‘힙 (자료 구조)’</a></p>
-<hr>
-<blockquote>
-<p>heaqp 모듈은 큐 알고리즘이라고도 하는 힙(heap) 큐 알고리즘의 구현을 제공한다.</p>
-</blockquote>
-<h3 id="python에-쓰이는-heap-코드"><a href="#python에-쓰이는-heap-코드" class="headerlink" title="python에 쓰이는 heap 코드"></a>python에 쓰이는 heap 코드</h3><ul>
-<li><p><code>import heapq</code> : heapq 모듈을 사용하기 위해 써주어야한다.</p>
-</li>
-<li><p><code>heapq.heapify(x)</code> : 값이 들어있는 리스트 x를 힙으로 변환하는 코드이다. </p>
-</li>
-<li><p><code>heapq.heappush(heap, item)</code> : item 값을 힙으로 푸시한다.</p>
-</li>
-<li><p><code>heapq.heappushpop(heap, item)</code> : 힙에 item을 푸시한 다음, heap에서 가장 작은 항목을 팝하고 반환한다. ( <code>heappush()</code> =&gt; <code>heappop()</code>)</p>
-</li>
-<li><p><code>heapq.heapreplace(heap, item)</code> : heap에서 가장 작은 항목을 팝하고 반환하며, 새로운 item도 푸시한다. heap 이 비어있을 시에 IndexError가 발생한다. ( <code>heappop()</code> =&gt; <code>heappush()</code>)</p>
-</li>
-</ul>
-<p>참고: <a href="https://python.flowdas.com/library/heapq.html" target="_blank" rel="noopener">https://python.flowdas.com/library/heapq.html</a> </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/25/python-heapq/" data-id="ck71qh2390000usw8hb6z2jve"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-kth-number" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/02/22/programmers-kth-number/">[프로그래머스] K번째 수 - 파이썬</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/02/22/programmers-kth-number/" class="article-date">
-  <time datetime="2020-02-22T07:22:00.000Z" itemprop="datePublished">2020-02-22</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제-설명"><a href="#문제-설명" class="headerlink" title="문제 설명"></a>문제 설명</h1><p>배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다.</p>
-<p>예를 들어 array가 [1, 5, 2, 6, 3, 7, 4], i = 2, j = 5, k = 3이라면</p>
-<ol>
-<li>array의 2번째부터 5번째까지 자르면 [5, 2, 6, 3]입니다.</li>
-<li>1에서 나온 배열을 정렬하면 [2, 3, 5, 6]입니다.</li>
-<li>2에서 나온 배열의 3번째 숫자는 5입니다.</li>
-</ol>
-<p>배열 array, [i, j, k]를 원소로 가진 2차원 배열 commands가 매개변수로 주어질 때, commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 나온 결과를 배열에 담아 return 하도록 solution 함수를 작성해주세요.</p>
-<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
-<li>array의 길이는 1 이상 100 이하입니다.</li>
-<li>array의 각 원소는 1 이상 100 이하입니다.</li>
-<li>commands의 길이는 1 이상 50 이하입니다.</li>
-<li>commands의 각 원소는 길이가 3입니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>array</th>
-<th>commands</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>[1, 5, 2, 6, 3, 7, 4]</td>
-<td>[[2, 5, 3], [4, 4, 1], [1, 7, 3]]</td>
-<td>[5, 6, 3]</td>
-</tr>
-</tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>[1, 5, 2, 6, 3, 7, 4]를 2번째부터 5번째까지 자른 후 정렬합니다. [2, 3, 5, 6]의 세 번째 숫자는 5입니다.<br>[1, 5, 2, 6, 3, 7, 4]를 4번째부터 4번째까지 자른 후 정렬합니다. [6]의 첫 번째 숫자는 6입니다.<br>[1, 5, 2, 6, 3, 7, 4]를 1번째부터 7번째까지 자릅니다. [1, 2, 3, 4, 5, 6, 7]의 세 번째 숫자는 3입니다.</p>
-<p><a href="https://neerc.ifmo.ru/subregions/northern.html" target="_blank" rel="noopener">출처</a></p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(array, commands)</span>:</span></span><br><span class="line">    answer = []</span><br><span class="line">    <span class="keyword">for</span> command_list <span class="keyword">in</span> commands:</span><br><span class="line">        sliced_array = array[command_list[<span class="number">0</span>]<span class="number">-1</span> : command_list[<span class="number">1</span>]]</span><br><span class="line">        sliced_array.sort()</span><br><span class="line">        answer.append(sliced_array[command_list[<span class="number">2</span>]<span class="number">-1</span>])</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-
-
-<p>이번 문제를 위해 공부한 내용은 array의 <code>slicing</code> 과 <code>sort</code>이다.</p>
-<ol>
-<li><p><code>commands</code> 가 [[2, 5, 3], [4, 4, 1], [1, 7, 3]] 일 때, <code>for command_list in commands</code>를 통해  [2, 5, 3] <strong>-&gt;</strong> [4, 4, 1] <strong>-&gt;</strong> [1, 7, 3] 순서로 <code>command_list</code>에 담는다.  </p>
-</li>
-<li><p>예를 들어 <code>command_list</code>가 <em>[2,5,3]</em> 일 때, </p>
-<p><code>array</code>의 <em>command_list[0]-1</em> (1번 인덱스) 부터 <em>command_list[1]</em> (4번 인덱스까지)(<code>slicing</code>에서 <code>end</code>부분(5)은 자르지 않기때문에 -1 해줄 필요가 없다.)까지 잘라 <code>sliced_array</code>에 담는다.</p>
-</li>
-<li><p><code>sliced_array</code>를 <code>sort()</code> 로 정렬한다. </p>
-</li>
-<li><p><em><code>answer</code>에  command_list[2]-1</em> (3번 인덱스) 의 값을 더한다.</p>
-</li>
-</ol>
-<h3 id="시행착오"><a href="#시행착오" class="headerlink" title="시행착오"></a>시행착오</h3><p> 처음에<code>for i in range(len(commands))</code> 로 i에  인덱스를 담아 <code>array[commands[i] [0] -1 : commands[i] [1]]</code> 이렇게 접근하였다.</p>
-<p> 근데 <code>for command_list in commands</code> 를 사용하면 commands의 첫번째, 두번째, 세번째 배열을 command_list에 담으며 실행할 수 있다는 것을 알게 되었고 코드를 고칠 수 있었다.  </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/22/programmers-kth-number/" data-id="ck6xahngx0000sow8ft7efs0z"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-python-array-cutting" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/02/22/python-array-cutting/">[파이썬] numpy array[::] 사용법(array 슬라이싱)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/02/22/python-array-cutting/" class="article-date">
-  <time datetime="2020-02-22T06:24:00.000Z" itemprop="datePublished">2020-02-22</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h3 id="슬라이싱-slicing"><a href="#슬라이싱-slicing" class="headerlink" title="슬라이싱 (slicing)"></a>슬라이싱 (slicing)</h3><p>기본형태 : <strong>array[start​ : end : ​step]</strong></p>
-<ul>
-<li><code>start</code> : 슬라이싱을 시작할 시작 위치</li>
-<li><code>end</code>: 슬라이싱을 끝낼 위치로 end는 포함하지 않는다.</li>
-<li><code>step</code>: stride라고도 하며 몇개씩 끊어서 가져올지를 정한다.</li>
-</ul>
-<p>양수,음수 모두 가능</p>
-<ul>
-<li><p><code>a[ start: ]</code> : start 위치부터 끝까지 가져오기</p>
-</li>
-<li><p><code>a[ end : ]</code>: 시작점부터 end 위치까지 모두 가져오기</p>
-</li>
-<li><p><code>a[ start : end ]</code> : start위치 부터 end 위치까지 모두 가져오기</p>
-</li>
-<li><p><code>a[ start : end : step ]</code> (step이 <code>양수</code> 일 때) : 오른쪽으로 step만큼 이동하면서 가져온다.</p>
-</li>
-<li><p><code>a[ start: end : step]</code>(step이 <code>음수</code>일 때): 왼쪽으로 step만큼 이동하면서 가져온다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a&#x3D; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]</span><br><span class="line"># 인덱스 1~3 까지를 꺼꾸로 가져오기</span><br><span class="line">&gt;&gt;&gt; a[3 :0 :-1]</span><br><span class="line">[&#39;d&#39;, &#39;c&#39;, &#39;b&#39;]</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<p><strong>더 많은 예제 참고</strong> : <a href="https://twpower.github.io/119-python-list-slicing-examples" target="_blank" rel="noopener">https://twpower.github.io/119-python-list-slicing-examples</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/22/python-array-cutting/" data-id="ck6x9iato0000k8w80cox3408"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-python-array-sort" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/02/22/python-array-sort/">[파이썬] numpy array 정렬</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/02/22/python-array-sort/" class="article-date">
-  <time datetime="2020-02-22T06:03:00.000Z" itemprop="datePublished">2020-02-22</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h3 id="1차원배열-정렬"><a href="#1차원배열-정렬" class="headerlink" title="1차원배열 정렬"></a>1차원배열 정렬</h3><ul>
-<li>좌에서 우로 정렬: <strong>np.sort(x)</strong> </li>
-<li>거꾸로 정렬: <strong>np.sort(x)[::-1] , x[np.argsort(-x)]</strong></li>
-</ul>
-<h3 id="2차원배열-정렬"><a href="#2차원배열-정렬" class="headerlink" title="2차원배열 정렬"></a>2차원배열 정렬</h3><ul>
-<li><p>열 축 기준(좌에서 우로)으로 정렬 : <strong>np.sort(x, axis=1)</strong></p>
-</li>
-<li><p>행 축 기준(위에서 아래로)으로 정렬: <strong>np.sort(x, axis=0)</strong></p>
-</li>
-<li><p>행 축 기준(위에서 아래로)으로 거꾸로 정렬: <strong>np.sort(x, axis=0)[::-1]</strong></p>
-</li>
-</ul>
-<h4 id="예시"><a href="#예시" class="headerlink" title="예시"></a>예시</h4><hr>
-<ol>
-<li><p><strong><code>np.sort(x)</code></strong></p>
-<p>x = np.array([3,5,1]) <strong>— 정렬 후 —&gt;</strong> array([1,3,5])</p>
-</li>
-</ol>
-<ol start="2">
-<li><p><strong><code>np.sort(x)[::-1]</code></strong> , <strong><code>x[np.argsort(-x)]</code></strong></p>
-<p>x = np.array([3,5,1]) <strong>— 정렬 후 —&gt;</strong> array([5,3,1])</p>
-</li>
-</ol>
-<ol start="3">
-<li><p><strong><code>np.sort(x, axis=1)</code></strong></p>
-<p>x = np.array([3, 5, 1],                            array([1, 3, 5],</p>
-<p>​                       [2, 6, 3], <strong>— 정렬 후 —&gt;</strong>            [2, 3, 6],</p>
-<p>​                       [8, 3, 7])                                     [3, 7, 8])</p>
-</li>
-</ol>
-<ol start="4">
-<li><p><strong><code>np.sort(x, axis=0)</code></strong></p>
-<p>x = np.array([3, 5, 1],                            array([2, 3, 1],</p>
-<p>​                       [2, 6, 3], <strong>— 정렬 후 —&gt;</strong>            [3, 5, 3],</p>
-<p>​                       [8, 3, 7])                                     [8, 6, 7])</p>
-</li>
-</ol>
-<ol start="5">
-<li><p><strong><code>np.sort(x, axis=0)[::-1]</code></strong></p>
-<p>x = np.array([3, 5, 1],                            array([8, 6, 7],</p>
-<p>​                       [2, 6, 3], <strong>— 정렬 후 —&gt;</strong>            [3, 5, 3],</p>
-<p>​                       [8, 3, 7])                                     [2, 3, 1])</p>
-</li>
-</ol>
-<hr>
-<h3 id="x-sort-와-np-sort-x-의-차이점"><a href="#x-sort-와-np-sort-x-의-차이점" class="headerlink" title="x.sort()와 np.sort(x)의 차이점"></a><strong>x.sort()와 np.sort(x)의 차이점</strong></h3><p> np.sort(x)는 원래 배열은 그대로, 정렬 결과의 복사본을 반환한다. </p>
-<p> x.sort()는 배열 자체를 정렬한다.</p>
-<h4 id="다음-과제"><a href="#다음-과제" class="headerlink" title="다음 과제"></a><strong>다음 과제</strong></h4><p>DataFrame, Tuple 정렬, List 정렬 </p>
-<p><a href="https://rfriend.tistory.com/357" target="_blank" rel="noopener">참고</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/22/python-array-sort/" data-id="ck6x9iaub0003k8w86dy81sz0"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
