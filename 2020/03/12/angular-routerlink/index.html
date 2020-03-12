@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    [앵귤러/Angular] Local 서버 키기 |
+    [앵귤러/Angular] 네비게이션 링크(routerLink) 추가하기 |
     
     Sohee&#39;s Dev Log !</title>
   
@@ -31,7 +31,7 @@
   <section class="outer">
   
 
-<article id="post-angular-ng-server-open" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-angular-routerlink" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -39,7 +39,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      [앵귤러/Angular] Local 서버 키기
+      [앵귤러/Angular] 네비게이션 링크(routerLink) 추가하기
     </h1>
   
   
@@ -52,8 +52,8 @@
 
     
       <div class="article-meta">
-        <a href="/2020/03/10/angular-ng-server-open/" class="article-date">
-  <time datetime="2020-03-10T04:30:00.000Z" itemprop="datePublished">2020-03-10</time>
+        <a href="/2020/03/12/angular-routerlink/" class="article-date">
+  <time datetime="2020-03-12T12:19:00.000Z" itemprop="datePublished">2020-03-12</time>
 </a>
         
       </div>
@@ -74,15 +74,21 @@
       
 
       
-        <p>프로젝트 폴더에 터미널을 킨 후 </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ng server --open</span><br></pre></td></tr></table></figure>
+        <blockquote>
+<p>앞에 글(AppRoutingModule 생성하기)에서는 URL을 통해 이동하는 방법이었다면, 이 글에서는 네비게이션을 실행하는 링크를 클릭하여 이동하는 방법을 다룰것이다!</p>
+</blockquote>
+<p><em>AppComponent<em>의 탬플릿 (</em>app.component.html</em>)에 아래 코드를 추가한다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">routerLink</span>=<span class="string">"/heroes"</span>&gt;</span>Heroes<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>입력하면 localhost:4200을 통해 서버를 킬 수 있다!</p>
+<ul>
+<li><code>routerLink</code> : <em>RouterModule*이 제공하는 *RouterLink</em> <em>디렉티브</em>이며, 사용자가 이 디렉티브가 적용된 엘리먼트를 클릭하면 네비게이션을 실행한다.</li>
+<li><code>&quot;/heroes&quot;</code> : <code>routerLink</code> 어트리뷰트 값으로 url을 통해 이동할 컴포넌트에 해당하는 라우팅 경로이다.</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/angular-ng-server-open/" data-id="ck7ljau0i000458w82r380g2d"
+      <a data-url="http://yoursite.com/2020/03/12/angular-routerlink/" data-id="ck7orwctn0007ekw8dasx7tdt"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
@@ -95,19 +101,19 @@
     
   <nav class="article-nav">
     
-      <a href="/2020/03/10/angular-ngfor/" class="article-nav-link">
+      <a href="/2020/03/12/anguler-interpolation-binding/" class="article-nav-link">
         <strong class="article-nav-caption">Newer</strong>
         <div class="article-nav-title">
           
-            [앵귤러/Angular] *ngFor
+            [앵귤러/Angular] 문자열 바인딩
           
         </div>
       </a>
     
     
-      <a href="/2020/03/07/backjoon-13458/" class="article-nav-link">
+      <a href="/2020/03/12/angular-create-approutingmodule/" class="article-nav-link">
         <strong class="article-nav-caption">Older</strong>
-        <div class="article-nav-title">[백준알고리즘] 13458번: 시험감독 - 파이썬(python)</div>
+        <div class="article-nav-title">[앵귤러/Angular] AppRoutingModule 생성하기</div>
       </a>
     
   </nav>
