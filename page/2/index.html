@@ -64,6 +64,173 @@
         
           
 
+<article id="post-angular-service-in-service" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/11/angular-service-in-service/">[앵귤러/Angular] 서비스 안에 서비스를 의존성으로 주입하기</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/11/angular-service-in-service/" class="article-date">
+  <time datetime="2020-03-11T09:50:00.000Z" itemprop="datePublished">2020-03-11</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; MessageService &#125; <span class="keyword">from</span> <span class="string">'./message.service'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroService &#123; </span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> messageService: MessageService</span>) &#123; &#125; </span><br><span class="line">  </span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>MessageService는 HeroService에 의존성으로 주입된다.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/11/angular-service-in-service/" data-id="ck7n5kure0003rsw828veb1xl"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-angular-sync-to-async-observable" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/11/angular-sync-to-async-observable/">[앵귤러/Angular] Observable 반환을 이용한 동기-&gt;비동기</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/11/angular-sync-to-async-observable/" class="article-date">
+  <time datetime="2020-03-11T09:23:00.000Z" itemprop="datePublished">2020-03-11</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>아래 코드는 <em>heroService</em>라는 <strong>서비스 클래스</strong>에서 <strong>목 데이터 값</strong>을 가져오는 코드이다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.heroes = <span class="keyword">this</span>.heroService.getHeroes();</span><br></pre></td></tr></table></figure>
+
+<p>위 코드에서 <code>heroService.getHeroes()</code>는 <em>동기 방식</em>으로 동작하기 때문에 함수의 실행결과가 바로 반환된다. 목 데이터를 가져올 때는 동기 방식이 유효할 수 있지만, 일반적인 애플리케이션에서는 리모트 서버에서 데이터를 가져오기 때문에, <em>비동기 동작</em>을 처리해야 하는 경우가 대부분이다.</p>
+<p><em>비동기</em>로 동작하기 위해 여러 방법을 사용할 수 있다.</p>
+<ol>
+<li>콜백함수를 사용한다.</li>
+<li>Promise를 반환하도록 처리한다.</li>
+<li><strong>Observable</strong>을 반환하도록 처리한다.</li>
+</ol>
+<p>이 포스팅에서는 3번의 방법을 구현해 보겠다! (Angular가 제공하는 <em>HttpClient.get</em> 메소드가 <strong>Observable</strong>을 반환하기 때문에 가장 자연스럽다.)</p>
+<p><code>Observable</code> : <em>RxJS 라이브러리</em>가 제공하는 클래스 중 가장 중요한 클래스이다. </p>
+<p>먼저 서비스 클래스 파일에 코드를 추가한다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Observable, of &#125; <span class="keyword">from</span> <span class="string">'rxjs'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Observable을 로드한다.</p>
+<p>getHeroes() 메소드를 수정한다.</p>
+<blockquote>
+<p>기존 getHeroes() 메소드</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getHeroes(): Hero[] &#123;</span><br><span class="line">  <span class="keyword">return</span> HEROES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>수정된 getHeroes() 메소드</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getHeroes(): Observable&lt;Hero[]&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> of(HEROES);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em>of(HEROES)</em>는 히어로 목 데이터를 <strong>Observable&lt;Hero[]&gt;</strong> 타입으로한번에 반환한다.</p>
+<p>이제는 <em>Observable&lt;Hero[]&gt;</em>타입을 반환하기 때문에 <strong>컴포넌트</strong> 코드도 수정하여야 한다.</p>
+<blockquote>
+<p>기존 컴포넌트 코드</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getHeroes(): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="keyword">this</span>.heroes = <span class="keyword">this</span>.heroService.getHeroes();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>수정된 컴포넌트 코드</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getHeroes(): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="keyword">this</span>.heroService.getHeroes()</span><br><span class="line">      .subscribe(<span class="function"><span class="params">heroes</span> =&gt;</span> <span class="keyword">this</span>.heroes = heroes);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><em>비동기 방식</em>으로 수정한 후에는 서버의 응답이 언제 도착하는지와 관계없이, 이 응답이 도착했을 때 <strong>subscribe</strong>가 서버에서 받은 응답을 콜백함수로 전달하고, 컴포넌트는 이렇게 받은 데이터를 heroes 프로퍼티에 할당한다.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/11/angular-sync-to-async-observable/" data-id="ck7n5kurm0006rsw86q9b4034"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-angular-cli-class" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -767,139 +934,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/03/10/angular-ngfor/" data-id="ck7ljau0l000558w8h2c08dlp"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-angular-ng-server-open" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/10/angular-ng-server-open/">[앵귤러/Angular] Local 서버 키기</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/10/angular-ng-server-open/" class="article-date">
-  <time datetime="2020-03-10T04:30:00.000Z" itemprop="datePublished">2020-03-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>프로젝트 폴더에 터미널을 킨 후 </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ng server --open</span><br></pre></td></tr></table></figure>
-
-<p>입력하면 localhost:4200을 통해 서버를 킬 수 있다!</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/angular-ng-server-open/" data-id="ck7ljau0i000458w82r380g2d"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-angular-event-binding" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/10/angular-event-binding/">[앵귤러/Angular] 이벤트 바인딩 문법</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/10/angular-event-binding/" class="article-date">
-  <time datetime="2020-03-10T04:30:00.000Z" itemprop="datePublished">2020-03-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>이벤트 바인딩 문법을 사용하면 키 입력이나 마우스의 움직임, 클릭이나 터치 이벤트를 감지할 수 있습니다. 이 섹션에서 설명하는 내용은 <a href="https://angular.kr/generated/live-examples/event-binding/stackblitz.html" target="_blank" rel="noopener">이벤트 바인딩 예제</a> / <a href="https://angular.kr/generated/zips/event-binding/event-binding.zip" target="_blank" rel="noopener">다운로드 링크</a> 에서 직접 확인할 수 있습니다.</p>
-<p>예를 들어 버튼의 클릭 이벤트를 감지하고 있다가 사용자가 버튼을 클릭할 때 컴포넌트에 있는 <code>onSave()</code> 메소드를 실행하려면 다음과 같이 구현합니다.</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> (<span class="attr">click</span>)=<span class="string">"onSave()"</span>&gt;</span></span><br><span class="line">    Save</span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>–추가예정–</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/angular-event-binding/" data-id="ck7ljatz9000158w89rl87ryf"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
