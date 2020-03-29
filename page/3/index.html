@@ -64,7 +64,7 @@
         
           
 
-<article id="post-angular-ngfor" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-angular-ngif" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -72,7 +72,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/10/angular-ngfor/">[앵귤러/Angular] *ngFor</a>
+      <a class="article-title" href="/2020/03/10/angular-ngif/">[앵귤러 / Angular] *ngIf</a>
     </h2>
   
   
@@ -85,7 +85,77 @@
 
     
       <div class="article-meta">
-        <a href="/2020/03/10/angular-ngfor/" class="article-date">
+        <a href="/2020/03/10/angular-ngif/" class="article-date">
+  <time datetime="2020-03-10T05:24:00.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p><code>*ngIf</code> : if와 같이 동작</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> *<span class="attr">ngIf</span>=<span class="string">"selectedHero"</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>: <code>selectedHero</code> 가 할당되어 있을 때 실행, undefined일 땐 실행 되지 않는다.</p>
+<p><code>*ngIf</code>를 넣어주지 않으면<code>ERROR TypeError: Cannot read property &#39;name&#39; of undefined</code> 에러가 난다. </p>
+<blockquote>
+<p><code>ngIf</code>앞에 별표(*)가 있다는 것을 잊지마세요. Angular에서 아주 중요한 문법입니다.</p>
+</blockquote>
+<p><a href="https://angular.kr/tutorial/toh-pt2" target="_blank" rel="noopener">출처</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/10/angular-ngif/" data-id="ck7ljau0v000858w838ixe226"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-angular-ng-server-open" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/10/angular-ng-server-open/">[앵귤러/Angular] Local 서버 키기</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/10/angular-ng-server-open/" class="article-date">
   <time datetime="2020-03-10T04:30:00.000Z" itemprop="datePublished">2020-03-10</time>
 </a>
         
@@ -101,19 +171,15 @@
       
 
       
-        <p><a href="https://angular.kr/guide/template-syntax#ngFor" target="_blank" rel="noopener">*ngFor</a>는 <em>항목을 반복하는</em> Angular 디렉티브입니다. 이 디렉티브는 목록에 있는 항목마다 호스트 엘리먼트를 반복합니다.</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> *<span class="attr">ngFor</span>=<span class="string">"let hero of heroes"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <p>프로젝트 폴더에 터미널을 킨 후 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ng server --open</span><br></pre></td></tr></table></figure>
 
-
-
-<blockquote>
-<p> <code>ngFor</code>앞에 별표(*)가 붙는 것에 주의하세요. 이 문법은 아주 중요합니다.</p>
-</blockquote>
+<p>입력하면 localhost:4200을 통해 서버를 킬 수 있다!</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/angular-ngfor/" data-id="ck7ljau0l000558w8h2c08dlp"
+      <a data-url="http://yoursite.com/2020/03/10/angular-ng-server-open/" data-id="ck7ljau0i000458w82r380g2d"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
@@ -201,7 +267,7 @@
         
           
 
-<article id="post-angular-ng-server-open" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-angular-ngfor" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -209,7 +275,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/10/angular-ng-server-open/">[앵귤러/Angular] Local 서버 키기</a>
+      <a class="article-title" href="/2020/03/10/angular-ngfor/">[앵귤러/Angular] *ngFor</a>
     </h2>
   
   
@@ -222,7 +288,7 @@
 
     
       <div class="article-meta">
-        <a href="/2020/03/10/angular-ng-server-open/" class="article-date">
+        <a href="/2020/03/10/angular-ngfor/" class="article-date">
   <time datetime="2020-03-10T04:30:00.000Z" itemprop="datePublished">2020-03-10</time>
 </a>
         
@@ -238,15 +304,19 @@
       
 
       
-        <p>프로젝트 폴더에 터미널을 킨 후 </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ng server --open</span><br></pre></td></tr></table></figure>
+        <p><a href="https://angular.kr/guide/template-syntax#ngFor" target="_blank" rel="noopener">*ngFor</a>는 <em>항목을 반복하는</em> Angular 디렉티브입니다. 이 디렉티브는 목록에 있는 항목마다 호스트 엘리먼트를 반복합니다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> *<span class="attr">ngFor</span>=<span class="string">"let hero of heroes"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>입력하면 localhost:4200을 통해 서버를 킬 수 있다!</p>
+
+
+<blockquote>
+<p> <code>ngFor</code>앞에 별표(*)가 붙는 것에 주의하세요. 이 문법은 아주 중요합니다.</p>
+</blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/angular-ng-server-open/" data-id="ck7ljau0i000458w82r380g2d"
+      <a data-url="http://yoursite.com/2020/03/10/angular-ngfor/" data-id="ck7ljau0l000558w8h2c08dlp"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
@@ -888,94 +958,6 @@ b,c= map(int,input().split())</code></p>
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-python-heapq" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/02/25/python-heapq/">[파이썬] heapq 모듈</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/02/25/python-heapq/" class="article-date">
-  <time datetime="2020-02-25T09:53:00.000Z" itemprop="datePublished">2020-02-25</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <blockquote>
-<p> heapq 모듈에 대해 간략히 알아보자 ! </p>
-</blockquote>
-<h3 id="Heap-이란"><a href="#Heap-이란" class="headerlink" title="Heap 이란 ?"></a>Heap 이란 ?</h3><p>힙(heap)은 최댓값 및 최솟값을 찾아내는 연산을 빠르게 하기 위해 고안된 완전이진트리(complete binary tree)를 기본으로 한 자료구조(tree-based structure)로서 다음과 같은 힙 속성(property)을 만족한다.</p>
-<ul>
-<li>A가 B의 부모노드(parent node)이면, A의 키(key)값과 B의 키값 사이에는 대소관계가 성립한다.</li>
-</ul>
-<p>힙에는 두가지 종류가 있으며, 부모노드의 키값이 자식노드의 키값보다 항상 큰 힙을 ‘최대 힙’, 부모노드의 키값이 자식노드의 키값보다 항상 작은 힙을 ‘최소 힙’이라고 부른다.</p>
-<p><img src="images%5Cheap-example.png" alt="최대-힙-예시"></p>
-<p>출처 : <a href="https://ko.wikipedia.org/wiki/%ED%9E%99_(%EC%9E%90%EB%A3%8C_%EA%B5%AC%EC%A1%B0)" target="_blank" rel="noopener">위키백과 ‘힙 (자료 구조)’</a></p>
-<hr>
-<blockquote>
-<p>heaqp 모듈은 큐 알고리즘이라고도 하는 힙(heap) 큐 알고리즘의 구현을 제공한다.</p>
-</blockquote>
-<h3 id="python에-쓰이는-heap-코드"><a href="#python에-쓰이는-heap-코드" class="headerlink" title="python에 쓰이는 heap 코드"></a>python에 쓰이는 heap 코드</h3><ul>
-<li><p><code>import heapq</code> : heapq 모듈을 사용하기 위해 써주어야한다.</p>
-</li>
-<li><p><code>heapq.heapify(x)</code> : 값이 들어있는 리스트 x를 힙으로 변환하는 코드이다. </p>
-</li>
-<li><p><code>heapq.heappush(heap, item)</code> : item 값을 힙으로 푸시한다.</p>
-</li>
-<li><p><code>heapq.heappushpop(heap, item)</code> : 힙에 item을 푸시한 다음, heap에서 가장 작은 항목을 팝하고 반환한다. ( <code>heappush()</code> =&gt; <code>heappop()</code>)</p>
-</li>
-<li><p><code>heapq.heapreplace(heap, item)</code> : heap에서 가장 작은 항목을 팝하고 반환하며, 새로운 item도 푸시한다. heap 이 비어있을 시에 IndexError가 발생한다. ( <code>heappop()</code> =&gt; <code>heappush()</code>)</p>
-</li>
-</ul>
-<p>참고: <a href="https://python.flowdas.com/library/heapq.html" target="_blank" rel="noopener">https://python.flowdas.com/library/heapq.html</a> </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/25/python-heapq/" data-id="ck71qh2390000usw8hb6z2jve"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
 
     </footer>
 
