@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    [앵귤러/Angular] Local 서버 키기 |
+    [파이썬] 조합(combinations)을 사용하여 리스트에 있는 값들의 모든 조합 구하기 |
     
     Sohee&#39;s Dev Log !</title>
   
@@ -31,7 +31,7 @@
   <section class="outer">
   
 
-<article id="post-angular-ng-server-open" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-python-combinations" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -39,7 +39,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      [앵귤러/Angular] Local 서버 키기
+      [파이썬] 조합(combinations)을 사용하여 리스트에 있는 값들의 모든 조합 구하기
     </h1>
   
   
@@ -52,8 +52,8 @@
 
     
       <div class="article-meta">
-        <a href="/2020/03/10/angular-ng-server-open/" class="article-date">
-  <time datetime="2020-03-10T04:30:00.000Z" itemprop="datePublished">2020-03-10</time>
+        <a href="/2020/05/05/python-combinations/" class="article-date">
+  <time datetime="2020-05-05T05:54:00.000Z" itemprop="datePublished">2020-05-05</time>
 </a>
         
       </div>
@@ -74,18 +74,30 @@
       
 
       
-        <p>프로젝트 폴더에 터미널을 킨 후 </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ng server --open</span><br></pre></td></tr></table></figure>
+        <blockquote>
+<p>정의</p>
+</blockquote>
+<ul>
+<li><p><strong>Combinations</strong> <strong>(조합 nCr)</strong> : 하나의 리스트에서 모든 조합을 계산해야할 때 사용한다.</p>
+</li>
+<li><p>Permutations (순열 nPr) 과의 차이</p>
+<p>순열은 순서가 바뀐 경우도 포함하고, 조합은 순서가 바뀐 경우는 포함하지 않는다(순서 상관 없음).</p>
+<p>예를 들어 1,2,3 으로 이루어진 리스트에서 순열은 (1,2),(1,3),(2,3),(2,1),(3,1),(3,2) 조합은 (1,2),(1,3),(2,3) 이다.</p>
+</li>
+</ul>
+<blockquote>
+<p>사용 방법</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> combinations <span class="comment"># itertools 중 combinations를 import</span></span><br><span class="line"></span><br><span class="line">items = [<span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>]</span><br><span class="line">c = list(combinations(items,<span class="number">2</span>)) <span class="comment"># 2가지 조합으로 이루어질 수 있는 모든 경우의 수를 list로 만든다.</span></span><br><span class="line">print(list(c))</span><br><span class="line"><span class="comment"># [(1,2), (1,3), (2,3)]</span></span><br></pre></td></tr></table></figure>
 
-<p>입력하면 localhost:4200을 통해 서버를 킬 수 있다!</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/angular-ng-server-open/" data-id="ck7ljau0i000458w82r380g2d"
+      <a data-url="http://yoursite.com/2020/05/05/python-combinations/" data-id="ck9zs9res00036ow89f4m8bw7"
          class="article-share-link">Share</a>
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
 
     </footer>
 
@@ -95,19 +107,19 @@
     
   <nav class="article-nav">
     
-      <a href="/2020/03/10/angular-event-binding/" class="article-nav-link">
+      <a href="/2020/05/09/backjoon-1912/" class="article-nav-link">
         <strong class="article-nav-caption">Newer</strong>
         <div class="article-nav-title">
           
-            [앵귤러/Angular] 이벤트 바인딩 문법
+            [알고리즘] 백준알고리즘 1912 연속합 (파이썬/python)
           
         </div>
       </a>
     
     
-      <a href="/2020/03/07/backjoon-13458/" class="article-nav-link">
+      <a href="/2020/05/01/programmers-tile/" class="article-nav-link">
         <strong class="article-nav-caption">Older</strong>
-        <div class="article-nav-title">[백준알고리즘] 13458번: 시험감독 - 파이썬(python)</div>
+        <div class="article-nav-title">[알고리즘] 프로그래머스 - 타일 장식물 (파이썬/python)</div>
       </a>
     
   </nav>
