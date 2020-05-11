@@ -187,6 +187,112 @@
         
           
 
+<article id="post-backjoon-9251" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/05/11/backjoon-9251/">[알고리즘] 백준알고리즘 9251 - LCS (파이썬/python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/05/11/backjoon-9251/" class="article-date">
+  <time datetime="2020-05-11T13:16:00.000Z" itemprop="datePublished">2020-05-11</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 초</td>
+<td align="left">256 MB</td>
+<td align="left">20545</td>
+<td align="left">8389</td>
+<td align="left">6261</td>
+<td align="left">41.156%</td>
+</tr>
+</tbody></table>
+<p>LCS(Longest Common Subsequence, 최장 공통 부분 수열)문제는 두 수열이 주어졌을 때, 모두의 부분 수열이 되는 수열 중 가장 긴 것을 찾는 문제이다.</p>
+<p>예를 들어, ACAYKP와 CAPCAK의 LCS는 ACAK가 된다.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄과 둘째 줄에 두 문자열이 주어진다. 문자열은 알파벳 대문자로만 이루어져 있으며, 최대 1000글자로 이루어져 있다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 입력으로 주어진 두 문자열의 LCS의 길이를 출력한다.</p>
+<h2 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ACAYKP</span><br><span class="line">CAPCAK</span><br></pre></td></tr></table></figure>
+
+<h2 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
+<li>문제를 만든 사람: <a href="https://www.acmicpc.net/user/baekjoon" target="_blank" rel="noopener">baekjoon</a></li>
+<li>데이터를 추가한 사람: <a href="https://www.acmicpc.net/user/qpwoeiruty" target="_blank" rel="noopener">qpwoeiruty</a></li>
+</ul>
+<h2 id="알고리즘-분류"><a href="#알고리즘-분류" class="headerlink" title="알고리즘 분류"></a>알고리즘 분류</h2><ul>
+<li>[다이나믹 프로그래밍](<a href="https://www.acmicpc.net/problem/tag/다이나믹" target="_blank" rel="noopener">https://www.acmicpc.net/problem/tag/다이나믹</a> 프로그래밍)</li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">n = list(str(input()))</span><br><span class="line">m = list(str(input()))</span><br><span class="line"></span><br><span class="line">lcs_list =[[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(n) + <span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(m) + <span class="number">1</span>)]</span><br><span class="line">answer = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(n)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(m)):</span><br><span class="line">        <span class="keyword">if</span> n[i] ==m[j]:</span><br><span class="line">            lcs_list[j+<span class="number">1</span>][i+<span class="number">1</span>] = lcs_list[j][i] + <span class="number">1</span></span><br><span class="line">            answer = max(answer,lcs_list[j+<span class="number">1</span>][i+<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            lcs_list[j+<span class="number">1</span>][i+<span class="number">1</span>] = max(lcs_list[j][i+<span class="number">1</span>],lcs_list[j+<span class="number">1</span>][i])</span><br><span class="line">            </span><br><span class="line">print(answer)</span><br></pre></td></tr></table></figure>
+
+<p>​       A C A Y K P</p>
+<p>​    0 0 0 0 0 0 0 </p>
+<p>C  0 0 1 1 1 1 1 </p>
+<p>A  0 <strong>1</strong> 1 2 2 2 2 </p>
+<p>P  0 1 1 <strong>2</strong> 2 2 3 </p>
+<p>C  0 1 2 2 2 2 3</p>
+<p>A  0 2 2 <strong>3</strong> 3 3 3 </p>
+<p>K  0 2 2 2 2 4 <strong>4</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/11/backjoon-9251/" data-id="cka2inyli0000igw856989i89"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-backjoon-1912" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -927,77 +1033,6 @@
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-python-underbar" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/23/python-underbar/">[파이썬] for _ in range(n)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/23/python-underbar/" class="article-date">
-  <time datetime="2020-03-23T12:57:00.000Z" itemprop="datePublished">2020-03-23</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h3 id="언더스코어"><a href="#언더스코어" class="headerlink" title="언더스코어(_)"></a>언더스코어(_)</h3><p>크게 다섯가지의 상황에서 사용된다.</p>
-<ul>
-<li>인터프리터(Interpreter)에서 마지막 값을 저장할 때</li>
-<li>값을 무시하고 싶을 때 (흔히 “I don’t care”라고 부른다.)</li>
-<li>변수나 함수명에 특별한 의미 또는 기능을 부여하고자 할 때</li>
-<li>국제화(Internationalization, i18n)/지역화(Localization, l10n) 함수로써 사용할 때</li>
-<li>숫자 리터럴값의 자릿수 구분을 위한 구분자로써 사용할 때</li>
-</ul>
-<p>여기서 for _ in range(n) 은 2번째 경우인 값을 무시하고 싶을 때 쓰인 경우이다.</p>
-<p>인덱스가 필요하지 않을 때 간단히 쓰인다.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/23/python-underbar/" data-id="ck84lhh930002ikw87gxacmbm"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
 
     </footer>
 
