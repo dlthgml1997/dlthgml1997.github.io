@@ -111,8 +111,18 @@
 <h2 id="알고리즘-분류"><a href="#알고리즘-분류" class="headerlink" title="알고리즘 분류"></a>알고리즘 분류</h2><ul>
 <li>[다이나믹 프로그래밍](<a href="https://www.acmicpc.net/problem/tag/다이나믹" target="_blank" rel="noopener">https://www.acmicpc.net/problem/tag/다이나믹</a> 프로그래밍)</li>
 </ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">n = list(str(input()))</span><br><span class="line">m = list(str(input()))</span><br><span class="line"></span><br><span class="line">lcs_list =[[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(n) + <span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(m) + <span class="number">1</span>)]</span><br><span class="line">answer = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(n)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(m)):</span><br><span class="line">        <span class="keyword">if</span> n[i] ==m[j]:</span><br><span class="line">            lcs_list[j+<span class="number">1</span>][i+<span class="number">1</span>] = lcs_list[j][i] + <span class="number">1</span></span><br><span class="line">            answer = max(answer,lcs_list[j+<span class="number">1</span>][i+<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            lcs_list[j+<span class="number">1</span>][i+<span class="number">1</span>] = max(lcs_list[j][i+<span class="number">1</span>],lcs_list[j+<span class="number">1</span>][i])</span><br><span class="line">            </span><br><span class="line">print(answer)</span><br></pre></td></tr></table></figure>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p><strong>LCS(Longest Common Subsequence)</strong> 는 문제에 나왔듯이 최장 공통 부분 수열을 뜻하며, </p>
+<p><strong>LCS(Longest Common Substring, 최장 공통 부분 문자열)</strong>과 헷갈릴 수 있다.</p>
+<p>공통 부분 문자열은 두 문자열이 가지는 공통적인 문자열 중 끊기지않고 연속적인 부분을 의미하고,</p>
+<p>공통 부분 수열은 두 문자열이 가지는 공통적인 문자열이 끊기더라도 순서가 맞으면 LCS로 인정하는 것을 의미한다.</p>
+<p><strong>ABCDHEF</strong> / <strong>BCDEF</strong> 두 문자열이 존재할 때</p>
+<p>최장 공통 부분 문자열은 BCD , 최장 공통 부분 수열은 BCDEF이다.</p>
+<h3 id="코드"><a href="#코드" class="headerlink" title="코드"></a>코드</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">n = list(str(input()))</span><br><span class="line">m = list(str(input()))</span><br><span class="line"></span><br><span class="line">lcs_list =[[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(n) + <span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(m) + <span class="number">1</span>)]</span><br><span class="line">answer = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(n)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(m)):</span><br><span class="line">        <span class="keyword">if</span> n[i] ==m[j]:</span><br><span class="line">            lcs_list[j+<span class="number">1</span>][i+<span class="number">1</span>] = lcs_list[j][i] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            lcs_list[j+<span class="number">1</span>][i+<span class="number">1</span>] = max(lcs_list[j][i+<span class="number">1</span>],lcs_list[j+<span class="number">1</span>][i])</span><br><span class="line">            </span><br><span class="line">print(lcs_list[<span class="number">-1</span>][<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
 
+
+
+<p>아래의 표를 만들어가는 코드이다. </p>
+<p>이 문제는 길이만 출력하면 되기 때문에 lcs_list 의 마지막(맨 오른쪽 아래) 값을 출력한다.</p>
 <p>​       A C A Y K P</p>
 <p>​    0 0 0 0 0 0 0 </p>
 <p>C  0 0 1 1 1 1 1 </p>
@@ -121,6 +131,7 @@
 <p>C  0 1 <strong>2</strong> 2 2 2 3</p>
 <p>A  0 1 2 <strong>3</strong> 3 3 3 </p>
 <p>K  0 1 2 3 3 <strong>4</strong> 4</p>
+<p>여기서 LCS 는 <strong>ACAK</strong> 가 된다. </p>
 
       
     </div>
@@ -138,11 +149,11 @@
     
   <nav class="article-nav">
     
-      <a href="/2020/05/24/backjoon-14502/" class="article-nav-link">
+      <a href="/2020/05/17/backjoon-9252/" class="article-nav-link">
         <strong class="article-nav-caption">Newer</strong>
         <div class="article-nav-title">
           
-            [알고리즘] 백준알고리즘 - 14502번: 연구소 (파이썬/python)
+            [알고리즘] 백준알고리즘 - 9252 LCS2 (파이썬/python)
           
         </div>
       </a>
