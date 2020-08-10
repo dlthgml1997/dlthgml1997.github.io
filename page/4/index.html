@@ -64,6 +64,142 @@
         
           
 
+<article id="post-angular-dependency-injection" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/11/angular-dependency-injection/">[앵귤러/Angular] 의존성 주입</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/11/angular-dependency-injection/" class="article-date">
+  <time datetime="2020-03-11T05:11:00.000Z" itemprop="datePublished">2020-03-11</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p><strong>의존성 주입(Dependency injection, DI)</strong></p>
+<blockquote>
+<p>의존성을 직접 생성하지 않고 외부 어딘가에서 받아오도록 요청하는 패턴</p>
+</blockquote>
+<ul>
+<li><p><strong>의존성</strong>(dependencies) : 어떤 클래스가 동작하기 위해 필요한 서비스나 객체를 의미</p>
+</li>
+<li><p>클래스의 인스턴스가 생성될 때 이 클래스에 필요한 의존성을 프레임워크가 생성해서 전달</p>
+</li>
+<li><p>애플리케이션 디자인 패턴 중에서도 아주 중요한 패턴</p>
+</li>
+<li><p>이 패턴을 활용하면 Angular 애플리케이션을 좀 더 효율적인 모듈 형태로 구성할 수 있다.</p>
+</li>
+<li><p>한 가지 예로는 데이터를 처리하는 Service를 만들 때 new 키워드로 인스턴스를 직접 생성하는것이 아닌, Angular가 제공하는 의존성 주입 매커니즘에 따라 component의 생성자로 주입되는 것</p>
+</li>
+</ul>
+<h3 id="의존성-주입-가능한-서비스-생성하고-등록하기"><a href="#의존성-주입-가능한-서비스-생성하고-등록하기" class="headerlink" title="의존성 주입 가능한 서비스 생성하고 등록하기"></a>의존성 주입 가능한 서비스 생성하고 등록하기</h3><ul>
+<li>목 데이터는 파일에 정의해두고 이 데이터를 서비스 클래스로 감싸 컴포넌트에 주입</li>
+</ul>
+<blockquote>
+<p>한 파일에 클래스를 여러개 정의하면 이 파일을 접하는 많은 사람들에게 혼란을 줄 수 있기 때문에 컴포넌트와 서비스는 파일 하나에 하나씩 정의하는 것이 좋다.  </p>
+<p>또한 컴포넌트와 서비스가 같은 파일에 정의해야 한다면 서비스 먼저 정의해야한다. 그렇지 않으면 런타임 null 참조 에러가 발생한다. (컴포넌트를 먼저 정의하고자 하면 forwardRef() 메소드를 사용하면 된다.)</p>
+</blockquote>
+<h4 id="의존성으로-주입할-서비스-클래스-정의"><a href="#의존성으로-주입할-서비스-클래스-정의" class="headerlink" title="의존성으로 주입할 서비스 클래스 정의"></a>의존성으로 주입할 서비스 클래스 정의</h4><p>Angular CLI를 사용하여 아래 명령을 이용하면 <code>HeroService</code> 클래스가 생성된다.  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng generate service hero</span><br></pre></td></tr></table></figure>
+
+<p><code>hero.sevice.ts</code> 초기 생성 파일은 아래와 같다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>(&#123;</span><br><span class="line">  <span class="comment">// 이 서비스를 애플리케이션 최상위 인젝터에 등록합니다.</span></span><br><span class="line">  providedIn: <span class="string">'root'</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroService &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"></span>) &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong><em>@Injectable()</em></strong> : 클래스를 인젝터에 프로바이더로 등록할 때 사용하는 데코레이터</p>
+<ul>
+<li><p><code>인젝터</code>:  서비스의 인스턴스를 생성하고 클래스에 주입하는 역할을 한다. 인스턴스를 생성할 때 프로바이더를 이용한다. </p>
+</li>
+<li><p><code>프로바이더</code>: 프로바이더 인터페이스들 중 하나를 구현하는 오브젝트, 프로바이더 객체는 DI토큰과 관련된 주입 가능한 의존성을 얻는 방법을 정의한다. 프로바이더에 서비스 클래스를 등록하면 인젝터는 new 키워드를 사용해 인스턴스를 생성한다. </p>
+<ol>
+<li><strong>서비스 클래스에서 @Injectable() 데코레이터로 직접 등록할 수 있다.</strong> </li>
+<li>NgModule의 @NgModule() 데코레이터에 등록할 수있다.</li>
+<li>컴포넌트의 @Component() 데코레이터에 등록할 수있다.</li>
+</ol>
+<p>위의 예제는 1번의 방식을 사용하였다.</p>
+<blockquote>
+<p>여러 클래스를 같은 서비스 타입으로 인젝터에 등록 가능하며, 서로 다른 프로바이더를 각기 다른 인젝터에 등록할 수 있다. </p>
+</blockquote>
+</li>
+<li><p><code>proviededIn</code></p>
+<ol>
+<li>@Injectable() 데코레이터를 사용할 때: 메타 데이터 옵션으로 서비스가 root인젝터에 등록될지, 특정 NgModule에 등록될지 지정할 수 있다.<ul>
+<li>서비스가 최상위 인젝터에 등록되면 Angular는 HeroService의 인스턴스를 하나만 생성하며, 이 클래스가 주입되는 모든 곳에서 같은 인스턴스를 공유한다.</li>
+</ul>
+</li>
+<li>@NgModule() 이나 @Component() 데코레이터를 사용할 때 : NgModule 계층이나 컴포넌트 계층의 인젝터에 프로바이더를 등록할 수 있다.</li>
+</ol>
+</li>
+<li><p>이 데코레이터가 등록된 클래스가 실제로 사용되지 않으면 이 클래스를 최종 빌드 결과물에서 제거하는 대상으로 등록하는 역할도 한다.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="서비스-주입하기"><a href="#서비스-주입하기" class="headerlink" title="서비스 주입하기"></a>서비스 주입하기</h3><h4 id="의존성-주입을-사용하는-컴포넌트-vs-사용하지-않는-컴포넌트"><a href="#의존성-주입을-사용하는-컴포넌트-vs-사용하지-않는-컴포넌트" class="headerlink" title="의존성 주입을 사용하는 컴포넌트 vs 사용하지 않는 컴포넌트"></a>의존성 주입을 사용하는 컴포넌트 vs 사용하지 않는 컴포넌트</h4><blockquote>
+<p>의존성 주입을 사용하지 않는 컴포넌트</p>
+</blockquote>
+<p>아래 HeroListComponent는 다른 mock 파일에 정의된 HEROES라는 배열을 메모리에 올려서 참조한다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">import</span> &#123; HEROES &#125;      <span class="keyword">from</span> <span class="string">'./mock-heroes'</span>;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroListComponent &#123;</span><br><span class="line">  heroes = HEROES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>이 방식은 실제 운영환경에서는 적합하지 않다. 테스트를 적용하거나 리모트 서버에서 데이터를 가져오도록 변경한다면 HerosListComponent를 반드시 수정해야하기 때문이다. 상황에 따라 매번 HEROES 목 데이터를 변경해야할 수도 있다. </p>
+<blockquote>
+<p>의존성 주입을 사용하는 컴포넌트</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">import</span> &#123; Hero &#125;        <span class="keyword">from</span> <span class="string">'./hero'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroService &#125; <span class="keyword">from</span> <span class="string">'./hero.service'</span>;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroListComponent &#123;</span><br><span class="line">  heroes: Hero[];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">heroService: HeroService</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.heroes = heroService.getHeroes();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>이 때 서비스클래스는 부모 인젝터 중 어딘가에 반드시 등록되어야 하지만, 컴포넌트의 입장에서는 서비스가 어디에 등록되어 있는지는 중요하지 않다.</p>
+<p>이 때 서비스 클래스의 코드는 아래와 같다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HEROES &#125; <span class="keyword">from</span> <span class="string">'./mock-heroes'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>(&#123;</span><br><span class="line">  <span class="comment">// 이 서비스를 애플리케이션 최상위 인젝터에 등록합니다.</span></span><br><span class="line">  providedIn: <span class="string">'root'</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroService &#123;</span><br><span class="line">  getHeroes() &#123; <span class="keyword">return</span> HEROES; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/11/angular-dependency-injection/" data-id="ck7n5kurb0001rsw8fnkc7ry8"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-angular-cli-overview" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -824,151 +960,12 @@ b,c= map(int,input().split())</code></p>
 
 
         
-          
-
-<article id="post-programmers-priority-queue" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/07/programmers-priority-queue/">[프로그래머스] 이중 우선순위 큐 - 파이썬(python)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/07/programmers-priority-queue/" class="article-date">
-  <time datetime="2020-03-07T07:35:00.000Z" itemprop="datePublished">2020-03-07</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제설명"><a href="#문제설명" class="headerlink" title="문제설명"></a>문제설명</h1><p>이중 우선순위 큐는 다음 연산을 할 수 있는 자료구조를 말합니다.</p>
-<table>
-<thead>
-<tr>
-<th>명령어</th>
-<th>수신 탑(높이)</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>I 숫자</td>
-<td>큐에 주어진 숫자를 삽입합니다.</td>
-</tr>
-<tr>
-<td>D 1</td>
-<td>큐에서 최댓값을 삭제합니다.</td>
-</tr>
-<tr>
-<td>D -1</td>
-<td>큐에서 최솟값을 삭제합니다.</td>
-</tr>
-</tbody></table>
-<p>이중 우선순위 큐가 할 연산 operations가 매개변수로 주어질 때, 모든 연산을 처리한 후 큐가 비어있으면 [0,0] 비어있지 않으면 [최댓값, 최솟값]을 return 하도록 solution 함수를 구현해주세요.</p>
-<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
-<li>operations는 길이가 1 이상 1,000,000 이하인 문자열 배열입니다.</li>
-<li>operations의 원소는 큐가 수행할 연산을 나타냅니다.<ul>
-<li>원소는 “명령어 데이터” 형식으로 주어집니다.- 최댓값/최솟값을 삭제하는 연산에서 최댓값/최솟값이 둘 이상인 경우, 하나만 삭제합니다.</li>
-</ul>
-</li>
-<li>빈 큐에 데이터를 삭제하라는 연산이 주어질 경우, 해당 연산은 무시합니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>operations</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>[I 16,D 1]</td>
-<td>[0,0]</td>
-</tr>
-<tr>
-<td>[I 7,I 5,I -5,D -1]</td>
-<td>[7,5]</td>
-</tr>
-</tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>16을 삽입 후 최댓값을 삭제합니다. 비어있으므로 [0,0]을 반환합니다.<br>7,5,-5를 삽입 후 최솟값을 삭제합니다. 최대값 7, 최소값 5를 반환합니다.</p>
-<p><a href="http://icpckorea.org/problems/2013/onlineset.pdf" target="_blank" rel="noopener">출처</a></p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><blockquote>
-<p>코드</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(operations)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> heapq</span><br><span class="line">    answer = []</span><br><span class="line">    priority_queue = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> operation <span class="keyword">in</span> operations:</span><br><span class="line">        op = operation[:<span class="number">1</span>]</span><br><span class="line">        num = int(operation[<span class="number">2</span>:])</span><br><span class="line">        <span class="keyword">if</span> op == <span class="string">"D"</span> <span class="keyword">and</span> priority_queue:</span><br><span class="line">            <span class="keyword">if</span> num == <span class="number">1</span>:</span><br><span class="line">                priority_queue.pop(priority_queue.index(max(priority_queue)))</span><br><span class="line">            <span class="keyword">elif</span> num == <span class="number">-1</span>:</span><br><span class="line">                priority_queue.pop(priority_queue.index(min(priority_queue)))</span><br><span class="line">        <span class="keyword">elif</span> op == <span class="string">"I"</span>:</span><br><span class="line">            heapq.heappush(priority_queue, num)</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">if</span> priority_queue:</span><br><span class="line">        answer = [max(priority_queue),min(priority_queue)]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        answer = [<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>새로 알게 된 점</p>
-</blockquote>
-<ol>
-<li>문자열 인덱싱(슬라이싱) <ul>
-<li>슬라이싱을 통해 operation 과 숫자를 나눴다.</li>
-</ul>
-</li>
-<li><code>priority_queue.index(max(priority_queue))</code><ul>
-<li>위 코드를 통해 priority_queue에서 가장 큰 값의 인덱스를 얻어올 수 있었다. 매우 편하다!</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>어려웠던 점</p>
-</blockquote>
-<p> 사실 생각보단 금방 풀었지만 ! 맨 처음 코드가 아래와 같을 때,</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> operation <span class="keyword">in</span> operations:</span><br><span class="line">    <span class="keyword">if</span> operation == <span class="string">"D 1"</span> <span class="keyword">and</span> priority_queue:</span><br><span class="line">        data = max(priority_queue)</span><br><span class="line">        priority_queue.pop(priority_queue.index(data))</span><br><span class="line">    <span class="keyword">elif</span> operation == <span class="string">"D -1"</span> <span class="keyword">and</span> priority_queue:</span><br><span class="line">        data = min(priority_queue)</span><br><span class="line">        priority_queue.pop(priority_queue.index(data))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        num = operation[<span class="number">2</span>:]</span><br><span class="line">        heapq.heappush(priority_queue, int(num))</span><br></pre></td></tr></table></figure>
-
-<p>입력값이 <code>[&quot;I 16&quot;, &quot;I -5643&quot;, &quot;D -1&quot;, &quot;D 1&quot;, &quot;D 1&quot;, &quot;I 123&quot;, &quot;D -1&quot;]</code> 인 경우,</p>
-<p>세번 째 <code>&quot;D 1&quot;</code> 에서 <code>priority_queue</code>가 비어있으니  <code>else</code>로 넘어가면서 1이 push 되는 문제가 발생하였다. </p>
-<p>그래서 <code>op</code> 와 <code>num</code>으로 나눠서 검사를 했더니 문제가 해결되었다. </p>
-<p><code>and priority_queue</code>를 넣지 않으면 ValueError : <strong>max() arg is an empty sequence</strong> 등의 문제가 발생한다.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/07/programmers-priority-queue/" data-id="ck7hb4r170000v4w82vo2fuo5"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
     </article>
     
   
     
       <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/page/3/">Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next</a>
+        <a class="extend prev" rel="prev" href="/page/3/">Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next</a>
       </nav>
     
   </section>

@@ -64,6 +64,145 @@
         
           
 
+<article id="post-programmers-priority-queue" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/07/programmers-priority-queue/">[프로그래머스] 이중 우선순위 큐 - 파이썬(python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/07/programmers-priority-queue/" class="article-date">
+  <time datetime="2020-03-07T07:35:00.000Z" itemprop="datePublished">2020-03-07</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제설명"><a href="#문제설명" class="headerlink" title="문제설명"></a>문제설명</h1><p>이중 우선순위 큐는 다음 연산을 할 수 있는 자료구조를 말합니다.</p>
+<table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>수신 탑(높이)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>I 숫자</td>
+<td>큐에 주어진 숫자를 삽입합니다.</td>
+</tr>
+<tr>
+<td>D 1</td>
+<td>큐에서 최댓값을 삭제합니다.</td>
+</tr>
+<tr>
+<td>D -1</td>
+<td>큐에서 최솟값을 삭제합니다.</td>
+</tr>
+</tbody></table>
+<p>이중 우선순위 큐가 할 연산 operations가 매개변수로 주어질 때, 모든 연산을 처리한 후 큐가 비어있으면 [0,0] 비어있지 않으면 [최댓값, 최솟값]을 return 하도록 solution 함수를 구현해주세요.</p>
+<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
+<li>operations는 길이가 1 이상 1,000,000 이하인 문자열 배열입니다.</li>
+<li>operations의 원소는 큐가 수행할 연산을 나타냅니다.<ul>
+<li>원소는 “명령어 데이터” 형식으로 주어집니다.- 최댓값/최솟값을 삭제하는 연산에서 최댓값/최솟값이 둘 이상인 경우, 하나만 삭제합니다.</li>
+</ul>
+</li>
+<li>빈 큐에 데이터를 삭제하라는 연산이 주어질 경우, 해당 연산은 무시합니다.</li>
+</ul>
+<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
+<thead>
+<tr>
+<th>operations</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[I 16,D 1]</td>
+<td>[0,0]</td>
+</tr>
+<tr>
+<td>[I 7,I 5,I -5,D -1]</td>
+<td>[7,5]</td>
+</tr>
+</tbody></table>
+<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>16을 삽입 후 최댓값을 삭제합니다. 비어있으므로 [0,0]을 반환합니다.<br>7,5,-5를 삽입 후 최솟값을 삭제합니다. 최대값 7, 최소값 5를 반환합니다.</p>
+<p><a href="http://icpckorea.org/problems/2013/onlineset.pdf" target="_blank" rel="noopener">출처</a></p>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><blockquote>
+<p>코드</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(operations)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> heapq</span><br><span class="line">    answer = []</span><br><span class="line">    priority_queue = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> operation <span class="keyword">in</span> operations:</span><br><span class="line">        op = operation[:<span class="number">1</span>]</span><br><span class="line">        num = int(operation[<span class="number">2</span>:])</span><br><span class="line">        <span class="keyword">if</span> op == <span class="string">"D"</span> <span class="keyword">and</span> priority_queue:</span><br><span class="line">            <span class="keyword">if</span> num == <span class="number">1</span>:</span><br><span class="line">                priority_queue.pop(priority_queue.index(max(priority_queue)))</span><br><span class="line">            <span class="keyword">elif</span> num == <span class="number">-1</span>:</span><br><span class="line">                priority_queue.pop(priority_queue.index(min(priority_queue)))</span><br><span class="line">        <span class="keyword">elif</span> op == <span class="string">"I"</span>:</span><br><span class="line">            heapq.heappush(priority_queue, num)</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">if</span> priority_queue:</span><br><span class="line">        answer = [max(priority_queue),min(priority_queue)]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        answer = [<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>새로 알게 된 점</p>
+</blockquote>
+<ol>
+<li>문자열 인덱싱(슬라이싱) <ul>
+<li>슬라이싱을 통해 operation 과 숫자를 나눴다.</li>
+</ul>
+</li>
+<li><code>priority_queue.index(max(priority_queue))</code><ul>
+<li>위 코드를 통해 priority_queue에서 가장 큰 값의 인덱스를 얻어올 수 있었다. 매우 편하다!</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>어려웠던 점</p>
+</blockquote>
+<p> 사실 생각보단 금방 풀었지만 ! 맨 처음 코드가 아래와 같을 때,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> operation <span class="keyword">in</span> operations:</span><br><span class="line">    <span class="keyword">if</span> operation == <span class="string">"D 1"</span> <span class="keyword">and</span> priority_queue:</span><br><span class="line">        data = max(priority_queue)</span><br><span class="line">        priority_queue.pop(priority_queue.index(data))</span><br><span class="line">    <span class="keyword">elif</span> operation == <span class="string">"D -1"</span> <span class="keyword">and</span> priority_queue:</span><br><span class="line">        data = min(priority_queue)</span><br><span class="line">        priority_queue.pop(priority_queue.index(data))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        num = operation[<span class="number">2</span>:]</span><br><span class="line">        heapq.heappush(priority_queue, int(num))</span><br></pre></td></tr></table></figure>
+
+<p>입력값이 <code>[&quot;I 16&quot;, &quot;I -5643&quot;, &quot;D -1&quot;, &quot;D 1&quot;, &quot;D 1&quot;, &quot;I 123&quot;, &quot;D -1&quot;]</code> 인 경우,</p>
+<p>세번 째 <code>&quot;D 1&quot;</code> 에서 <code>priority_queue</code>가 비어있으니  <code>else</code>로 넘어가면서 1이 push 되는 문제가 발생하였다. </p>
+<p>그래서 <code>op</code> 와 <code>num</code>으로 나눠서 검사를 했더니 문제가 해결되었다. </p>
+<p><code>and priority_queue</code>를 넣지 않으면 ValueError : <strong>max() arg is an empty sequence</strong> 등의 문제가 발생한다.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/07/programmers-priority-queue/" data-id="ck7hb4r170000v4w82vo2fuo5"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-python-indexing-slicing" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -979,119 +1118,12 @@
 
 
         
-          
-
-<article id="post-programmers-printer" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/02/15/programmers-printer/">[프로그래머스] 프린터 - 파이썬</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/02/15/programmers-printer/" class="article-date">
-  <time datetime="2020-02-15T09:27:00.000Z" itemprop="datePublished">2020-02-15</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제설명"><a href="#문제설명" class="headerlink" title="문제설명"></a>문제설명</h1><p>일반적인 프린터는 인쇄 요청이 들어온 순서대로 인쇄합니다. 그렇기 때문에 중요한 문서가 나중에 인쇄될 수 있습니다. 이런 문제를 보완하기 위해 중요도가 높은 문서를 먼저 인쇄하는 프린터를 개발했습니다. 이 새롭게 개발한 프린터는 아래와 같은 방식으로 인쇄 작업을 수행합니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 인쇄 대기목록의 가장 앞에 있는 문서(J)를 대기목록에서 꺼냅니다.</span><br><span class="line">2. 나머지 인쇄 대기목록에서 J보다 중요도가 높은 문서가 한 개라도 존재하면 J를 대기목록의 가장 마지막에 넣습니다.</span><br><span class="line">3. 그렇지 않으면 J를 인쇄합니다.</span><br></pre></td></tr></table></figure>
-
-<p>예를 들어, 4개의 문서(A, B, C, D)가 순서대로 인쇄 대기목록에 있고 중요도가 2 1 3 2 라면 C D A B 순으로 인쇄하게 됩니다.</p>
-<p>내가 인쇄를 요청한 문서가 몇 번째로 인쇄되는지 알고 싶습니다. 위의 예에서 C는 1번째로, A는 3번째로 인쇄됩니다.</p>
-<p>현재 대기목록에 있는 문서의 중요도가 순서대로 담긴 배열 priorities와 내가 인쇄를 요청한 문서가 현재 대기목록의 어떤 위치에 있는지를 알려주는 location이 매개변수로 주어질 때, 내가 인쇄를 요청한 문서가 몇 번째로 인쇄되는지 return 하도록 solution 함수를 작성해주세요.</p>
-<h2 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h2><ul>
-<li>현재 대기목록에는 1개 이상 100개 이하의 문서가 있습니다.</li>
-<li>인쇄 작업의 중요도는 1~9로 표현하며 숫자가 클수록 중요하다는 뜻입니다.</li>
-<li>location은 0 이상 (현재 대기목록에 있는 작업 수 - 1) 이하의 값을 가지며 대기목록의 가장 앞에 있으면 0, 두 번째에 있으면 1로 표현합니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>priorities</th>
-<th>location</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>[2, 1, 3, 2]</td>
-<td>2</td>
-<td>1</td>
-</tr>
-<tr>
-<td>[1, 1, 9, 1, 1, 1]</td>
-<td>0</td>
-<td>5</td>
-</tr>
-</tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>예제 #1</p>
-<p>문제에 나온 예와 같습니다.</p>
-<p>예제 #2</p>
-<p>6개의 문서(A, B, C, D, E, F)가 인쇄 대기목록에 있고 중요도가 1 1 9 1 1 1 이므로 C D E F A B 순으로 인쇄합니다.</p>
-<p><a href="http://www.csc.kth.se/contest/nwerc/2006/problems/nwerc06.pdf" target="_blank" rel="noopener">출처</a></p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(priorities, location)</span>:</span></span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    pi_list = [(p, i) <span class="keyword">for</span> (i, p) <span class="keyword">in</span> enumerate(priorities)]</span><br><span class="line">               </span><br><span class="line">    <span class="keyword">while</span> pi_list:</span><br><span class="line">        prior = pi_list.pop(<span class="number">0</span>)</span><br><span class="line">        <span class="comment"># 밑에 코드 추가하니까 85점 -&gt; 100점</span></span><br><span class="line">        <span class="keyword">if</span> pi_list:</span><br><span class="line">            p_list = [priority <span class="keyword">for</span> priority, idx <span class="keyword">in</span> pi_list]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> p_list:</span><br><span class="line">            <span class="keyword">if</span> prior[<span class="number">0</span>] &gt;= max(p_list):</span><br><span class="line">                <span class="keyword">if</span> prior[<span class="number">1</span>] == location:</span><br><span class="line">                    <span class="keyword">return</span> answer + <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    answer += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                pi_list.append(prior)</span><br></pre></td></tr></table></figure>
-
-<h3 id="변수설명"><a href="#변수설명" class="headerlink" title="변수설명"></a>변수설명</h3><ul>
-<li>pi_list : (우선순위, index) 로 저장된 튜플</li>
-<li>prior : 첫번째 대기 문서</li>
-<li>p_list :  남아있는 문서들의 우선순위 배열</li>
-</ul>
-<p>나의 첫번째 알고리즘 문제이다!</p>
-<p> 많은 정답을 참고하고 이해하면서 풀어보았다</p>
-<p><strong>tuple</strong>과 <strong>enumerate</strong>에 대해 처음 알게 된 문제이다. </p>
-<p><strong>enmerate</strong>는 리스트를 순서와 리스트의 값을 한쌍으로 반환하는 함수이다.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/15/programmers-printer/" data-id="ck6nj5ref0000osw82yi71q9a"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
     </article>
     
   
     
       <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/page/4/">Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+        <a class="extend prev" rel="prev" href="/page/4/">Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next</a>
       </nav>
     
   </section>
