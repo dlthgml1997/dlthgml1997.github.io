@@ -93,7 +93,7 @@
 
 
 <ol>
-<li><p>처음엔 <em>text<em>에 서명한 값을 *String</em>으로 변환하여 반환할 때, <em>Base64</em>를 이용하지 않고<code>return new String(signatureBytes, &quot;UTF-8&quot;);</code>이와 같은 방식으로 *Encode</em>, <em>Decode</em> 하였다. </p>
+<li><p>처음엔 <em>text<em>에 서명한 값을 *String</em>으로 변환하여 반환할 때, <em>Base64</em>를 이용하지 않고 <code>return new String(signatureBytes, &quot;UTF-8&quot;);</code> 이와 같은 방식으로 *Encode</em>, <em>Decode</em> 하였다. </p>
 <p>-&gt; verify 결과: false</p>
 </li>
 <li><p><em>getDigitalSignature()</em> 함수의 반환형을 <em>String</em> 아닌 <em>byte[]<em>로 반환하도록 코드를 수정하였다. (</em>signature.sign()</em> 값 형변환 x)</p>
