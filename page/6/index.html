@@ -64,6 +64,203 @@
         
           
 
+<article id="post-python-heapq" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/02/25/python-heapq/">[파이썬] heapq 모듈</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/02/25/python-heapq/" class="article-date">
+  <time datetime="2020-02-25T09:53:00.000Z" itemprop="datePublished">2020-02-25</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <blockquote>
+<p> heapq 모듈에 대해 간략히 알아보자 ! </p>
+</blockquote>
+<h3 id="Heap-이란"><a href="#Heap-이란" class="headerlink" title="Heap 이란 ?"></a>Heap 이란 ?</h3><p>힙(heap)은 최댓값 및 최솟값을 찾아내는 연산을 빠르게 하기 위해 고안된 완전이진트리(complete binary tree)를 기본으로 한 자료구조(tree-based structure)로서 다음과 같은 힙 속성(property)을 만족한다.</p>
+<ul>
+<li>A가 B의 부모노드(parent node)이면, A의 키(key)값과 B의 키값 사이에는 대소관계가 성립한다.</li>
+</ul>
+<p>힙에는 두가지 종류가 있으며, 부모노드의 키값이 자식노드의 키값보다 항상 큰 힙을 ‘최대 힙’, 부모노드의 키값이 자식노드의 키값보다 항상 작은 힙을 ‘최소 힙’이라고 부른다.</p>
+<p><img src="images%5Cheap-example.png" alt="최대-힙-예시"></p>
+<p>출처 : <a href="https://ko.wikipedia.org/wiki/%ED%9E%99_(%EC%9E%90%EB%A3%8C_%EA%B5%AC%EC%A1%B0)" target="_blank" rel="noopener">위키백과 ‘힙 (자료 구조)’</a></p>
+<hr>
+<blockquote>
+<p>heaqp 모듈은 큐 알고리즘이라고도 하는 힙(heap) 큐 알고리즘의 구현을 제공한다.</p>
+</blockquote>
+<h3 id="python에-쓰이는-heap-코드"><a href="#python에-쓰이는-heap-코드" class="headerlink" title="python에 쓰이는 heap 코드"></a>python에 쓰이는 heap 코드</h3><ul>
+<li><p><code>import heapq</code> : heapq 모듈을 사용하기 위해 써주어야한다.</p>
+</li>
+<li><p><code>heapq.heapify(x)</code> : 값이 들어있는 리스트 x를 힙으로 변환하는 코드이다. </p>
+</li>
+<li><p><code>heapq.heappush(heap, item)</code> : item 값을 힙으로 푸시한다.</p>
+</li>
+<li><p><code>heapq.heappushpop(heap, item)</code> : 힙에 item을 푸시한 다음, heap에서 가장 작은 항목을 팝하고 반환한다. ( <code>heappush()</code> =&gt; <code>heappop()</code>)</p>
+</li>
+<li><p><code>heapq.heapreplace(heap, item)</code> : heap에서 가장 작은 항목을 팝하고 반환하며, 새로운 item도 푸시한다. heap 이 비어있을 시에 IndexError가 발생한다. ( <code>heappop()</code> =&gt; <code>heappush()</code>)</p>
+</li>
+</ul>
+<p>참고: <a href="https://python.flowdas.com/library/heapq.html" target="_blank" rel="noopener">https://python.flowdas.com/library/heapq.html</a> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/25/python-heapq/" data-id="ck71qh2390000usw8hb6z2jve"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-programmers-kth-number" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/02/22/programmers-kth-number/">[프로그래머스] K번째 수 - 파이썬</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/02/22/programmers-kth-number/" class="article-date">
+  <time datetime="2020-02-22T07:22:00.000Z" itemprop="datePublished">2020-02-22</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제-설명"><a href="#문제-설명" class="headerlink" title="문제 설명"></a>문제 설명</h1><p>배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다.</p>
+<p>예를 들어 array가 [1, 5, 2, 6, 3, 7, 4], i = 2, j = 5, k = 3이라면</p>
+<ol>
+<li>array의 2번째부터 5번째까지 자르면 [5, 2, 6, 3]입니다.</li>
+<li>1에서 나온 배열을 정렬하면 [2, 3, 5, 6]입니다.</li>
+<li>2에서 나온 배열의 3번째 숫자는 5입니다.</li>
+</ol>
+<p>배열 array, [i, j, k]를 원소로 가진 2차원 배열 commands가 매개변수로 주어질 때, commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 나온 결과를 배열에 담아 return 하도록 solution 함수를 작성해주세요.</p>
+<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
+<li>array의 길이는 1 이상 100 이하입니다.</li>
+<li>array의 각 원소는 1 이상 100 이하입니다.</li>
+<li>commands의 길이는 1 이상 50 이하입니다.</li>
+<li>commands의 각 원소는 길이가 3입니다.</li>
+</ul>
+<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
+<thead>
+<tr>
+<th>array</th>
+<th>commands</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[1, 5, 2, 6, 3, 7, 4]</td>
+<td>[[2, 5, 3], [4, 4, 1], [1, 7, 3]]</td>
+<td>[5, 6, 3]</td>
+</tr>
+</tbody></table>
+<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>[1, 5, 2, 6, 3, 7, 4]를 2번째부터 5번째까지 자른 후 정렬합니다. [2, 3, 5, 6]의 세 번째 숫자는 5입니다.<br>[1, 5, 2, 6, 3, 7, 4]를 4번째부터 4번째까지 자른 후 정렬합니다. [6]의 첫 번째 숫자는 6입니다.<br>[1, 5, 2, 6, 3, 7, 4]를 1번째부터 7번째까지 자릅니다. [1, 2, 3, 4, 5, 6, 7]의 세 번째 숫자는 3입니다.</p>
+<p><a href="https://neerc.ifmo.ru/subregions/northern.html" target="_blank" rel="noopener">출처</a></p>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(array, commands)</span>:</span></span><br><span class="line">    answer = []</span><br><span class="line">    <span class="keyword">for</span> command_list <span class="keyword">in</span> commands:</span><br><span class="line">        sliced_array = array[command_list[<span class="number">0</span>]<span class="number">-1</span> : command_list[<span class="number">1</span>]]</span><br><span class="line">        sliced_array.sort()</span><br><span class="line">        answer.append(sliced_array[command_list[<span class="number">2</span>]<span class="number">-1</span>])</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+
+
+<p>이번 문제를 위해 공부한 내용은 array의 <code>slicing</code> 과 <code>sort</code>이다.</p>
+<ol>
+<li><p><code>commands</code> 가 [[2, 5, 3], [4, 4, 1], [1, 7, 3]] 일 때, <code>for command_list in commands</code>를 통해  [2, 5, 3] <strong>-&gt;</strong> [4, 4, 1] <strong>-&gt;</strong> [1, 7, 3] 순서로 <code>command_list</code>에 담는다.  </p>
+</li>
+<li><p>예를 들어 <code>command_list</code>가 <em>[2,5,3]</em> 일 때, </p>
+<p><code>array</code>의 <em>command_list[0]-1</em> (1번 인덱스) 부터 <em>command_list[1]</em> (4번 인덱스까지)(<code>slicing</code>에서 <code>end</code>부분(5)은 자르지 않기때문에 -1 해줄 필요가 없다.)까지 잘라 <code>sliced_array</code>에 담는다.</p>
+</li>
+<li><p><code>sliced_array</code>를 <code>sort()</code> 로 정렬한다. </p>
+</li>
+<li><p><em><code>answer</code>에  command_list[2]-1</em> (3번 인덱스) 의 값을 더한다.</p>
+</li>
+</ol>
+<h3 id="시행착오"><a href="#시행착오" class="headerlink" title="시행착오"></a>시행착오</h3><p> 처음에<code>for i in range(len(commands))</code> 로 i에  인덱스를 담아 <code>array[commands[i] [0] -1 : commands[i] [1]]</code> 이렇게 접근하였다.</p>
+<p> 근데 <code>for command_list in commands</code> 를 사용하면 commands의 첫번째, 두번째, 세번째 배열을 command_list에 담으며 실행할 수 있다는 것을 알게 되었고 코드를 고칠 수 있었다.  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/22/programmers-kth-number/" data-id="ck6xahngx0000sow8ft7efs0z"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-python-array-cutting" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
