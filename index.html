@@ -227,9 +227,9 @@
       
 
       
-        <h3 id="Base64"><a href="#Base64" class="headerlink" title="Base64"></a>Base64</h3><p>일단 Base64가 뭘까? 컴퓨터 분야에서 쓰이는 <strong>Base64</strong>란 8비트 이진 데이터를 문자 코드에 영향을 받지 않는 공통 ASCII 영역의 문자들로만 이루어진 일련의 문자열로 바꾸는 인코딩 방식을 가리키는 개념이라고 한다. </p>
-<p><strong>Encoding</strong> 은 이진데이터를 일련의 문자열로, <strong>Decoding은</strong> 일련의 문자열을 이진데이터로 바꾸는 것이다.</p>
-<h3 id="encodToString"><a href="#encodToString" class="headerlink" title="encodToString"></a>encodToString</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encodeToString</span> <span class="params">(<span class="keyword">byte</span>[] input, <span class="keyword">int</span> flags)</span></span></span><br></pre></td></tr></table></figure>
+        <h2 id="Base64"><a href="#Base64" class="headerlink" title="Base64"></a>Base64</h2><p>일단 Base64가 뭘까? 컴퓨터 분야에서 쓰이는 <strong>Base64</strong>란 8비트 이진 데이터를 문자 코드에 영향을 받지 않는 공통 ASCII 영역의 문자들로만 이루어진 일련의 문자열로 바꾸는 인코딩 방식을 가리키는 개념이라고 한다. </p>
+<p><strong>Encoding</strong> 은 이진데이터를 일련의 문자열로, <strong>Decoding</strong> 은 일련의 문자열을 이진데이터로 바꾸는 것이다.</p>
+<h2 id="encodToString"><a href="#encodToString" class="headerlink" title="encodToString"></a>encodToString</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encodeToString</span> <span class="params">(<span class="keyword">byte</span>[] input, <span class="keyword">int</span> flags)</span></span></span><br></pre></td></tr></table></figure>
 
 <p>Base64를 이용하여 byte Array 를 String으로 Encoding 할 때 이용하는 함수이다.</p>
 <p>나는 text를 private key로 디지털 서명한 byte[] 값을 서버에 String 형식으로 보내야하기 때문에 사용했다.</p>
