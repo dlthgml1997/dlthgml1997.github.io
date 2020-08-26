@@ -134,8 +134,9 @@
 </li>
 </ol>
 <ol start="2">
-<li><p>DFS 를 이용하는 방법 (백트래킹)</p>
-<p>내일 추가할꾸</p>
+<li><p>DFS 를 이용하는 방법</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">N, M = map(int, input().split())</span><br><span class="line">visited = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(N)]</span><br><span class="line">answer = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(depth)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> depth == M:</span><br><span class="line">        print(<span class="string">' '</span>.join(map(str, answer)))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(visited)):</span><br><span class="line">        <span class="keyword">if</span> visited[i] == <span class="number">0</span>:</span><br><span class="line">            visited[i] = <span class="number">1</span></span><br><span class="line">            answer.append(i+<span class="number">1</span>)</span><br><span class="line">            dfs(depth +<span class="number">1</span>)</span><br><span class="line">            visited[i] = <span class="number">0</span></span><br><span class="line">            answer.pop()</span><br><span class="line"></span><br><span class="line">dfs(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 
@@ -154,6 +155,15 @@
   
     
   <nav class="article-nav">
+    
+      <a href="/2020/08/27/programmers-price-of-stock/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer</strong>
+        <div class="article-nav-title">
+          
+            [프로그래머스] 주식가격 (파이썬/pyhton)
+          
+        </div>
+      </a>
     
     
       <a href="/2020/08/24/android-keystore2/" class="article-nav-link">

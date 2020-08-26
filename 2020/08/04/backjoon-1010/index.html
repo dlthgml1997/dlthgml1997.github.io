@@ -112,7 +112,7 @@
 <h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span><span class="params">(s)</span>:</span></span><br><span class="line">    a = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(s):</span><br><span class="line">        a *= (i+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> a</span><br><span class="line"></span><br><span class="line">t = int(input())</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(t):</span><br><span class="line">    n, m = map(int, input().split())</span><br><span class="line">    print(factorial(m) // factorial(n) // factorial(m-n))</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>이 문제는 조합을 이용한다. (m개중 n개를 뽑는 조합의 수 / 순서대로 정렬)</li>
+<li>이 문제는 조합을 이용한다. (m개중 n개를 뽑는 조합의 수)</li>
 </ul>
 <img src="../image/image-20200804175123560.png" alt="image-20200804175123560" style="zoom:50%;" />
 
@@ -123,6 +123,10 @@
 1 5
 13 29 </code></pre><p>이런 식으로 같은 형식의 input 을 여러줄 받아올 때는 한 줄씩 받아오면서(<code>n, m = map(int, input().split())</code>) print를 처리해도 된다 ! </p>
 </li>
+</ul>
+<ul>
+<li>from itertools import combinations 를 이용해서 풀 수도 있지만 숫자가 크기 때문에 시간 초과가 된다 !</li>
+<li>식을 외워두는 것이 좋겠다 ㅎ-ㅎ </li>
 </ul>
 
       
