@@ -64,6 +64,202 @@
         
           
 
+<article id="post-backjoon-1037" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/06/15/backjoon-1037/">[백준알고리즘/boj] 1037- 약수 파이썬(python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/06/15/backjoon-1037/" class="article-date">
+  <time datetime="2020-06-15T09:00:00.000Z" itemprop="datePublished">2020-06-15</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">2 초</td>
+<td align="left">512 MB</td>
+<td align="left">17208</td>
+<td align="left">8185</td>
+<td align="left">7162</td>
+<td align="left">48.921%</td>
+</tr>
+</tbody></table>
+<h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>양수 A가 N의 진짜 약수가 되려면, N이 A의 배수이고, A가 1과 N이 아니어야 한다. 어떤 수 N의 진짜 약수가 모두 주어질 때, N을 구하는 프로그램을 작성하시오.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 N의 진짜 약수의 개수가 주어진다. 이 개수는 50보다 작거나 같은 자연수이다. 둘째 줄에는 N의 진짜 약수가 주어진다. 1,000,000보다 작거나 같고, 2보다 크거나 같은 자연수이고, 중복되지 않는다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 N을 출력한다. N은 항상 32비트 부호있는 정수로 표현할 수 있다.</p>
+<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">4 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8</span><br></pre></td></tr></table></figure>
+
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
+<li>문제를 번역한 사람: <a href="https://www.acmicpc.net/user/baekjoon" target="_blank" rel="noopener">baekjoon</a></li>
+<li>빠진 조건을 찾은 사람: <a href="https://www.acmicpc.net/user/doju" target="_blank" rel="noopener">doju</a></li>
+<li>어색한 표현을 찾은 사람: <a href="https://www.acmicpc.net/user/jh05013" target="_blank" rel="noopener">jh05013</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>처음에 nums.pop(0) * nums[0] 로 풀었더니 당연히 ! 틀렸다.</p>
+<p>배열의 마지막 요소를 얻어오기 위해 nums[-1] 을 사용하면 된다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">n = map(int, input())</span><br><span class="line">nums = list(map(int, input().split()))</span><br><span class="line"></span><br><span class="line">nums.sort()</span><br><span class="line">print(nums[<span class="number">0</span>] * nums[<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/06/15/backjoon-1037/" data-id="ckbruw8nh00002cw88t43gtza"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-backjoon-2667" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/06/13/backjoon-2667/">[백준알고리즘] 1057- 토너먼트 파이썬(python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/06/13/backjoon-2667/" class="article-date">
+  <time datetime="2020-06-13T07:10:00.000Z" itemprop="datePublished">2020-06-13</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><h2 id="토너먼트-분류"><a href="#토너먼트-분류" class="headerlink" title="토너먼트 분류"></a>토너먼트 분류</h2><table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 초</td>
+<td align="left">512 MB</td>
+<td align="left">10747</td>
+<td align="left">5731</td>
+<td align="left">4831</td>
+<td align="left">55.580%</td>
+</tr>
+</tbody></table>
+<p>김지민은 N명이 참가하는 스타 토너먼트에 진출했다. 토너먼트는 다음과 같이 진행된다. 일단 N명의 참가자는 번호가 1번부터 N번까지 배정받는다. 그러고 난 후에 서로 인접한 번호끼리 스타를 한다. 이긴 사람은 다음 라운드에 진출하고, 진 사람은 그 라운드에서 떨어진다. 만약 그 라운드의 참가자가 홀수명이라면, 마지막 번호를 가진 참가자는 다음 라운드로 자동 진출한다. 다음 라운드에선 다시 참가자의 번호를 1번부터 매긴다. 이때, 번호를 매기는 순서는 처음 번호의 순서를 유지하면서 1번부터 매긴다. 이 말은 1번과 2번이 스타를 해서 1번이 진출하고, 3번과 4번이 스타를 해서 4번이 진출했다면, 4번은 다음 라운드에서 번호 2번을 배정받는다. 번호를 다시 배정받은 후에 한 명만 남을 때까지 라운드를 계속 한다.</p>
+<p>마침 이 스타 대회에 임한수도 참가했다. 김지민은 갑자기 스타 대회에서 우승하는 욕심은 없어지고, 몇 라운드에서 임한수와 대결하는지 궁금해졌다. 일단 김지민과 임한수는 서로 대결하기 전까지 항상 이긴다고 가정한다. 1 라운드에서 김지민의 번호와 임한수의 번호가 주어질 때, 과연 김지민과 임한수가 몇 라운드에서 대결하는지 출력하는 프로그램을 작성하시오.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 참가자의 수 N과 1 라운드에서 김지민의 번호와 임한수의 번호가 순서대로 주어진다. N은 100,000보다 작거나 같은 자연수이고, 김지민의 번호와 임한수의 번호는 N보다 작거나 같은 자연수이고, 서로 다르다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 김지민과 임한수가 대결하는 라운드 번호를 출력한다. 만약 서로 대결하지 않을 때는 -1을 출력한다.</p>
+<h2 id="예제-입력"><a href="#예제-입력" class="headerlink" title="예제 입력"></a>예제 입력</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">16 8 9</span><br></pre></td></tr></table></figure>
+
+<h2 id="예제-출력"><a href="#예제-출력" class="headerlink" title="예제 출력"></a>예제 출력</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>토너먼트를 이해하고 있다면 간단하게 풀 수 있는 문제 !</p>
+<p>지민과 한수에서 2로 나눈 몫을 뺀 값이 같아 졌을 때가 둘이 대결하는 때이다. </p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">n, han, jimin = map(int, input().split())</span><br><span class="line">answer = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> han != jimin:</span><br><span class="line">    han -= han//<span class="number">2</span></span><br><span class="line">    jimin -= jimin//<span class="number">2</span></span><br><span class="line">    answer += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(answer)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>(여담)</p>
+<ul>
+<li>이제 알고리즘도 다시 열심히 풀고 블로그 테마도 바꿀거당 ! ! </li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/06/13/backjoon-2667/" data-id="ck8czcyps0000nww817v02d0m"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-backjoon-9252" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -855,213 +1051,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/04/19/backjoon-11047/" data-id="ck975e6az0000pcw81dpoeii1"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-clothes" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/04/15/programmers-clothes/">[알고리즘] 프로그래머스-체육복 (python 파이썬)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/04/15/programmers-clothes/" class="article-date">
-  <time datetime="2020-04-15T07:13:00.000Z" itemprop="datePublished">2020-04-15</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>점심시간에 도둑이 들어, 일부 학생이 체육복을 도난당했습니다. 다행히 여벌 체육복이 있는 학생이 이들에게 체육복을 빌려주려 합니다. 학생들의 번호는 체격 순으로 매겨져 있어, 바로 앞번호의 학생이나 바로 뒷번호의 학생에게만 체육복을 빌려줄 수 있습니다. 예를 들어, 4번 학생은 3번 학생이나 5번 학생에게만 체육복을 빌려줄 수 있습니다. 체육복이 없으면 수업을 들을 수 없기 때문에 체육복을 적절히 빌려 최대한 많은 학생이 체육수업을 들어야 합니다.</p>
-<p>전체 학생의 수 n, 체육복을 도난당한 학생들의 번호가 담긴 배열 lost, 여벌의 체육복을 가져온 학생들의 번호가 담긴 배열 reserve가 매개변수로 주어질 때, 체육수업을 들을 수 있는 학생의 최댓값을 return 하도록 solution 함수를 작성해주세요.</p>
-<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
-<li>전체 학생의 수는 2명 이상 30명 이하입니다.</li>
-<li>체육복을 도난당한 학생의 수는 1명 이상 n명 이하이고 중복되는 번호는 없습니다.</li>
-<li>여벌의 체육복을 가져온 학생의 수는 1명 이상 n명 이하이고 중복되는 번호는 없습니다.</li>
-<li>여벌 체육복이 있는 학생만 다른 학생에게 체육복을 빌려줄 수 있습니다.</li>
-<li>여벌 체육복을 가져온 학생이 체육복을 도난당했을 수 있습니다. 이때 이 학생은 체육복을 하나만 도난당했다고 가정하며, 남은 체육복이 하나이기에 다른 학생에게는 체육복을 빌려줄 수 없습니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>n</th>
-<th>lost</th>
-<th>reserve</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>5</td>
-<td>[2, 4]</td>
-<td>[1, 3, 5]</td>
-<td>5</td>
-</tr>
-<tr>
-<td>5</td>
-<td>[2, 4]</td>
-<td>[3]</td>
-<td>4</td>
-</tr>
-<tr>
-<td>3</td>
-<td>[3]</td>
-<td>[1]</td>
-<td>2</td>
-</tr>
-</tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>예제 #1<br>1번 학생이 2번 학생에게 체육복을 빌려주고, 3번 학생이나 5번 학생이 4번 학생에게 체육복을 빌려주면 학생 5명이 체육수업을 들을 수 있습니다.</p>
-<p>예제 #2<br>3번 학생이 2번 학생이나 4번 학생에게 체육복을 빌려주면 학생 4명이 체육수업을 들을 수 있습니다.</p>
-<p><a href="http://hsin.hr/coci/archive/2009_2010/contest6_tasks.pdf" target="_blank" rel="noopener">출처</a></p>
-<p>※ 공지 - 2019년 2월 18일 지문이 리뉴얼되었습니다.<br>※ 공지 - 2019년 2월 27일, 28일 테스트케이스가 추가되었습니다.</p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>초반 풀이 =&gt; 런타임 에러</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(n, lost, reserve)</span>:</span></span><br><span class="line">        </span><br><span class="line">    num =<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">if</span> i+<span class="number">1</span> <span class="keyword">in</span> lost:</span><br><span class="line">            <span class="keyword">if</span> i+<span class="number">1</span> <span class="keyword">in</span> reserve:</span><br><span class="line">                lost.remove(i+<span class="number">1</span>)</span><br><span class="line">                reserve.remove(i)</span><br><span class="line">            <span class="keyword">elif</span> i <span class="keyword">in</span> reserve:</span><br><span class="line">                lost.remove(i+<span class="number">1</span>)</span><br><span class="line">                reserve.remove(i)</span><br><span class="line">            <span class="keyword">elif</span> i+<span class="number">2</span> <span class="keyword">in</span> reserve:</span><br><span class="line">                lost.remove(i+<span class="number">1</span>)</span><br><span class="line">                reserve.remove(i+<span class="number">2</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                num+=<span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    answer = n-num</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-
-
-<p>두번째 풀이 (블로그들을 조금 참고하였다 ㅎ.ㅎ)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(n, lost, reserve)</span>:</span></span><br><span class="line">    clothes = [<span class="number">1</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">if</span> i+<span class="number">1</span> <span class="keyword">in</span> reserve:</span><br><span class="line">            clothes[i] =<span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> i+<span class="number">1</span> <span class="keyword">in</span> lost:</span><br><span class="line">            clothes[i] -=<span class="number">1</span></span><br><span class="line">            </span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">if</span> j&gt;<span class="number">0</span> <span class="keyword">and</span> clothes[j] == <span class="number">0</span> <span class="keyword">and</span> clothes[j<span class="number">-1</span>]==<span class="number">2</span>:</span><br><span class="line">            clothes[j] += <span class="number">1</span></span><br><span class="line">            clothes[j<span class="number">-1</span>] -=<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> j&lt;n<span class="number">-1</span> <span class="keyword">and</span> clothes[j] == <span class="number">0</span> <span class="keyword">and</span> clothes[j+<span class="number">1</span>]==<span class="number">2</span>:</span><br><span class="line">            clothes[j] += <span class="number">1</span></span><br><span class="line">            clothes[j+<span class="number">1</span>] -=<span class="number">1</span></span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> n-clothes.count(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<p>clothes에 reserve에 해당하는 index는 2로 lost에 해당하는 index는 0으로 아무것도 해당하지 않는 index는 1로 채운 다음 0인 index의 앞뒤 index가 2이면 두 index를 1로 바꾼다.</p>
-<p>마지막에 모든 학생수에서 clothes 배열의 0(체육복 없는 학생)의 수를 빼서 return한다.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/15/programmers-clothes/" data-id="ck910xlrx0000w4w8436de88f"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-network" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/04/13/programmers-network/">[알고리즘] 프로그래머스 - 네트워크 (Python)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/04/13/programmers-network/" class="article-date">
-  <time datetime="2020-04-13T12:37:00.000Z" itemprop="datePublished">2020-04-13</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>네트워크란 컴퓨터 상호 간에 정보를 교환할 수 있도록 연결된 형태를 의미합니다. 예를 들어, 컴퓨터 A와 컴퓨터 B가 직접적으로 연결되어있고, 컴퓨터 B와 컴퓨터 C가 직접적으로 연결되어 있을 때 컴퓨터 A와 컴퓨터 C도 간접적으로 연결되어 정보를 교환할 수 있습니다. 따라서 컴퓨터 A, B, C는 모두 같은 네트워크 상에 있다고 할 수 있습니다.</p>
-<p>컴퓨터의 개수 n, 연결에 대한 정보가 담긴 2차원 배열 computers가 매개변수로 주어질 때, 네트워크의 개수를 return 하도록 solution 함수를 작성하시오.</p>
-<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
-<li>컴퓨터의 개수 n은 1 이상 200 이하인 자연수입니다.</li>
-<li>각 컴퓨터는 0부터 <code>n-1</code>인 정수로 표현합니다.</li>
-<li>i번 컴퓨터와 j번 컴퓨터가 연결되어 있으면 computers[i][j]를 1로 표현합니다.</li>
-<li>computer[i][i]는 항상 1입니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>n</th>
-<th>computers</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>3</td>
-<td>[[1, 1, 0], [1, 1, 0], [0, 0, 1]]</td>
-<td>2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>[[1, 1, 0], [1, 1, 1], [0, 1, 1]]</td>
-<td>1</td>
-</tr>
-</tbody></table>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(n, computers)</span>:</span></span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    visited = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">        visited += [<span class="number">0</span>]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(start, visited, computers)</span>:</span></span><br><span class="line">            stack = [start]</span><br><span class="line">            <span class="keyword">while</span> stack:</span><br><span class="line">                current = stack.pop(<span class="number">0</span>)</span><br><span class="line">                visited[current] = <span class="number">1</span></span><br><span class="line">                <span class="keyword">for</span> search <span class="keyword">in</span> range(n):</span><br><span class="line">                    <span class="keyword">if</span> computers[current][search] <span class="keyword">and</span> visited[search] == <span class="number">0</span>:</span><br><span class="line">                        stack.append(search)</span><br><span class="line">    </span><br><span class="line">    i=<span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">0</span> <span class="keyword">in</span> visited: <span class="comment"># 다 돌 때까지 </span></span><br><span class="line">        <span class="keyword">if</span> visited[i] == <span class="number">0</span>: <span class="comment"># 아직 들리지 않았다면 </span></span><br><span class="line">            dfs(i, visited, computers) <span class="comment"># 들린다. 한번에 연결된 노드까지 들린다.</span></span><br><span class="line">            answer +=<span class="number">1</span></span><br><span class="line">        i+=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-
-
-<p>나는 dfs를 활용하여 풀었다. </p>
-<p>일단 모든 컴퓨터를 다 들려야 하기 떄문에 visited 가 1이 될 때까지 dfs함수를 실행한다.</p>
-<p> dfs는 한번 실행될 때 연결된 모든 노드를 돌기 때문에 함수밖에서 answer의 수를 1 UP해주면 네트워크의 수가 된다!  </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/13/programmers-network/" data-id="ck910xlsv0002w4w8f2r27t4t"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>

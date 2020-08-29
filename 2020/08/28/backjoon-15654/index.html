@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [백준알고리즘] N과 M(5) - 15654 (파이썬/ python) |
+    
+    Sohee&#39;s Dev Log !</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-backjoon-15654" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [백준알고리즘] N과 M(5) - 15654 (파이썬/ python)
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/08/28/backjoon-15654/" class="article-date">
+  <time datetime="2020-08-28T05:28:49.784Z" itemprop="datePublished">2020-08-28</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 초</td>
+<td align="left">512 MB</td>
+<td align="left">6458</td>
+<td align="left">4805</td>
+<td align="left">3849</td>
+<td align="left">74.219%</td>
+</tr>
+</tbody></table>
+<p>N개의 자연수와 자연수 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오. N개의 자연수는 모두 다른 수이다.</p>
+<ul>
+<li>N개의 자연수 중에서 M개를 고른 수열</li>
+</ul>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 8)</p>
+<p>둘째 줄에 N개의 수가 주어진다. 입력으로 주어지는 수는 10,000보다 작거나 같은 자연수이다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>한 줄에 하나씩 문제의 조건을 만족하는 수열을 출력한다. 중복되는 수열을 여러 번 출력하면 안되며, 각 수열은 공백으로 구분해서 출력해야 한다.</p>
+<p>수열은 사전 순으로 증가하는 순서로 출력해야 한다.</p>
+<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3 1</span><br><span class="line">4 5 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4 2</span><br><span class="line">9 8 7 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1 7</span><br><span class="line">1 8</span><br><span class="line">1 9</span><br><span class="line">7 1</span><br><span class="line">7 8</span><br><span class="line">7 9</span><br><span class="line">8 1</span><br><span class="line">8 7</span><br><span class="line">8 9</span><br><span class="line">9 1</span><br><span class="line">9 7</span><br><span class="line">9 8</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4 4</span><br><span class="line">1231 1232 1233 1234</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1231 1232 1233 1234</span><br><span class="line">1231 1232 1234 1233</span><br><span class="line">1231 1233 1232 1234</span><br><span class="line">1231 1233 1234 1232</span><br><span class="line">1231 1234 1232 1233</span><br><span class="line">1231 1234 1233 1232</span><br><span class="line">1232 1231 1233 1234</span><br><span class="line">1232 1231 1234 1233</span><br><span class="line">1232 1233 1231 1234</span><br><span class="line">1232 1233 1234 1231</span><br><span class="line">1232 1234 1231 1233</span><br><span class="line">1232 1234 1233 1231</span><br><span class="line">1233 1231 1232 1234</span><br><span class="line">1233 1231 1234 1232</span><br><span class="line">1233 1232 1231 1234</span><br><span class="line">1233 1232 1234 1231</span><br><span class="line">1233 1234 1231 1232</span><br><span class="line">1233 1234 1232 1231</span><br><span class="line">1234 1231 1232 1233</span><br><span class="line">1234 1231 1233 1232</span><br><span class="line">1234 1232 1231 1233</span><br><span class="line">1234 1232 1233 1231</span><br><span class="line">1234 1233 1231 1232</span><br><span class="line">1234 1233 1232 1231</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">N, M = map(int, input().split())</span><br><span class="line">nums = list(map(int, input().split()))</span><br><span class="line">nums.sort()</span><br><span class="line"></span><br><span class="line">out = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(M)]</span><br><span class="line">visited = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(N)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(depth)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> depth == M:</span><br><span class="line">        print(<span class="string">' '</span>.join(map(str, out)))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">        <span class="keyword">if</span> visited[i] == <span class="number">0</span>:</span><br><span class="line">            visited[i] = <span class="number">1</span></span><br><span class="line">            out[depth] = nums[i]</span><br><span class="line">            dfs(depth+<span class="number">1</span>)</span><br><span class="line">            visited[i] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">dfs(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>다른 N과 M 문제와 다른 점은 N의 수가 지정되어 있다는 점이다.</p>
+<p>N의 수들을 sort 한 다음 똑같이 dfs를 수행한다. 중복을 허용하지 않기 때문에 visited를 검사한다.</p>
+<ul>
+<li><p>다른 N과 M 문제처럼 out 리스트에 append 후 pop 하는 코드로 구현하였더니, pop 할 때마다 원소들이 재 정렬되기 때문에 런타임 에러가 발생하였다. </p>
+<p>-&gt; 어차피 print 할 때마다 out은 초기화 되어야 하기 때문에 out을 m길이의 list로 정의 하고 depth를 탐색할 때 out[depth]를 탐색한 nums 로 지정한다. </p>
+</li>
+<li><p>int로 받아오고 str 로 print 하는 과정이 꼬이면 틀렸습니다가 나온다ㅠ </p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/08/28/backjoon-15654/" data-id="ckeeyb7ua0001mgc9aab7frl2"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/08/28/backjoon-15651/" class="article-nav-link">
+        <strong class="article-nav-caption">Older</strong>
+        <div class="article-nav-title">[백준알고리즘] N과 M(3) - 15651 (파이썬/ python)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2020 Sohee&#39;s Dev Log !</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Sohee&#39;s Dev Log !"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>
