@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [안드로이드] Kakao Maps API 개발자 등록부터 뷰에 띄우기까지 |
+    
+    Sohee&#39;s Dev Log !</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-android-kakao-map-api" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [안드로이드] Kakao Maps API 개발자 등록부터 뷰에 띄우기까지
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/09/01/android-kakao-map-api/" class="article-date">
+  <time datetime="2020-09-01T07:56:16.920Z" itemprop="datePublished">2020-09-01</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="개발자사이트에-앱-생성하기"><a href="#개발자사이트에-앱-생성하기" class="headerlink" title="개발자사이트에 앱 생성하기"></a>개발자사이트에 앱 생성하기</h1><p><img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.31.51.png" alt="2020-09-015.31.51"></p>
+<ol>
+<li><p><strong>아래 링크에서 로그인 한 후 내 애플리케이션에 들어간다</strong></p>
+<p><a href="https://developers.kakao.com/" target="_blank" rel="noopener">https://developers.kakao.com/</a></p>
+</li>
+<li><p><strong>애플리케이션 추가하기 버튼 클릭</strong></p>
+<img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-011.png" alt="2020-09-011" style="zoom:50%;" />
+</li>
+<li><p><strong>앱 이름 및 회사 이름 설정</strong></p>
+<img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.08.13.png" alt="2020-09-015.08.13" style="zoom:50%;" />
+</li>
+<li><p><strong>생성한 앱을 클릭하여 Android 플랫폼 등록</strong></p>
+<img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.11.25.png" alt="2020-09-015.11.25" style="zoom:30%;" />
+</li>
+<li><p><strong>패키지명 입력</strong><br>패키지명은 maps api를 사용하고자 하는 안드로이드 스튜디오 프로젝트의 AndroidManifest.xml 파일의 package 속성의 값을 입력하면 된다.</p>
+<p><img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.14.22.png" alt="2020-09-015.14.22"></p>
+<p>아래와 같이 입력하면 된다!</p>
+<img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.23.17.png" alt="2020-09-015.23.17" style="zoom:50%;" />
+</li>
+<li><p><strong>키 해시 입력</strong></p>
+<p>키 해시를 얻는 방법은 여러가지가 있지만 나는 안드로이드 프로젝트 로그로 얻는 방법을 선택했다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;     </span><br><span class="line">            <span class="keyword">val</span> info = packageManager.getPackageInfo(<span class="string">"com.example.scookie"</span>, PackageManager.GET_SIGNATURES) <span class="comment">// 본인의 패키지명으로 변경하여야 한다.</span></span><br><span class="line">            <span class="keyword">for</span> (signature <span class="keyword">in</span> info.signatures) &#123;</span><br><span class="line">                <span class="keyword">val</span> md = MessageDigest.getInstance(<span class="string">"SHA"</span>)</span><br><span class="line">                md.update(signature.toByteArray())</span><br><span class="line">                <span class="keyword">val</span> sign = Base64.encodeToString(md.digest(), Base64.DEFAULT)</span><br><span class="line">                Log.e(<span class="string">"hash key TAG"</span>, <span class="string">"hash key : <span class="variable">$sign</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: PackageManager.NameNotFoundException) &#123;</span><br><span class="line">            Log.e(<span class="string">"hash key TAG"</span>, <span class="string">"error: <span class="variable">$e</span>"</span>)</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: NoSuchAlgorithmException) &#123;</span><br><span class="line">            Log.e(<span class="string">"hash key TAG"</span>, <span class="string">"error: <span class="variable">$e</span>"</span>)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>위 코드를 액티비티의 onCreate 함수 안에 넣어서 실행을 하면 로그에서 키를 얻을 수 있다. </p>
+<img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.29.14.png" alt="2020-09-015.29.14" style="zoom:30%;" />
+얻은 해시 키를 복사해서 아래 키 해시 입력창에 입력하면 된다 ! 
+<img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.24.23.png" alt="2020-09-015.24.23" style="zoom:50%;" />
+
+<p>저장을 누른다.</p>
+</li>
+<li><p>네이티브 앱 키 / 패키지명 / 키 해시를 기억해둔다.</p>
+</li>
+</ol>
+<h1 id="라이브러리-파일-추가"><a href="#라이브러리-파일-추가" class="headerlink" title="라이브러리 파일 추가"></a>라이브러리 파일 추가</h1><ol>
+<li><p>아래 링크에서 SDK 파일을 다운로드 한다.</p>
+<p><a href="https://apis.map.kakao.com/android/guide/" target="_blank" rel="noopener">https://apis.map.kakao.com/android/guide/</a> </p>
+</li>
+<li><p>프로젝트 구조를 Android에서 Project로 변경한 후</p>
+<img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.42.09.png" alt="2020-09-015.42.09" style="zoom:50%;" />
+아래와 동일해 지도록 SDK 파일들을 복사해 준다. 
+
+<p><img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.41.00.png" alt="2020-09-015.41.00"></p>
+</li>
+<li><p>AndroidManifest.xml에 uses-permission과 meta-data를 추가한다.</p>
+<p><img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.49.10.png" alt="2020-09-015.49.10"></p>
+<p>나는 meta-data를 application 사이에 추가하였다.</p>
+<p>meta-data의 value 는 네이티브 앱 키를 입력한다.</p>
+</li>
+</ol>
+<h1 id="화면에-맵-띄우기"><a href="#화면에-맵-띄우기" class="headerlink" title="화면에 맵 띄우기"></a>화면에 맵 띄우기</h1><ol>
+<li><p>먼저 layout 파일에 아래와 같은 코드를 작성한다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- xml layout --&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">RelativeLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span> <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">RelativeLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/map_view"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Activity 파일에 아래 코드를 작성한다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// kotlin code</span></span><br><span class="line"><span class="keyword">val</span> mapView = MapView(<span class="keyword">this</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> mapViewContainer = map_view <span class="keyword">as</span> ViewGroup</span><br><span class="line">mapViewContainer.addView(mapView)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// java code</span></span><br><span class="line">MapView mapView = <span class="keyword">new</span> MapView(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);</span><br><span class="line">mapViewContainer.addView(mapView);</span><br></pre></td></tr></table></figure>
+
+<p>이 때, MapView는 <strong>net.daum.android.map.MapView</strong> 가 아닌</p>
+<p><strong>net.daum.mf.map.api.MapView</strong> 를 사용하여야 아래와 같은 에러가 뜨지 않는다.</p>
+<p><img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-021.20.21.png" alt="2020-09-021.20.21"></p>
+</li>
+<li><p>실행 결과 지도가 띄워지는 것을 확인할 수 있다 ( 참고 : 에뮬레이터에서는 보이지 않는다.)</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/09/01/android-kakao-map-api/" data-id="ckek5yrb90000msc92zow4gxg"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/08/28/backjoon-15654/" class="article-nav-link">
+        <strong class="article-nav-caption">Older</strong>
+        <div class="article-nav-title">[백준알고리즘] N과 M(5) - 15654 (파이썬/ python)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2020 Sohee&#39;s Dev Log !</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Sohee&#39;s Dev Log !"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>
