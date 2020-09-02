@@ -76,33 +76,33 @@
       
 
       
-        <h1 id="개발자사이트에-앱-생성하기"><a href="#개발자사이트에-앱-생성하기" class="headerlink" title="개발자사이트에 앱 생성하기"></a>개발자사이트에 앱 생성하기</h1><p><img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.31.51.png" alt="2020-09-015.31.51"></p>
+        <h1 id="개발자사이트에-앱-생성하기"><a href="#개발자사이트에-앱-생성하기" class="headerlink" title="개발자사이트에 앱 생성하기"></a>개발자사이트에 앱 생성하기</h1><p><img src="../image/2020-09-015.31.51.png" alt="2020-09-015.31.51"></p>
 <ol>
 <li><p><strong>아래 링크에서 로그인 한 후 내 애플리케이션에 들어간다</strong></p>
 <p><a href="https://developers.kakao.com/" target="_blank" rel="noopener">https://developers.kakao.com/</a></p>
 </li>
 <li><p><strong>애플리케이션 추가하기 버튼 클릭</strong></p>
-<img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-011.png" alt="2020-09-011" style="zoom:50%;" />
+<img src="../image/2020-09-011.png" alt="2020-09-011" style="zoom:50%;" />
 </li>
 <li><p><strong>앱 이름 및 회사 이름 설정</strong></p>
-<img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.08.13.png" alt="2020-09-015.08.13" style="zoom:50%;" />
+<img src="../image/2020-09-015.08.13.png" alt="2020-09-015.08.13" style="zoom:50%;" />
 </li>
 <li><p><strong>생성한 앱을 클릭하여 Android 플랫폼 등록</strong></p>
-<img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.11.25.png" alt="2020-09-015.11.25" style="zoom:30%;" />
+<img src="../image/2020-09-015.11.25.png" alt="2020-09-015.11.25" style="zoom:30%;" />
 </li>
 <li><p><strong>패키지명 입력</strong><br>패키지명은 maps api를 사용하고자 하는 안드로이드 스튜디오 프로젝트의 AndroidManifest.xml 파일의 package 속성의 값을 입력하면 된다.</p>
-<p><img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.14.22.png" alt="2020-09-015.14.22"></p>
+<p><img src="../image/2020-09-015.14.22.png" alt="2020-09-015.14.22"></p>
 <p>아래와 같이 입력하면 된다!</p>
-<img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.23.17.png" alt="2020-09-015.23.17" style="zoom:50%;" />
+<img src="../image/2020-09-015.23.17.png" alt="2020-09-015.23.17" style="zoom:50%;" />
 </li>
 <li><p><strong>키 해시 입력</strong></p>
 <p>키 해시를 얻는 방법은 여러가지가 있지만 나는 안드로이드 프로젝트 로그로 얻는 방법을 선택했다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;     </span><br><span class="line">            <span class="keyword">val</span> info = packageManager.getPackageInfo(<span class="string">"com.example.scookie"</span>, PackageManager.GET_SIGNATURES) <span class="comment">// 본인의 패키지명으로 변경하여야 한다.</span></span><br><span class="line">            <span class="keyword">for</span> (signature <span class="keyword">in</span> info.signatures) &#123;</span><br><span class="line">                <span class="keyword">val</span> md = MessageDigest.getInstance(<span class="string">"SHA"</span>)</span><br><span class="line">                md.update(signature.toByteArray())</span><br><span class="line">                <span class="keyword">val</span> sign = Base64.encodeToString(md.digest(), Base64.DEFAULT)</span><br><span class="line">                Log.e(<span class="string">"hash key TAG"</span>, <span class="string">"hash key : <span class="variable">$sign</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: PackageManager.NameNotFoundException) &#123;</span><br><span class="line">            Log.e(<span class="string">"hash key TAG"</span>, <span class="string">"error: <span class="variable">$e</span>"</span>)</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: NoSuchAlgorithmException) &#123;</span><br><span class="line">            Log.e(<span class="string">"hash key TAG"</span>, <span class="string">"error: <span class="variable">$e</span>"</span>)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
 <p>위 코드를 액티비티의 onCreate 함수 안에 넣어서 실행을 하면 로그에서 키를 얻을 수 있다. </p>
-<img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.29.14.png" alt="2020-09-015.29.14" style="zoom:30%;" />
+<img src="../image/2020-09-015.29.14.png" alt="2020-09-015.29.14" style="zoom:30%;" />
 얻은 해시 키를 복사해서 아래 키 해시 입력창에 입력하면 된다 ! 
-<img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.24.23.png" alt="2020-09-015.24.23" style="zoom:50%;" />
+<img src="../image/2020-09-015.24.23.png" alt="2020-09-015.24.23" style="zoom:50%;" />
 
 <p>저장을 누른다.</p>
 </li>
@@ -114,13 +114,13 @@
 <p><a href="https://apis.map.kakao.com/android/guide/" target="_blank" rel="noopener">https://apis.map.kakao.com/android/guide/</a> </p>
 </li>
 <li><p>프로젝트 구조를 Android에서 Project로 변경한 후</p>
-<img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.42.09.png" alt="2020-09-015.42.09" style="zoom:50%;" />
+<img src="../image/2020-09-015.42.09.png" alt="2020-09-015.42.09" style="zoom:50%;" />
 아래와 동일해 지도록 SDK 파일들을 복사해 준다. 
 
-<p><img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.41.00.png" alt="2020-09-015.41.00"></p>
+<p><img src="../image/2020-09-015.41.00.png" alt="2020-09-015.41.00"></p>
 </li>
 <li><p>AndroidManifest.xml에 uses-permission과 meta-data를 추가한다.</p>
-<p><img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-015.49.10.png" alt="2020-09-015.49.10"></p>
+<p><img src="../image/2020-09-015.49.10.png" alt="2020-09-015.49.10"></p>
 <p>나는 meta-data를 application 사이에 추가하였다.</p>
 <p>meta-data의 value 는 네이티브 앱 키를 입력한다.</p>
 </li>
@@ -136,7 +136,7 @@
 
 <p>이 때, MapView는 <strong>net.daum.android.map.MapView</strong> 가 아닌</p>
 <p><strong>net.daum.mf.map.api.MapView</strong> 를 사용하여야 아래와 같은 에러가 뜨지 않는다.</p>
-<p><img src="/Users/leesohee/Desktop/blog_sohee/blog_sohee/source/image/2020-09-021.20.21.png" alt="2020-09-021.20.21"></p>
+<p><img src="../image/2020-09-021.20.21.png" alt="2020-09-021.20.21"></p>
 </li>
 <li><p>실행 결과 지도가 띄워지는 것을 확인할 수 있다 ( 참고 : 에뮬레이터에서는 보이지 않는다.)</p>
 </li>
