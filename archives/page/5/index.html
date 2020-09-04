@@ -326,17 +326,17 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/2020/03/12/angular-activatedRoute/"
-                            aria-label=": [앵귤러/Angular] URL에 존재하는 라우팅 변수 참조하기(ActivatedRoute 이용)"
+                            href="/2020/08/04/backjoon-1010/"
+                            aria-label=": [백준알고리즘] 1010: 다리 놓기 (파이썬) - 조합/ 다이나믹 프로그래밍"
                         >
-                            [앵귤러/Angular] URL에 존재하는 라우팅 변수 참조하기(ActivatedRoute 이용)
+                            [백준알고리즘] 1010: 다리 놓기 (파이썬) - 조합/ 다이나믹 프로그래밍
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2020-03-12T21:56:00+09:00">
+    <time datetime="2020-08-04T17:52:00+09:00">
 	
-		    Mar 12, 2020
+		    Aug 04, 2020
     	
     </time>
     
@@ -345,807 +345,58 @@
             </div>
             
                 <div class="postShorten-content">
-                    <h3 id="ActivatedRoute"><a href="#ActivatedRoute" class="headerlink" title="ActivatedRoute"></a>ActivatedRoute</h3><ul>
-<li><p>컴포넌트의 인스턴스를 생성하면서 적용한 라우팅 규칙에 대한 정보를 담고있다.</p>
-</li>
-<li><p>아래 코드를 통해 로드할 수 있다.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ActivatedRoute &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<h4 id="URL에-존재하는-라우팅-변수-참조하기"><a href="#URL에-존재하는-라우팅-변수-참조하기" class="headerlink" title="URL에 존재하는 라우팅 변수 참조하기"></a>URL에 존재하는 라우팅 변수 참조하기</h4><ol>
-<li><p>라우팅 변수를 참고할 컴포넌트의 생성자에 ActivatedRoute를 private 프로퍼티로 선언한다.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">  <span class="keyword">private</span> route: ActivatedRoute</span></span><br><span class="line"><span class="params"></span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>예를 들어 ‘/detail/:id’ 형태의 URL에서 id값을 가져오고 싶을 때, 아래 코드를 입력한다.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> id = +<span class="keyword">this</span>.route.snapshot.paraMap.get(<span class="string">'id'</span>);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>route.snapshot</code>: 컴포넌트가 생성된 직후에 존재하는 라우팅 규칙에 대한 정보를 담고있는 객체이다.</li>
-<li><code>paraMap</code>: route.snapshot 객체가 paraMap을 사용하면 URL에 존재하는 라우팅 변수를 참조할 수 있다.</li>
-</ul>
-<blockquote>
-<p>추가: javaScript (+) 연산자를 사용해서 라우팅 변수를 숫자로 변환하였다.</p>
-</blockquote>
-</li>
-</ol>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2020/03/12/angular-activatedRoute/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2020/03/12/anguler-interpolation-binding/"
-                            aria-label=": [앵귤러/Angular] 문자열 바인딩"
-                        >
-                            [앵귤러/Angular] 문자열 바인딩
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-03-12T21:36:00+09:00">
-	
-		    Mar 12, 2020
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <p>—추가예정</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2020/03/12/anguler-interpolation-binding/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2020/03/12/angular-routerlink/"
-                            aria-label=": [앵귤러/Angular] 네비게이션 링크(routerLink) 추가하기"
-                        >
-                            [앵귤러/Angular] 네비게이션 링크(routerLink) 추가하기
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-03-12T21:19:00+09:00">
-	
-		    Mar 12, 2020
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <blockquote>
-<p>앞에 글(AppRoutingModule 생성하기)에서는 URL을 통해 이동하는 방법이었다면, 이 글에서는 네비게이션을 실행하는 링크를 클릭하여 이동하는 방법을 다룰것이다!</p>
-</blockquote>
-<p><em>AppComponent<em>의 탬플릿 (</em>app.component.html</em>)에 아래 코드를 추가한다.</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">routerLink</span>=<span class="string">"/heroes"</span>&gt;</span>Heroes<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>routerLink</code> : <em>RouterModule*이 제공하는 *RouterLink</em> <em>디렉티브</em>이며, 사용자가 이 디렉티브가 적용된 엘리먼트를 클릭하면 네비게이션을 실행한다.</li>
-<li><code>&quot;/heroes&quot;</code> : <code>routerLink</code> 어트리뷰트 값으로 url을 통해 이동할 컴포넌트에 해당하는 라우팅 경로이다.</li>
-</ul>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2020/03/12/angular-routerlink/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2020/03/12/angular-create-approutingmodule/"
-                            aria-label=": [앵귤러/Angular] AppRoutingModule 생성하기"
-                        >
-                            [앵귤러/Angular] AppRoutingModule 생성하기
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-03-12T18:10:00+09:00">
-	
-		    Mar 12, 2020
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <p>애플리케이션 최상위 라우팅을 담당하는 모듈의 클래스 이름은 일반적으로 <em>AppRoutingModule</em>이라고 칭한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng generate module app-routing --flat --module&#x3D;app</span><br></pre></td></tr></table></figure>
-
-<p>Angular CLI로 다음 명령을 실행하면 <em>app-routing.module.ts</em> 파일이 생성되며, 라우팅 모듈이 만들어진다. </p>
-<ul>
-<li><code>--flat</code> : 새로운 폴더를 만들지 않고 src/app 폴더에 파일 생성</li>
-<li><code>--module=app</code> : Angular CLI가 이 라우팅 모듈을 AppModule의 imports 배열에 자동으로 추가</li>
-</ul>
-<p>아래 코드는 기본적으로 생성되는 app.routing.module.ts 파일의 코드이다.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; NgModule &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; CommonModule &#125; <span class="keyword">from</span> <span class="string">'@angular/common'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    CommonModule</span><br><span class="line">  ],</span><br><span class="line">  declarations: []</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppRoutingModule &#123; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>위 코드를 라우팅 동작을 실행할 수 있도록 아래 코드를 입력하여 <em>RouterModule*과 *Routes</em> 심볼을 로드한다.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; RouterModule, Routes &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br></pre></td></tr></table></figure>
-
-<p>또한 라우팅 규칙에 따라 이동할 컴포넌트 또한 로드한다.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; 이동할Component &#125; <span class="keyword">from</span> <span class="string">'이동할 컴포넌트의 위치'</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>라우팅 규칙(Route)</p>
-</blockquote>
-<p><em>라우팅 규칙</em>은 사용자가 링크를 클릭하거나 브라우저 주소표시줄에 URL을 직접 입력했을 때 라우터가 어떤 화면을 표시할지 정의한 것이다. </p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> routes: Routes = [</span><br><span class="line">    &#123; path: <span class="string">'URL과 매칭될 문자열'</span>, component: <span class="string">'화면에 표시할 컴포넌트'</span>&#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
-
-<p>위 코드를 <em>AppRoutingModule</em>에 추가한 후, <code>path: &#39;heroes&#39;</code> 에 해당하는 URL을 만나면 <em>localhost:4200/heroes</em>와 같은 URL로 이동하면서 <em>컴포넌트</em>를 표시할 수 있다.</p>
-<blockquote>
-<p>RouterModule.forRoot()</p>
-</blockquote>
-<p><em>@NgModule</em>에 메타데이터를 지정하면 모듈이 생성될 때 라우터를 초기화하면서 브라우저의 주소가 변화되는 것을 감지한다. 그래서 <em>AppRoutingModule</em>에도 라우터를 초기화하기 위해 <strong>imports 배열</strong>에 <em>RouterModule</em>을 등록해야 한다.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imports: [ RouterModule.forRoot(routes) ],</span><br></pre></td></tr></table></figure>
-
-<p>위 코드를 <em>@NgModule</em> 안에 입력하면 된다. </p>
-<ul>
-<li><code>forRoot()</code> :  최상위 계층에 존재하는 라우터를 설정할 때 사용하는 메소드이다. 이 메소드를 사용하면 브라우저에서 변경되는 URL을 감지할 수 있다.</li>
-</ul>
-<p>또한 앱에서도 <em>RouterModule</em>을 사용할 수 있도록 <strong>exports 배열</strong>도 지정해야한다.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exports: [ RouterModule ]</span><br></pre></td></tr></table></figure>
-
-<p> imports 코드 아래에 위 코드를 입력하면 된다.</p>
-<hr>
-<blockquote>
-<p>추가: 라우팅 영역(RouterOutlet) 추가하기</p>
-</blockquote>
-<p>AppComponent html 파일에 아래 코드를 추가한다.</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-outlet</span>&gt;</span><span class="tag">&lt;/<span class="name">router-outlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>&lt;router-outlet&gt;</code>: 라우팅 된 화면이 표시될 위치를 지정하는 엘리먼트이다.</li>
-<li>위에서 <code>RouterModule</code>을 <em>exports 배열*을 통해 외부로 공개하였기 때문에 *AppComponent</em> 에서도 <em>RouterOutlet</em> 디렉티브를 사용할 수 있다. <ul>
-<li>또한 이는 맨 위쪽에서 <em>–module=app</em> 플래그를 지정하였기 때문에 자동으로 추가된 것이다.</li>
-</ul>
-</li>
-<li>파일을 직접 생성했거나 Angular CLI 외의 툴을 이용했다면 <em>app.module.ts</em> 파일에서 <em>AppRoutingModule</em>을 로드하고 <em>NgModule</em>의 <em>imports 배열</em>에 이 라우팅 모듈을 추가하면 된다.</li>
-</ul>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2020/03/12/angular-create-approutingmodule/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2020/03/12/angular-template-literal/"
-                            aria-label=": [앵귤러/Angular] 템플릿 리터럴(template literal)"
-                        >
-                            [앵귤러/Angular] 템플릿 리터럴(template literal)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-03-12T10:04:00+09:00">
-	
-		    Mar 12, 2020
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <p>추가 예정</p>
-<p>역따옴표(`)</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2020/03/12/angular-template-literal/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2020/03/11/angular-service-in-service/"
-                            aria-label=": [앵귤러/Angular] 서비스 안에 서비스를 의존성으로 주입하기"
-                        >
-                            [앵귤러/Angular] 서비스 안에 서비스를 의존성으로 주입하기
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-03-11T18:50:00+09:00">
-	
-		    Mar 11, 2020
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; MessageService &#125; <span class="keyword">from</span> <span class="string">'./message.service'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroService &#123; </span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> messageService: MessageService</span>) &#123; &#125; </span><br><span class="line">  </span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>MessageService는 HeroService에 의존성으로 주입된다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2020/03/11/angular-service-in-service/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2020/03/11/angular-sync-to-async-observable/"
-                            aria-label=": [앵귤러/Angular] Observable 반환을 이용한 동기-&gt;비동기"
-                        >
-                            [앵귤러/Angular] Observable 반환을 이용한 동기-&gt;비동기
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-03-11T18:23:00+09:00">
-	
-		    Mar 11, 2020
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <p>아래 코드는 <em>heroService</em>라는 <strong>서비스 클래스</strong>에서 <strong>목 데이터 값</strong>을 가져오는 코드이다.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.heroes = <span class="keyword">this</span>.heroService.getHeroes();</span><br></pre></td></tr></table></figure>
-
-<p>위 코드에서 <code>heroService.getHeroes()</code>는 <em>동기 방식</em>으로 동작하기 때문에 함수의 실행결과가 바로 반환된다. 목 데이터를 가져올 때는 동기 방식이 유효할 수 있지만, 일반적인 애플리케이션에서는 리모트 서버에서 데이터를 가져오기 때문에, <em>비동기 동작</em>을 처리해야 하는 경우가 대부분이다.</p>
-<p><em>비동기</em>로 동작하기 위해 여러 방법을 사용할 수 있다.</p>
-<ol>
-<li>콜백함수를 사용한다.</li>
-<li>Promise를 반환하도록 처리한다.</li>
-<li><strong>Observable</strong>을 반환하도록 처리한다.</li>
-</ol>
-<p>이 포스팅에서는 3번의 방법을 구현해 보겠다! (Angular가 제공하는 <em>HttpClient.get</em> 메소드가 <strong>Observable</strong>을 반환하기 때문에 가장 자연스럽다.)</p>
-<p><code>Observable</code> : <em>RxJS 라이브러리</em>가 제공하는 클래스 중 가장 중요한 클래스이다. </p>
-<p>먼저 서비스 클래스 파일에 코드를 추가한다.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Observable, of &#125; <span class="keyword">from</span> <span class="string">'rxjs'</span>;</span><br></pre></td></tr></table></figure>
-
-<p>Observable을 로드한다.</p>
-<p>getHeroes() 메소드를 수정한다.</p>
-<blockquote>
-<p>기존 getHeroes() 메소드</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getHeroes(): Hero[] &#123;</span><br><span class="line">  <span class="keyword">return</span> HEROES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>수정된 getHeroes() 메소드</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getHeroes(): Observable&lt;Hero[]&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> of(HEROES);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><em>of(HEROES)</em>는 히어로 목 데이터를 <strong>Observable&lt;Hero[]&gt;</strong> 타입으로한번에 반환한다.</p>
-<p>이제는 <em>Observable&lt;Hero[]&gt;</em>타입을 반환하기 때문에 <strong>컴포넌트</strong> 코드도 수정하여야 한다.</p>
-<blockquote>
-<p>기존 컴포넌트 코드</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getHeroes(): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="keyword">this</span>.heroes = <span class="keyword">this</span>.heroService.getHeroes();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>수정된 컴포넌트 코드</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getHeroes(): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="keyword">this</span>.heroService.getHeroes()</span><br><span class="line">      .subscribe(<span class="function"><span class="params">heroes</span> =&gt;</span> <span class="keyword">this</span>.heroes = heroes);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><em>비동기 방식</em>으로 수정한 후에는 서버의 응답이 언제 도착하는지와 관계없이, 이 응답이 도착했을 때 <strong>subscribe</strong>가 서버에서 받은 응답을 콜백함수로 전달하고, 컴포넌트는 이렇게 받은 데이터를 heroes 프로퍼티에 할당한다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2020/03/11/angular-sync-to-async-observable/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2020/03/11/angular-cli-class/"
-                            aria-label=": [앵귤러/Angular] Angular CLI 서비스 클래스 생성"
-                        >
-                            [앵귤러/Angular] Angular CLI 서비스 클래스 생성
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-03-11T14:42:00+09:00">
-	
-		    Mar 11, 2020
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <p>아래 명령을 이용하면 서비스 클래스 파일이 생성된다.  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng generate service hero</span><br></pre></td></tr></table></figure>
-
-<p><code>hero.sevice.ts</code> 초기 생성 파일은 아래와 같다.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>(&#123;</span><br><span class="line">  providedIn: <span class="string">'root'</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroService &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"></span>) &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><em>@Injectable()</em> : 클래스를 인젝터에 프로바이더로 등록할 때 사용하는 데코레이터</li>
-</ul>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2020/03/11/angular-cli-class/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2020/03/11/angular-dependency-injection/"
-                            aria-label=": [앵귤러/Angular] 의존성 주입"
-                        >
-                            [앵귤러/Angular] 의존성 주입
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-03-11T14:11:00+09:00">
-	
-		    Mar 11, 2020
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <p><strong>의존성 주입(Dependency injection, DI)</strong></p>
-<blockquote>
-<p>의존성을 직접 생성하지 않고 외부 어딘가에서 받아오도록 요청하는 패턴</p>
-</blockquote>
-<ul>
-<li><p><strong>의존성</strong>(dependencies) : 어떤 클래스가 동작하기 위해 필요한 서비스나 객체를 의미</p>
-</li>
-<li><p>클래스의 인스턴스가 생성될 때 이 클래스에 필요한 의존성을 프레임워크가 생성해서 전달</p>
-</li>
-<li><p>애플리케이션 디자인 패턴 중에서도 아주 중요한 패턴</p>
-</li>
-<li><p>이 패턴을 활용하면 Angular 애플리케이션을 좀 더 효율적인 모듈 형태로 구성할 수 있다.</p>
-</li>
-<li><p>한 가지 예로는 데이터를 처리하는 Service를 만들 때 new 키워드로 인스턴스를 직접 생성하는것이 아닌, Angular가 제공하는 의존성 주입 매커니즘에 따라 component의 생성자로 주입되는 것</p>
-</li>
-</ul>
-<h3 id="의존성-주입-가능한-서비스-생성하고-등록하기"><a href="#의존성-주입-가능한-서비스-생성하고-등록하기" class="headerlink" title="의존성 주입 가능한 서비스 생성하고 등록하기"></a>의존성 주입 가능한 서비스 생성하고 등록하기</h3><ul>
-<li>목 데이터는 파일에 정의해두고 이 데이터를 서비스 클래스로 감싸 컴포넌트에 주입</li>
-</ul>
-<blockquote>
-<p>한 파일에 클래스를 여러개 정의하면 이 파일을 접하는 많은 사람들에게 혼란을 줄 수 있기 때문에 컴포넌트와 서비스는 파일 하나에 하나씩 정의하는 것이 좋다.  </p>
-<p>또한 컴포넌트와 서비스가 같은 파일에 정의해야 한다면 서비스 먼저 정의해야한다. 그렇지 않으면 런타임 null 참조 에러가 발생한다. (컴포넌트를 먼저 정의하고자 하면 forwardRef() 메소드를 사용하면 된다.)</p>
-</blockquote>
-<h4 id="의존성으로-주입할-서비스-클래스-정의"><a href="#의존성으로-주입할-서비스-클래스-정의" class="headerlink" title="의존성으로 주입할 서비스 클래스 정의"></a>의존성으로 주입할 서비스 클래스 정의</h4><p>Angular CLI를 사용하여 아래 명령을 이용하면 <code>HeroService</code> 클래스가 생성된다.  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng generate service hero</span><br></pre></td></tr></table></figure>
-
-<p><code>hero.sevice.ts</code> 초기 생성 파일은 아래와 같다.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>(&#123;</span><br><span class="line">  <span class="comment">// 이 서비스를 애플리케이션 최상위 인젝터에 등록합니다.</span></span><br><span class="line">  providedIn: <span class="string">'root'</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroService &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"></span>) &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong><em>@Injectable()</em></strong> : 클래스를 인젝터에 프로바이더로 등록할 때 사용하는 데코레이터</p>
-<ul>
-<li><p><code>인젝터</code>:  서비스의 인스턴스를 생성하고 클래스에 주입하는 역할을 한다. 인스턴스를 생성할 때 프로바이더를 이용한다. </p>
-</li>
-<li><p><code>프로바이더</code>: 프로바이더 인터페이스들 중 하나를 구현하는 오브젝트, 프로바이더 객체는 DI토큰과 관련된 주입 가능한 의존성을 얻는 방법을 정의한다. 프로바이더에 서비스 클래스를 등록하면 인젝터는 new 키워드를 사용해 인스턴스를 생성한다. </p>
-<ol>
-<li><strong>서비스 클래스에서 @Injectable() 데코레이터로 직접 등록할 수 있다.</strong> </li>
-<li>NgModule의 @NgModule() 데코레이터에 등록할 수있다.</li>
-<li>컴포넌트의 @Component() 데코레이터에 등록할 수있다.</li>
-</ol>
-<p>위의 예제는 1번의 방식을 사용하였다.</p>
-<blockquote>
-<p>여러 클래스를 같은 서비스 타입으로 인젝터에 등록 가능하며, 서로 다른 프로바이더를 각기 다른 인젝터에 등록할 수 있다. </p>
-</blockquote>
-</li>
-<li><p><code>proviededIn</code></p>
-<ol>
-<li>@Injectable() 데코레이터를 사용할 때: 메타 데이터 옵션으로 서비스가 root인젝터에 등록될지, 특정 NgModule에 등록될지 지정할 수 있다.<ul>
-<li>서비스가 최상위 인젝터에 등록되면 Angular는 HeroService의 인스턴스를 하나만 생성하며, 이 클래스가 주입되는 모든 곳에서 같은 인스턴스를 공유한다.</li>
-</ul>
-</li>
-<li>@NgModule() 이나 @Component() 데코레이터를 사용할 때 : NgModule 계층이나 컴포넌트 계층의 인젝터에 프로바이더를 등록할 수 있다.</li>
-</ol>
-</li>
-<li><p>이 데코레이터가 등록된 클래스가 실제로 사용되지 않으면 이 클래스를 최종 빌드 결과물에서 제거하는 대상으로 등록하는 역할도 한다.</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="서비스-주입하기"><a href="#서비스-주입하기" class="headerlink" title="서비스 주입하기"></a>서비스 주입하기</h3><h4 id="의존성-주입을-사용하는-컴포넌트-vs-사용하지-않는-컴포넌트"><a href="#의존성-주입을-사용하는-컴포넌트-vs-사용하지-않는-컴포넌트" class="headerlink" title="의존성 주입을 사용하는 컴포넌트 vs 사용하지 않는 컴포넌트"></a>의존성 주입을 사용하는 컴포넌트 vs 사용하지 않는 컴포넌트</h4><blockquote>
-<p>의존성 주입을 사용하지 않는 컴포넌트</p>
-</blockquote>
-<p>아래 HeroListComponent는 다른 mock 파일에 정의된 HEROES라는 배열을 메모리에 올려서 참조한다.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">import</span> &#123; HEROES &#125;      <span class="keyword">from</span> <span class="string">'./mock-heroes'</span>;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroListComponent &#123;</span><br><span class="line">  heroes = HEROES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>이 방식은 실제 운영환경에서는 적합하지 않다. 테스트를 적용하거나 리모트 서버에서 데이터를 가져오도록 변경한다면 HerosListComponent를 반드시 수정해야하기 때문이다. 상황에 따라 매번 HEROES 목 데이터를 변경해야할 수도 있다. </p>
-<blockquote>
-<p>의존성 주입을 사용하는 컴포넌트</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">import</span> &#123; Hero &#125;        <span class="keyword">from</span> <span class="string">'./hero'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroService &#125; <span class="keyword">from</span> <span class="string">'./hero.service'</span>;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroListComponent &#123;</span><br><span class="line">  heroes: Hero[];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">heroService: HeroService</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.heroes = heroService.getHeroes();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>이 때 서비스클래스는 부모 인젝터 중 어딘가에 반드시 등록되어야 하지만, 컴포넌트의 입장에서는 서비스가 어디에 등록되어 있는지는 중요하지 않다.</p>
-<p>이 때 서비스 클래스의 코드는 아래와 같다.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HEROES &#125; <span class="keyword">from</span> <span class="string">'./mock-heroes'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>(&#123;</span><br><span class="line">  <span class="comment">// 이 서비스를 애플리케이션 최상위 인젝터에 등록합니다.</span></span><br><span class="line">  providedIn: <span class="string">'root'</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroService &#123;</span><br><span class="line">  getHeroes() &#123; <span class="keyword">return</span> HEROES; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2020/03/11/angular-dependency-injection/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2020/03/11/angular-cli-overview/"
-                            aria-label=": [앵귤러/Angular] Angular cli overview 정리"
-                        >
-                            [앵귤러/Angular] Angular cli overview 정리
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-03-11T11:04:00+09:00">
-	
-		    Mar 11, 2020
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Angular-CLI-설치"><a href="#Angular-CLI-설치" class="headerlink" title="Angular CLI 설치"></a>Angular CLI 설치</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @angular&#x2F;cli</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="기본-워크-플로우"><a href="#기본-워크-플로우" class="headerlink" title="기본 워크 플로우"></a>기본 워크 플로우</h3><p>주어진 명령에 대한 명령 또는 옵션 (예 : <a href="https://angular.kr/cli/generate" target="_blank" rel="noopener">generate</a> )을 간단한 설명과 함께 나열하려면 다음을 입력하면 된다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ng help</span><br><span class="line">ng generate --help</span><br></pre></td></tr></table></figure>
-
-<p>개발 서버에서 새 기본 Angular 프로젝트를 작성, 빌드 및 제공하려면 다음 명령을 사용하여 새 작업 공간의 상위 디렉토리로 이동할 수 있다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new my-first-project </span><br><span class="line">cd my-first-project </span><br><span class="line">ng serve</span><br></pre></td></tr></table></figure>
-
-<p>브라우저에서 <a href="http://localhost:4200/" target="_blank" rel="noopener">http : // localhost : 4200 /</a> 을 열어 앱 실행을 확인할 수 있다.</p>
-<h3 id="CLI-명령-언어-구문"><a href="#CLI-명령-언어-구문" class="headerlink" title="CLI 명령 언어 구문"></a>CLI 명령 언어 구문</h3><p>ng <em>commandNameOrAlias</em> <em>requiredArg</em> [optionalArg] [options]</p>
-<ul>
-<li><p>옵션 이름 앞에는 이중 대시(-)가 붙습니다. 옵션 별명은 단일 대시 (-)로 시작한다.</p>
-</li>
-<li><p>인수 및 옵션 이름은 <strong>camelCase</strong> 또는 <strong>dash-case</strong>로 지정할 수 있다. (예 : –myOptionName 또는 –my-option-name)</p>
-</li>
-</ul>
-<h3 id="명령-개요"><a href="#명령-개요" class="headerlink" title="명령 개요"></a>명령 개요</h3><table>
+                    <table>
 <thead>
 <tr>
-<th align="left">명령</th>
-<th align="left">별명</th>
-<th align="left">기술</th>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left"><a href="https://angular.kr/cli/add" target="_blank" rel="noopener"><code>add</code></a></td>
-<td align="left"></td>
-<td align="left">프로젝트에 외부 라이브러리에 대한 지원을 추가합니다.</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/analytics" target="_blank" rel="noopener"><code>analytics</code></a></td>
-<td align="left"></td>
-<td align="left">Angular CLI 사용 메트릭 수집을 구성</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/build" target="_blank" rel="noopener"><code>build</code></a></td>
-<td align="left"><code>b</code></td>
-<td align="left">주어진 출력 경로에서 Angular 앱을 dist /라는 출력 디렉토리로 컴파일 (작업 공간 디렉토리 내에서 실행해야한다.)</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/config" target="_blank" rel="noopener"><code>config</code></a></td>
-<td align="left"></td>
-<td align="left">작업 공간의 angular.json 파일에서 각도 구성 값을 검색하거나 설정</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/deploy" target="_blank" rel="noopener"><code>deploy</code></a></td>
-<td align="left"></td>
-<td align="left">작업 공간에서 지정된 프로젝트 또는 기본 프로젝트에 대한 배치 빌더를 호출</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/doc" target="_blank" rel="noopener"><code>doc</code></a></td>
-<td align="left"><code>d</code></td>
-<td align="left">브라우저에서 공식 Angular 문서 (angular.io)를 열고 주어진 키워드를 검색</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/e2e" target="_blank" rel="noopener"><code>e2e</code></a></td>
-<td align="left"><code>e</code></td>
-<td align="left">Angular 앱을 빌드하고 제공 한 다음 각도기를 사용하여 엔드 투 엔드 테스트</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/generate" target="_blank" rel="noopener"><code>generate</code></a></td>
-<td align="left"><code>g</code></td>
-<td align="left">회로도를 기반으로 파일을 생성 및 / 또는 수정</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/help" target="_blank" rel="noopener"><code>help</code></a></td>
-<td align="left"></td>
-<td align="left">사용 가능한 명령과 간단한 설명을 나열</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/lint" target="_blank" rel="noopener"><code>lint</code></a></td>
-<td align="left"><code>l</code></td>
-<td align="left">주어진 프로젝트 폴더의 Angular 앱 코드에서 Linting 도구를 실행</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/new" target="_blank" rel="noopener"><code>new</code></a></td>
-<td align="left"><code>n</code></td>
-<td align="left">새로운 작업 공간과 초기 Angular 앱을 생성</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/run" target="_blank" rel="noopener"><code>run</code></a></td>
-<td align="left"></td>
-<td align="left">프로젝트에 정의 된 선택적 사용자 정의 빌더 구성으로 Architect 대상을 실행</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/serve" target="_blank" rel="noopener"><code>serve</code></a></td>
-<td align="left"><code>s</code></td>
-<td align="left">파일 변경 사항을 다시 작성하여 앱을 빌드하고 제공</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/test" target="_blank" rel="noopener"><code>test</code></a></td>
-<td align="left"><code>t</code></td>
-<td align="left">프로젝트에서 단위 테스트를 실행</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/update" target="_blank" rel="noopener"><code>update</code></a></td>
-<td align="left"></td>
-<td align="left">응용 프로그램 및 해당 종속성을 업데이트</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/version" target="_blank" rel="noopener"><code>version</code></a></td>
-<td align="left"><code>v</code></td>
-<td align="left">Angular CLI 버전을 출력</td>
-</tr>
-<tr>
-<td align="left"><a href="https://angular.kr/cli/xi18n" target="_blank" rel="noopener"><code>xi18n</code></a></td>
-<td align="left"><code>i18n-extract</code></td>
-<td align="left">소스 코드에서 i18n 메시지를 추출</td>
+<td align="left">2 초</td>
+<td align="left">128 MB</td>
+<td align="left">25159</td>
+<td align="left">11697</td>
+<td align="left">9466</td>
+<td align="left">48.377%</td>
 </tr>
 </tbody></table>
-<blockquote>
-<p>앱 및 라이브러리에서 생성하거나 작동하는 <a href="https://angular.kr/cli/add" target="_blank" rel="noopener">add</a> 및 <a href="https://angular.kr/cli/generate" target="_blank" rel="noopener">generate</a> 와 같은 명령은 작업 영역 또는 프로젝트 폴더 내에서 실행해야한다.</p>
-<p><a href="https://angular.kr/cli/generate" target="_blank" rel="noopener">ng generate</a> 명령을 사용하여 추가 구성 요소 및 서비스를위한 새 파일을 추가하고 새 파이프, 지시문 등을위한 코드를 추가할 수 있다.</p>
-</blockquote>
-<blockquote>
-<p> <a href="https://angular.kr/cli/new" target="_blank" rel="noopener">ng new</a> 명령으로 작성된 초기 앱은 작업 공간의 최상위 레벨에 있으며, 작업 공간에서 추가 앱 또는 라이브러리를 생성하면 <code>projects/</code>하위 폴더로 이동 할 수 있다.</p>
-</blockquote>
+<h2 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h2><p>재원이는 한 도시의 시장이 되었다. 이 도시에는 도시를 동쪽과 서쪽으로 나누는 큰 강이 흐르고 있다. 하지만 재원이는 다리가 없어서 시민들이 강을 건너는데 큰 불편을 겪고 있음을 알고 다리를 짓기로 결심하였다. 강 주변에서 다리를 짓기에 적합한 곳을 사이트라고 한다. 재원이는 강 주변을 면밀히 조사해 본 결과 강의 서쪽에는 N개의 사이트가 있고 동쪽에는 M개의 사이트가 있다는 것을 알았다. (N ≤ M)</p>
+<p>재원이는 서쪽의 사이트와 동쪽의 사이트를 다리로 연결하려고 한다. (이때 한 사이트에는 최대 한 개의 다리만 연결될 수 있다.) 재원이는 다리를 최대한 많이 지으려고 하기 때문에 서쪽의 사이트 개수만큼 (N개) 다리를 지으려고 한다. 다리끼리는 서로 겹쳐질 수 없다고 할 때 다리를 지을 수 있는 경우의 수를 구하는 프로그램을 작성하라.</p>
+<img src="../image/스크린샷 2020-08-04 오후 5.57.11.png" alt="스크린샷 2020-08-04 오후 5.57.11" style="zoom:50%;" />
+
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>입력의 첫 줄에는 테스트 케이스의 개수 T가 주어진다. 그 다음 줄부터 각각의 테스트케이스에 대해 강의 서쪽과 동쪽에 있는 사이트의 개수 정수 N, M (0 &lt; N ≤ M &lt; 30)이 주어진다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>각 테스트 케이스에 대해 주어진 조건하에 다리를 지을 수 있는 경우의 수를 출력한다.</p>
+<h2 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">2 2</span><br><span class="line">1 5</span><br><span class="line">13 29</span><br></pre></td></tr></table></figure>
+
+<h2 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">5</span><br><span class="line">67863915</span><br></pre></td></tr></table></figure>
+
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
+<li>문제를 만든 사람: <a href="https://www.acmicpc.net/user/i274" target="_blank" rel="noopener">i274</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span><span class="params">(s)</span>:</span></span><br><span class="line">    a = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(s):</span><br><span class="line">        a *= (i+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> a</span><br><span class="line"></span><br><span class="line">t = int(input())</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(t):</span><br><span class="line">    n, m = map(int, input().split())</span><br><span class="line">    print(factorial(m) // factorial(n) // factorial(m-n))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>이 문제는 조합을 이용한다. (m개중 n개를 뽑는 조합의 수)</li>
+</ul>
+<img src="../image/image-20200804175123560.png" alt="image-20200804175123560" style="zoom:50%;" />
+
+<ul>
+<li><p>// 는 나누기이다.</p>
+</li>
+<li><pre><code>2 2
+1 5
+13 29 </code></pre><p>이런 식으로 같은 형식의 input 을 여러줄 받아올 때는 한 줄씩 받아오면서(<code>n, m = map(int, input().split())</code>) print를 처리해도 된다 ! </p>
+</li>
+</ul>
+<ul>
+<li>from itertools import combinations 를 이용해서 풀 수도 있지만 숫자가 크기 때문에 시간 초과가 된다 !</li>
+<li>식을 외워두는 것이 좋겠다 ㅎ-ㅎ </li>
+</ul>
 
                     
                         
@@ -1155,7 +406,377 @@
                     
                         <p>
                             <a
-                                href="/2020/03/11/angular-cli-overview/#post-footer"
+                                href="/2020/08/04/backjoon-1010/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2020/08/02/backjoon-11053/"
+                            aria-label=": [알고리즘] 백준알고리즘 - 11053: 가장 긴 증가하는 부분 수열 (파이썬/python)"
+                        >
+                            [알고리즘] 백준알고리즘 - 11053: 가장 긴 증가하는 부분 수열 (파이썬/python)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2020-08-02T19:07:00+09:00">
+	
+		    Aug 02, 2020
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>수열 A가 주어졌을 때, 가장 긴 증가하는 부분 수열을 구하는 프로그램을 작성하시오.</p>
+<p>예를 들어, 수열 A = {10, 20, 10, 30, 20, 50} 인 경우에 가장 긴 증가하는 부분 수열은 A = {<strong>10</strong>, <strong>20</strong>, 10, <strong>30</strong>, 20, <strong>50</strong>} 이고, 길이는 4이다.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 수열 A의 크기 N (1 ≤ N ≤ 1,000)이 주어진다.</p>
+<p>둘째 줄에는 수열 A를 이루고 있는 Ai가 주어진다. (1 ≤ Ai ≤ 1,000)</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 수열 A의 가장 긴 증가하는 부분 수열의 길이를 출력한다.</p>
+<h2 id="예제-입력"><a href="#예제-입력" class="headerlink" title="예제 입력"></a>예제 입력</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">10 20 10 30 20 50</span><br></pre></td></tr></table></figure>
+
+<h2 id="예제-출력"><a href="#예제-출력" class="headerlink" title="예제 출력"></a>예제 출력</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
+<li>문제를 만든 사람: <a href="https://www.acmicpc.net/user/baekjoon" target="_blank" rel="noopener">baekjoon</a></li>
+<li>데이터를 추가한 사람: <a href="https://www.acmicpc.net/user/harinboy" target="_blank" rel="noopener">harinboy</a></li>
+</ul>
+<h2 id="비슷한-문제"><a href="#비슷한-문제" class="headerlink" title="비슷한 문제"></a>비슷한 문제</h2><ul>
+<li>11054 , 11055, 11722, 12015, 12738, 14002, 14003 </li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">n = int(input())</span><br><span class="line">nums = list(map(int, input().split()))</span><br><span class="line">answer_list = []</span><br><span class="line">length = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    length = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(i):</span><br><span class="line">        <span class="keyword">if</span> nums[j] &lt; nums[i] <span class="keyword">and</span> answer_list[j] &gt;= length:</span><br><span class="line">            length = answer_list[j]</span><br><span class="line">    answer_list.append(length+<span class="number">1</span>)</span><br><span class="line">print(max(answer_list))</span><br></pre></td></tr></table></figure>
+
+<p>다이나믹 프로그래밍으로 푸는 문제이다.</p>
+<p>nums 배열의 각 인덱스까지의 증가하는 부분 수열의 최대 길이를 저장하는</p>
+<p>answer_list 배열을 만들어 이 중 최대 숫자를 반환하는 코드이다.</p>
+<table>
+<thead>
+<tr>
+<th align="center">nums</th>
+<th align="center">10</th>
+<th align="center">20</th>
+<th align="center">10</th>
+<th align="center">30</th>
+<th align="center">20</th>
+<th align="center">50</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">answer_list</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">4</td>
+</tr>
+</tbody></table>
+<p>예를 들어, answer_list[3] (nums[3]까지(10, 20, 10, 30)를 수열로 봤을 때 이루어질 수 있는 증가하는 부분 수열의 최대 길이값) 이 저장되는 과정은 ! </p>
+<ul>
+<li><p><code>for j in range(i)</code> 반복문을 돌며 nums[3] , answer_list[3] 이전 값들을 비교한다.</p>
+</li>
+<li><p>nums 가 30 보다 작고 이에 대응되는 answer_list가 length보다 크거나 같으면 length에 answer_list 값을 저장한다.</p>
+</li>
+<li><p><code>for j in range(i)</code> 반복문을 모두 돌면 30보다 작은 nums 값들에 대응 되는 answer_list 값들 중 가장 큰 <strong>answer_list (= 2)</strong> 값이 <strong>length</strong> 에 저장된다. </p>
+</li>
+<li><p>자신을 포함한 길이이기 때문에 length에 1을 더한 3을 answer_list[3] 에 저장한다.</p>
+</li>
+</ul>
+<p>최종적으로는 증가하는 부분수열의 최대 길이 값인 4가 answer_list[5] 에 저장된다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2020/08/02/backjoon-11053/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2020/06/15/backjoon-1037/"
+                            aria-label=": [백준알고리즘/boj] 1037- 약수 파이썬(python)"
+                        >
+                            [백준알고리즘/boj] 1037- 약수 파이썬(python)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2020-06-15T18:00:00+09:00">
+	
+		    Jun 15, 2020
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">2 초</td>
+<td align="left">512 MB</td>
+<td align="left">17208</td>
+<td align="left">8185</td>
+<td align="left">7162</td>
+<td align="left">48.921%</td>
+</tr>
+</tbody></table>
+<h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>양수 A가 N의 진짜 약수가 되려면, N이 A의 배수이고, A가 1과 N이 아니어야 한다. 어떤 수 N의 진짜 약수가 모두 주어질 때, N을 구하는 프로그램을 작성하시오.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 N의 진짜 약수의 개수가 주어진다. 이 개수는 50보다 작거나 같은 자연수이다. 둘째 줄에는 N의 진짜 약수가 주어진다. 1,000,000보다 작거나 같고, 2보다 크거나 같은 자연수이고, 중복되지 않는다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 N을 출력한다. N은 항상 32비트 부호있는 정수로 표현할 수 있다.</p>
+<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">4 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8</span><br></pre></td></tr></table></figure>
+
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
+<li>문제를 번역한 사람: <a href="https://www.acmicpc.net/user/baekjoon" target="_blank" rel="noopener">baekjoon</a></li>
+<li>빠진 조건을 찾은 사람: <a href="https://www.acmicpc.net/user/doju" target="_blank" rel="noopener">doju</a></li>
+<li>어색한 표현을 찾은 사람: <a href="https://www.acmicpc.net/user/jh05013" target="_blank" rel="noopener">jh05013</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>처음에 nums.pop(0) * nums[0] 로 풀었더니 당연히 ! 틀렸다.</p>
+<p>배열의 마지막 요소를 얻어오기 위해 nums[-1] 을 사용하면 된다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">n = map(int, input())</span><br><span class="line">nums = list(map(int, input().split()))</span><br><span class="line"></span><br><span class="line">nums.sort()</span><br><span class="line">print(nums[<span class="number">0</span>] * nums[<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
+
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2020/06/15/backjoon-1037/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2020/06/13/backjoon-2667/"
+                            aria-label=": [백준알고리즘] 1057- 토너먼트 파이썬(python)"
+                        >
+                            [백준알고리즘] 1057- 토너먼트 파이썬(python)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2020-06-13T16:10:00+09:00">
+	
+		    Jun 13, 2020
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><h2 id="토너먼트-분류"><a href="#토너먼트-분류" class="headerlink" title="토너먼트 분류"></a>토너먼트 분류</h2><table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 초</td>
+<td align="left">512 MB</td>
+<td align="left">10747</td>
+<td align="left">5731</td>
+<td align="left">4831</td>
+<td align="left">55.580%</td>
+</tr>
+</tbody></table>
+<p>김지민은 N명이 참가하는 스타 토너먼트에 진출했다. 토너먼트는 다음과 같이 진행된다. 일단 N명의 참가자는 번호가 1번부터 N번까지 배정받는다. 그러고 난 후에 서로 인접한 번호끼리 스타를 한다. 이긴 사람은 다음 라운드에 진출하고, 진 사람은 그 라운드에서 떨어진다. 만약 그 라운드의 참가자가 홀수명이라면, 마지막 번호를 가진 참가자는 다음 라운드로 자동 진출한다. 다음 라운드에선 다시 참가자의 번호를 1번부터 매긴다. 이때, 번호를 매기는 순서는 처음 번호의 순서를 유지하면서 1번부터 매긴다. 이 말은 1번과 2번이 스타를 해서 1번이 진출하고, 3번과 4번이 스타를 해서 4번이 진출했다면, 4번은 다음 라운드에서 번호 2번을 배정받는다. 번호를 다시 배정받은 후에 한 명만 남을 때까지 라운드를 계속 한다.</p>
+<p>마침 이 스타 대회에 임한수도 참가했다. 김지민은 갑자기 스타 대회에서 우승하는 욕심은 없어지고, 몇 라운드에서 임한수와 대결하는지 궁금해졌다. 일단 김지민과 임한수는 서로 대결하기 전까지 항상 이긴다고 가정한다. 1 라운드에서 김지민의 번호와 임한수의 번호가 주어질 때, 과연 김지민과 임한수가 몇 라운드에서 대결하는지 출력하는 프로그램을 작성하시오.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 참가자의 수 N과 1 라운드에서 김지민의 번호와 임한수의 번호가 순서대로 주어진다. N은 100,000보다 작거나 같은 자연수이고, 김지민의 번호와 임한수의 번호는 N보다 작거나 같은 자연수이고, 서로 다르다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 김지민과 임한수가 대결하는 라운드 번호를 출력한다. 만약 서로 대결하지 않을 때는 -1을 출력한다.</p>
+<h2 id="예제-입력"><a href="#예제-입력" class="headerlink" title="예제 입력"></a>예제 입력</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">16 8 9</span><br></pre></td></tr></table></figure>
+
+<h2 id="예제-출력"><a href="#예제-출력" class="headerlink" title="예제 출력"></a>예제 출력</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>토너먼트를 이해하고 있다면 간단하게 풀 수 있는 문제 !</p>
+<p>지민과 한수에서 2로 나눈 몫을 뺀 값이 같아 졌을 때가 둘이 대결하는 때이다. </p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">n, han, jimin = map(int, input().split())</span><br><span class="line">answer = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> han != jimin:</span><br><span class="line">    han -= han//<span class="number">2</span></span><br><span class="line">    jimin -= jimin//<span class="number">2</span></span><br><span class="line">    answer += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(answer)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>(여담)</p>
+<ul>
+<li>이제 알고리즘도 다시 열심히 풀고 블로그 테마도 바꿀거당 ! ! </li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2020/06/13/backjoon-2667/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2020/05/17/backjoon-9252/"
+                            aria-label=": [알고리즘] 백준알고리즘 - 9252 LCS2 (파이썬/python)"
+                        >
+                            [알고리즘] 백준알고리즘 - 9252 LCS2 (파이썬/python)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2020-05-17T18:30:00+09:00">
+	
+		    May 17, 2020
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>LCS(Longest Common Subsequence, 최장 공통 부분 수열)문제는 두 수열이 주어졌을 때, 모두의 부분 수열이 되는 수열 중 가장 긴 것을 찾는 문제이다.</p>
+<p>예를 들어, ACAYKP와 CAPCAK의 LCS는 ACAK가 된다.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄과 둘째 줄에 두 문자열이 주어진다. 문자열은 알파벳 대문자로만 이루어져 있으며, 최대 1000글자로 이루어져 있다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 입력으로 주어진 두 문자열의 LCS의 길이를, 둘째 줄에 LCS를 출력한다.</p>
+<p>LCS가 여러 가지인 경우에는 아무거나 출력하고, LCS의 길이가 0인 경우에는 둘째 줄을 출력하지 않는다.</p>
+<h2 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ACAYKP</span><br><span class="line">CAPCAK</span><br></pre></td></tr></table></figure>
+
+<h2 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">ACAK</span><br></pre></td></tr></table></figure>
+
+<h2 id="알고리즘-분류"><a href="#알고리즘-분류" class="headerlink" title="알고리즘 분류"></a>알고리즘 분류</h2><ul>
+<li>[다이나믹 프로그래밍](<a href="https://www.acmicpc.net/problem/tag/다이나믹" target="_blank" rel="noopener">https://www.acmicpc.net/problem/tag/다이나믹</a> 프로그래밍)</li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>저번에 풀었던 LCS 문제는 길이만 출력을 했다면, LCS2는 LCS 값도 출력을 해야한다.</p>
+<h3 id="코드"><a href="#코드" class="headerlink" title="코드"></a>코드</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">n = input()</span><br><span class="line">m = input()</span><br><span class="line"></span><br><span class="line">strings =[[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(n) + <span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(m) + <span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(n)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(m)):</span><br><span class="line">        <span class="keyword">if</span> n[i] ==m[j]:</span><br><span class="line">            strings[j+<span class="number">1</span>][i+<span class="number">1</span>] = strings[j][i] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            strings[j+<span class="number">1</span>][i+<span class="number">1</span>] = max(strings[j][i+<span class="number">1</span>],strings[j+<span class="number">1</span>][i])</span><br><span class="line"></span><br><span class="line">now = strings[<span class="number">-1</span>][<span class="number">-1</span>]</span><br><span class="line">x = len(strings[<span class="number">0</span>]) <span class="number">-1</span></span><br><span class="line">y = len(strings) <span class="number">-1</span></span><br><span class="line">answer = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> now != <span class="number">0</span>:</span><br><span class="line">    <span class="keyword">if</span> now <span class="number">-1</span> == strings[y][x<span class="number">-1</span>] <span class="keyword">and</span> now <span class="number">-1</span> == strings[y<span class="number">-1</span>][x]:</span><br><span class="line">        answer = n[x<span class="number">-1</span>] + answer</span><br><span class="line">        now -= <span class="number">1</span></span><br><span class="line">        x -= <span class="number">1</span></span><br><span class="line">        y -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> strings[y<span class="number">-1</span>][x] &gt; strings[y][x<span class="number">-1</span>]:</span><br><span class="line">            y -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            x -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(strings[<span class="number">-1</span>][<span class="number">-1</span>])</span><br><span class="line">print(answer)</span><br></pre></td></tr></table></figure>
+
+<p><em>strings 배열</em></p>
+<p>​       A C A Y K P</p>
+<p>​    0 0 0 0 0 0 0 </p>
+<p>C  0 0 1 1 1 1 1 </p>
+<p>A  0 <strong>1</strong> 1 2 2 2 2 </p>
+<p>P  0 1 1 2 2 2 3 </p>
+<p>C  0 1 <strong>2</strong> 2 2 2 3</p>
+<p>A  0 1 2 <strong>3</strong> 3 3 3 </p>
+<p>K  0 1 2 3 3 <strong>4</strong> 4</p>
+<p>위 배열의 맨 오른쪽 아래 <code>(strings[-1][-1])</code> 부터 돌면서 answer에 문자열을 더해가고, 값이 0 일 때 순회를 멈춘다.</p>
+<ul>
+<li>앞과 위의 값이 현재 값보다 -1 이면 대각선 위로 이동한다.</li>
+<li>그렇지 않다면 위의 값과 좌측 값 중<ul>
+<li>위의 값이 클 땐 위로 이동하고,</li>
+<li>좌측값이 크다면  좌측으로 이동한다.</li>
+</ul>
+</li>
+<li>이동할 때 answer에 현재 값을 저장한 후 이동한다.</li>
+</ul>
+<h3 id="새로-배운점"><a href="#새로-배운점" class="headerlink" title="새로 배운점"></a>새로 배운점</h3><ul>
+<li><code>배열[-1][-1]</code> 은 맨 마지막 배열의 value를 의미한다 !</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2020/05/17/backjoon-9252/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -1195,7 +816,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 5 of 7</li>
+        <li class="pagination-number">page 5 of 14</li>
     </ul>
 </div>
 
