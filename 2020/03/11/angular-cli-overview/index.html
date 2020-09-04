@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [앵귤러/Angular] Angular cli overview 정리 |
+    
+    Sohee&#39;s Dev Log !</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-angular-cli-overview" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [앵귤러/Angular] Angular cli overview 정리
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/11/angular-cli-overview/" class="article-date">
+  <time datetime="2020-03-11T02:04:00.000Z" itemprop="datePublished">2020-03-11</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h2 id="Angular-CLI-설치"><a href="#Angular-CLI-설치" class="headerlink" title="Angular CLI 설치"></a>Angular CLI 설치</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @angular&#x2F;cli</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="기본-워크-플로우"><a href="#기본-워크-플로우" class="headerlink" title="기본 워크 플로우"></a>기본 워크 플로우</h3><p>주어진 명령에 대한 명령 또는 옵션 (예 : <a href="https://angular.kr/cli/generate" target="_blank" rel="noopener">generate</a> )을 간단한 설명과 함께 나열하려면 다음을 입력하면 된다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ng help</span><br><span class="line">ng generate --help</span><br></pre></td></tr></table></figure>
+
+<p>개발 서버에서 새 기본 Angular 프로젝트를 작성, 빌드 및 제공하려면 다음 명령을 사용하여 새 작업 공간의 상위 디렉토리로 이동할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new my-first-project </span><br><span class="line">cd my-first-project </span><br><span class="line">ng serve</span><br></pre></td></tr></table></figure>
+
+<p>브라우저에서 <a href="http://localhost:4200/" target="_blank" rel="noopener">http : // localhost : 4200 /</a> 을 열어 앱 실행을 확인할 수 있다.</p>
+<h3 id="CLI-명령-언어-구문"><a href="#CLI-명령-언어-구문" class="headerlink" title="CLI 명령 언어 구문"></a>CLI 명령 언어 구문</h3><p>ng <em>commandNameOrAlias</em> <em>requiredArg</em> [optionalArg] [options]</p>
+<ul>
+<li><p>옵션 이름 앞에는 이중 대시(-)가 붙습니다. 옵션 별명은 단일 대시 (-)로 시작한다.</p>
+</li>
+<li><p>인수 및 옵션 이름은 <strong>camelCase</strong> 또는 <strong>dash-case</strong>로 지정할 수 있다. (예 : –myOptionName 또는 –my-option-name)</p>
+</li>
+</ul>
+<h3 id="명령-개요"><a href="#명령-개요" class="headerlink" title="명령 개요"></a>명령 개요</h3><table>
+<thead>
+<tr>
+<th align="left">명령</th>
+<th align="left">별명</th>
+<th align="left">기술</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://angular.kr/cli/add" target="_blank" rel="noopener"><code>add</code></a></td>
+<td align="left"></td>
+<td align="left">프로젝트에 외부 라이브러리에 대한 지원을 추가합니다.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/analytics" target="_blank" rel="noopener"><code>analytics</code></a></td>
+<td align="left"></td>
+<td align="left">Angular CLI 사용 메트릭 수집을 구성</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/build" target="_blank" rel="noopener"><code>build</code></a></td>
+<td align="left"><code>b</code></td>
+<td align="left">주어진 출력 경로에서 Angular 앱을 dist /라는 출력 디렉토리로 컴파일 (작업 공간 디렉토리 내에서 실행해야한다.)</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/config" target="_blank" rel="noopener"><code>config</code></a></td>
+<td align="left"></td>
+<td align="left">작업 공간의 angular.json 파일에서 각도 구성 값을 검색하거나 설정</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/deploy" target="_blank" rel="noopener"><code>deploy</code></a></td>
+<td align="left"></td>
+<td align="left">작업 공간에서 지정된 프로젝트 또는 기본 프로젝트에 대한 배치 빌더를 호출</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/doc" target="_blank" rel="noopener"><code>doc</code></a></td>
+<td align="left"><code>d</code></td>
+<td align="left">브라우저에서 공식 Angular 문서 (angular.io)를 열고 주어진 키워드를 검색</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/e2e" target="_blank" rel="noopener"><code>e2e</code></a></td>
+<td align="left"><code>e</code></td>
+<td align="left">Angular 앱을 빌드하고 제공 한 다음 각도기를 사용하여 엔드 투 엔드 테스트</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/generate" target="_blank" rel="noopener"><code>generate</code></a></td>
+<td align="left"><code>g</code></td>
+<td align="left">회로도를 기반으로 파일을 생성 및 / 또는 수정</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/help" target="_blank" rel="noopener"><code>help</code></a></td>
+<td align="left"></td>
+<td align="left">사용 가능한 명령과 간단한 설명을 나열</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/lint" target="_blank" rel="noopener"><code>lint</code></a></td>
+<td align="left"><code>l</code></td>
+<td align="left">주어진 프로젝트 폴더의 Angular 앱 코드에서 Linting 도구를 실행</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/new" target="_blank" rel="noopener"><code>new</code></a></td>
+<td align="left"><code>n</code></td>
+<td align="left">새로운 작업 공간과 초기 Angular 앱을 생성</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/run" target="_blank" rel="noopener"><code>run</code></a></td>
+<td align="left"></td>
+<td align="left">프로젝트에 정의 된 선택적 사용자 정의 빌더 구성으로 Architect 대상을 실행</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/serve" target="_blank" rel="noopener"><code>serve</code></a></td>
+<td align="left"><code>s</code></td>
+<td align="left">파일 변경 사항을 다시 작성하여 앱을 빌드하고 제공</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/test" target="_blank" rel="noopener"><code>test</code></a></td>
+<td align="left"><code>t</code></td>
+<td align="left">프로젝트에서 단위 테스트를 실행</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/update" target="_blank" rel="noopener"><code>update</code></a></td>
+<td align="left"></td>
+<td align="left">응용 프로그램 및 해당 종속성을 업데이트</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/version" target="_blank" rel="noopener"><code>version</code></a></td>
+<td align="left"><code>v</code></td>
+<td align="left">Angular CLI 버전을 출력</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/xi18n" target="_blank" rel="noopener"><code>xi18n</code></a></td>
+<td align="left"><code>i18n-extract</code></td>
+<td align="left">소스 코드에서 i18n 메시지를 추출</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>앱 및 라이브러리에서 생성하거나 작동하는 <a href="https://angular.kr/cli/add" target="_blank" rel="noopener">add</a> 및 <a href="https://angular.kr/cli/generate" target="_blank" rel="noopener">generate</a> 와 같은 명령은 작업 영역 또는 프로젝트 폴더 내에서 실행해야한다.</p>
+<p><a href="https://angular.kr/cli/generate" target="_blank" rel="noopener">ng generate</a> 명령을 사용하여 추가 구성 요소 및 서비스를위한 새 파일을 추가하고 새 파이프, 지시문 등을위한 코드를 추가할 수 있다.</p>
+</blockquote>
+<blockquote>
+<p> <a href="https://angular.kr/cli/new" target="_blank" rel="noopener">ng new</a> 명령으로 작성된 초기 앱은 작업 공간의 최상위 레벨에 있으며, 작업 공간에서 추가 앱 또는 라이브러리를 생성하면 <code>projects/</code>하위 폴더로 이동 할 수 있다.</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/11/angular-cli-overview/" data-id="ckenwlotq000k6jc983ohdku3"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2020/03/11/angular-dependency-injection/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer</strong>
+        <div class="article-nav-title">
+          
+            [앵귤러/Angular] 의존성 주입
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/03/10/angular-property-binding/" class="article-nav-link">
+        <strong class="article-nav-caption">Older</strong>
+        <div class="article-nav-title">[앵귤러/Angular] 프로퍼티 바인딩 문법</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2020 Sohee&#39;s Dev Log !</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Sohee&#39;s Dev Log !"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>

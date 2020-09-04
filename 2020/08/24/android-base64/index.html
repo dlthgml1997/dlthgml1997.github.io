@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [안드로이드] byte Array to String (Base 64를 이용하여 encoding, decoding 시 주의할 점!) - 자바/JAVA |
+    
+    Sohee&#39;s Dev Log !</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-android-base64" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [안드로이드] byte Array to String (Base 64를 이용하여 encoding, decoding 시 주의할 점!) - 자바/JAVA
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/08/24/android-base64/" class="article-date">
+  <time datetime="2020-08-23T16:00:00.000Z" itemprop="datePublished">2020-08-24</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h2 id="Base64"><a href="#Base64" class="headerlink" title="Base64"></a>Base64</h2><p>일단 Base64가 뭘까? 컴퓨터 분야에서 쓰이는 <strong>Base64</strong>란 8비트 이진 데이터를 문자 코드에 영향을 받지 않는 공통 ASCII 영역의 문자들로만 이루어진 일련의 문자열로 바꾸는 인코딩 방식을 가리키는 개념이라고 한다. </p>
+<p><strong>Encoding</strong> 은 이진데이터를 일련의 문자열로, <strong>Decoding</strong> 은 일련의 문자열을 이진데이터로 바꾸는 것이다.</p>
+<h2 id="encodToString"><a href="#encodToString" class="headerlink" title="encodToString"></a>encodToString</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encodeToString</span> <span class="params">(<span class="keyword">byte</span>[] input, <span class="keyword">int</span> flags)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>Base64를 이용하여 byte Array 를 String으로 Encoding 할 때 이용하는 함수이다.</p>
+<p>나는 text를 private key로 디지털 서명한 byte[] 값을 서버에 String 형식으로 보내야하기 때문에 사용했다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getDigitalSignature</span><span class="params">(String packageName, String text)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);</span><br><span class="line">        signature.initSign(getPrivateKey(packageName));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] data = text.getBytes();</span><br><span class="line">        signature.update(data);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] signatureBytes = signature.sign();</span><br><span class="line">        String signatureStr = Base64.encodeToString(signatureBytes, Base64.NO_WRAP);</span><br><span class="line">        Log.d(TAG, <span class="string">"Signature:"</span> + signatureStr);</span><br><span class="line">        <span class="keyword">return</span> signatureStr;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) &#123;</span><br><span class="line">        Log.e(TAG, <span class="string">"error in digital signature"</span> + e);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>signatureBytes 를 변형 없이 encoding 하기 위해 Base64.NO_WRAP 옵션을 사용하는 것이 좋다. 왜일까?</p>
+<blockquote>
+<p> 여기서 주의할 점이 나온다 ! </p>
+</blockquote>
+<p>긴 길이의 byte 배열의 경우, </p>
+<ul>
+<li><p><strong>Base64.Default</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Default values for encoder&#x2F;decoder flags.</span><br><span class="line">Constant Value: 0</span><br></pre></td></tr></table></figure>
+
+<p>위는 android developers 레퍼런스 설명이다. default 옵션으로, 이 옵션의 경우 76자가 넘는 위치에 개행문자(\n)가 삽입된다. </p>
+<ul>
+<li><p><strong>예시</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String signatureStr = Base64.encodeToString(signatureBytes, Base64.DEFAULT);</span><br><span class="line">Log.d(TAG, <span class="string">"Signature:"</span> + signatureStr);</span><br></pre></td></tr></table></figure>
+
+<p><strong>결과</strong> -&gt; 세보진 않았지만 76자 마다 개행문자가 삽입되는 것을 확인할 수 있다.</p>
+<p><img src="../image/2020-08-242.10.47.png" alt="2020-08-242.10.47"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>Base64.NO_WRAP</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Encoder flag bit to omit all line terminators (i.e., the output will be on one long line).</span><br><span class="line">Constant Value: 2</span><br></pre></td></tr></table></figure>
+
+<p>즉, 개행문자를 삽입하지 않고 긴 한줄의 output 을 갖는다.</p>
+<ul>
+<li><p><strong>예시</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String signatureStr = Base64.encodeToString(signatureBytes, Base64.NO_WRAP);</span><br><span class="line">Log.d(TAG, <span class="string">"Signature:"</span> + signatureStr);</span><br></pre></td></tr></table></figure>
+
+<p><strong>결과</strong> -&gt; 끊김 없이 한 줄로 나오는 것을 확인할 수 있다.</p>
+<p><img src="../image/2020-08-242.07.26.png" alt="2020-08-242.07.26"></p>
+</li>
+</ul>
+</li>
+<li><p>이 외에도, <strong>CRLF / NO_CLOSE / NO_PADDING / URL_SAFE</strong> 옵션이 있다.</p>
+</li>
+</ul>
+<blockquote>
+<p>publicKey 를 서버로 전송하는 경우에는 DEFAULT 옵션을 사용하여야 했다.</p>
+<p>때에 따라서 알맞은 옵션을 사용하도록 하자 ! </p>
+</blockquote>
+<p>마지막으로 ! decoding 시에도 동일한 옵션을 사용해 주어야 한다. 나 같은 경우에는 아래와 같은 코드를 이용했다 (NO_WRAP)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Base64.decode(signatureStr, Base64.NO_WRAP);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>출처: <a href="https://kjwsx23.tistory.com/234" target="_blank" rel="noopener">https://kjwsx23.tistory.com/234</a> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/08/24/android-base64/" data-id="ckenwlotf00036jc97l7ch4d9"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2020/08/24/android-sign-verify/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer</strong>
+        <div class="article-nav-title">
+          
+            [Android / Node.js] PrivateKey Signature, PublicKey Verify
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/08/19/backjoon-12761/" class="article-nav-link">
+        <strong class="article-nav-caption">Older</strong>
+        <div class="article-nav-title">[알고리즘] 백준알고리즘(boj) - 12761: 돌다리 (파이썬/python)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2020 Sohee&#39;s Dev Log !</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Sohee&#39;s Dev Log !"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>
