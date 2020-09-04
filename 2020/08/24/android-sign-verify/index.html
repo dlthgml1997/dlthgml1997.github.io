@@ -1,82 +1,355 @@
+
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
-  <meta charset="utf-8">
-  
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    [Android / Node.js] PrivateKey Signature, PublicKey Verify |
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Sohee&#39;s Dev Log !">
+    <title>[Android / Node.js] PrivateKey Signature, PublicKey Verify - Sohee&#39;s Dev Log !</title>
+    <meta name="author" content="Sohee Lee">
     
-    Sohee&#39;s Dev Log !</title>
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-  
-<script src="/js/pace.min.js"></script>
-
-<meta name="generator" content="Hexo 4.2.0"></head>
-
-<body>
-<main class="content">
-  <section class="outer">
-  
-
-<article id="post-android-sign-verify" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
     
-      <header class="article-header">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sohee Lee","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"articleBody":"\n클라이언트의 Private Key로 서명한 Challenge Number를 서버로 보내 (기존 클라이언트에게 받은)Public Key 로 Verify 하는 과정에서 우당탕탕 고통스러웠는데, 고통의 과정에서 알게 된 것을 한번 정리해 보려 한다 ! \n\n\n위 플로우 중 4, 6 번의 과정을 다룰 것이다. (3번은 Key Generate 포스팅에서 다룰 예정이다.)\nPrivate Key 를 이용하여 Challenge Number 에 서명하기 (4번 과정) - Client일단 코드는 아래와 같다. \ngetDigitalSignature()12345678910111213141516171819private static final String SIGNATURE_ALGORITHM = \"SHA256withRSA\";...public String getDigitalSignature(String packageName, String text) &#123;        try&#123;            Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);            signature.initSign(getPrivateKey(packageName));            byte[] data = text.getBytes();            signature.update(data);            byte[] signatureBytes = signature.sign();            String signatureStr = Base64.encodeToString(signatureBytes, Base64.NO_WRAP);            Log.d(TAG, \"Signature:\" + signatureStr);            return signatureStr;        &#125; catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) &#123;            Log.e(TAG, \"error in digital signature\" + e);            return null;        &#125;    &#125;\n\n\n\nPublic Key 를 이용하여 Verify - ClientverifySignature()일단 먼저 Client에서 Sign 및 Verify 가 완벽히 이루어 져야 Server에 코드를 짜고 테스트 해볼 수 있을 거라 생각하였기 때문에 verify 함수도 구현하였다.\n12345678910111213141516171819private static final String SIGNATURE_ALGORITHM = \"SHA256withRSA\";...public boolean verifySignature(String packageName, String signature, String original)&#123;        try&#123;            Signature sig = Signature.getInstance(SIGNATURE_ALGORITHM); // getDigitalSignature와 같은 알고리즘 사용            sig.initVerify(getPublicKey(packageName));            byte[] data = original.getBytes();            sig.update(data);            boolean result = sig.verify(Base64.decode(signature, Base64.NO_WRAP));            Log.d(TAG, \"signatureString result :\" + result);            return result;        &#125;catch(Exception e)&#123;            e.printStackTrace();            Log.e(TAG,\"error for verify:\" + e.getMessage());            return false;        &#125;    &#125;\n\n\n\n\n처음엔 text에 서명한 값을 *String으로 변환하여 반환할 때, Base64를 이용하지 않고 return new String(signatureBytes, &quot;UTF-8&quot;); 이와 같은 방식으로 *Encode, Decode 하였다. \n-&gt; verify 결과: false\n\ngetDigitalSignature() 함수의 반환형을 String 아닌 byte[]로 반환하도록 코드를 수정하였다. (signature.sign() 값 형변환 x)\n-&gt; verify 결과: true \n\n\n즉, byte Array를 String으로 Encoding 하는 과정에서 데이터가 온전히 Encoding 되지 않는다는 뜻이었다. \n하지만 서버에는 String 형태로 보내야해서 어떻게든 String으로 형변환을 해야했다ㅠㅠ .. 엄청 헤매다가 초반 RSA를 이용한 Encrypt, Decrypt  함수 작성시에 *Base64로 *Encoding 한 코드를 참고하여 Base64를 이용해 보았다. 아래와 같은 코드였다.\n\nString signatureStr = Base64.encodeToString(signatureBytes, Base64.DEFAULT);  \n-&gt; verify 결과: false\n\n 다른 포스팅에서 작성한 글(‘Base64를 이용하여 Encoding, Decoding시 주의할 점’)에서 알 수 있듯이 디지털 서명은 암호화된 값과는 달리 길이가 길어서 Base64.Default를 이용하면 중간에 개행 문자(\\n)가 삽입돼서 그런거였다.\n\n\nString signatureStr = Base64.encodeToString(signatureBytes, Base64.NO_WRAP);\n-&gt; verify 결과: true\n\n드디어 true가 나왔다. \nNO_WRAP 은 개행 문자를 삽입하지 않고 한 줄로 encoding 한다. \n\n\n\nPublic Key 를 이용하여 Verify하기 (6번 과정) - Server123456789101112app.post(\"/auth\", function(req, res)&#123;    var signedCN = req.body.challenge_number; // Client에서 받아온 서명값    console.log(\"auth challenge_number from client : \"+ signedCN);        const verifier = crypto.createVerify('sha256WithRSAEncryption'); // 알고리즘 Client와 일치해야함    verifier.update(challenge_number);    const verifyResult = verifier.verify(public_key, Buffer.from(signedCN,'base64'));     console.log(\"auth verify result: \" + verifyResult);    var val = &#123;'mode':\"auth\", 'result': verifyResult&#125;;    res.send(val);&#125;);\n\n\nchallenge_number(2번에서 Client에 전송한 값) 와 public_key(Client의 Private Key 와 한 쌍, 1번 과정에서 받아옴) 는 이미 서버가 알고 있다. \n\n클라이언트에서는 verify 결과가 true 였지만 서버 verify는 false여서 답답해하며 알아낸 것.\n\nClient와 동일한 알고리즘(sha256WithRSAEncryption)이 뭔지 알아내기 어려웠다.\n계속 ‘RSA-SHA256’이 같은 알고리즘일 것이라 생각했고 검색 끝에 알아내게 되었다.\n\nBuffer.from(signedCN,&#39;base64&#39;)) \n예제 마다 Buffer.from 를 이용하여 Decoding 하는 객체가 달라서 너무 헷갈렸다ㅠ (challenge_number, public_key, signedCN 중 어느 것을 Decoding 하여야 하는지..? )\n\n서명 값(signedCN)이 Base64*로 *Encoding 되어 왔기 때문에 똑같이 Base64*를 이용하여 *Decoding 해주어야 했다.(https://stackoverflow.com/questions/53813676/sha256withrsa-signature-verification-in-nodejs-returning-false-every-time 감사합니다.. )\n\nClient에서는 update시에 challenge_number를 byte[]로 변환하기에 Buffer.from 을 이용해야하는 줄 알았는데 그냥 update에 넣어도 된다 ! \n\n\n\n\n+) Private Key 를 이용하여 Sign (6번 과정) - Server123const signature = crypto.createSign('sha256WithRSAEncryption');signature.update(challenge_number);const sigresult = signature.sign(private_key);\n\n-&gt; 초반에 Node.js 자체에서 sign과 verify가 정상적으로 되는지 테스트 해보려고 작성했던 코드이다.\n( 추후 3번 포스팅 할 때 추가할 내용 : public key encoding 시 Base64.DEFAULT 사용/ public key 앞 뒤에 header 추가해야함 ) \n","dateCreated":"2020-08-24T03:56:00+09:00","dateModified":"2020-08-26T03:15:27+09:00","datePublished":"2020-08-24T03:56:00+09:00","description":"","headline":"[Android / Node.js] PrivateKey Signature, PublicKey Verify","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://yoursite.com/2020/08/24/android-sign-verify/"},"publisher":{"@type":"Organization","name":"Sohee Lee","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"url":"http://yoursite.com/2020/08/24/android-sign-verify/","keywords":"안드로이드"}</script>
+    <meta name="description" content="클라이언트의 Private Key로 서명한 Challenge Number를 서버로 보내 (기존 클라이언트에게 받은)Public Key 로 Verify 하는 과정에서 우당탕탕 고통스러웠는데, 고통의 과정에서 알게 된 것을 한번 정리해 보려 한다 !    위 플로우 중 4, 6 번의 과정을 다룰 것이다. (3번은 Key Generate 포스팅에서 다룰 예정이">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="[Android &#x2F; Node.js] PrivateKey Signature, PublicKey Verify">
+<meta property="og:url" content="http://yoursite.com/2020/08/24/android-sign-verify/index.html">
+<meta property="og:site_name" content="Sohee&#39;s Dev Log !">
+<meta property="og:description" content="클라이언트의 Private Key로 서명한 Challenge Number를 서버로 보내 (기존 클라이언트에게 받은)Public Key 로 Verify 하는 과정에서 우당탕탕 고통스러웠는데, 고통의 과정에서 알게 된 것을 한번 정리해 보려 한다 !    위 플로우 중 4, 6 번의 과정을 다룰 것이다. (3번은 Key Generate 포스팅에서 다룰 예정이">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/08/24/image/2020-08-242.50.59.png">
+<meta property="article:published_time" content="2020-08-23T18:56:00.000Z">
+<meta property="article:modified_time" content="2020-08-25T18:15:27.658Z">
+<meta property="article:author" content="Sohee Lee">
+<meta property="article:tag" content="안드로이드">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/08/24/image/2020-08-242.50.59.png">
+    
+    
         
-  
-    <h1 class="article-title" itemprop="name">
-      [Android / Node.js] PrivateKey Signature, PublicKey Verify
-    </h1>
-  
-  
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/all.css">
 
+    
+<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
 
+    
+<link rel="stylesheet" href="/assets/css/thumbs.css">
 
+    
+<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
 
-      </header>
+    <!--STYLES END-->
     
 
     
-      <div class="article-meta">
-        <a href="/2020/08/24/android-sign-verify/" class="article-date">
-  <time datetime="2020-08-23T18:56:00.000Z" itemprop="datePublished">2020-08-24</time>
-</a>
+
+    
         
-      </div>
     
+</head>
 
-    
-      
-    <div class="tocbot"></div>
-
-
-
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
 
 
     
 
-    <div class="article-entry" itemprop="articleBody">
-      
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/%20"
+            aria-label=""
+        >
+            Sohee&#39;s Dev Log !
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
 
 
-      
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://twitter.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Twitter"
+                        >
+                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Twitter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://plus.google.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Google +"
+                        >
+                        <i class="sidebar-button-icon fab fa-google-plus" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Google +</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
 
-      
-        <blockquote>
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            [Android / Node.js] PrivateKey Signature, PublicKey Verify
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2020-08-24T03:56:00+09:00">
+	
+		    Aug 24, 2020
+    	
+    </time>
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <blockquote>
 <p>클라이언트의 Private Key로 서명한 Challenge Number를 서버로 보내 (기존 클라이언트에게 받은)Public Key 로 Verify 하는 과정에서 우당탕탕 고통스러웠는데, 고통의 과정에서 알게 된 것을 한번 정리해 보려 한다 ! </p>
 </blockquote>
 <p><img src="../image/2020-08-242.50.59.png" alt="2020-08-242.50.59"></p>
@@ -141,168 +414,333 @@
 <p>-&gt; 초반에 Node.js 자체에서 sign과 verify가 정상적으로 되는지 테스트 해보려고 작성했던 코드이다.</p>
 <p>( 추후 3번 포스팅 할 때 추가할 내용 : public key encoding 시 Base64.DEFAULT 사용/ public key 앞 뒤에 header 추가해야함 ) </p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/08/24/android-sign-verify/" data-id="cke7gg0vr00013oc9hnhu3oig"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
+            
 
-    </footer>
 
-  </div>
-
-  
-    
-  <nav class="article-nav">
-    
-      <a href="/2020/08/24/android-keystore2/" class="article-nav-link">
-        <strong class="article-nav-caption">Newer</strong>
-        <div class="article-nav-title">
-          
-            android-keystore2
-          
         </div>
-      </a>
-    
-    
-      <a href="/2020/08/24/android-base64/" class="article-nav-link">
-        <strong class="article-nav-caption">Older</strong>
-        <div class="article-nav-title">[안드로이드] byte Array to String (Base 64를 이용하여 encoding, decoding 시 주의할 점!) - 자바/JAVA</div>
-      </a>
-    
-  </nav>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/08/24/android-keystore2/"
+                    data-tooltip="android-keystore2"
+                    aria-label="PREVIOUS: android-keystore2"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/08/24/android-base64/"
+                    data-tooltip="[안드로이드] byte Array to String (Base 64를 이용하여 encoding, decoding 시 주의할 점!) - 자바/JAVA"
+                    aria-label="NEXT: [안드로이드] byte Array to String (Base 64를 이용하여 encoding, decoding 시 주의할 점!) - 자바/JAVA"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/08/24/android-sign-verify/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2020/08/24/android-sign-verify/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://yoursite.com/2020/08/24/android-sign-verify/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
 
 
-  
-
-  
-    
-  
-
+        
+        
+            
+        
+    </div>
 </article>
 
 
 
-</section>
-  <footer class="footer">
-  <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
-  
-</ul>
-    </div>
-    <ul class="list-inline">
-      <li>&copy; 2020 Sohee&#39;s Dev Log !</li>
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
-    </ul>
-  </div>
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2020 Sohee Lee. All Rights Reserved.
+    </span>
 </footer>
 
-</main>
-<aside class="sidebar">
-  <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-    <div class="logo">
-      <a href="/"><img src="/images/hexo.svg" alt="Sohee&#39;s Dev Log !"></a>
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/08/24/android-keystore2/"
+                    data-tooltip="android-keystore2"
+                    aria-label="PREVIOUS: android-keystore2"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/08/24/android-base64/"
+                    data-tooltip="[안드로이드] byte Array to String (Base 64를 이용하여 encoding, decoding 시 주의할 점!) - 자바/JAVA"
+                    aria-label="NEXT: [안드로이드] byte Array to String (Base 64를 이용하여 encoding, decoding 시 주의할 점!) - 자바/JAVA"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/08/24/android-sign-verify/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2020/08/24/android-sign-verify/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://yoursite.com/2020/08/24/android-sign-verify/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/08/24/android-sign-verify/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=http://yoursite.com/2020/08/24/android-sign-verify/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=http://yoursite.com/2020/08/24/android-sign-verify/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
     </div>
-  
-  <ul class="nav nav-main">
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/">Home</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/archives">Archives</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/gallery">Gallery</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/about">About</a>
-      </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="Search">
-        <i class="fe fe-search"></i>
-        Search
-      </a>
-    </li>
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">Sohee Lee</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
 </div>
-    </li>
-    <li class="nav-item">
-      
-        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-          <i class="fe fe-feed"></i>
-        </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
 </div>
-</div>
-</aside>
 
-<script src="/js/jquery-2.0.3.min.js"></script>
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
 
-
-<script src="/js/jquery.justifiedGallery.min.js"></script>
-
-
-<script src="/js/lazyload.min.js"></script>
+<script src="/assets/js/jquery.js"></script>
 
 
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
+<script src="/assets/js/jquery.fancybox.js"></script>
 
 
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+<script src="/assets/js/thumbs.js"></script>
 
 
+<script src="/assets/js/tranquilpeak.js"></script>
+
+<!--SCRIPTS END-->
 
 
-  
-<script src="/js/tocbot.min.js"></script>
-
-  <script>
-    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-    tocbot.init({
-      tocSelector: '.tocbot',
-      contentSelector: '.article-entry',
-      headingSelector: 'h1, h2, h3, h4, h5, h6',
-      hasInnerContainers: true,
-      scrollSmooth: true,
-      positionFixedSelector: '.tocbot',
-      positionFixedClass: 'is-position-fixed',
-      fixedSidebarOffset: 'auto',
-    });
-  </script>
+    
 
 
 
-<script src="/js/ocean.js"></script>
 
-
-</body>
+    </body>
 </html>

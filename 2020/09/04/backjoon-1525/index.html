@@ -1,82 +1,353 @@
+
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
-  <meta charset="utf-8">
-  
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    [백준알고리즘] 퍼즐 - 1525 (파이썬/python) |
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Sohee&#39;s Dev Log !">
+    <title>[백준알고리즘] 퍼즐 - 1525 (파이썬/python) - Sohee&#39;s Dev Log !</title>
+    <meta name="author" content="Sohee Lee">
     
-    Sohee&#39;s Dev Log !</title>
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-  
-<script src="/js/pace.min.js"></script>
-
-<meta name="generator" content="Hexo 4.2.0"></head>
-
-<body>
-<main class="content">
-  <section class="outer">
-  
-
-<article id="post-backjoon-1525" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
     
-      <header class="article-header">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sohee Lee","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"articleBody":"문제\n\n\n시간 제한\n메모리 제한\n제출\n정답\n맞은 사람\n정답 비율\n\n\n\n1 초\n32 MB\n9234\n3778\n2219\n39.386%\n\n\n3×3 표에 다음과 같이 수가 채워져 있다. 오른쪽 아래 가장 끝 칸은 비어 있는 칸이다.\n\n\n\n1\n2\n3\n\n\n\n4\n5\n6\n\n\n7\n8\n\n\n\n어떤 수와 인접해 있는 네 개의 칸 중에 하나가 비어 있으면, 수를 그 칸으로 이동시킬 수가 있다. 물론 표 바깥으로 나가는 경우는 불가능하다. 우리의 목표는 초기 상태가 주어졌을 때, 최소의 이동으로 위와 같은 정리된 상태를 만드는 것이다. 다음의 예를 보자.\n\n\n\n1\n\n3\n\n\n\n4\n2\n5\n\n\n7\n8\n6\n\n\n\n\n\n1\n2\n3\n\n\n\n4\n\n5\n\n\n7\n8\n6\n\n\n\n\n\n1\n2\n3\n\n\n\n4\n5\n\n\n\n7\n8\n6\n\n\n\n\n\n1\n2\n3\n\n\n\n4\n5\n6\n\n\n7\n8\n\n\n\n가장 윗 상태에서 세 번의 이동을 통해 정리된 상태를 만들 수 있다. 이와 같이 최소 이동 횟수를 구하는 프로그램을 작성하시오.\n입력세 줄에 걸쳐서 표에 채워져 있는 아홉 개의 수가 주어진다. 한 줄에 세 개의 수가 주어지며, 빈 칸은 0으로 나타낸다.\n출력첫째 줄에 최소의 이동 횟수를 출력한다. 이동이 불가능한 경우 -1을 출력한다.\n예제 입력 11231 0 34 2 57 8 6\n\n예제 출력 113\n\n예제 입력 21233 6 08 1 27 4 5\n\n예제 출력 21-1\n\n\n\n출처\n문제를 번역한 사람: baekjoon\n잘못된 데이터를 찾은 사람: djm03178\n데이터를 추가한 사람: hello70825\n메모리 제한을 수정한 사람: portableangel\n\n알고리즘 분류\n그래프 이론\n그래프 탐색\n너비 우선 탐색\n비트마스킹\n\n풀이BFS로 푸는 문제이다. 저번에 미로 문제를 풀 때 썼던 방식과 유사하게 풀면 될것이라 생각해서 풀었더니 완전 틀려버렸다ㅠㅠ..\n처음 제출했던 코드 (틀림)\n1234567891011121314151617181920212223242526272829303132333435363738394041424344454647import sysinput = sys.stdin.readlinetable = []for _ in range(3):    table.append(list(map(int,input().split())))sorted = [[1,2,3],[4,5,6],[7,8,0]]visited = []queue = [[0,0]]def solution():    answer = 0    while queue:        [i, j] = queue.pop(0)        visited.append([i,j])        if i&gt;0 and [i-1,j] not in visited:            if table[i-1][j] != sorted[i-1][j] and table[i][j] == 0:                answer += 1                table[i][j] = table[i-1][j]                table[i-1][j] = 0            queue.append([i-1,j])        if j&gt;0 and [i,j-1] not in visited:            if table[i][j-1] != sorted[i][j-1] and table[i][j] == 0:                answer += 1                table[i][j] = table[i][j-1]                table[i][j-1] = 0            queue.append([i,j-1])        if j&lt;2 and [i,j+1] not in visited:            if table[i][j+1] != sorted[i][j+1] and table[i][j] == 0:                answer += 1                table[i][j] = table[i][j+1]                table[i][j+1] = 0            queue.append([i,j+1])        if i&lt;2 and [i+1,j] not in visited:            if table[i+1][j] != sorted[i+1][j] and table[i][j] == 0:                answer += 1                table[i][j] = table[i+1][j]                table[i+1][j] = 0            queue.append([i+1,j])    if table != sorted:        return -1    return answerprint(solution())\n\n문제점 -&gt; 0이 움직일 수 있는 모든 조건을 검사하는 것이 아니다. 0이 움직일 수 있는 모든 조건을 검사하려면 queue 에 table 배열이 쌓여야하는데 이는 구현이 복잡할 뿐더러 메모리 제한 오류가 발생한다고 한다. 이 개념을 가능하게 하려면 배열이 아닌 string 형태로 table을 받아와 다루면 된다 (검색을 통해 알게 되었다.)\n123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960import sysdef solution():    queue = [table]    visited = &#123;table:0&#125; # 딕셔너리 key: table , value: 움직인 수        while queue:        q = queue.pop(0)        step = visited.get(q) # 해당 테이블까지 움직인 step 수를 얻어온다.        zeroIdx = q.index('0')         if q == '123456780':            return step         # q가 배열의 모습일 때, 0의 인덱스를 구한다.        i = zeroIdx//3        j = zeroIdx - 3*(zeroIdx//3)         step += 1        ql = list(q)        if i &gt; 0: # 위            ql[zeroIdx], ql[zeroIdx-3] = ql[zeroIdx-3], ql[zeroIdx]            qs = ''.join(ql)            if not visited.get(qs):                visited[qs] = step                queue.append(qs)            ql[zeroIdx], ql[zeroIdx-3] = ql[zeroIdx-3], ql[zeroIdx]         if i &lt; 2: # 아래            ql[zeroIdx], ql[zeroIdx+3] = ql[zeroIdx+3], ql[zeroIdx]            qs = ''.join(ql)            if not visited.get(qs):                visited[qs] = step                queue.append(qs)            ql[zeroIdx], ql[zeroIdx+3] = ql[zeroIdx+3], ql[zeroIdx]                if j &gt; 0: # 왼쪽            ql[zeroIdx], ql[zeroIdx-1] = ql[zeroIdx-1], ql[zeroIdx]            qs = ''.join(ql)            if not visited.get(qs):                visited[qs] = step                queue.append(qs)            ql[zeroIdx], ql[zeroIdx-1] = ql[zeroIdx-1], ql[zeroIdx]                    if j &lt; 2: # 오른쪽            ql[zeroIdx], ql[zeroIdx+1] = ql[zeroIdx+1], ql[zeroIdx]            qs = ''.join(ql)            if not visited.get(qs):                visited[qs] = step                queue.append(qs)            ql[zeroIdx], ql[zeroIdx+1] = ql[zeroIdx+1], ql[zeroIdx]     return -1 # 배열이 아닌 str 형태로 받아온다.table = ''for _ in range(3):    table += ''.join(sys.stdin.readline().split()) print(solution())\n\n난 아직 많이 부족하다는 것을 깨달았다 ㅠ-ㅠ 그래도 딕셔너리 / 새로운 bfs 방식 / 새로운 문제 접근 방식 을 배운 것에 만족하자 ! \n","dateCreated":"2020-09-04T03:34:50+09:00","dateModified":"2020-09-04T03:36:21+09:00","datePublished":"2020-09-04T03:34:50+09:00","description":"","headline":"[백준알고리즘] 퍼즐 - 1525 (파이썬/python)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://yoursite.com/2020/09/04/backjoon-1525/"},"publisher":{"@type":"Organization","name":"Sohee Lee","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"url":"http://yoursite.com/2020/09/04/backjoon-1525/","keywords":"알고리즘"}</script>
+    <meta name="description" content="문제   시간 제한 메모리 제한 제출 정답 맞은 사람 정답 비율    1 초 32 MB 9234 3778 2219 39.386%   3×3 표에 다음과 같이 수가 채워져 있다. 오른쪽 아래 가장 끝 칸은 비어 있는 칸이다.    1 2 3    4 5 6   7 8    어떤 수와 인접해 있는 네 개의 칸 중에 하나가 비어 있으면, 수를 그 칸으로 이동시킬">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="[백준알고리즘] 퍼즐 - 1525 (파이썬&#x2F;python)">
+<meta property="og:url" content="http://yoursite.com/2020/09/04/backjoon-1525/index.html">
+<meta property="og:site_name" content="Sohee&#39;s Dev Log !">
+<meta property="og:description" content="문제   시간 제한 메모리 제한 제출 정답 맞은 사람 정답 비율    1 초 32 MB 9234 3778 2219 39.386%   3×3 표에 다음과 같이 수가 채워져 있다. 오른쪽 아래 가장 끝 칸은 비어 있는 칸이다.    1 2 3    4 5 6   7 8    어떤 수와 인접해 있는 네 개의 칸 중에 하나가 비어 있으면, 수를 그 칸으로 이동시킬">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-03T18:34:50.556Z">
+<meta property="article:modified_time" content="2020-09-03T18:36:21.890Z">
+<meta property="article:author" content="Sohee Lee">
+<meta property="article:tag" content="알고리즘">
+<meta name="twitter:card" content="summary">
+    
+    
         
-  
-    <h1 class="article-title" itemprop="name">
-      [백준알고리즘] 퍼즐 - 1525 (파이썬/python)
-    </h1>
-  
-  
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/all.css">
 
+    
+<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
 
+    
+<link rel="stylesheet" href="/assets/css/thumbs.css">
 
+    
+<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
 
-      </header>
+    <!--STYLES END-->
     
 
     
-      <div class="article-meta">
-        <a href="/2020/09/04/backjoon-1525/" class="article-date">
-  <time datetime="2020-09-03T18:34:50.556Z" itemprop="datePublished">2020-09-04</time>
-</a>
+
+    
         
-      </div>
     
+</head>
 
-    
-      
-    <div class="tocbot"></div>
-
-
-
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
 
 
     
 
-    <div class="article-entry" itemprop="articleBody">
-      
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/%20"
+            aria-label=""
+        >
+            Sohee&#39;s Dev Log !
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
 
 
-      
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://twitter.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Twitter"
+                        >
+                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Twitter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://plus.google.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Google +"
+                        >
+                        <i class="sidebar-button-icon fab fa-google-plus" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Google +</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
 
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            [백준알고리즘] 퍼즐 - 1525 (파이썬/python)
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2020-09-04T03:34:50+09:00">
+	
+		    Sep 04, 2020
+    	
+    </time>
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
 <thead>
 <tr>
 <th align="left">시간 제한</th>
@@ -227,159 +498,327 @@
 
 <p>난 아직 많이 부족하다는 것을 깨달았다 ㅠ-ㅠ 그래도 딕셔너리 / 새로운 bfs 방식 / 새로운 문제 접근 방식 을 배운 것에 만족하자 ! </p>
 
-      
+            
+
+
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/09/04/backjoon-1525/" data-id="cken5i4au0000b7c9ensae73n"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a>
 
-    </footer>
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/09/01/android-kakao-map-api/"
+                    data-tooltip="[안드로이드] Kakao Maps API 개발자 등록부터 뷰에 띄우기까지"
+                    aria-label="NEXT: [안드로이드] Kakao Maps API 개발자 등록부터 뷰에 띄우기까지"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/09/04/backjoon-1525/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2020/09/04/backjoon-1525/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://yoursite.com/2020/09/04/backjoon-1525/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
 
-  </div>
 
-  
-    
-  <nav class="article-nav">
-    
-    
-      <a href="/2020/09/01/android-kakao-map-api/" class="article-nav-link">
-        <strong class="article-nav-caption">Older</strong>
-        <div class="article-nav-title">[안드로이드] Kakao Maps API 개발자 등록부터 뷰에 띄우기까지</div>
-      </a>
-    
-  </nav>
-
-
-  
-
-  
-    
-  
-
+        
+        
+            
+        
+    </div>
 </article>
 
 
 
-</section>
-  <footer class="footer">
-  <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
-  
-</ul>
-    </div>
-    <ul class="list-inline">
-      <li>&copy; 2020 Sohee&#39;s Dev Log !</li>
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
-    </ul>
-  </div>
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2020 Sohee Lee. All Rights Reserved.
+    </span>
 </footer>
 
-</main>
-<aside class="sidebar">
-  <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-    <div class="logo">
-      <a href="/"><img src="/images/hexo.svg" alt="Sohee&#39;s Dev Log !"></a>
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/09/01/android-kakao-map-api/"
+                    data-tooltip="[안드로이드] Kakao Maps API 개발자 등록부터 뷰에 띄우기까지"
+                    aria-label="NEXT: [안드로이드] Kakao Maps API 개발자 등록부터 뷰에 띄우기까지"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/09/04/backjoon-1525/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2020/09/04/backjoon-1525/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://yoursite.com/2020/09/04/backjoon-1525/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/09/04/backjoon-1525/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=http://yoursite.com/2020/09/04/backjoon-1525/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=http://yoursite.com/2020/09/04/backjoon-1525/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
     </div>
-  
-  <ul class="nav nav-main">
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/">Home</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/archives">Archives</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/gallery">Gallery</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/about">About</a>
-      </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="Search">
-        <i class="fe fe-search"></i>
-        Search
-      </a>
-    </li>
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">Sohee Lee</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
 </div>
-    </li>
-    <li class="nav-item">
-      
-        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-          <i class="fe fe-feed"></i>
-        </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
 </div>
-</div>
-</aside>
 
-<script src="/js/jquery-2.0.3.min.js"></script>
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
 
-
-<script src="/js/jquery.justifiedGallery.min.js"></script>
-
-
-<script src="/js/lazyload.min.js"></script>
+<script src="/assets/js/jquery.js"></script>
 
 
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
+<script src="/assets/js/jquery.fancybox.js"></script>
 
 
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+<script src="/assets/js/thumbs.js"></script>
 
 
+<script src="/assets/js/tranquilpeak.js"></script>
+
+<!--SCRIPTS END-->
 
 
-  
-<script src="/js/tocbot.min.js"></script>
-
-  <script>
-    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-    tocbot.init({
-      tocSelector: '.tocbot',
-      contentSelector: '.article-entry',
-      headingSelector: 'h1, h2, h3, h4, h5, h6',
-      hasInnerContainers: true,
-      scrollSmooth: true,
-      positionFixedSelector: '.tocbot',
-      positionFixedClass: 'is-position-fixed',
-      fixedSidebarOffset: 'auto',
-    });
-  </script>
+    
 
 
 
-<script src="/js/ocean.js"></script>
 
-
-</body>
+    </body>
 </html>
