@@ -1,0 +1,735 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Sohee&#39;s Dev Log !">
+    <title>[앵귤러/Angular] AppRoutingModule 생성하기 - Sohee&#39;s Dev Log !</title>
+    <meta name="author" content="Sohee Lee">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sohee Lee","sameAs":["https://github.com/dlthgml1997","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"articleBody":"애플리케이션 최상위 라우팅을 담당하는 모듈의 클래스 이름은 일반적으로 AppRoutingModule이라고 칭한다.\n1ng generate module app-routing --flat --module&#x3D;app\n\nAngular CLI로 다음 명령을 실행하면 app-routing.module.ts 파일이 생성되며, 라우팅 모듈이 만들어진다. \n\n--flat : 새로운 폴더를 만들지 않고 src/app 폴더에 파일 생성\n--module=app : Angular CLI가 이 라우팅 모듈을 AppModule의 imports 배열에 자동으로 추가\n\n아래 코드는 기본적으로 생성되는 app.routing.module.ts 파일의 코드이다.\n12345678910import &#123; NgModule &#125; from '@angular/core';import &#123; CommonModule &#125; from '@angular/common';@NgModule(&#123;  imports: [    CommonModule  ],  declarations: []&#125;)export class AppRoutingModule &#123; &#125;\n\n위 코드를 라우팅 동작을 실행할 수 있도록 아래 코드를 입력하여 RouterModule*과 *Routes 심볼을 로드한다.\n1import &#123; RouterModule, Routes &#125; from '@angular/router';\n\n또한 라우팅 규칙에 따라 이동할 컴포넌트 또한 로드한다.\n1import &#123; 이동할Component &#125; from '이동할 컴포넌트의 위치';\n\n\n\n\n라우팅 규칙(Route)\n\n라우팅 규칙은 사용자가 링크를 클릭하거나 브라우저 주소표시줄에 URL을 직접 입력했을 때 라우터가 어떤 화면을 표시할지 정의한 것이다. \n123const routes: Routes = [    &#123; path: 'URL과 매칭될 문자열', component: '화면에 표시할 컴포넌트'&#125;];\n\n위 코드를 AppRoutingModule에 추가한 후, path: &#39;heroes&#39; 에 해당하는 URL을 만나면 localhost:4200/heroes와 같은 URL로 이동하면서 컴포넌트를 표시할 수 있다.\n\nRouterModule.forRoot()\n\n@NgModule에 메타데이터를 지정하면 모듈이 생성될 때 라우터를 초기화하면서 브라우저의 주소가 변화되는 것을 감지한다. 그래서 AppRoutingModule에도 라우터를 초기화하기 위해 imports 배열에 RouterModule을 등록해야 한다.\n1imports: [ RouterModule.forRoot(routes) ],\n\n위 코드를 @NgModule 안에 입력하면 된다. \n\nforRoot() :  최상위 계층에 존재하는 라우터를 설정할 때 사용하는 메소드이다. 이 메소드를 사용하면 브라우저에서 변경되는 URL을 감지할 수 있다.\n\n또한 앱에서도 RouterModule을 사용할 수 있도록 exports 배열도 지정해야한다.\n1exports: [ RouterModule ]\n\n imports 코드 아래에 위 코드를 입력하면 된다.\n\n\n추가: 라우팅 영역(RouterOutlet) 추가하기\n\nAppComponent html 파일에 아래 코드를 추가한다.\n1&lt;router-outlet&gt;&lt;/router-outlet&gt;\n\n\n&lt;router-outlet&gt;: 라우팅 된 화면이 표시될 위치를 지정하는 엘리먼트이다.\n위에서 RouterModule을 exports 배열*을 통해 외부로 공개하였기 때문에 *AppComponent 에서도 RouterOutlet 디렉티브를 사용할 수 있다. \n또한 이는 맨 위쪽에서 –module=app 플래그를 지정하였기 때문에 자동으로 추가된 것이다.\n\n\n파일을 직접 생성했거나 Angular CLI 외의 툴을 이용했다면 app.module.ts 파일에서 AppRoutingModule을 로드하고 NgModule의 imports 배열에 이 라우팅 모듈을 추가하면 된다.\n\n","dateCreated":"2020-03-12T18:10:00+09:00","dateModified":"2020-03-12T21:17:46+09:00","datePublished":"2020-03-12T18:10:00+09:00","description":"","headline":"[앵귤러/Angular] AppRoutingModule 생성하기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://yoursite.com/2020/03/12/angular-create-approutingmodule/"},"publisher":{"@type":"Organization","name":"Sohee Lee","sameAs":["https://github.com/dlthgml1997","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"url":"http://yoursite.com/2020/03/12/angular-create-approutingmodule/","keywords":"앵귤러"}</script>
+    <meta name="description" content="애플리케이션 최상위 라우팅을 담당하는 모듈의 클래스 이름은 일반적으로 AppRoutingModule이라고 칭한다. 1ng generate module app-routing --flat --module&#x3D;app  Angular CLI로 다음 명령을 실행하면 app-routing.module.ts 파일이 생성되며, 라우팅 모듈이 만들어진다.   --fl">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="[앵귤러&#x2F;Angular] AppRoutingModule 생성하기">
+<meta property="og:url" content="http://yoursite.com/2020/03/12/angular-create-approutingmodule/index.html">
+<meta property="og:site_name" content="Sohee&#39;s Dev Log !">
+<meta property="og:description" content="애플리케이션 최상위 라우팅을 담당하는 모듈의 클래스 이름은 일반적으로 AppRoutingModule이라고 칭한다. 1ng generate module app-routing --flat --module&#x3D;app  Angular CLI로 다음 명령을 실행하면 app-routing.module.ts 파일이 생성되며, 라우팅 모듈이 만들어진다.   --fl">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-12T09:10:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T12:17:46.000Z">
+<meta property="article:author" content="Sohee Lee">
+<meta property="article:tag" content="앵귤러">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/all.css">
+
+    
+<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+
+    
+<link rel="stylesheet" href="/assets/css/thumbs.css">
+
+    
+<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/%20"
+            aria-label=""
+        >
+            Sohee&#39;s Dev Log !
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/dlthgml1997"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://twitter.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Twitter"
+                        >
+                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Twitter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://plus.google.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Google +"
+                        >
+                        <i class="sidebar-button-icon fab fa-google-plus" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Google +</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            [앵귤러/Angular] AppRoutingModule 생성하기
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2020-03-12T18:10:00+09:00">
+	
+		    Mar 12, 2020
+    	
+    </time>
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <p>애플리케이션 최상위 라우팅을 담당하는 모듈의 클래스 이름은 일반적으로 <em>AppRoutingModule</em>이라고 칭한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng generate module app-routing --flat --module&#x3D;app</span><br></pre></td></tr></table></figure>
+
+<p>Angular CLI로 다음 명령을 실행하면 <em>app-routing.module.ts</em> 파일이 생성되며, 라우팅 모듈이 만들어진다. </p>
+<ul>
+<li><code>--flat</code> : 새로운 폴더를 만들지 않고 src/app 폴더에 파일 생성</li>
+<li><code>--module=app</code> : Angular CLI가 이 라우팅 모듈을 AppModule의 imports 배열에 자동으로 추가</li>
+</ul>
+<p>아래 코드는 기본적으로 생성되는 app.routing.module.ts 파일의 코드이다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; NgModule &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; CommonModule &#125; <span class="keyword">from</span> <span class="string">'@angular/common'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    CommonModule</span><br><span class="line">  ],</span><br><span class="line">  declarations: []</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppRoutingModule &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>위 코드를 라우팅 동작을 실행할 수 있도록 아래 코드를 입력하여 <em>RouterModule*과 *Routes</em> 심볼을 로드한다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; RouterModule, Routes &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>또한 라우팅 규칙에 따라 이동할 컴포넌트 또한 로드한다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; 이동할Component &#125; <span class="keyword">from</span> <span class="string">'이동할 컴포넌트의 위치'</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>라우팅 규칙(Route)</p>
+</blockquote>
+<p><em>라우팅 규칙</em>은 사용자가 링크를 클릭하거나 브라우저 주소표시줄에 URL을 직접 입력했을 때 라우터가 어떤 화면을 표시할지 정의한 것이다. </p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> routes: Routes = [</span><br><span class="line">    &#123; path: <span class="string">'URL과 매칭될 문자열'</span>, component: <span class="string">'화면에 표시할 컴포넌트'</span>&#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>위 코드를 <em>AppRoutingModule</em>에 추가한 후, <code>path: &#39;heroes&#39;</code> 에 해당하는 URL을 만나면 <em>localhost:4200/heroes</em>와 같은 URL로 이동하면서 <em>컴포넌트</em>를 표시할 수 있다.</p>
+<blockquote>
+<p>RouterModule.forRoot()</p>
+</blockquote>
+<p><em>@NgModule</em>에 메타데이터를 지정하면 모듈이 생성될 때 라우터를 초기화하면서 브라우저의 주소가 변화되는 것을 감지한다. 그래서 <em>AppRoutingModule</em>에도 라우터를 초기화하기 위해 <strong>imports 배열</strong>에 <em>RouterModule</em>을 등록해야 한다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imports: [ RouterModule.forRoot(routes) ],</span><br></pre></td></tr></table></figure>
+
+<p>위 코드를 <em>@NgModule</em> 안에 입력하면 된다. </p>
+<ul>
+<li><code>forRoot()</code> :  최상위 계층에 존재하는 라우터를 설정할 때 사용하는 메소드이다. 이 메소드를 사용하면 브라우저에서 변경되는 URL을 감지할 수 있다.</li>
+</ul>
+<p>또한 앱에서도 <em>RouterModule</em>을 사용할 수 있도록 <strong>exports 배열</strong>도 지정해야한다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exports: [ RouterModule ]</span><br></pre></td></tr></table></figure>
+
+<p> imports 코드 아래에 위 코드를 입력하면 된다.</p>
+<hr>
+<blockquote>
+<p>추가: 라우팅 영역(RouterOutlet) 추가하기</p>
+</blockquote>
+<p>AppComponent html 파일에 아래 코드를 추가한다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-outlet</span>&gt;</span><span class="tag">&lt;/<span class="name">router-outlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>&lt;router-outlet&gt;</code>: 라우팅 된 화면이 표시될 위치를 지정하는 엘리먼트이다.</li>
+<li>위에서 <code>RouterModule</code>을 <em>exports 배열*을 통해 외부로 공개하였기 때문에 *AppComponent</em> 에서도 <em>RouterOutlet</em> 디렉티브를 사용할 수 있다. <ul>
+<li>또한 이는 맨 위쪽에서 <em>–module=app</em> 플래그를 지정하였기 때문에 자동으로 추가된 것이다.</li>
+</ul>
+</li>
+<li>파일을 직접 생성했거나 Angular CLI 외의 툴을 이용했다면 <em>app.module.ts</em> 파일에서 <em>AppRoutingModule</em>을 로드하고 <em>NgModule</em>의 <em>imports 배열</em>에 이 라우팅 모듈을 추가하면 된다.</li>
+</ul>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/03/12/angular-routerlink/"
+                    data-tooltip="[앵귤러/Angular] 네비게이션 링크(routerLink) 추가하기"
+                    aria-label="PREVIOUS: [앵귤러/Angular] 네비게이션 링크(routerLink) 추가하기"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/03/12/angular-template-literal/"
+                    data-tooltip="[앵귤러/Angular] 템플릿 리터럴(template literal)"
+                    aria-label="NEXT: [앵귤러/Angular] 템플릿 리터럴(template literal)"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/03/12/angular-create-approutingmodule/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2020/03/12/angular-create-approutingmodule/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://yoursite.com/2020/03/12/angular-create-approutingmodule/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2020 Sohee Lee. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/03/12/angular-routerlink/"
+                    data-tooltip="[앵귤러/Angular] 네비게이션 링크(routerLink) 추가하기"
+                    aria-label="PREVIOUS: [앵귤러/Angular] 네비게이션 링크(routerLink) 추가하기"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/03/12/angular-template-literal/"
+                    data-tooltip="[앵귤러/Angular] 템플릿 리터럴(template literal)"
+                    aria-label="NEXT: [앵귤러/Angular] 템플릿 리터럴(template literal)"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/03/12/angular-create-approutingmodule/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2020/03/12/angular-create-approutingmodule/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://yoursite.com/2020/03/12/angular-create-approutingmodule/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/03/12/angular-create-approutingmodule/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=http://yoursite.com/2020/03/12/angular-create-approutingmodule/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=http://yoursite.com/2020/03/12/angular-create-approutingmodule/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">Sohee Lee</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/jquery.js"></script>
+
+
+<script src="/assets/js/jquery.fancybox.js"></script>
+
+
+<script src="/assets/js/thumbs.js"></script>
+
+
+<script src="/assets/js/tranquilpeak.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

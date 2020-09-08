@@ -64,6 +64,322 @@
         
           
 
+<article id="post-angular-dependency-injection" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/11/angular-dependency-injection/">[앵귤러/Angular] 의존성 주입</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/11/angular-dependency-injection/" class="article-date">
+  <time datetime="2020-03-11T05:11:00.000Z" itemprop="datePublished">2020-03-11</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p><strong>의존성 주입(Dependency injection, DI)</strong></p>
+<blockquote>
+<p>의존성을 직접 생성하지 않고 외부 어딘가에서 받아오도록 요청하는 패턴</p>
+</blockquote>
+<ul>
+<li><p><strong>의존성</strong>(dependencies) : 어떤 클래스가 동작하기 위해 필요한 서비스나 객체를 의미</p>
+</li>
+<li><p>클래스의 인스턴스가 생성될 때 이 클래스에 필요한 의존성을 프레임워크가 생성해서 전달</p>
+</li>
+<li><p>애플리케이션 디자인 패턴 중에서도 아주 중요한 패턴</p>
+</li>
+<li><p>이 패턴을 활용하면 Angular 애플리케이션을 좀 더 효율적인 모듈 형태로 구성할 수 있다.</p>
+</li>
+<li><p>한 가지 예로는 데이터를 처리하는 Service를 만들 때 new 키워드로 인스턴스를 직접 생성하는것이 아닌, Angular가 제공하는 의존성 주입 매커니즘에 따라 component의 생성자로 주입되는 것</p>
+</li>
+</ul>
+<h3 id="의존성-주입-가능한-서비스-생성하고-등록하기"><a href="#의존성-주입-가능한-서비스-생성하고-등록하기" class="headerlink" title="의존성 주입 가능한 서비스 생성하고 등록하기"></a>의존성 주입 가능한 서비스 생성하고 등록하기</h3><ul>
+<li>목 데이터는 파일에 정의해두고 이 데이터를 서비스 클래스로 감싸 컴포넌트에 주입</li>
+</ul>
+<blockquote>
+<p>한 파일에 클래스를 여러개 정의하면 이 파일을 접하는 많은 사람들에게 혼란을 줄 수 있기 때문에 컴포넌트와 서비스는 파일 하나에 하나씩 정의하는 것이 좋다.  </p>
+<p>또한 컴포넌트와 서비스가 같은 파일에 정의해야 한다면 서비스 먼저 정의해야한다. 그렇지 않으면 런타임 null 참조 에러가 발생한다. (컴포넌트를 먼저 정의하고자 하면 forwardRef() 메소드를 사용하면 된다.)</p>
+</blockquote>
+<h4 id="의존성으로-주입할-서비스-클래스-정의"><a href="#의존성으로-주입할-서비스-클래스-정의" class="headerlink" title="의존성으로 주입할 서비스 클래스 정의"></a>의존성으로 주입할 서비스 클래스 정의</h4><p>Angular CLI를 사용하여 아래 명령을 이용하면 <code>HeroService</code> 클래스가 생성된다.  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng generate service hero</span><br></pre></td></tr></table></figure>
+
+<p><code>hero.sevice.ts</code> 초기 생성 파일은 아래와 같다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>(&#123;</span><br><span class="line">  <span class="comment">// 이 서비스를 애플리케이션 최상위 인젝터에 등록합니다.</span></span><br><span class="line">  providedIn: <span class="string">'root'</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroService &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"></span>) &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong><em>@Injectable()</em></strong> : 클래스를 인젝터에 프로바이더로 등록할 때 사용하는 데코레이터</p>
+<ul>
+<li><p><code>인젝터</code>:  서비스의 인스턴스를 생성하고 클래스에 주입하는 역할을 한다. 인스턴스를 생성할 때 프로바이더를 이용한다. </p>
+</li>
+<li><p><code>프로바이더</code>: 프로바이더 인터페이스들 중 하나를 구현하는 오브젝트, 프로바이더 객체는 DI토큰과 관련된 주입 가능한 의존성을 얻는 방법을 정의한다. 프로바이더에 서비스 클래스를 등록하면 인젝터는 new 키워드를 사용해 인스턴스를 생성한다. </p>
+<ol>
+<li><strong>서비스 클래스에서 @Injectable() 데코레이터로 직접 등록할 수 있다.</strong> </li>
+<li>NgModule의 @NgModule() 데코레이터에 등록할 수있다.</li>
+<li>컴포넌트의 @Component() 데코레이터에 등록할 수있다.</li>
+</ol>
+<p>위의 예제는 1번의 방식을 사용하였다.</p>
+<blockquote>
+<p>여러 클래스를 같은 서비스 타입으로 인젝터에 등록 가능하며, 서로 다른 프로바이더를 각기 다른 인젝터에 등록할 수 있다. </p>
+</blockquote>
+</li>
+<li><p><code>proviededIn</code></p>
+<ol>
+<li>@Injectable() 데코레이터를 사용할 때: 메타 데이터 옵션으로 서비스가 root인젝터에 등록될지, 특정 NgModule에 등록될지 지정할 수 있다.<ul>
+<li>서비스가 최상위 인젝터에 등록되면 Angular는 HeroService의 인스턴스를 하나만 생성하며, 이 클래스가 주입되는 모든 곳에서 같은 인스턴스를 공유한다.</li>
+</ul>
+</li>
+<li>@NgModule() 이나 @Component() 데코레이터를 사용할 때 : NgModule 계층이나 컴포넌트 계층의 인젝터에 프로바이더를 등록할 수 있다.</li>
+</ol>
+</li>
+<li><p>이 데코레이터가 등록된 클래스가 실제로 사용되지 않으면 이 클래스를 최종 빌드 결과물에서 제거하는 대상으로 등록하는 역할도 한다.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="서비스-주입하기"><a href="#서비스-주입하기" class="headerlink" title="서비스 주입하기"></a>서비스 주입하기</h3><h4 id="의존성-주입을-사용하는-컴포넌트-vs-사용하지-않는-컴포넌트"><a href="#의존성-주입을-사용하는-컴포넌트-vs-사용하지-않는-컴포넌트" class="headerlink" title="의존성 주입을 사용하는 컴포넌트 vs 사용하지 않는 컴포넌트"></a>의존성 주입을 사용하는 컴포넌트 vs 사용하지 않는 컴포넌트</h4><blockquote>
+<p>의존성 주입을 사용하지 않는 컴포넌트</p>
+</blockquote>
+<p>아래 HeroListComponent는 다른 mock 파일에 정의된 HEROES라는 배열을 메모리에 올려서 참조한다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">import</span> &#123; HEROES &#125;      <span class="keyword">from</span> <span class="string">'./mock-heroes'</span>;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroListComponent &#123;</span><br><span class="line">  heroes = HEROES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>이 방식은 실제 운영환경에서는 적합하지 않다. 테스트를 적용하거나 리모트 서버에서 데이터를 가져오도록 변경한다면 HerosListComponent를 반드시 수정해야하기 때문이다. 상황에 따라 매번 HEROES 목 데이터를 변경해야할 수도 있다. </p>
+<blockquote>
+<p>의존성 주입을 사용하는 컴포넌트</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">import</span> &#123; Hero &#125;        <span class="keyword">from</span> <span class="string">'./hero'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroService &#125; <span class="keyword">from</span> <span class="string">'./hero.service'</span>;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroListComponent &#123;</span><br><span class="line">  heroes: Hero[];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">heroService: HeroService</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.heroes = heroService.getHeroes();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>이 때 서비스클래스는 부모 인젝터 중 어딘가에 반드시 등록되어야 하지만, 컴포넌트의 입장에서는 서비스가 어디에 등록되어 있는지는 중요하지 않다.</p>
+<p>이 때 서비스 클래스의 코드는 아래와 같다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HEROES &#125; <span class="keyword">from</span> <span class="string">'./mock-heroes'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>(&#123;</span><br><span class="line">  <span class="comment">// 이 서비스를 애플리케이션 최상위 인젝터에 등록합니다.</span></span><br><span class="line">  providedIn: <span class="string">'root'</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroService &#123;</span><br><span class="line">  getHeroes() &#123; <span class="keyword">return</span> HEROES; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/11/angular-dependency-injection/" data-id="ckenwlots000o6jc95jhhah6m"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-angular-cli-overview" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/11/angular-cli-overview/">[앵귤러/Angular] Angular cli overview 정리</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/11/angular-cli-overview/" class="article-date">
+  <time datetime="2020-03-11T02:04:00.000Z" itemprop="datePublished">2020-03-11</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h2 id="Angular-CLI-설치"><a href="#Angular-CLI-설치" class="headerlink" title="Angular CLI 설치"></a>Angular CLI 설치</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @angular&#x2F;cli</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="기본-워크-플로우"><a href="#기본-워크-플로우" class="headerlink" title="기본 워크 플로우"></a>기본 워크 플로우</h3><p>주어진 명령에 대한 명령 또는 옵션 (예 : <a href="https://angular.kr/cli/generate" target="_blank" rel="noopener">generate</a> )을 간단한 설명과 함께 나열하려면 다음을 입력하면 된다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ng help</span><br><span class="line">ng generate --help</span><br></pre></td></tr></table></figure>
+
+<p>개발 서버에서 새 기본 Angular 프로젝트를 작성, 빌드 및 제공하려면 다음 명령을 사용하여 새 작업 공간의 상위 디렉토리로 이동할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new my-first-project </span><br><span class="line">cd my-first-project </span><br><span class="line">ng serve</span><br></pre></td></tr></table></figure>
+
+<p>브라우저에서 <a href="http://localhost:4200/" target="_blank" rel="noopener">http : // localhost : 4200 /</a> 을 열어 앱 실행을 확인할 수 있다.</p>
+<h3 id="CLI-명령-언어-구문"><a href="#CLI-명령-언어-구문" class="headerlink" title="CLI 명령 언어 구문"></a>CLI 명령 언어 구문</h3><p>ng <em>commandNameOrAlias</em> <em>requiredArg</em> [optionalArg] [options]</p>
+<ul>
+<li><p>옵션 이름 앞에는 이중 대시(-)가 붙습니다. 옵션 별명은 단일 대시 (-)로 시작한다.</p>
+</li>
+<li><p>인수 및 옵션 이름은 <strong>camelCase</strong> 또는 <strong>dash-case</strong>로 지정할 수 있다. (예 : –myOptionName 또는 –my-option-name)</p>
+</li>
+</ul>
+<h3 id="명령-개요"><a href="#명령-개요" class="headerlink" title="명령 개요"></a>명령 개요</h3><table>
+<thead>
+<tr>
+<th align="left">명령</th>
+<th align="left">별명</th>
+<th align="left">기술</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://angular.kr/cli/add" target="_blank" rel="noopener"><code>add</code></a></td>
+<td align="left"></td>
+<td align="left">프로젝트에 외부 라이브러리에 대한 지원을 추가합니다.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/analytics" target="_blank" rel="noopener"><code>analytics</code></a></td>
+<td align="left"></td>
+<td align="left">Angular CLI 사용 메트릭 수집을 구성</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/build" target="_blank" rel="noopener"><code>build</code></a></td>
+<td align="left"><code>b</code></td>
+<td align="left">주어진 출력 경로에서 Angular 앱을 dist /라는 출력 디렉토리로 컴파일 (작업 공간 디렉토리 내에서 실행해야한다.)</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/config" target="_blank" rel="noopener"><code>config</code></a></td>
+<td align="left"></td>
+<td align="left">작업 공간의 angular.json 파일에서 각도 구성 값을 검색하거나 설정</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/deploy" target="_blank" rel="noopener"><code>deploy</code></a></td>
+<td align="left"></td>
+<td align="left">작업 공간에서 지정된 프로젝트 또는 기본 프로젝트에 대한 배치 빌더를 호출</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/doc" target="_blank" rel="noopener"><code>doc</code></a></td>
+<td align="left"><code>d</code></td>
+<td align="left">브라우저에서 공식 Angular 문서 (angular.io)를 열고 주어진 키워드를 검색</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/e2e" target="_blank" rel="noopener"><code>e2e</code></a></td>
+<td align="left"><code>e</code></td>
+<td align="left">Angular 앱을 빌드하고 제공 한 다음 각도기를 사용하여 엔드 투 엔드 테스트</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/generate" target="_blank" rel="noopener"><code>generate</code></a></td>
+<td align="left"><code>g</code></td>
+<td align="left">회로도를 기반으로 파일을 생성 및 / 또는 수정</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/help" target="_blank" rel="noopener"><code>help</code></a></td>
+<td align="left"></td>
+<td align="left">사용 가능한 명령과 간단한 설명을 나열</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/lint" target="_blank" rel="noopener"><code>lint</code></a></td>
+<td align="left"><code>l</code></td>
+<td align="left">주어진 프로젝트 폴더의 Angular 앱 코드에서 Linting 도구를 실행</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/new" target="_blank" rel="noopener"><code>new</code></a></td>
+<td align="left"><code>n</code></td>
+<td align="left">새로운 작업 공간과 초기 Angular 앱을 생성</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/run" target="_blank" rel="noopener"><code>run</code></a></td>
+<td align="left"></td>
+<td align="left">프로젝트에 정의 된 선택적 사용자 정의 빌더 구성으로 Architect 대상을 실행</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/serve" target="_blank" rel="noopener"><code>serve</code></a></td>
+<td align="left"><code>s</code></td>
+<td align="left">파일 변경 사항을 다시 작성하여 앱을 빌드하고 제공</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/test" target="_blank" rel="noopener"><code>test</code></a></td>
+<td align="left"><code>t</code></td>
+<td align="left">프로젝트에서 단위 테스트를 실행</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/update" target="_blank" rel="noopener"><code>update</code></a></td>
+<td align="left"></td>
+<td align="left">응용 프로그램 및 해당 종속성을 업데이트</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/version" target="_blank" rel="noopener"><code>version</code></a></td>
+<td align="left"><code>v</code></td>
+<td align="left">Angular CLI 버전을 출력</td>
+</tr>
+<tr>
+<td align="left"><a href="https://angular.kr/cli/xi18n" target="_blank" rel="noopener"><code>xi18n</code></a></td>
+<td align="left"><code>i18n-extract</code></td>
+<td align="left">소스 코드에서 i18n 메시지를 추출</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>앱 및 라이브러리에서 생성하거나 작동하는 <a href="https://angular.kr/cli/add" target="_blank" rel="noopener">add</a> 및 <a href="https://angular.kr/cli/generate" target="_blank" rel="noopener">generate</a> 와 같은 명령은 작업 영역 또는 프로젝트 폴더 내에서 실행해야한다.</p>
+<p><a href="https://angular.kr/cli/generate" target="_blank" rel="noopener">ng generate</a> 명령을 사용하여 추가 구성 요소 및 서비스를위한 새 파일을 추가하고 새 파이프, 지시문 등을위한 코드를 추가할 수 있다.</p>
+</blockquote>
+<blockquote>
+<p> <a href="https://angular.kr/cli/new" target="_blank" rel="noopener">ng new</a> 명령으로 작성된 초기 앱은 작업 공간의 최상위 레벨에 있으며, 작업 공간에서 추가 앱 또는 라이브러리를 생성하면 <code>projects/</code>하위 폴더로 이동 할 수 있다.</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/11/angular-cli-overview/" data-id="ckenwlotq000k6jc983ohdku3"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-angular-property-binding" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -630,180 +946,6 @@ b,c= map(int,input().split())</code></p>
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-python-indexing-slicing" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/07/python-indexing-slicing/">[파이썬] 문자열 인덱싱 및 잘라내기</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/07/python-indexing-slicing/" class="article-date">
-  <time datetime="2020-03-07T07:14:00.000Z" itemprop="datePublished">2020-03-07</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <blockquote>
-<p>문자열 잘라내기</p>
-</blockquote>
-<p>‘hello world’ 에서 일부만 자르고 싶을 때, </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">'hello world'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>:<span class="number">5</span>]</span><br><span class="line"><span class="string">'hello'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">6</span>:<span class="number">11</span>]</span><br><span class="line"><span class="string">'world'</span></span><br></pre></td></tr></table></figure>
-
-<p><code>a[0:5]</code> 와 <code>a[:5]</code> 는 같은 문자열(‘hello’)을 출력한다.</p>
-<p>또한</p>
-<p><code>a[6:11]</code> 과 <code>a[6:]</code> 또한 같은 문자열(‘world’)을 출력한다.</p>
-<blockquote>
-<p>음수 인덱싱</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">6</span>:<span class="number">-2</span>]</span><br><span class="line"><span class="string">'wor'</span></span><br></pre></td></tr></table></figure>
-
-<p><code>a[6:-2]</code>에서 <code>-2</code>는 뒤에서 2번째까지 잘라내겠다는 것을 의미한다 따라서 맨 뒤에 문자 ld가 잘린것을 볼 수 있다.</p>
-<p><a href="https://wikidocs.net/2838" target="_blank" rel="noopener">참고</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/07/python-indexing-slicing/" data-id="ckenwlov8003w6jc9dowr4tvj"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-python-arithmetic-operators" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/04/python-arithmetic-operators/">[파이썬] 산술연산자</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/04/python-arithmetic-operators/" class="article-date">
-  <time datetime="2020-03-04T12:50:00.000Z" itemprop="datePublished">2020-03-04</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h4 id="산술연산자-Arithmetic-Operators"><a href="#산술연산자-Arithmetic-Operators" class="headerlink" title="산술연산자 (Arithmetic Operators) :"></a>산술연산자 (Arithmetic Operators) :</h4><table>
-<thead>
-<tr>
-<th>Operater</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>+</td>
-<td>더하기</td>
-</tr>
-<tr>
-<td>-</td>
-<td>빼기</td>
-</tr>
-<tr>
-<td>*</td>
-<td>곱하기</td>
-</tr>
-<tr>
-<td>/</td>
-<td>나누기</td>
-</tr>
-<tr>
-<td>%</td>
-<td>나머지</td>
-</tr>
-<tr>
-<td>**</td>
-<td>제곱</td>
-</tr>
-<tr>
-<td>//</td>
-<td>몫</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/04/python-arithmetic-operators/" data-id="ckenwlov3003k6jc96bcvb0wk"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
 
     </footer>
 

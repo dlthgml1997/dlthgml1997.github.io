@@ -1,0 +1,766 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Sohee&#39;s Dev Log !">
+    <title>[프로그래머스] 이중 우선순위 큐 - 파이썬(python) - Sohee&#39;s Dev Log !</title>
+    <meta name="author" content="Sohee Lee">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sohee Lee","sameAs":["https://github.com/dlthgml1997","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"articleBody":"문제설명이중 우선순위 큐는 다음 연산을 할 수 있는 자료구조를 말합니다.\n\n\n\n명령어\n수신 탑(높이)\n\n\n\nI 숫자\n큐에 주어진 숫자를 삽입합니다.\n\n\nD 1\n큐에서 최댓값을 삭제합니다.\n\n\nD -1\n큐에서 최솟값을 삭제합니다.\n\n\n이중 우선순위 큐가 할 연산 operations가 매개변수로 주어질 때, 모든 연산을 처리한 후 큐가 비어있으면 [0,0] 비어있지 않으면 [최댓값, 최솟값]을 return 하도록 solution 함수를 구현해주세요.\n제한사항\noperations는 길이가 1 이상 1,000,000 이하인 문자열 배열입니다.\noperations의 원소는 큐가 수행할 연산을 나타냅니다.\n원소는 “명령어 데이터” 형식으로 주어집니다.- 최댓값/최솟값을 삭제하는 연산에서 최댓값/최솟값이 둘 이상인 경우, 하나만 삭제합니다.\n\n\n빈 큐에 데이터를 삭제하라는 연산이 주어질 경우, 해당 연산은 무시합니다.\n\n입출력 예\n\n\noperations\nreturn\n\n\n\n[I 16,D 1]\n[0,0]\n\n\n[I 7,I 5,I -5,D -1]\n[7,5]\n\n\n입출력 예 설명16을 삽입 후 최댓값을 삭제합니다. 비어있으므로 [0,0]을 반환합니다.7,5,-5를 삽입 후 최솟값을 삭제합니다. 최대값 7, 최소값 5를 반환합니다.\n출처\n풀이\n코드\n\n12345678910111213141516171819202122def solution(operations):    import heapq    answer = []    priority_queue = []        for operation in operations:        op = operation[:1]        num = int(operation[2:])        if op == \"D\" and priority_queue:            if num == 1:                priority_queue.pop(priority_queue.index(max(priority_queue)))            elif num == -1:                heapq.heappop(priority_queue)        elif op == \"I\":            heapq.heappush(priority_queue, num)            if priority_queue:        answer = [max(priority_queue),heapq.heappop(priority_queue)]    else:        answer = [0,0]                                       return answer\n\n\n\n\n새로 알게 된 점\n\n\n문자열 인덱싱(슬라이싱) \n슬라이싱을 통해 operation 과 숫자를 나눴다.\n\n\npriority_queue.index(max(priority_queue))\n위 코드를 통해 priority_queue에서 가장 큰 값의 인덱스를 얻어올 수 있었다. 매우 편하다!\n\n\nheapq.heappush(priority_queue, num) \n위 코드는 최소힙(우선순위큐)을 만족하도록 num을 push한다.\n\n\nheapq.heappop(priority_queue)\n위 코드는 최소 값을 pop한다.\n\n\n\n\n어려웠던 점\n\n 사실 생각보단 금방 풀었지만 ! 맨 처음 코드가 아래와 같을 때,\n12345678910for operation in operations:    if operation == \"D 1\" and priority_queue:        data = max(priority_queue)        priority_queue.pop(priority_queue.index(data))    elif operation == \"D -1\" and priority_queue:        data = min(priority_queue)        priority_queue.pop(priority_queue.index(data))    else:        num = operation[2:]        heapq.heappush(priority_queue, int(num))\n\n입력값이 [&quot;I 16&quot;, &quot;I -5643&quot;, &quot;D -1&quot;, &quot;D 1&quot;, &quot;D 1&quot;, &quot;I 123&quot;, &quot;D -1&quot;] 인 경우,\n세번 째 &quot;D 1&quot; 에서 priority_queue가 비어있으니  else로 넘어가면서 1이 push 되는 문제가 발생하였다. \n그래서 op 와 num으로 나눠서 검사를 했더니 문제가 해결되었다. \nand priority_queue를 넣지 않으면 ValueError : max() arg is an empty sequence 등의 문제가 발생한다.\n","dateCreated":"2020-08-27T18:14:00+09:00","dateModified":"2020-08-27T18:17:14+09:00","datePublished":"2020-08-27T18:14:00+09:00","description":"","headline":"[프로그래머스] 이중 우선순위 큐 - 파이썬(python)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://yoursite.com/2020/08/27/programmers-priority-queue/"},"publisher":{"@type":"Organization","name":"Sohee Lee","sameAs":["https://github.com/dlthgml1997","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"url":"http://yoursite.com/2020/08/27/programmers-priority-queue/","keywords":"알고리즘"}</script>
+    <meta name="description" content="문제설명이중 우선순위 큐는 다음 연산을 할 수 있는 자료구조를 말합니다.    명령어 수신 탑(높이)    I 숫자 큐에 주어진 숫자를 삽입합니다.   D 1 큐에서 최댓값을 삭제합니다.   D -1 큐에서 최솟값을 삭제합니다.   이중 우선순위 큐가 할 연산 operations가 매개변수로 주어질 때, 모든 연산을 처리한 후 큐가 비어있으면 [0,0] 비">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="[프로그래머스] 이중 우선순위 큐 - 파이썬(python)">
+<meta property="og:url" content="http://yoursite.com/2020/08/27/programmers-priority-queue/index.html">
+<meta property="og:site_name" content="Sohee&#39;s Dev Log !">
+<meta property="og:description" content="문제설명이중 우선순위 큐는 다음 연산을 할 수 있는 자료구조를 말합니다.    명령어 수신 탑(높이)    I 숫자 큐에 주어진 숫자를 삽입합니다.   D 1 큐에서 최댓값을 삭제합니다.   D -1 큐에서 최솟값을 삭제합니다.   이중 우선순위 큐가 할 연산 operations가 매개변수로 주어질 때, 모든 연산을 처리한 후 큐가 비어있으면 [0,0] 비">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-27T09:14:00.000Z">
+<meta property="article:modified_time" content="2020-08-27T09:17:14.847Z">
+<meta property="article:author" content="Sohee Lee">
+<meta property="article:tag" content="알고리즘">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/all.css">
+
+    
+<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+
+    
+<link rel="stylesheet" href="/assets/css/thumbs.css">
+
+    
+<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/%20"
+            aria-label=""
+        >
+            Sohee&#39;s Dev Log !
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/dlthgml1997"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://twitter.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Twitter"
+                        >
+                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Twitter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://plus.google.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Google +"
+                        >
+                        <i class="sidebar-button-icon fab fa-google-plus" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Google +</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            [프로그래머스] 이중 우선순위 큐 - 파이썬(python)
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2020-08-27T18:14:00+09:00">
+	
+		    Aug 27, 2020
+    	
+    </time>
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h1 id="문제설명"><a href="#문제설명" class="headerlink" title="문제설명"></a>문제설명</h1><p>이중 우선순위 큐는 다음 연산을 할 수 있는 자료구조를 말합니다.</p>
+<table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>수신 탑(높이)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>I 숫자</td>
+<td>큐에 주어진 숫자를 삽입합니다.</td>
+</tr>
+<tr>
+<td>D 1</td>
+<td>큐에서 최댓값을 삭제합니다.</td>
+</tr>
+<tr>
+<td>D -1</td>
+<td>큐에서 최솟값을 삭제합니다.</td>
+</tr>
+</tbody></table>
+<p>이중 우선순위 큐가 할 연산 operations가 매개변수로 주어질 때, 모든 연산을 처리한 후 큐가 비어있으면 [0,0] 비어있지 않으면 [최댓값, 최솟값]을 return 하도록 solution 함수를 구현해주세요.</p>
+<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
+<li>operations는 길이가 1 이상 1,000,000 이하인 문자열 배열입니다.</li>
+<li>operations의 원소는 큐가 수행할 연산을 나타냅니다.<ul>
+<li>원소는 “명령어 데이터” 형식으로 주어집니다.- 최댓값/최솟값을 삭제하는 연산에서 최댓값/최솟값이 둘 이상인 경우, 하나만 삭제합니다.</li>
+</ul>
+</li>
+<li>빈 큐에 데이터를 삭제하라는 연산이 주어질 경우, 해당 연산은 무시합니다.</li>
+</ul>
+<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
+<thead>
+<tr>
+<th>operations</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[I 16,D 1]</td>
+<td>[0,0]</td>
+</tr>
+<tr>
+<td>[I 7,I 5,I -5,D -1]</td>
+<td>[7,5]</td>
+</tr>
+</tbody></table>
+<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>16을 삽입 후 최댓값을 삭제합니다. 비어있으므로 [0,0]을 반환합니다.<br>7,5,-5를 삽입 후 최솟값을 삭제합니다. 최대값 7, 최소값 5를 반환합니다.</p>
+<p><a href="http://icpckorea.org/problems/2013/onlineset.pdf" target="_blank" rel="noopener">출처</a></p>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><blockquote>
+<p>코드</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(operations)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> heapq</span><br><span class="line">    answer = []</span><br><span class="line">    priority_queue = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> operation <span class="keyword">in</span> operations:</span><br><span class="line">        op = operation[:<span class="number">1</span>]</span><br><span class="line">        num = int(operation[<span class="number">2</span>:])</span><br><span class="line">        <span class="keyword">if</span> op == <span class="string">"D"</span> <span class="keyword">and</span> priority_queue:</span><br><span class="line">            <span class="keyword">if</span> num == <span class="number">1</span>:</span><br><span class="line">                priority_queue.pop(priority_queue.index(max(priority_queue)))</span><br><span class="line">            <span class="keyword">elif</span> num == <span class="number">-1</span>:</span><br><span class="line">                heapq.heappop(priority_queue)</span><br><span class="line">        <span class="keyword">elif</span> op == <span class="string">"I"</span>:</span><br><span class="line">            heapq.heappush(priority_queue, num)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> priority_queue:</span><br><span class="line">        answer = [max(priority_queue),heapq.heappop(priority_queue)]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        answer = [<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line">                                   </span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>새로 알게 된 점</p>
+</blockquote>
+<ol>
+<li>문자열 인덱싱(슬라이싱) <ul>
+<li>슬라이싱을 통해 operation 과 숫자를 나눴다.</li>
+</ul>
+</li>
+<li><code>priority_queue.index(max(priority_queue))</code><ul>
+<li>위 코드를 통해 priority_queue에서 가장 큰 값의 인덱스를 얻어올 수 있었다. 매우 편하다!</li>
+</ul>
+</li>
+<li><code>heapq.heappush(priority_queue, num)</code> <ul>
+<li>위 코드는 최소힙(우선순위큐)을 만족하도록 num을 push한다.</li>
+</ul>
+</li>
+<li><code>heapq.heappop(priority_queue)</code><ul>
+<li>위 코드는 최소 값을 pop한다.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>어려웠던 점</p>
+</blockquote>
+<p> 사실 생각보단 금방 풀었지만 ! 맨 처음 코드가 아래와 같을 때,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> operation <span class="keyword">in</span> operations:</span><br><span class="line">    <span class="keyword">if</span> operation == <span class="string">"D 1"</span> <span class="keyword">and</span> priority_queue:</span><br><span class="line">        data = max(priority_queue)</span><br><span class="line">        priority_queue.pop(priority_queue.index(data))</span><br><span class="line">    <span class="keyword">elif</span> operation == <span class="string">"D -1"</span> <span class="keyword">and</span> priority_queue:</span><br><span class="line">        data = min(priority_queue)</span><br><span class="line">        priority_queue.pop(priority_queue.index(data))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        num = operation[<span class="number">2</span>:]</span><br><span class="line">        heapq.heappush(priority_queue, int(num))</span><br></pre></td></tr></table></figure>
+
+<p>입력값이 <code>[&quot;I 16&quot;, &quot;I -5643&quot;, &quot;D -1&quot;, &quot;D 1&quot;, &quot;D 1&quot;, &quot;I 123&quot;, &quot;D -1&quot;]</code> 인 경우,</p>
+<p>세번 째 <code>&quot;D 1&quot;</code> 에서 <code>priority_queue</code>가 비어있으니  <code>else</code>로 넘어가면서 1이 push 되는 문제가 발생하였다. </p>
+<p>그래서 <code>op</code> 와 <code>num</code>으로 나눠서 검사를 했더니 문제가 해결되었다. </p>
+<p><code>and priority_queue</code>를 넣지 않으면 ValueError : <strong>max() arg is an empty sequence</strong> 등의 문제가 발생한다.</p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/08/27/programmers-phonebook/"
+                    data-tooltip="[프로그래머스] 해시- 전화번호 목록 (파이썬/ python)"
+                    aria-label="PREVIOUS: [프로그래머스] 해시- 전화번호 목록 (파이썬/ python)"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/08/27/python-heapq/"
+                    data-tooltip="[파이썬] heapq 모듈"
+                    aria-label="NEXT: [파이썬] heapq 모듈"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/08/27/programmers-priority-queue/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2020/08/27/programmers-priority-queue/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://yoursite.com/2020/08/27/programmers-priority-queue/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2020 Sohee Lee. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/08/27/programmers-phonebook/"
+                    data-tooltip="[프로그래머스] 해시- 전화번호 목록 (파이썬/ python)"
+                    aria-label="PREVIOUS: [프로그래머스] 해시- 전화번호 목록 (파이썬/ python)"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/08/27/python-heapq/"
+                    data-tooltip="[파이썬] heapq 모듈"
+                    aria-label="NEXT: [파이썬] heapq 모듈"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/08/27/programmers-priority-queue/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2020/08/27/programmers-priority-queue/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://yoursite.com/2020/08/27/programmers-priority-queue/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/08/27/programmers-priority-queue/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=http://yoursite.com/2020/08/27/programmers-priority-queue/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=http://yoursite.com/2020/08/27/programmers-priority-queue/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">Sohee Lee</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/jquery.js"></script>
+
+
+<script src="/assets/js/jquery.fancybox.js"></script>
+
+
+<script src="/assets/js/thumbs.js"></script>
+
+
+<script src="/assets/js/tranquilpeak.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

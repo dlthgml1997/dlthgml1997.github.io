@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [백준알고리즘] 9328번 열쇠 (파이썬/ python) - BFS , ord() |
+    
+    Sohee&#39;s Dev Log !</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-backjoon-9328" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [백준알고리즘] 9328번 열쇠 (파이썬/ python) - BFS , ord()
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/09/08/backjoon-9328/" class="article-date">
+  <time datetime="2020-09-08T09:33:58.066Z" itemprop="datePublished">2020-09-08</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p> <a href="https://www.acmicpc.net/problem/9328" target="_blank" rel="noopener">https://www.acmicpc.net/problem/9328</a></p>
+<table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 초</td>
+<td align="left">256 MB</td>
+<td align="left">8225</td>
+<td align="left">2174</td>
+<td align="left">1344</td>
+<td align="left">23.898%</td>
+</tr>
+</tbody></table>
+<p>상근이는 1층 빌딩에 침입해 매우 중요한 문서를 훔쳐오려고 한다. 상근이가 가지고 있는 평면도에는 문서의 위치가 모두 나타나 있다. 빌딩의 문은 모두 잠겨있기 때문에, 문을 열려면 열쇠가 필요하다. 상근이는 일부 열쇠를 이미 가지고 있고, 일부 열쇠는 빌딩의 바닥에 놓여져 있다.</p>
+<p>상근이가 훔칠 수 있는 문서의 최대 개수를 구하는 프로그램을 작성하시오.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 테스트 케이스의 개수가 주어진다. 테스트 케이스의 수는 100개를 넘지 않는다.</p>
+<p>각 테스트 케이스의 첫째 줄에는 지도의 높이와 너비 h와 w (2 ≤ h, w ≤ 100)가 주어진다. 다음 h개 줄에는 빌딩을 나타내는 w개의 문자가 주어지며, 각 문자는 다음 중 하나이다.</p>
+<ul>
+<li>‘.’는 빈 공간을 나타낸다.</li>
+<li>‘*’는 벽을 나타내며, 상근이는 벽을 통과할 수 없다.</li>
+<li>‘$’는 상근이가 훔쳐야하는 문서이다.</li>
+<li>알파벳 대문자는 문을 나타낸다.</li>
+<li>알파벳 소문자는 열쇠를 나타내며, 그 문자의 대문자인 모든 문을 열 수 있다.</li>
+</ul>
+<p>마지막 줄에는 상근이가 이미 가지고 있는 열쇠가 공백없이 주어진다. 만약, 열쇠를 하나도 가지고 있지 않는 경우에는 “0”이 주어진다.</p>
+<p>상근이는 처음에는 빌딩의 밖에 있으며, 빌딩 가장자리의 빈 공간이나 문을 통해 빌딩 안팎을 드나들 수 있다. 각각의 문에 대해서, 그 문을 열 수 있는 열쇠의 개수는 0개, 1개, 또는 그 이상이고, 각각의 열쇠에 대해서, 그 열쇠로 열 수 있는 문의 개수도 0개, 1개, 또는 그 이상이다. 열쇠는 여러 번 사용할 수 있다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>각 테스트 케이스 마다, 상근이가 훔칠 수 있는 문서의 최대 개수를 출력한다.</p>
+<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">5 17</span><br><span class="line">*****************</span><br><span class="line">.............**$*</span><br><span class="line">*B*A*P*C**X*Y*.X.</span><br><span class="line">*y*x*a*p**$*$**$*</span><br><span class="line">*****************</span><br><span class="line">cz</span><br><span class="line">5 11</span><br><span class="line">*.*********</span><br><span class="line">*...*...*x*</span><br><span class="line">*X*.*.*.*.*</span><br><span class="line">*$*...*...*</span><br><span class="line">***********</span><br><span class="line">0</span><br><span class="line">7 7</span><br><span class="line">*ABCDE*</span><br><span class="line">X.....F</span><br><span class="line">W.$$$.G</span><br><span class="line">V.$$$.H</span><br><span class="line">U.$$$.J</span><br><span class="line">T.....K</span><br><span class="line">*SQPML*</span><br><span class="line">irony</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">1</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"></span><br><span class="line">dx = [<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">dy = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(x,y)</span>:</span></span><br><span class="line">    q = deque()</span><br><span class="line">    <span class="comment"># visted: 방문 여부 / + 2를 하는 이유는 newMaze() 함수를 수행 한 후 maze의 w,h 가 2씩 증가했기 때문이다.</span></span><br><span class="line">    visited = [[<span class="number">0</span>]* (w+<span class="number">2</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(h+<span class="number">2</span>)]</span><br><span class="line">    q.append([x,y])</span><br><span class="line">    visited[x][y] = <span class="number">1</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> q:</span><br><span class="line">        x, y = q.popleft()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">            nx = x + dx[i]</span><br><span class="line">            ny = y + dy[i]</span><br><span class="line">            <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; h+<span class="number">2</span> <span class="keyword">and</span> <span class="number">0</span> &lt;= ny &lt; w+<span class="number">2</span>:</span><br><span class="line">                <span class="comment"># 들리지 않았다면</span></span><br><span class="line">                <span class="keyword">if</span> visited[nx][ny] == <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">if</span> maze[nx][ny] == <span class="string">'$'</span>:</span><br><span class="line">                      	<span class="comment"># 문서 획득</span></span><br><span class="line">                        count += <span class="number">1</span></span><br><span class="line">                        maze[nx][ny] = <span class="string">'.'</span></span><br><span class="line">                        q.append([nx,ny])</span><br><span class="line">                        visited[nx][ny] = <span class="number">1</span></span><br><span class="line">                    <span class="keyword">elif</span> maze[nx][ny].islower():</span><br><span class="line">                      	<span class="comment"># 키 획득</span></span><br><span class="line">                        door[ord(maze[nx][ny])- ord(<span class="string">'a'</span>)] = <span class="number">1</span></span><br><span class="line">                        <span class="comment"># key를 주은 경우 key에 해당하는 문을 이미 지나쳤을 수도 있으니 visited와 q를 초기화 해준다.</span></span><br><span class="line">                        q = deque()</span><br><span class="line">                        visited = [[<span class="number">0</span>] * (w+<span class="number">2</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(h+<span class="number">2</span>)]</span><br><span class="line">                        maze[nx][ny] = <span class="string">'.'</span></span><br><span class="line">                        <span class="comment"># 이 위치부터 다시 시작</span></span><br><span class="line">                        q.append([nx,ny])</span><br><span class="line">                    <span class="keyword">elif</span> maze[nx][ny].isupper(): </span><br><span class="line">                      	<span class="comment"># 해당하는 키가 있다면</span></span><br><span class="line">                        <span class="keyword">if</span> door[ord(maze[nx][ny]) - ord(<span class="string">'A'</span>)]:</span><br><span class="line">                            maze[nx][ny] = <span class="string">'.'</span></span><br><span class="line">                            q.append([nx,ny])</span><br><span class="line">                            visited[nx][ny] = <span class="number">1</span></span><br><span class="line">                    <span class="keyword">elif</span> maze[nx][ny] == <span class="string">'.'</span>:</span><br><span class="line">                            q.append([nx,ny])</span><br><span class="line">                            visited[nx][ny] = <span class="number">1</span></span><br><span class="line">    print(count)         </span><br><span class="line"></span><br><span class="line"><span class="comment"># maze를 둘러싸는 '.' 라인을 만드는 함수</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">newMaze</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 행의 양 옆에 '.' 추가</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> maze:</span><br><span class="line">        i.insert(<span class="number">0</span>,<span class="string">'.'</span>)</span><br><span class="line">        i.append(<span class="string">'.'</span>)</span><br><span class="line">    <span class="comment"># 열의 위,아래에 '.' 추가</span></span><br><span class="line">    maze.insert(<span class="number">0</span>, [<span class="string">'.'</span>]*(w+<span class="number">2</span>))</span><br><span class="line">    maze.append([<span class="string">'.'</span>]*(w+<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n = int(input())</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">    h, w = map(int, input().split())</span><br><span class="line">    maze = [list(input().strip()) <span class="keyword">for</span> _ <span class="keyword">in</span> range(h)]</span><br><span class="line">    key= list(input().strip())</span><br><span class="line">    <span class="comment"># a 부터 z 까지</span></span><br><span class="line">    door = [<span class="number">0</span>] * <span class="number">26</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> key:</span><br><span class="line">        <span class="keyword">if</span> k != <span class="string">'0'</span>:</span><br><span class="line">            <span class="comment"># 예) j 가 'b'인 경우 door[98-97] 즉, door[1]에 1이 저장된다. </span></span><br><span class="line">            door[ord(k)- ord(<span class="string">'a'</span>)] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(h):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(w):</span><br><span class="line">            <span class="comment"># maze[i][j]가 대문자이면</span></span><br><span class="line">            <span class="keyword">if</span> maze[i][j].isupper():</span><br><span class="line">                <span class="comment"># 소문자와 대문자가 같은 문자일 경우</span></span><br><span class="line">                <span class="comment"># 예) maze[i][j]가 'B'일 경우 door[66-65] 즉, door[1]을 의미한다. door[1]은 'b' 키의 유무를 나타낸다.</span></span><br><span class="line">                <span class="keyword">if</span> door[ord(maze[i][j])- ord(<span class="string">'A'</span>)]:</span><br><span class="line">                    <span class="comment"># 들어갈 수 있으므로 '.' 으로 바꾼다.</span></span><br><span class="line">                    maze[i][j] = <span class="string">'.'</span></span><br><span class="line">    newMaze()</span><br><span class="line">    dfs(<span class="number">0</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>새로 배운 것</p>
+<ul>
+<li><p>새로운 dfs 방법 ! </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"></span><br><span class="line">dx = [<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">dy = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># n행 m열의 배열이라고 가정</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    q = deque()</span><br><span class="line">    q.append([x,y])</span><br><span class="line">    visited = [[<span class="number">0</span>]* m <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">    visited[x][y] = <span class="number">1</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> q:</span><br><span class="line">        x, y = q.popleft()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>): </span><br><span class="line">            nx = x + dx[i]</span><br><span class="line">            ny = y + dy[i]</span><br><span class="line">            <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; n <span class="keyword">and</span> <span class="number">0</span> &lt;= ny &lt; m:</span><br><span class="line">                <span class="keyword">if</span> visited[nx][ny] == <span class="number">0</span>:</span><br><span class="line">                    count += <span class="number">1</span></span><br><span class="line">                    q.append([nx,ny])</span><br><span class="line">                    visited[nx][ny] = <span class="number">1</span></span><br><span class="line">    print(count)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>deque는 popleft()를 이용하여 맨 왼쪽의 원소를 pop할 수 있다.</p>
+</li>
+<li><p>bfs 문제에서 입구를 찾기 애매한 경우(입구에 조건이 걸려있는 경우)에는 newMaze같은 함수를 통해 maze를 둘러싼 새로운 maze를 생성한다 ! </p>
+</li>
+<li><p><code>list(input().strip())</code> : input의 공백을 모두 제거한 후 list로 만든다. </p>
+<ul>
+<li>lstrip() : 왼쪽에 해당하는 공백제거</li>
+<li>rstrip() : 오른쪽에 해당하는 공백제거</li>
+<li>lstrip(‘.,’): 왼쪽에 존재하는 .와 ,를 제거. 이때, 공백은 제거하지 않는다.</li>
+</ul>
+</li>
+<li><p><code>ord()</code>: 하나의 유니코드 문자를 나타내는 문자열이 주어지면 해당 문자의 유니코드 코드 포인트를 나타내는 정수를 돌려준다. 예를 들어, ord(‘a’) 는 정수 97을 반환한다. 반대 개념으로는 <code>chr()</code> 이 있다.</p>
+<ul>
+<li><p>(참고) <strong>유니코드표</strong></p>
+<p><img src="../image/2020-09-086.32.13.png" alt="2020-09-086.32.13"><br> 출처: <a href="https://velog.io/@exploit017/%EC%95%84%EC%8A%A4%ED%82%A4-%EC%BD%94%EB%93%9C%ED%91%9C" target="_blank" rel="noopener">https://velog.io/@exploit017/%EC%95%84%EC%8A%A4%ED%82%A4-%EC%BD%94%EB%93%9C%ED%91%9C</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/09/08/backjoon-9328/" data-id="cketwnp2v0001gxc902v2clnv"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/09/08/algorythm-base-1/" class="article-nav-link">
+        <strong class="article-nav-caption">Older</strong>
+        <div class="article-nav-title">[실전 알고리즘] 기초 코드 작성 요령 1 정리 (시간복잡도, 공간복잡도)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2020 Sohee&#39;s Dev Log !</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Sohee&#39;s Dev Log !"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>

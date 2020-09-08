@@ -1,0 +1,736 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Sohee&#39;s Dev Log !">
+    <title>[안드로이드] byte Array to String (Base 64를 이용하여 encoding, decoding 시 주의할 점!) - 자바/JAVA - Sohee&#39;s Dev Log !</title>
+    <meta name="author" content="Sohee Lee">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sohee Lee","sameAs":["https://github.com/dlthgml1997","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"articleBody":"Base64일단 Base64가 뭘까? 컴퓨터 분야에서 쓰이는 Base64란 8비트 이진 데이터를 문자 코드에 영향을 받지 않는 공통 ASCII 영역의 문자들로만 이루어진 일련의 문자열로 바꾸는 인코딩 방식을 가리키는 개념이라고 한다. \nEncoding 은 이진데이터를 일련의 문자열로, Decoding 은 일련의 문자열을 이진데이터로 바꾸는 것이다.\nencodToString1public static String encodeToString (byte[] input, int flags)\n\nBase64를 이용하여 byte Array 를 String으로 Encoding 할 때 이용하는 함수이다.\n나는 text를 private key로 디지털 서명한 byte[] 값을 서버에 String 형식으로 보내야하기 때문에 사용했다.\n1234567891011121314151617public String getDigitalSignature(String packageName, String text) &#123;    try&#123;        Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);        signature.initSign(getPrivateKey(packageName));        byte[] data = text.getBytes();        signature.update(data);        byte[] signatureBytes = signature.sign();        String signatureStr = Base64.encodeToString(signatureBytes, Base64.NO_WRAP);        Log.d(TAG, \"Signature:\" + signatureStr);        return signatureStr;    &#125; catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) &#123;        Log.e(TAG, \"error in digital signature\" + e);        return null;    &#125;&#125;\n\nsignatureBytes 를 변형 없이 encoding 하기 위해 Base64.NO_WRAP 옵션을 사용하는 것이 좋다. 왜일까?\n\n 여기서 주의할 점이 나온다 ! \n\n긴 길이의 byte 배열의 경우, \n\nBase64.Default\n12Default values for encoder&#x2F;decoder flags.Constant Value: 0\n\n위는 android developers 레퍼런스 설명이다. default 옵션으로, 이 옵션의 경우 76자가 넘는 위치에 개행문자(\\n)가 삽입된다. \n\n예시 \n12String signatureStr = Base64.encodeToString(signatureBytes, Base64.DEFAULT);Log.d(TAG, \"Signature:\" + signatureStr);\n\n결과 -&gt; 세보진 않았지만 76자 마다 개행문자가 삽입되는 것을 확인할 수 있다.\n\n\n\n\nBase64.NO_WRAP\n12Encoder flag bit to omit all line terminators (i.e., the output will be on one long line).Constant Value: 2\n\n즉, 개행문자를 삽입하지 않고 긴 한줄의 output 을 갖는다.\n\n예시\n12String signatureStr = Base64.encodeToString(signatureBytes, Base64.NO_WRAP);Log.d(TAG, \"Signature:\" + signatureStr);\n\n결과 -&gt; 끊김 없이 한 줄로 나오는 것을 확인할 수 있다.\n\n\n\n\n이 외에도, CRLF / NO_CLOSE / NO_PADDING / URL_SAFE 옵션이 있다.\n\n\n\npublicKey 를 서버로 전송하는 경우에는 DEFAULT 옵션을 사용하여야 했다.\n때에 따라서 알맞은 옵션을 사용하도록 하자 ! \n\n마지막으로 ! decoding 시에도 동일한 옵션을 사용해 주어야 한다. 나 같은 경우에는 아래와 같은 코드를 이용했다 (NO_WRAP)\n1Base64.decode(signatureStr, Base64.NO_WRAP);\n\n\n\n출처: https://kjwsx23.tistory.com/234 \n","dateCreated":"2020-08-24T01:00:00+09:00","dateModified":"2020-08-24T04:14:18+09:00","datePublished":"2020-08-24T01:00:00+09:00","description":"","headline":"[안드로이드] byte Array to String (Base 64를 이용하여 encoding, decoding 시 주의할 점!) - 자바/JAVA","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://yoursite.com/2020/08/24/android-base64/"},"publisher":{"@type":"Organization","name":"Sohee Lee","sameAs":["https://github.com/dlthgml1997","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"url":"http://yoursite.com/2020/08/24/android-base64/","keywords":"안드로이드"}</script>
+    <meta name="description" content="Base64일단 Base64가 뭘까? 컴퓨터 분야에서 쓰이는 Base64란 8비트 이진 데이터를 문자 코드에 영향을 받지 않는 공통 ASCII 영역의 문자들로만 이루어진 일련의 문자열로 바꾸는 인코딩 방식을 가리키는 개념이라고 한다.  Encoding 은 이진데이터를 일련의 문자열로, Decoding 은 일련의 문자열을 이진데이터로 바꾸는 것이다. enco">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="[안드로이드] byte Array to String (Base 64를 이용하여 encoding, decoding 시 주의할 점!) - 자바&#x2F;JAVA">
+<meta property="og:url" content="http://yoursite.com/2020/08/24/android-base64/index.html">
+<meta property="og:site_name" content="Sohee&#39;s Dev Log !">
+<meta property="og:description" content="Base64일단 Base64가 뭘까? 컴퓨터 분야에서 쓰이는 Base64란 8비트 이진 데이터를 문자 코드에 영향을 받지 않는 공통 ASCII 영역의 문자들로만 이루어진 일련의 문자열로 바꾸는 인코딩 방식을 가리키는 개념이라고 한다.  Encoding 은 이진데이터를 일련의 문자열로, Decoding 은 일련의 문자열을 이진데이터로 바꾸는 것이다. enco">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/08/24/image/2020-08-242.10.47.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/24/image/2020-08-242.07.26.png">
+<meta property="article:published_time" content="2020-08-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-08-23T19:14:18.779Z">
+<meta property="article:author" content="Sohee Lee">
+<meta property="article:tag" content="안드로이드">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/08/24/image/2020-08-242.10.47.png">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/all.css">
+
+    
+<link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+
+    
+<link rel="stylesheet" href="/assets/css/thumbs.css">
+
+    
+<link rel="stylesheet" href="/assets/css/tranquilpeak.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/%20"
+            aria-label=""
+        >
+            Sohee&#39;s Dev Log !
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/dlthgml1997"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="http://stackoverflow.com/users"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Stack Overflow"
+                        >
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://twitter.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Twitter"
+                        >
+                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Twitter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://facebook.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Facebook"
+                        >
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://plus.google.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Google +"
+                        >
+                        <i class="sidebar-button-icon fab fa-google-plus" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Google +</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://www.linkedin.com/profile/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="LinkedIn"
+                        >
+                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">LinkedIn</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/atom.xml"
+                            
+                            rel="noopener"
+                            title="RSS"
+                        >
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            [안드로이드] byte Array to String (Base 64를 이용하여 encoding, decoding 시 주의할 점!) - 자바/JAVA
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2020-08-24T01:00:00+09:00">
+	
+		    Aug 24, 2020
+    	
+    </time>
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h2 id="Base64"><a href="#Base64" class="headerlink" title="Base64"></a>Base64</h2><p>일단 Base64가 뭘까? 컴퓨터 분야에서 쓰이는 <strong>Base64</strong>란 8비트 이진 데이터를 문자 코드에 영향을 받지 않는 공통 ASCII 영역의 문자들로만 이루어진 일련의 문자열로 바꾸는 인코딩 방식을 가리키는 개념이라고 한다. </p>
+<p><strong>Encoding</strong> 은 이진데이터를 일련의 문자열로, <strong>Decoding</strong> 은 일련의 문자열을 이진데이터로 바꾸는 것이다.</p>
+<h2 id="encodToString"><a href="#encodToString" class="headerlink" title="encodToString"></a>encodToString</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encodeToString</span> <span class="params">(<span class="keyword">byte</span>[] input, <span class="keyword">int</span> flags)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>Base64를 이용하여 byte Array 를 String으로 Encoding 할 때 이용하는 함수이다.</p>
+<p>나는 text를 private key로 디지털 서명한 byte[] 값을 서버에 String 형식으로 보내야하기 때문에 사용했다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getDigitalSignature</span><span class="params">(String packageName, String text)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);</span><br><span class="line">        signature.initSign(getPrivateKey(packageName));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] data = text.getBytes();</span><br><span class="line">        signature.update(data);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] signatureBytes = signature.sign();</span><br><span class="line">        String signatureStr = Base64.encodeToString(signatureBytes, Base64.NO_WRAP);</span><br><span class="line">        Log.d(TAG, <span class="string">"Signature:"</span> + signatureStr);</span><br><span class="line">        <span class="keyword">return</span> signatureStr;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) &#123;</span><br><span class="line">        Log.e(TAG, <span class="string">"error in digital signature"</span> + e);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>signatureBytes 를 변형 없이 encoding 하기 위해 Base64.NO_WRAP 옵션을 사용하는 것이 좋다. 왜일까?</p>
+<blockquote>
+<p> 여기서 주의할 점이 나온다 ! </p>
+</blockquote>
+<p>긴 길이의 byte 배열의 경우, </p>
+<ul>
+<li><p><strong>Base64.Default</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Default values for encoder&#x2F;decoder flags.</span><br><span class="line">Constant Value: 0</span><br></pre></td></tr></table></figure>
+
+<p>위는 android developers 레퍼런스 설명이다. default 옵션으로, 이 옵션의 경우 76자가 넘는 위치에 개행문자(\n)가 삽입된다. </p>
+<ul>
+<li><p><strong>예시</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String signatureStr = Base64.encodeToString(signatureBytes, Base64.DEFAULT);</span><br><span class="line">Log.d(TAG, <span class="string">"Signature:"</span> + signatureStr);</span><br></pre></td></tr></table></figure>
+
+<p><strong>결과</strong> -&gt; 세보진 않았지만 76자 마다 개행문자가 삽입되는 것을 확인할 수 있다.</p>
+<p><img src="../image/2020-08-242.10.47.png" alt="2020-08-242.10.47"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>Base64.NO_WRAP</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Encoder flag bit to omit all line terminators (i.e., the output will be on one long line).</span><br><span class="line">Constant Value: 2</span><br></pre></td></tr></table></figure>
+
+<p>즉, 개행문자를 삽입하지 않고 긴 한줄의 output 을 갖는다.</p>
+<ul>
+<li><p><strong>예시</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String signatureStr = Base64.encodeToString(signatureBytes, Base64.NO_WRAP);</span><br><span class="line">Log.d(TAG, <span class="string">"Signature:"</span> + signatureStr);</span><br></pre></td></tr></table></figure>
+
+<p><strong>결과</strong> -&gt; 끊김 없이 한 줄로 나오는 것을 확인할 수 있다.</p>
+<p><img src="../image/2020-08-242.07.26.png" alt="2020-08-242.07.26"></p>
+</li>
+</ul>
+</li>
+<li><p>이 외에도, <strong>CRLF / NO_CLOSE / NO_PADDING / URL_SAFE</strong> 옵션이 있다.</p>
+</li>
+</ul>
+<blockquote>
+<p>publicKey 를 서버로 전송하는 경우에는 DEFAULT 옵션을 사용하여야 했다.</p>
+<p>때에 따라서 알맞은 옵션을 사용하도록 하자 ! </p>
+</blockquote>
+<p>마지막으로 ! decoding 시에도 동일한 옵션을 사용해 주어야 한다. 나 같은 경우에는 아래와 같은 코드를 이용했다 (NO_WRAP)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Base64.decode(signatureStr, Base64.NO_WRAP);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>출처: <a href="https://kjwsx23.tistory.com/234" target="_blank" rel="noopener">https://kjwsx23.tistory.com/234</a> </p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/08/24/android-sign-verify/"
+                    data-tooltip="[Android / Node.js] PrivateKey Signature, PublicKey Verify"
+                    aria-label="PREVIOUS: [Android / Node.js] PrivateKey Signature, PublicKey Verify"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/08/19/backjoon-12761/"
+                    data-tooltip="[알고리즘] 백준알고리즘(boj) - 12761: 돌다리 (파이썬/python)"
+                    aria-label="NEXT: [알고리즘] 백준알고리즘(boj) - 12761: 돌다리 (파이썬/python)"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/08/24/android-base64/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2020/08/24/android-base64/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://yoursite.com/2020/08/24/android-base64/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2020 Sohee Lee. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/08/24/android-sign-verify/"
+                    data-tooltip="[Android / Node.js] PrivateKey Signature, PublicKey Verify"
+                    aria-label="PREVIOUS: [Android / Node.js] PrivateKey Signature, PublicKey Verify"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2020/08/19/backjoon-12761/"
+                    data-tooltip="[알고리즘] 백준알고리즘(boj) - 12761: 돌다리 (파이썬/python)"
+                    aria-label="NEXT: [알고리즘] 백준알고리즘(boj) - 12761: 돌다리 (파이썬/python)"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/08/24/android-base64/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2020/08/24/android-base64/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://yoursite.com/2020/08/24/android-base64/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/08/24/android-base64/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=http://yoursite.com/2020/08/24/android-base64/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=http://yoursite.com/2020/08/24/android-base64/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">Sohee Lee</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/jquery.js"></script>
+
+
+<script src="/assets/js/jquery.fancybox.js"></script>
+
+
+<script src="/assets/js/thumbs.js"></script>
+
+
+<script src="/assets/js/tranquilpeak.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
