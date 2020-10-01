@@ -64,6 +64,249 @@
         
           
 
+<article id="post-angular-create-approutingmodule" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/12/angular-create-approutingmodule/">[앵귤러/Angular] AppRoutingModule 생성하기</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/12/angular-create-approutingmodule/" class="article-date">
+  <time datetime="2020-03-12T09:10:00.000Z" itemprop="datePublished">2020-03-12</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>애플리케이션 최상위 라우팅을 담당하는 모듈의 클래스 이름은 일반적으로 <em>AppRoutingModule</em>이라고 칭한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng generate module app-routing --flat --module&#x3D;app</span><br></pre></td></tr></table></figure>
+
+<p>Angular CLI로 다음 명령을 실행하면 <em>app-routing.module.ts</em> 파일이 생성되며, 라우팅 모듈이 만들어진다. </p>
+<ul>
+<li><code>--flat</code> : 새로운 폴더를 만들지 않고 src/app 폴더에 파일 생성</li>
+<li><code>--module=app</code> : Angular CLI가 이 라우팅 모듈을 AppModule의 imports 배열에 자동으로 추가</li>
+</ul>
+<p>아래 코드는 기본적으로 생성되는 app.routing.module.ts 파일의 코드이다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; NgModule &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; CommonModule &#125; <span class="keyword">from</span> <span class="string">'@angular/common'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    CommonModule</span><br><span class="line">  ],</span><br><span class="line">  declarations: []</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppRoutingModule &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>위 코드를 라우팅 동작을 실행할 수 있도록 아래 코드를 입력하여 <em>RouterModule*과 *Routes</em> 심볼을 로드한다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; RouterModule, Routes &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>또한 라우팅 규칙에 따라 이동할 컴포넌트 또한 로드한다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; 이동할Component &#125; <span class="keyword">from</span> <span class="string">'이동할 컴포넌트의 위치'</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>라우팅 규칙(Route)</p>
+</blockquote>
+<p><em>라우팅 규칙</em>은 사용자가 링크를 클릭하거나 브라우저 주소표시줄에 URL을 직접 입력했을 때 라우터가 어떤 화면을 표시할지 정의한 것이다. </p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> routes: Routes = [</span><br><span class="line">    &#123; path: <span class="string">'URL과 매칭될 문자열'</span>, component: <span class="string">'화면에 표시할 컴포넌트'</span>&#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>위 코드를 <em>AppRoutingModule</em>에 추가한 후, <code>path: &#39;heroes&#39;</code> 에 해당하는 URL을 만나면 <em>localhost:4200/heroes</em>와 같은 URL로 이동하면서 <em>컴포넌트</em>를 표시할 수 있다.</p>
+<blockquote>
+<p>RouterModule.forRoot()</p>
+</blockquote>
+<p><em>@NgModule</em>에 메타데이터를 지정하면 모듈이 생성될 때 라우터를 초기화하면서 브라우저의 주소가 변화되는 것을 감지한다. 그래서 <em>AppRoutingModule</em>에도 라우터를 초기화하기 위해 <strong>imports 배열</strong>에 <em>RouterModule</em>을 등록해야 한다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imports: [ RouterModule.forRoot(routes) ],</span><br></pre></td></tr></table></figure>
+
+<p>위 코드를 <em>@NgModule</em> 안에 입력하면 된다. </p>
+<ul>
+<li><code>forRoot()</code> :  최상위 계층에 존재하는 라우터를 설정할 때 사용하는 메소드이다. 이 메소드를 사용하면 브라우저에서 변경되는 URL을 감지할 수 있다.</li>
+</ul>
+<p>또한 앱에서도 <em>RouterModule</em>을 사용할 수 있도록 <strong>exports 배열</strong>도 지정해야한다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exports: [ RouterModule ]</span><br></pre></td></tr></table></figure>
+
+<p> imports 코드 아래에 위 코드를 입력하면 된다.</p>
+<hr>
+<blockquote>
+<p>추가: 라우팅 영역(RouterOutlet) 추가하기</p>
+</blockquote>
+<p>AppComponent html 파일에 아래 코드를 추가한다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-outlet</span>&gt;</span><span class="tag">&lt;/<span class="name">router-outlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>&lt;router-outlet&gt;</code>: 라우팅 된 화면이 표시될 위치를 지정하는 엘리먼트이다.</li>
+<li>위에서 <code>RouterModule</code>을 <em>exports 배열*을 통해 외부로 공개하였기 때문에 *AppComponent</em> 에서도 <em>RouterOutlet</em> 디렉티브를 사용할 수 있다. <ul>
+<li>또한 이는 맨 위쪽에서 <em>–module=app</em> 플래그를 지정하였기 때문에 자동으로 추가된 것이다.</li>
+</ul>
+</li>
+<li>파일을 직접 생성했거나 Angular CLI 외의 툴을 이용했다면 <em>app.module.ts</em> 파일에서 <em>AppRoutingModule</em>을 로드하고 <em>NgModule</em>의 <em>imports 배열</em>에 이 라우팅 모듈을 추가하면 된다.</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/12/angular-create-approutingmodule/" data-id="ckenwlotr000m6jc9fiuk2q2m"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-angular-template-literal" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/12/angular-template-literal/">[앵귤러/Angular] 템플릿 리터럴(template literal)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/12/angular-template-literal/" class="article-date">
+  <time datetime="2020-03-12T01:04:00.000Z" itemprop="datePublished">2020-03-12</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>추가 예정</p>
+<p>역따옴표(`)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/12/angular-template-literal/" data-id="ckenwlou2001d6jc972fm7egp"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-angular-service-in-service" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/11/angular-service-in-service/">[앵귤러/Angular] 서비스 안에 서비스를 의존성으로 주입하기</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/11/angular-service-in-service/" class="article-date">
+  <time datetime="2020-03-11T09:50:00.000Z" itemprop="datePublished">2020-03-11</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; MessageService &#125; <span class="keyword">from</span> <span class="string">'./message.service'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroService &#123; </span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> messageService: MessageService</span>) &#123; &#125; </span><br><span class="line">  </span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>MessageService는 HeroService에 의존성으로 주입된다.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/11/angular-service-in-service/" data-id="ckenwlou000186jc9843g40z3"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-angular-sync-to-async-observable" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -731,209 +974,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/03/10/angular-class-binding/" data-id="ckenwlotm000d6jc95t6787lx"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-angular-ngif" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/10/angular-ngif/">[앵귤러 / Angular] *ngIf</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/10/angular-ngif/" class="article-date">
-  <time datetime="2020-03-10T05:24:00.000Z" itemprop="datePublished">2020-03-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p><code>*ngIf</code> : if와 같이 동작</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> *<span class="attr">ngIf</span>=<span class="string">"selectedHero"</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>: <code>selectedHero</code> 가 할당되어 있을 때 실행, undefined일 땐 실행 되지 않는다.</p>
-<p><code>*ngIf</code>를 넣어주지 않으면<code>ERROR TypeError: Cannot read property &#39;name&#39; of undefined</code> 에러가 난다. </p>
-<blockquote>
-<p><code>ngIf</code>앞에 별표(*)가 있다는 것을 잊지마세요. Angular에서 아주 중요한 문법입니다.</p>
-</blockquote>
-<p><a href="https://angular.kr/tutorial/toh-pt2" target="_blank" rel="noopener">출처</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/angular-ngif/" data-id="ckenwlotx00106jc93yl8cw9q"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-angular-event-binding" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/10/angular-event-binding/">[앵귤러/Angular] 이벤트 바인딩 문법</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/10/angular-event-binding/" class="article-date">
-  <time datetime="2020-03-10T04:30:00.000Z" itemprop="datePublished">2020-03-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>이벤트 바인딩 문법을 사용하면 키 입력이나 마우스의 움직임, 클릭이나 터치 이벤트를 감지할 수 있습니다. 이 섹션에서 설명하는 내용은 <a href="https://angular.kr/generated/live-examples/event-binding/stackblitz.html" target="_blank" rel="noopener">이벤트 바인딩 예제</a> / <a href="https://angular.kr/generated/zips/event-binding/event-binding.zip" target="_blank" rel="noopener">다운로드 링크</a> 에서 직접 확인할 수 있습니다.</p>
-<p>예를 들어 버튼의 클릭 이벤트를 감지하고 있다가 사용자가 버튼을 클릭할 때 컴포넌트에 있는 <code>onSave()</code> 메소드를 실행하려면 다음과 같이 구현합니다.</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> (<span class="attr">click</span>)=<span class="string">"onSave()"</span>&gt;</span></span><br><span class="line">    Save</span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>–추가예정–</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/angular-event-binding/" data-id="ckenwlott000q6jc95w2df1tg"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-angular-ng-server-open" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/10/angular-ng-server-open/">[앵귤러/Angular] Local 서버 키기</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/10/angular-ng-server-open/" class="article-date">
-  <time datetime="2020-03-10T04:30:00.000Z" itemprop="datePublished">2020-03-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>프로젝트 폴더에 터미널을 킨 후 </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ng server --open</span><br></pre></td></tr></table></figure>
-
-<p>입력하면 localhost:4200을 통해 서버를 킬 수 있다!</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/angular-ng-server-open/" data-id="ckenwlotv000v6jc9h3dbh7lw"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>

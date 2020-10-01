@@ -64,6 +64,320 @@
         
           
 
+<article id="post-backjoon-2667" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/06/13/backjoon-2667/">[백준알고리즘] 1057- 토너먼트 파이썬(python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/06/13/backjoon-2667/" class="article-date">
+  <time datetime="2020-06-13T07:10:00.000Z" itemprop="datePublished">2020-06-13</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><h2 id="토너먼트-분류"><a href="#토너먼트-분류" class="headerlink" title="토너먼트 분류"></a>토너먼트 분류</h2><table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 초</td>
+<td align="left">512 MB</td>
+<td align="left">10747</td>
+<td align="left">5731</td>
+<td align="left">4831</td>
+<td align="left">55.580%</td>
+</tr>
+</tbody></table>
+<p>김지민은 N명이 참가하는 스타 토너먼트에 진출했다. 토너먼트는 다음과 같이 진행된다. 일단 N명의 참가자는 번호가 1번부터 N번까지 배정받는다. 그러고 난 후에 서로 인접한 번호끼리 스타를 한다. 이긴 사람은 다음 라운드에 진출하고, 진 사람은 그 라운드에서 떨어진다. 만약 그 라운드의 참가자가 홀수명이라면, 마지막 번호를 가진 참가자는 다음 라운드로 자동 진출한다. 다음 라운드에선 다시 참가자의 번호를 1번부터 매긴다. 이때, 번호를 매기는 순서는 처음 번호의 순서를 유지하면서 1번부터 매긴다. 이 말은 1번과 2번이 스타를 해서 1번이 진출하고, 3번과 4번이 스타를 해서 4번이 진출했다면, 4번은 다음 라운드에서 번호 2번을 배정받는다. 번호를 다시 배정받은 후에 한 명만 남을 때까지 라운드를 계속 한다.</p>
+<p>마침 이 스타 대회에 임한수도 참가했다. 김지민은 갑자기 스타 대회에서 우승하는 욕심은 없어지고, 몇 라운드에서 임한수와 대결하는지 궁금해졌다. 일단 김지민과 임한수는 서로 대결하기 전까지 항상 이긴다고 가정한다. 1 라운드에서 김지민의 번호와 임한수의 번호가 주어질 때, 과연 김지민과 임한수가 몇 라운드에서 대결하는지 출력하는 프로그램을 작성하시오.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 참가자의 수 N과 1 라운드에서 김지민의 번호와 임한수의 번호가 순서대로 주어진다. N은 100,000보다 작거나 같은 자연수이고, 김지민의 번호와 임한수의 번호는 N보다 작거나 같은 자연수이고, 서로 다르다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 김지민과 임한수가 대결하는 라운드 번호를 출력한다. 만약 서로 대결하지 않을 때는 -1을 출력한다.</p>
+<h2 id="예제-입력"><a href="#예제-입력" class="headerlink" title="예제 입력"></a>예제 입력</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">16 8 9</span><br></pre></td></tr></table></figure>
+
+<h2 id="예제-출력"><a href="#예제-출력" class="headerlink" title="예제 출력"></a>예제 출력</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>토너먼트를 이해하고 있다면 간단하게 풀 수 있는 문제 !</p>
+<p>지민과 한수에서 2로 나눈 몫을 뺀 값이 같아 졌을 때가 둘이 대결하는 때이다. </p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">n, han, jimin = map(int, input().split())</span><br><span class="line">answer = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> han != jimin:</span><br><span class="line">    han -= han//<span class="number">2</span></span><br><span class="line">    jimin -= jimin//<span class="number">2</span></span><br><span class="line">    answer += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(answer)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>(여담)</p>
+<ul>
+<li>이제 알고리즘도 다시 열심히 풀고 블로그 테마도 바꿀거당 ! ! </li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/06/13/backjoon-2667/" data-id="ckenwloul002e6jc9f6rlhl80"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-backjoon-9252" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/05/17/backjoon-9252/">[알고리즘] 백준알고리즘 - 9252 LCS2 (파이썬/python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/05/17/backjoon-9252/" class="article-date">
+  <time datetime="2020-05-17T09:30:00.000Z" itemprop="datePublished">2020-05-17</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>LCS(Longest Common Subsequence, 최장 공통 부분 수열)문제는 두 수열이 주어졌을 때, 모두의 부분 수열이 되는 수열 중 가장 긴 것을 찾는 문제이다.</p>
+<p>예를 들어, ACAYKP와 CAPCAK의 LCS는 ACAK가 된다.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄과 둘째 줄에 두 문자열이 주어진다. 문자열은 알파벳 대문자로만 이루어져 있으며, 최대 1000글자로 이루어져 있다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 입력으로 주어진 두 문자열의 LCS의 길이를, 둘째 줄에 LCS를 출력한다.</p>
+<p>LCS가 여러 가지인 경우에는 아무거나 출력하고, LCS의 길이가 0인 경우에는 둘째 줄을 출력하지 않는다.</p>
+<h2 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ACAYKP</span><br><span class="line">CAPCAK</span><br></pre></td></tr></table></figure>
+
+<h2 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">ACAK</span><br></pre></td></tr></table></figure>
+
+<h2 id="알고리즘-분류"><a href="#알고리즘-분류" class="headerlink" title="알고리즘 분류"></a>알고리즘 분류</h2><ul>
+<li>[다이나믹 프로그래밍](<a href="https://www.acmicpc.net/problem/tag/다이나믹" target="_blank" rel="noopener">https://www.acmicpc.net/problem/tag/다이나믹</a> 프로그래밍)</li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>저번에 풀었던 LCS 문제는 길이만 출력을 했다면, LCS2는 LCS 값도 출력을 해야한다.</p>
+<h3 id="코드"><a href="#코드" class="headerlink" title="코드"></a>코드</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">n = input()</span><br><span class="line">m = input()</span><br><span class="line"></span><br><span class="line">strings =[[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(n) + <span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(m) + <span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(n)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(m)):</span><br><span class="line">        <span class="keyword">if</span> n[i] ==m[j]:</span><br><span class="line">            strings[j+<span class="number">1</span>][i+<span class="number">1</span>] = strings[j][i] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            strings[j+<span class="number">1</span>][i+<span class="number">1</span>] = max(strings[j][i+<span class="number">1</span>],strings[j+<span class="number">1</span>][i])</span><br><span class="line"></span><br><span class="line">now = strings[<span class="number">-1</span>][<span class="number">-1</span>]</span><br><span class="line">x = len(strings[<span class="number">0</span>]) <span class="number">-1</span></span><br><span class="line">y = len(strings) <span class="number">-1</span></span><br><span class="line">answer = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> now != <span class="number">0</span>:</span><br><span class="line">    <span class="keyword">if</span> now <span class="number">-1</span> == strings[y][x<span class="number">-1</span>] <span class="keyword">and</span> now <span class="number">-1</span> == strings[y<span class="number">-1</span>][x]:</span><br><span class="line">        answer = n[x<span class="number">-1</span>] + answer</span><br><span class="line">        now -= <span class="number">1</span></span><br><span class="line">        x -= <span class="number">1</span></span><br><span class="line">        y -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> strings[y<span class="number">-1</span>][x] &gt; strings[y][x<span class="number">-1</span>]:</span><br><span class="line">            y -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            x -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(strings[<span class="number">-1</span>][<span class="number">-1</span>])</span><br><span class="line">print(answer)</span><br></pre></td></tr></table></figure>
+
+<p><em>strings 배열</em></p>
+<p>​       A C A Y K P</p>
+<p>​    0 0 0 0 0 0 0 </p>
+<p>C  0 0 1 1 1 1 1 </p>
+<p>A  0 <strong>1</strong> 1 2 2 2 2 </p>
+<p>P  0 1 1 2 2 2 3 </p>
+<p>C  0 1 <strong>2</strong> 2 2 2 3</p>
+<p>A  0 1 2 <strong>3</strong> 3 3 3 </p>
+<p>K  0 1 2 3 3 <strong>4</strong> 4</p>
+<p>위 배열의 맨 오른쪽 아래 <code>(strings[-1][-1])</code> 부터 돌면서 answer에 문자열을 더해가고, 값이 0 일 때 순회를 멈춘다.</p>
+<ul>
+<li>앞과 위의 값이 현재 값보다 -1 이면 대각선 위로 이동한다.</li>
+<li>그렇지 않다면 위의 값과 좌측 값 중<ul>
+<li>위의 값이 클 땐 위로 이동하고,</li>
+<li>좌측값이 크다면  좌측으로 이동한다.</li>
+</ul>
+</li>
+<li>이동할 때 answer에 현재 값을 저장한 후 이동한다.</li>
+</ul>
+<h3 id="새로-배운점"><a href="#새로-배운점" class="headerlink" title="새로 배운점"></a>새로 배운점</h3><ul>
+<li><code>배열[-1][-1]</code> 은 맨 마지막 배열의 value를 의미한다 !</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/17/backjoon-9252/" data-id="ckenwloum002j6jc9hoxz872f"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-backjoon-9251" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/05/11/backjoon-9251/">[알고리즘] 백준알고리즘 9251 - LCS (파이썬/python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/05/11/backjoon-9251/" class="article-date">
+  <time datetime="2020-05-11T13:16:00.000Z" itemprop="datePublished">2020-05-11</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 초</td>
+<td align="left">256 MB</td>
+<td align="left">20545</td>
+<td align="left">8389</td>
+<td align="left">6261</td>
+<td align="left">41.156%</td>
+</tr>
+</tbody></table>
+<p>LCS(Longest Common Subsequence, 최장 공통 부분 수열)문제는 두 수열이 주어졌을 때, 모두의 부분 수열이 되는 수열 중 가장 긴 것을 찾는 문제이다.</p>
+<p>예를 들어, ACAYKP와 CAPCAK의 LCS는 ACAK가 된다.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄과 둘째 줄에 두 문자열이 주어진다. 문자열은 알파벳 대문자로만 이루어져 있으며, 최대 1000글자로 이루어져 있다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 입력으로 주어진 두 문자열의 LCS의 길이를 출력한다.</p>
+<h2 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ACAYKP</span><br><span class="line">CAPCAK</span><br></pre></td></tr></table></figure>
+
+<h2 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
+<li>문제를 만든 사람: <a href="https://www.acmicpc.net/user/baekjoon" target="_blank" rel="noopener">baekjoon</a></li>
+<li>데이터를 추가한 사람: <a href="https://www.acmicpc.net/user/qpwoeiruty" target="_blank" rel="noopener">qpwoeiruty</a></li>
+</ul>
+<h2 id="알고리즘-분류"><a href="#알고리즘-분류" class="headerlink" title="알고리즘 분류"></a>알고리즘 분류</h2><ul>
+<li>[다이나믹 프로그래밍](<a href="https://www.acmicpc.net/problem/tag/다이나믹" target="_blank" rel="noopener">https://www.acmicpc.net/problem/tag/다이나믹</a> 프로그래밍)</li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p><strong>LCS(Longest Common Subsequence)</strong> 는 문제에 나왔듯이 최장 공통 부분 수열을 뜻하며, </p>
+<p><strong>LCS(Longest Common Substring, 최장 공통 부분 문자열)</strong>과 헷갈릴 수 있다.</p>
+<p>공통 부분 문자열은 두 문자열이 가지는 공통적인 문자열 중 끊기지않고 연속적인 부분을 의미하고,</p>
+<p>공통 부분 수열은 두 문자열이 가지는 공통적인 문자열이 끊기더라도 순서가 맞으면 LCS로 인정하는 것을 의미한다.</p>
+<p><strong>ABCDHEF</strong> / <strong>BCDEF</strong> 두 문자열이 존재할 때</p>
+<p>최장 공통 부분 문자열은 BCD , 최장 공통 부분 수열은 BCDEF이다.</p>
+<h3 id="코드"><a href="#코드" class="headerlink" title="코드"></a>코드</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">n = list(str(input()))</span><br><span class="line">m = list(str(input()))</span><br><span class="line"></span><br><span class="line">lcs_list =[[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(n) + <span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(m) + <span class="number">1</span>)]</span><br><span class="line">answer = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(n)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(m)):</span><br><span class="line">        <span class="keyword">if</span> n[i] ==m[j]:</span><br><span class="line">            lcs_list[j+<span class="number">1</span>][i+<span class="number">1</span>] = lcs_list[j][i] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            lcs_list[j+<span class="number">1</span>][i+<span class="number">1</span>] = max(lcs_list[j][i+<span class="number">1</span>],lcs_list[j+<span class="number">1</span>][i])</span><br><span class="line">            </span><br><span class="line">print(lcs_list[<span class="number">-1</span>][<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<p>아래의 표를 만들어가는 코드이다. </p>
+<p>이 문제는 길이만 출력하면 되기 때문에 lcs_list 의 마지막(맨 오른쪽 아래) 값을 출력한다.</p>
+<p>​       A C A Y K P</p>
+<p>​    0 0 0 0 0 0 0 </p>
+<p>C  0 0 1 1 1 1 1 </p>
+<p>A  0 <strong>1</strong> 1 2 2 2 2 </p>
+<p>P  0 1 1 2 2 2 3 </p>
+<p>C  0 1 <strong>2</strong> 2 2 2 3</p>
+<p>A  0 1 2 <strong>3</strong> 3 3 3 </p>
+<p>K  0 1 2 3 3 <strong>4</strong> 4</p>
+<p>여기서 LCS 는 <strong>ACAK</strong> 가 된다. </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/11/backjoon-9251/" data-id="ckenwloum002h6jc9732ga9fl"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-backjoon-1912" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -752,298 +1066,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/04/15/programmers-clothes/" data-id="ckenwlour002u6jc95eo0ca2o"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-network" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/04/13/programmers-network/">[알고리즘] 프로그래머스 - 네트워크 (Python)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/04/13/programmers-network/" class="article-date">
-  <time datetime="2020-04-13T12:37:00.000Z" itemprop="datePublished">2020-04-13</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>네트워크란 컴퓨터 상호 간에 정보를 교환할 수 있도록 연결된 형태를 의미합니다. 예를 들어, 컴퓨터 A와 컴퓨터 B가 직접적으로 연결되어있고, 컴퓨터 B와 컴퓨터 C가 직접적으로 연결되어 있을 때 컴퓨터 A와 컴퓨터 C도 간접적으로 연결되어 정보를 교환할 수 있습니다. 따라서 컴퓨터 A, B, C는 모두 같은 네트워크 상에 있다고 할 수 있습니다.</p>
-<p>컴퓨터의 개수 n, 연결에 대한 정보가 담긴 2차원 배열 computers가 매개변수로 주어질 때, 네트워크의 개수를 return 하도록 solution 함수를 작성하시오.</p>
-<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
-<li>컴퓨터의 개수 n은 1 이상 200 이하인 자연수입니다.</li>
-<li>각 컴퓨터는 0부터 <code>n-1</code>인 정수로 표현합니다.</li>
-<li>i번 컴퓨터와 j번 컴퓨터가 연결되어 있으면 computers[i][j]를 1로 표현합니다.</li>
-<li>computer[i][i]는 항상 1입니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>n</th>
-<th>computers</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>3</td>
-<td>[[1, 1, 0], [1, 1, 0], [0, 0, 1]]</td>
-<td>2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>[[1, 1, 0], [1, 1, 1], [0, 1, 1]]</td>
-<td>1</td>
-</tr>
-</tbody></table>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(n, computers)</span>:</span></span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    visited = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">        visited += [<span class="number">0</span>]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(start, visited, computers)</span>:</span></span><br><span class="line">            stack = [start]</span><br><span class="line">            <span class="keyword">while</span> stack:</span><br><span class="line">                current = stack.pop(<span class="number">0</span>)</span><br><span class="line">                visited[current] = <span class="number">1</span></span><br><span class="line">                <span class="keyword">for</span> search <span class="keyword">in</span> range(n):</span><br><span class="line">                    <span class="keyword">if</span> computers[current][search] <span class="keyword">and</span> visited[search] == <span class="number">0</span>:</span><br><span class="line">                        stack.append(search)</span><br><span class="line">    </span><br><span class="line">    i=<span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">0</span> <span class="keyword">in</span> visited: <span class="comment"># 다 돌 때까지 </span></span><br><span class="line">        <span class="keyword">if</span> visited[i] == <span class="number">0</span>: <span class="comment"># 아직 들리지 않았다면 </span></span><br><span class="line">            dfs(i, visited, computers) <span class="comment"># 들린다. 한번에 연결된 노드까지 들린다.</span></span><br><span class="line">            answer +=<span class="number">1</span></span><br><span class="line">        i+=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-
-
-<p>나는 dfs를 활용하여 풀었다. </p>
-<p>일단 모든 컴퓨터를 다 들려야 하기 떄문에 visited 가 1이 될 때까지 dfs함수를 실행한다.</p>
-<p> dfs는 한번 실행될 때 연결된 모든 노드를 돌기 때문에 함수밖에서 answer의 수를 1 UP해주면 네트워크의 수가 된다!  </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/13/programmers-network/" data-id="ckenwlouu00326jc95f00417e"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-python-underbar" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/23/python-underbar/">[파이썬] for _ in range(n)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/23/python-underbar/" class="article-date">
-  <time datetime="2020-03-23T12:57:00.000Z" itemprop="datePublished">2020-03-23</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h3 id="언더스코어"><a href="#언더스코어" class="headerlink" title="언더스코어(_)"></a>언더스코어(_)</h3><p>크게 다섯가지의 상황에서 사용된다.</p>
-<ul>
-<li>인터프리터(Interpreter)에서 마지막 값을 저장할 때</li>
-<li>값을 무시하고 싶을 때 (흔히 “I don’t care”라고 부른다.)</li>
-<li>변수나 함수명에 특별한 의미 또는 기능을 부여하고자 할 때</li>
-<li>국제화(Internationalization, i18n)/지역화(Localization, l10n) 함수로써 사용할 때</li>
-<li>숫자 리터럴값의 자릿수 구분을 위한 구분자로써 사용할 때</li>
-</ul>
-<p>여기서 for _ in range(n) 은 2번째 경우인 값을 무시하고 싶을 때 쓰인 경우이다.</p>
-<p>인덱스가 필요하지 않을 때 간단히 쓰인다.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/23/python-underbar/" data-id="ckenwlov900416jc9bley9t6u"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-backjoon-2178" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/23/backjoon-2178/">[백준알고리즘] 2178번: 미로 탐색- 파이썬(python)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/23/backjoon-2178/" class="article-date">
-  <time datetime="2020-03-23T12:00:00.000Z" itemprop="datePublished">2020-03-23</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>N×M크기의 배열로 표현되는 미로가 있다.</p>
-<table>
-<thead>
-<tr>
-<th>1</th>
-<th>0</th>
-<th>1</th>
-<th>1</th>
-<th>1</th>
-<th>1</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody></table>
-<p>미로에서 1은 이동할 수 있는 칸을 나타내고, 0은 이동할 수 없는 칸을 나타낸다. 이러한 미로가 주어졌을 때, (1, 1)에서 출발하여 (N, M)의 위치로 이동할 때 지나야 하는 최소의 칸 수를 구하는 프로그램을 작성하시오. 한 칸에서 다른 칸으로 이동할 때, 서로 인접한 칸으로만 이동할 수 있다.</p>
-<p>위의 예에서는 15칸을 지나야 (N, M)의 위치로 이동할 수 있다. 칸을 셀 때에는 시작 위치와 도착 위치도 포함한다.</p>
-<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 두 정수 N, M(2 ≤ N, M ≤ 100)이 주어진다. 다음 N개의 줄에는 M개의 정수로 미로가 주어진다. 각각의 수들은 <strong>붙어서</strong> 입력으로 주어진다.</p>
-<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 지나야 하는 최소의 칸 수를 출력한다. 항상 도착위치로 이동할 수 있는 경우만 입력으로 주어진다.</p>
-<h4 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4 6</span><br><span class="line">101111</span><br><span class="line">101010</span><br><span class="line">101011</span><br><span class="line">111011</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">15</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4 6</span><br><span class="line">110110</span><br><span class="line">110110</span><br><span class="line">111111</span><br><span class="line">111101</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2 25</span><br><span class="line">1011101110111011101110111</span><br><span class="line">1110111011101110111011101</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">38</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-입력-4"><a href="#예제-입력-4" class="headerlink" title="예제 입력 4"></a>예제 입력 4</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">7 7</span><br><span class="line">1011111</span><br><span class="line">1110001</span><br><span class="line">1000001</span><br><span class="line">1000001</span><br><span class="line">1000001</span><br><span class="line">1000001</span><br><span class="line">1111111</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-출력-4"><a href="#예제-출력-4" class="headerlink" title="예제 출력 4"></a>예제 출력 4</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    n, m = map(int, input().split())</span><br><span class="line">    data = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">        data.append(list(map(int, str(input()))))</span><br><span class="line">    distance = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(m)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">    distance[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">    queue = [[<span class="number">0</span>,<span class="number">0</span>]]</span><br><span class="line">    foot_prints = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        [i, j] = queue.pop(<span class="number">0</span>)</span><br><span class="line">        foot_prints.append([i,j])</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">if</span> j &gt; <span class="number">0</span> <span class="keyword">and</span> data[i][j<span class="number">-1</span>] == <span class="number">1</span> <span class="keyword">and</span> [i,j<span class="number">-1</span>] <span class="keyword">not</span> <span class="keyword">in</span> foot_prints <span class="keyword">and</span> [i,j<span class="number">-1</span>] <span class="keyword">not</span> <span class="keyword">in</span> queue:</span><br><span class="line">            queue.append([i,j<span class="number">-1</span>])</span><br><span class="line">            distance[i][j<span class="number">-1</span>] = distance[i][j] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> j &lt; m<span class="number">-1</span> <span class="keyword">and</span> data[i][j+<span class="number">1</span>] == <span class="number">1</span> <span class="keyword">and</span> [i,j+<span class="number">1</span>] <span class="keyword">not</span> <span class="keyword">in</span> foot_prints <span class="keyword">and</span> [i,j+<span class="number">1</span>] <span class="keyword">not</span> <span class="keyword">in</span> queue:</span><br><span class="line">            queue.append([i,j+<span class="number">1</span>])</span><br><span class="line">            distance[i][j+<span class="number">1</span>] = distance[i][j] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> data[i<span class="number">-1</span>][j] == <span class="number">1</span> <span class="keyword">and</span> [i<span class="number">-1</span>,j] <span class="keyword">not</span> <span class="keyword">in</span> foot_prints <span class="keyword">and</span> [i<span class="number">-1</span>,j] <span class="keyword">not</span> <span class="keyword">in</span> queue:</span><br><span class="line">            queue.append([i<span class="number">-1</span>,j])</span><br><span class="line">            distance[i<span class="number">-1</span>][j] = distance[i][j] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &lt; n<span class="number">-1</span> <span class="keyword">and</span> data[i+<span class="number">1</span>][j] == <span class="number">1</span> <span class="keyword">and</span> [i+<span class="number">1</span>,j] <span class="keyword">not</span> <span class="keyword">in</span> foot_prints <span class="keyword">and</span> [i+<span class="number">1</span>,j] <span class="keyword">not</span> <span class="keyword">in</span> queue:</span><br><span class="line">            queue.append([i+<span class="number">1</span>,j])    </span><br><span class="line">            distance[i+<span class="number">1</span>][j] = distance[i][j] + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> distance[n<span class="number">-1</span>][m<span class="number">-1</span>]</span><br><span class="line">    </span><br><span class="line">print(main())</span><br></pre></td></tr></table></figure>
-
-
-
-<p>큐를 이용한 bfs를 통해 문제 풀이를 하였다.</p>
-<p>(출처)[<a href="https://claude-u.tistory.com/212]" target="_blank" rel="noopener">https://claude-u.tistory.com/212]</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/23/backjoon-2178/" data-id="ckenwlouk002c6jc9hmqabmqw"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
