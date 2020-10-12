@@ -158,7 +158,7 @@
 
 <ul>
 <li><strong><code>permutations(M, N)</code></strong> : 순서를 염두해 M에서 N개만큼 뽑아내는 경우의 수이다. </li>
-<li><strong><code>set</code></strong> : 중복을 제거해 준다. <code>permutations</code>에서 <code>[&#39;+&#39;,&#39;+&#39;,&#39;+&#39;,&#39;+&#39;]</code> 의 경우 순서를 염두하기 때문에 4개가 만들어 질텐데, 이때 <code>set</code>은 중복을 제거해서 경우의 수를 하나로 줄여준다.</li>
+<li><strong><code>set</code></strong> : 중복을 제거해 준다. <code>permutations</code>에서 <code>[&#39;+&#39;,&#39;+&#39;,&#39;+&#39;,&#39;+&#39;]</code> 의 경우 순서를 염두하기 때문에 복수개가 만들어 질텐데, 이때 <code>set</code>은 중복을 제거해서 경우의 수를 하나로 줄여준다.</li>
 <li><strong><code>extend</code></strong>: 한가지가 아닌 복수의 요소를 리스트에 추가할 때 사용한다. for문을 안써도 돼서 시간이 단축된다.</li>
 <li>for 문 사용을 줄이기 위해 <code>temp = [o] * oper_num[i]</code>를 작성했다. <code>o</code> 가 <code>&#39;+&#39;</code> 이고 <code>oper_num[i]</code>이 <code>2</code>인 경우, <code>temp</code>는 <code>[&#39;+&#39;, &#39;+&#39;]</code> 가 된다.</li>
 </ul>
