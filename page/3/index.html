@@ -64,6 +64,238 @@
         
           
 
+<article id="post-programmers-priority-queue" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/08/27/programmers-priority-queue/">[프로그래머스] 이중 우선순위 큐 - 파이썬(python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/08/27/programmers-priority-queue/" class="article-date">
+  <time datetime="2020-08-27T09:14:00.000Z" itemprop="datePublished">2020-08-27</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제설명"><a href="#문제설명" class="headerlink" title="문제설명"></a>문제설명</h1><p>이중 우선순위 큐는 다음 연산을 할 수 있는 자료구조를 말합니다.</p>
+<table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>수신 탑(높이)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>I 숫자</td>
+<td>큐에 주어진 숫자를 삽입합니다.</td>
+</tr>
+<tr>
+<td>D 1</td>
+<td>큐에서 최댓값을 삭제합니다.</td>
+</tr>
+<tr>
+<td>D -1</td>
+<td>큐에서 최솟값을 삭제합니다.</td>
+</tr>
+</tbody></table>
+<p>이중 우선순위 큐가 할 연산 operations가 매개변수로 주어질 때, 모든 연산을 처리한 후 큐가 비어있으면 [0,0] 비어있지 않으면 [최댓값, 최솟값]을 return 하도록 solution 함수를 구현해주세요.</p>
+<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
+<li>operations는 길이가 1 이상 1,000,000 이하인 문자열 배열입니다.</li>
+<li>operations의 원소는 큐가 수행할 연산을 나타냅니다.<ul>
+<li>원소는 “명령어 데이터” 형식으로 주어집니다.- 최댓값/최솟값을 삭제하는 연산에서 최댓값/최솟값이 둘 이상인 경우, 하나만 삭제합니다.</li>
+</ul>
+</li>
+<li>빈 큐에 데이터를 삭제하라는 연산이 주어질 경우, 해당 연산은 무시합니다.</li>
+</ul>
+<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
+<thead>
+<tr>
+<th>operations</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[I 16,D 1]</td>
+<td>[0,0]</td>
+</tr>
+<tr>
+<td>[I 7,I 5,I -5,D -1]</td>
+<td>[7,5]</td>
+</tr>
+</tbody></table>
+<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>16을 삽입 후 최댓값을 삭제합니다. 비어있으므로 [0,0]을 반환합니다.<br>7,5,-5를 삽입 후 최솟값을 삭제합니다. 최대값 7, 최소값 5를 반환합니다.</p>
+<p><a href="http://icpckorea.org/problems/2013/onlineset.pdf" target="_blank" rel="noopener">출처</a></p>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><blockquote>
+<p>코드</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(operations)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> heapq</span><br><span class="line">    answer = []</span><br><span class="line">    priority_queue = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> operation <span class="keyword">in</span> operations:</span><br><span class="line">        op = operation[:<span class="number">1</span>]</span><br><span class="line">        num = int(operation[<span class="number">2</span>:])</span><br><span class="line">        <span class="keyword">if</span> op == <span class="string">"D"</span> <span class="keyword">and</span> priority_queue:</span><br><span class="line">            <span class="keyword">if</span> num == <span class="number">1</span>:</span><br><span class="line">                priority_queue.pop(priority_queue.index(max(priority_queue)))</span><br><span class="line">            <span class="keyword">elif</span> num == <span class="number">-1</span>:</span><br><span class="line">                heapq.heappop(priority_queue)</span><br><span class="line">        <span class="keyword">elif</span> op == <span class="string">"I"</span>:</span><br><span class="line">            heapq.heappush(priority_queue, num)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> priority_queue:</span><br><span class="line">        answer = [max(priority_queue),heapq.heappop(priority_queue)]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        answer = [<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line">                                   </span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>새로 알게 된 점</p>
+</blockquote>
+<ol>
+<li>문자열 인덱싱(슬라이싱) <ul>
+<li>슬라이싱을 통해 operation 과 숫자를 나눴다.</li>
+</ul>
+</li>
+<li><code>priority_queue.index(max(priority_queue))</code><ul>
+<li>위 코드를 통해 priority_queue에서 가장 큰 값의 인덱스를 얻어올 수 있었다. 매우 편하다!</li>
+</ul>
+</li>
+<li><code>heapq.heappush(priority_queue, num)</code> <ul>
+<li>위 코드는 최소힙(우선순위큐)을 만족하도록 num을 push한다.</li>
+</ul>
+</li>
+<li><code>heapq.heappop(priority_queue)</code><ul>
+<li>위 코드는 최소 값을 pop한다.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>어려웠던 점</p>
+</blockquote>
+<p> 사실 생각보단 금방 풀었지만 ! 맨 처음 코드가 아래와 같을 때,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> operation <span class="keyword">in</span> operations:</span><br><span class="line">    <span class="keyword">if</span> operation == <span class="string">"D 1"</span> <span class="keyword">and</span> priority_queue:</span><br><span class="line">        data = max(priority_queue)</span><br><span class="line">        priority_queue.pop(priority_queue.index(data))</span><br><span class="line">    <span class="keyword">elif</span> operation == <span class="string">"D -1"</span> <span class="keyword">and</span> priority_queue:</span><br><span class="line">        data = min(priority_queue)</span><br><span class="line">        priority_queue.pop(priority_queue.index(data))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        num = operation[<span class="number">2</span>:]</span><br><span class="line">        heapq.heappush(priority_queue, int(num))</span><br></pre></td></tr></table></figure>
+
+<p>입력값이 <code>[&quot;I 16&quot;, &quot;I -5643&quot;, &quot;D -1&quot;, &quot;D 1&quot;, &quot;D 1&quot;, &quot;I 123&quot;, &quot;D -1&quot;]</code> 인 경우,</p>
+<p>세번 째 <code>&quot;D 1&quot;</code> 에서 <code>priority_queue</code>가 비어있으니  <code>else</code>로 넘어가면서 1이 push 되는 문제가 발생하였다. </p>
+<p>그래서 <code>op</code> 와 <code>num</code>으로 나눠서 검사를 했더니 문제가 해결되었다. </p>
+<p><code>and priority_queue</code>를 넣지 않으면 ValueError : <strong>max() arg is an empty sequence</strong> 등의 문제가 발생한다.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/08/27/programmers-priority-queue/" data-id="ckenwlouz003c6jc9d8ydc3sm"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-python-heapq" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/08/27/python-heapq/">[파이썬] heapq 모듈</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/08/27/python-heapq/" class="article-date">
+  <time datetime="2020-08-27T09:12:00.000Z" itemprop="datePublished">2020-08-27</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <blockquote>
+<p> heapq 모듈에 대해 간략히 알아보자 ! </p>
+</blockquote>
+<h3 id="Heap-이란"><a href="#Heap-이란" class="headerlink" title="Heap 이란 ?"></a>Heap 이란 ?</h3><p>힙(heap)은 최댓값 및 최솟값을 찾아내는 연산을 빠르게 하기 위해 고안된 완전이진트리(complete binary tree)를 기본으로 한 자료구조(tree-based structure)로서 다음과 같은 힙 속성(property)을 만족한다.</p>
+<ul>
+<li>A가 B의 부모노드(parent node)이면, A의 키(key)값과 B의 키값 사이에는 대소관계가 성립한다.</li>
+</ul>
+<p>힙에는 두가지 종류가 있으며, 부모노드의 키값이 자식노드의 키값보다 항상 큰 힙을 ‘최대 힙’, 부모노드의 키값이 자식노드의 키값보다 항상 작은 힙을 ‘최소 힙’이라고 부른다. 아래 사진은 <strong>최대 힙</strong>의 예시이다.</p>
+<img src="../image/image-20200827173046492.png" alt="image-20200827173046492" style="zoom:50%;" />
+
+<p>출처 : <a href="https://ko.wikipedia.org/wiki/%ED%9E%99_(%EC%9E%90%EB%A3%8C_%EA%B5%AC%EC%A1%B0)" target="_blank" rel="noopener">위키백과 ‘힙 (자료 구조)’</a></p>
+<h2 id="heapq"><a href="#heapq" class="headerlink" title="heapq"></a>heapq</h2><p><strong>완전 이진트리 기반의 최소 힙 자료구조</strong>이다. heapq의 첫번째 인덱스 값은 최소값이다.</p>
+<p>부모 노드의 key 값은 자식 노드의 key 값보다 작거나 같다.</p>
+<p>heapq 모듈은 큐 알고리즘이라고도 하는 힙(heap) 큐 알고리즘의 구현을 제공한다.</p>
+<h3 id="python에-쓰이는-heapq-코드"><a href="#python에-쓰이는-heapq-코드" class="headerlink" title="python에 쓰이는 heapq 코드"></a>python에 쓰이는 heapq 코드</h3><ul>
+<li><code>import heapq</code> : heapq 모듈을 사용하기 위해 써주어야한다.</li>
+<li><code>heapq.heapify(x)</code> : 값이 들어있는 리스트 x를 최소 힙으로 변환하는 코드이다. 이 때 주의할 점은 최소 힙을 만족시키는리스트가 아닌 최소 힙(리스트x)으로 변경된다는 사실이다.</li>
+<li><code>heapq.heappush(heap, item)</code> : item 값을 힙으로 푸시한다.</li>
+<li><code>heapq.heappushpop(heap, item)</code> : 힙에 item을 푸시한 다음, heap에서 가장 작은 항목을 팝하고 반환한다. ( <code>heapq.heappush(heap)</code> =&gt; <code>heapq.heappop(heap)</code>)</li>
+<li><code>heapq.heapreplace(heap, item)</code> : heap에서 가장 작은 항목을 팝하고 반환하며, 새로운 item도 푸시한다. heap 이 비어있을 시에 IndexError가 발생한다. ( <code>heapq.heappop(heap)</code> =&gt; <code>heapq.heappush(heap)</code>)</li>
+</ul>
+<p>주의할 점 ! sort 와 달리 전체를 정렬하는 것이 아니므로 맨앞의 값이 최소값인 것은 확실하지만 두번째 값이 두번째로 작은 값임은 확신할 수 없다. </p>
+<p>이 경우 heapq.heappop(heap)을 한 다음 heap[0] 으로 접근한다.</p>
+<p>참고: <a href="https://python.flowdas.com/library/heapq.html" target="_blank" rel="noopener">https://python.flowdas.com/library/heapq.html</a> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/08/27/python-heapq/" data-id="ckenwlov8003y6jc91jct0zlo"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-programmers-func-develop" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -882,197 +1114,12 @@
 
 
         
-          
-
-<article id="post-android-hash-key" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/14/android-hash-key/">[안드로이드] 해시 키 얻어오기 - Kotlin</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/14/android-hash-key/" class="article-date">
-  <time datetime="2020-08-14T12:23:00.000Z" itemprop="datePublished">2020-08-14</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>안드로이드 스튜디오에서 코드를 통해 해시 키를 얻어올 수 있다.</p>
-<p>“package name”에 프로젝트 패키지 네임을 넣고 실행하면 로그에 해시키가 찍힌다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">       <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">       setContentView(R.layout.activity_main)</span><br><span class="line">       <span class="keyword">try</span> &#123;     <span class="comment">// 해시키</span></span><br><span class="line">           <span class="keyword">val</span> info = packageManager.getPackageInfo(<span class="string">"package name"</span>, PackageManager.GET_SIGNATURES)</span><br><span class="line">           <span class="keyword">for</span> (signature <span class="keyword">in</span> info.signatures) &#123;</span><br><span class="line">               <span class="keyword">val</span> md = MessageDigest.getInstance(<span class="string">"SHA"</span>)</span><br><span class="line">               md.update(signature.toByteArray())</span><br><span class="line">               <span class="keyword">val</span> sign = Base64.encodeToString(md.digest(), Base64.DEFAULT)</span><br><span class="line">               Log.e(<span class="string">"hash key TAG"</span>, <span class="string">"hash key : <span class="variable">$sign</span>"</span>)</span><br><span class="line">               <span class="comment">//Toast.makeText(getApplicationContext(),sign,     Toast.LENGTH_LONG).show();</span></span><br><span class="line">           &#125;</span><br><span class="line">       &#125; <span class="keyword">catch</span> (e: PackageManager.NameNotFoundException) &#123;</span><br><span class="line">           Log.e(<span class="string">"hash key TAG"</span>, <span class="string">"error: <span class="variable">$e</span>"</span>)</span><br><span class="line">       &#125; <span class="keyword">catch</span> (e: NoSuchAlgorithmException) &#123;</span><br><span class="line">           Log.e(<span class="string">"hash key TAG"</span>, <span class="string">"error: <span class="variable">$e</span>"</span>)</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/08/14/android-hash-key/" data-id="ckenwloth00046jc94sv468xo"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-backjoon-9372" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/11/backjoon-9372/">[알고리즘] 백준알고리즘(boj) - 9372: 상근이의 여행 (파이썬/python)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/11/backjoon-9372/" class="article-date">
-  <time datetime="2020-08-10T17:37:00.000Z" itemprop="datePublished">2020-08-11</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>상근이는 겨울방학을 맞아 N개국을 여행하면서 자아를 찾기로 마음먹었다. </p>
-<p>하지만 상근이는 새로운 비행기를 무서워하기 때문에, 최대한 적은 종류의 비행기를 타고 국가들을 이동하려고 한다.</p>
-<p>이번 방학 동안의 비행 스케줄이 주어졌을 때, 상근이가 <strong>가장 적은 종류</strong>의 비행기를 타고 모든 국가들을 여행할 수 있도록 도와주자.</p>
-<p>상근이가 한 국가에서 다른 국가로 이동할 때 다른 국가를 거쳐 가도(심지어 이미 방문한 국가라도) 된다.</p>
-<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫 번째 줄에는 테스트 케이스의 수 T(T ≤ 100)가 주어지고,</p>
-<p>각 테스트 케이스마다 다음과 같은 정보가 주어진다.</p>
-<ul>
-<li>첫 번째 줄에는 국가의 수 N(2 ≤ N ≤ 1 000)과 비행기의 종류 M(1 ≤ M ≤ 10 000) 가 주어진다.</li>
-<li>이후 M개의 줄에 a와 b 쌍들이 입력된다. a와 b를 왕복하는 비행기가 있다는 것을 의미한다. (1 ≤ a, b ≤ n; a ≠ b) </li>
-<li>주어지는 비행 스케줄은 항상 연결 그래프를 이룬다.</li>
-</ul>
-<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>테스트 케이스마다 한 줄을 출력한다.</p>
-<ul>
-<li>상근이가 모든 국가를 여행하기 위해 타야 하는 비행기 종류의 최소 개수를 출력한다.</li>
-</ul>
-<h4 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">3 3</span><br><span class="line">1 2</span><br><span class="line">2 3</span><br><span class="line">1 3</span><br><span class="line">5 4</span><br><span class="line">2 1</span><br><span class="line">2 3</span><br><span class="line">4 3</span><br><span class="line">4 5</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
-
-<h4 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h4><p><a href="https://www.acmicpc.net/category/1" target="_blank" rel="noopener">ICPC </a>&gt; <a href="https://www.acmicpc.net/category/7" target="_blank" rel="noopener">Regionals </a>&gt; <a href="https://www.acmicpc.net/category/10" target="_blank" rel="noopener">Europe </a>&gt; <a href="https://www.acmicpc.net/category/15" target="_blank" rel="noopener">Northwestern European Regional Contest </a>&gt; <a href="https://www.acmicpc.net/category/89" target="_blank" rel="noopener">Benelux Algorithm Programming Contest </a>&gt; <a href="https://www.acmicpc.net/category/detail/1160" target="_blank" rel="noopener">BAPC 2013</a> F번</p>
-<ul>
-<li>문제의 오타를 찾은 사람: <a href="https://www.acmicpc.net/user/rhksdlr134" target="_blank" rel="noopener">rhksdlr134</a> <a href="https://www.acmicpc.net/user/vl0612" target="_blank" rel="noopener">vl0612</a></li>
-<li>문제를 번역한 사람: <a href="https://www.acmicpc.net/user/WeissBlume" target="_blank" rel="noopener">WeissBlume</a></li>
-</ul>
-<h2 id="알고리즘-분류"><a href="#알고리즘-분류" class="headerlink" title="알고리즘 분류"></a>알고리즘 분류</h2><ul>
-<li>[최소 스패닝 트리](<a href="https://www.acmicpc.net/problem/tag/최소" target="_blank" rel="noopener">https://www.acmicpc.net/problem/tag/최소</a> 스패닝 트리)</li>
-<li><a href="https://www.acmicpc.net/problem/tag/BFS" target="_blank" rel="noopener">BFS</a></li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span><span class="params">(start)</span>:</span></span><br><span class="line">    queue = [start]</span><br><span class="line">    foot_prints = [start]</span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        start = queue.pop(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(airplane[start])):</span><br><span class="line">            <span class="keyword">if</span> airplane[start][i] <span class="keyword">and</span> i <span class="keyword">not</span> <span class="keyword">in</span> foot_prints:</span><br><span class="line">                queue.append(i)</span><br><span class="line">                foot_prints.append(i)</span><br><span class="line">                answer += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> answer</span><br><span class="line"></span><br><span class="line">T = int(input())</span><br><span class="line"><span class="keyword">while</span> T:</span><br><span class="line">    N , M = map(int,input().split())</span><br><span class="line">    airplane = [[<span class="number">0</span>] * (N+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(N+<span class="number">1</span>)]</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(M):</span><br><span class="line">        a, b = map(int,input().split())</span><br><span class="line">        airplane[a][b] = <span class="number">1</span></span><br><span class="line">        airplane[b][a] = <span class="number">1</span></span><br><span class="line">    print(bfs(<span class="number">1</span>))</span><br><span class="line">    T -= <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>이번 문제는 입력을 받아오는 방법이 새로웠다.</p>
-<ol>
-<li><p>테스트 케이스의 개수를 T로 받아오고, <strong>T</strong> 개의 테스트 케이스 라인들을 받아오기 위해 <strong>while 문</strong>을 이용한다. </p>
-</li>
-<li><p>국가마다 이어지는 것이기 때문에 <strong>배열(airplane) 은  N+1 * N+1 의 크기로</strong> 생성한다. (N: 국가의 수) </p>
-<ul>
-<li>N+1 의 크기를 이용하는 이유 : BFS 탐색 노드를 출력하는 문제의 경우, 인덱스와 노드의 숫자가 일치하도록 배열을 생성하면  print할 때나 사용할 때 이해하기 편하다고 생각해서 !</li>
-</ul>
-</li>
-<li><p>이후 M개의 줄에 a b 쌍이 입력되기 때문에 <strong>for문은 M만큼</strong> 돌며 a b를 받아온다.</p>
-</li>
-<li><p>a와 b를 왕복하는 비행기가 있다는 것은 a국가와 b국가 사이에 <strong>간선</strong>이 있다는 것이다. 1로 표현한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">airplane[a][b] = <span class="number">1</span></span><br><span class="line">airplane[b][a] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>배열을 완성한 후 <strong>BFS</strong>를 실행한다. (시작 노드는 1)</p>
-</li>
-</ol>
-<p>사실 비행기들은 모든 국가를 들릴 수 있도록 이어져 있기 때문에 타야 하는 <strong>비행기 종류의 최소 개수</strong>는 <strong>N-1</strong>(국가의 수-1) 이다. </p>
-<p>하지만 BFS 구현 코드를 다시 떠올릴 겸 BFS를 이용하여 풀어보았다. </p>
-<ul>
-<li>들린 국가의 수 출력이 아닌 비행기 종류의 개수 출력이기 때문에 국가를 이동할 때마다 answer에 1을 더하여 탄 비행기 종류 개수를 반환한다. </li>
-</ul>
-<p>아래 코드를 추가하니 시간 초과 문제가 해결되었다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/08/11/backjoon-9372/" data-id="ckenwloun002m6jc9btsxe76u"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
     </article>
     
   
     
       <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/page/2/">이전</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">다음</a>
+        <a class="extend prev" rel="prev" href="/page/2/">이전</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/">다음</a>
       </nav>
     
   </section>
