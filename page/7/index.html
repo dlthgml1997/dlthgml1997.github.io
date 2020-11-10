@@ -64,6 +64,117 @@
         
           
 
+<article id="post-algorithm-hash" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/14/algorithm-hash/">해쉬 알고리즘이란?</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/14/algorithm-hash/" class="article-date">
+  <time datetime="2020-03-14T06:46:00.000Z" itemprop="datePublished">2020-03-14</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="해쉬-알고리즘-O-1"><a href="#해쉬-알고리즘-O-1" class="headerlink" title="해쉬 알고리즘 O(1)"></a>해쉬 알고리즘 O(1)</h3><p>해쉬는 임의의 크기를 가진 데이터를 고정된 데이터의 크기로 변환시키는 것.</p>
+<p>key 값을 계산 하는 함수는 <strong>해쉬 함수</strong>라고 한다.</p>
+<h4 id="해쉬-함수"><a href="#해쉬-함수" class="headerlink" title="해쉬 함수"></a>해쉬 함수</h4><ul>
+<li><p>문자열을 받아 숫자로 변환하는 함수</p>
+</li>
+<li><p>문자열에 숫자를 Mapping (할당)한다.</p>
+</li>
+<li><p>일관성을 유지해야하며, 다른 단어가 들어가면 꼭 다른 숫자가 나와야한다.</p>
+</li>
+<li><p><strong>사용방법</strong></p>
+<ol>
+<li><p>0 ,1 , 2, 3, 4 인덱스의 배열이 있다고 하자.</p>
+</li>
+<li><p>apple을 해쉬 함수에 넣으면 해쉬 함수는 3을 출력한다고 가정, 이 때 apple의 가격을 3번 인덱스 위치에 저장한다.</p>
+<ol>
+<li>milk 는 0을 출력한다고 가정, 이 때 milk의 가격을 0번 인덱스 위치에 저장한다.</li>
+<li>위와 같은 방법으로 전체 배열을 채운다.</li>
+</ol>
+</li>
+<li><p>이 때 milk의 가격을 묻는다면 배열을 탐색할 필요 없이 milk를 해시함수에 넣기만 하면 해당 가격이 있는 인덱스를 출력하게 될 것이다.</p>
+<blockquote>
+<p>해시 함수는 배열의 크기를 알고 있어야하며 유요한 인덱스만 반환해야한다.</p>
+<p>해시함수와 같은 이름 : 해시 맵, 맵, 딕셔너리, 연관 배열</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><p><strong>용도</strong></p>
+<ul>
+<li><p>해시 테이블로 조회하기</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">phone_book = dict()</span><br><span class="line">phone_book[<span class="string">"jenny"</span>] = <span class="number">8675409</span></span><br><span class="line">phone_book[<span class="string">"emergency"</span>] = <span class="number">911</span></span><br><span class="line"></span><br><span class="line">print(phone_book[<span class="string">"jenny"</span>]) <span class="comment"># 8675409</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>중복 항목 방지하기</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">voted = &#123;&#125;</span><br><span class="line">value = voted.get&#123;<span class="string">"tom"</span>&#125; <span class="comment"># tom이 있으면 value를 없다면 None을 출력</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_voter</span><span class="params">(name)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> voted.get(name):</span><br><span class="line">        print(<span class="string">"이미 투표"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        voted[name] = <span class="literal">True</span></span><br><span class="line">        print(<span class="string">"투표하세요."</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>해시 테이블을 캐시로 사용하기</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cache = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_page</span><span class="params">(url)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> cache.get(url):</span><br><span class="line">        <span class="keyword">return</span> cache[url]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        data = get_data_from_server(url)</span><br><span class="line">        cache[url] = data</span><br><span class="line">        <span class="keyword">return</span> data</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>장점</strong></p>
+<ol>
+<li>어떤 것과 다른 것 사이의 관계를 모형화</li>
+<li>중복 방지</li>
+<li>서버에게 작업을 시키지 않고 캐싱 가능</li>
+</ol>
+</li>
+</ul>
+<h4 id="충돌-Collusion"><a href="#충돌-Collusion" class="headerlink" title="충돌(Collusion)"></a>충돌(Collusion)</h4><p>해쉬테이블의 가장 큰 문제점이다. 다른 <code>k</code>값이 동일한 <code>h(k)</code>값을 가져 동일한 <code>slot</code>에 저장되는 경우이다. 예를 들어 k1 과 k2 를 해쉬했을 때 h(k1) == h(k2) 인 경우이다. 이러한 문제를 해결하기 위해서는 배열과 리스트를 조합하여 사용하는 자료구조를 사용한다.</p>
+<p><a href="hsp1116.tistory.com/35">참고</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/14/algorithm-hash/" data-id="ckenwlotc00016jc99h2s5mxw"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%84%A4%EB%AA%85/" rel="tag">알고리즘설명</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-programmers-participant-not-completion" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -798,76 +909,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/03/11/angular-sync-to-async-observable/" data-id="ckenwlou1001a6jc9dtvl9lfr"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-angular-cli-class" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/11/angular-cli-class/">[앵귤러/Angular] Angular CLI 서비스 클래스 생성</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/11/angular-cli-class/" class="article-date">
-  <time datetime="2020-03-11T05:42:00.000Z" itemprop="datePublished">2020-03-11</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>아래 명령을 이용하면 서비스 클래스 파일이 생성된다.  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng generate service hero</span><br></pre></td></tr></table></figure>
-
-<p><code>hero.sevice.ts</code> 초기 생성 파일은 아래와 같다.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>(&#123;</span><br><span class="line">  providedIn: <span class="string">'root'</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroService &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"></span>) &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><em>@Injectable()</em> : 클래스를 인젝터에 프로바이더로 등록할 때 사용하는 데코레이터</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/11/angular-cli-class/" data-id="ckenwlotp000i6jc9d0tldyzv"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
