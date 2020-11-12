@@ -64,6 +64,71 @@
         
           
 
+<article id="post-android-hash-key" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/08/14/android-hash-key/">[안드로이드] 해시 키 얻어오기 - Kotlin</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/08/14/android-hash-key/" class="article-date">
+  <time datetime="2020-08-14T12:23:00.000Z" itemprop="datePublished">2020-08-14</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>안드로이드 스튜디오에서 코드를 통해 해시 키를 얻어올 수 있다.</p>
+<p>“package name”에 프로젝트 패키지 네임을 넣고 실행하면 로그에 해시키가 찍힌다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">       <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">       setContentView(R.layout.activity_main)</span><br><span class="line">       <span class="keyword">try</span> &#123;     <span class="comment">// 해시키</span></span><br><span class="line">           <span class="keyword">val</span> info = packageManager.getPackageInfo(<span class="string">"package name"</span>, PackageManager.GET_SIGNATURES)</span><br><span class="line">           <span class="keyword">for</span> (signature <span class="keyword">in</span> info.signatures) &#123;</span><br><span class="line">               <span class="keyword">val</span> md = MessageDigest.getInstance(<span class="string">"SHA"</span>)</span><br><span class="line">               md.update(signature.toByteArray())</span><br><span class="line">               <span class="keyword">val</span> sign = Base64.encodeToString(md.digest(), Base64.DEFAULT)</span><br><span class="line">               Log.e(<span class="string">"hash key TAG"</span>, <span class="string">"hash key : <span class="variable">$sign</span>"</span>)</span><br><span class="line">               <span class="comment">//Toast.makeText(getApplicationContext(),sign,     Toast.LENGTH_LONG).show();</span></span><br><span class="line">           &#125;</span><br><span class="line">       &#125; <span class="keyword">catch</span> (e: PackageManager.NameNotFoundException) &#123;</span><br><span class="line">           Log.e(<span class="string">"hash key TAG"</span>, <span class="string">"error: <span class="variable">$e</span>"</span>)</span><br><span class="line">       &#125; <span class="keyword">catch</span> (e: NoSuchAlgorithmException) &#123;</span><br><span class="line">           Log.e(<span class="string">"hash key TAG"</span>, <span class="string">"error: <span class="variable">$e</span>"</span>)</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/08/14/android-hash-key/" data-id="ckenwloth00046jc94sv468xo"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-backjoon-9372" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -993,110 +1058,12 @@
 
 
         
-          
-
-<article id="post-backjoon-1912" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/05/09/backjoon-1912/">[알고리즘] 백준알고리즘 1912 연속합 (파이썬/python)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/05/09/backjoon-1912/" class="article-date">
-  <time datetime="2020-05-09T14:26:00.000Z" itemprop="datePublished">2020-05-09</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>n개의 정수로 이루어진 임의의 수열이 주어진다. 우리는 이 중 연속된 몇 개의 수를 선택해서 구할 수 있는 합 중 가장 큰 합을 구하려고 한다. 단, 수는 한 개 이상 선택해야 한다.</p>
-<p>예를 들어서 10, -4, 3, 1, 5, 6, -35, 12, 21, -1 이라는 수열이 주어졌다고 하자. 여기서 정답은 12+21인 33이 정답이 된다.</p>
-<h4 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h4><p>첫째 줄에 정수 n(1 ≤ n ≤ 100,000)이 주어지고 둘째 줄에는 n개의 정수로 이루어진 수열이 주어진다. 수는 -1,000보다 크거나 같고, 1,000보다 작거나 같은 정수이다.</p>
-<h4 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h4><p>첫째 줄에 답을 출력한다.</p>
-<h4 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10</span><br><span class="line">10 -4 3 1 5 6 -35 12 21 -1</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">33</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10</span><br><span class="line">2 1 -4 3 4 -4 6 5 -5 1</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">14</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">-1 -2 -3 -4 -5</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1</span><br></pre></td></tr></table></figure>
-
-<h4 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h4><ul>
-<li>데이터를 추가한 사람: <a href="https://www.acmicpc.net/user/djm03178" target="_blank" rel="noopener">djm03178</a> <a href="https://www.acmicpc.net/user/dohyeokkim" target="_blank" rel="noopener">dohyeokkim</a> <a href="https://www.acmicpc.net/user/doju" target="_blank" rel="noopener">doju</a> <a href="https://www.acmicpc.net/user/jh05013" target="_blank" rel="noopener">jh05013</a> <a href="https://www.acmicpc.net/user/kimdr123" target="_blank" rel="noopener">kimdr123</a> <a href="https://www.acmicpc.net/user/seedkin" target="_blank" rel="noopener">seedkin</a></li>
-<li>빠진 조건을 찾은 사람: <a href="https://www.acmicpc.net/user/isac322" target="_blank" rel="noopener">isac322</a> <a href="https://www.acmicpc.net/user/Qwaz" target="_blank" rel="noopener">Qwaz</a></li>
-<li>문제의 오타를 찾은 사람: <a href="https://www.acmicpc.net/user/jh05013" target="_blank" rel="noopener">jh05013</a></li>
-<li>잘못된 데이터를 찾은 사람: <a href="https://www.acmicpc.net/user/tncks0121" target="_blank" rel="noopener">tncks0121</a></li>
-</ul>
-<h4 id="알고리즘-분류"><a href="#알고리즘-분류" class="headerlink" title="알고리즘 분류"></a>알고리즘 분류</h4><ul>
-<li>[다이나믹 프로그래밍](<a href="https://www.acmicpc.net/problem/tag/다이나믹" target="_blank" rel="noopener">https://www.acmicpc.net/problem/tag/다이나믹</a> 프로그래밍)</li>
-<li><a href="https://www.acmicpc.net/problem/tag/수학" target="_blank" rel="noopener">수학</a></li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><h4 id="틀린-풀이"><a href="#틀린-풀이" class="headerlink" title="틀린 풀이"></a>틀린 풀이</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">n = map(int, input())</span><br><span class="line">nums = list(map(int, input().split()))</span><br><span class="line"></span><br><span class="line">max_num = <span class="number">0</span></span><br><span class="line">before = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> nums:</span><br><span class="line">  <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">    total = before + num</span><br><span class="line">    <span class="keyword">if</span> total &gt; before <span class="keyword">and</span> max_num &lt; total:</span><br><span class="line">      max_num = total</span><br><span class="line">      before = total</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">  nums.pop(<span class="number">0</span>)</span><br><span class="line">  before = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">print(max_num)</span><br></pre></td></tr></table></figure>
-
-<p>위 풀이는 컴파일러로 해봤을 때 동작은 되지만 문제의 <strong>시간 제한</strong>을 넘어서서 다른 블로그의 방법들을 찾아보고 이해해 보았다.</p>
-<h4 id="맞은-풀이"><a href="#맞은-풀이" class="headerlink" title="맞은 풀이"></a>맞은 풀이</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">n = int(input())</span><br><span class="line">nums = [<span class="number">0</span>]</span><br><span class="line">nums += list(map(int, input().split()))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 0번째 인덱스는 0으로 두기 위해 n+1 크기로 배열 생성</span></span><br><span class="line">temp = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(n+<span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line">result = <span class="number">-1001</span> <span class="comment"># 최소 숫자가 -1000이기 때문</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">    temp[i] = max(temp[i<span class="number">-1</span>]+nums[i], nums[i])</span><br><span class="line">    result = max(result, temp[i])</span><br><span class="line">    </span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
-
-<h5 id="런타임-에러-해결"><a href="#런타임-에러-해결" class="headerlink" title="런타임 에러 해결"></a>런타임 에러 해결</h5><p>위에 코드에서 n = map(int, input()) 로 했을 때엔 런타임 에러가 떴는데,  n = int(input()) 으로 바꾸니까 런타임에러가 해결됐다 ..(?)</p>
-<h5 id="풀이방법"><a href="#풀이방법" class="headerlink" title="풀이방법"></a>풀이방법</h5><ul>
-<li>이전 값을 사용해야 하기 때문에 temp, nums 배열 모두 0번째 인덱스는 0으로 두었다. </li>
-<li>이전까지 더해온 값들에 현재값을 더한값과(temp[i-1]+nums[i]) 현재값(nums[i]) 중 더 큰 값을 temp 배열에 저장한다.</li>
-<li>이전 temp 값들과 temp[i]를 비교하여 더 큰 값을 result로 지정한다.</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/09/backjoon-1912/" data-id="ckenwlouj00296jc9b5qgeg6z"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
     </article>
     
   
     
       <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/page/4/">이전</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">다음</a>
+        <a class="extend prev" rel="prev" href="/page/4/">이전</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/">다음</a>
       </nav>
     
   </section>
