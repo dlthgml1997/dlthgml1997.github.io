@@ -64,6 +64,132 @@
         
           
 
+<article id="post-backjoon-2178" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/23/backjoon-2178/">[백준알고리즘] 2178번: 미로 탐색- 파이썬(python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/23/backjoon-2178/" class="article-date">
+  <time datetime="2020-03-23T12:00:00.000Z" itemprop="datePublished">2020-03-23</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>N×M크기의 배열로 표현되는 미로가 있다.</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>0</th>
+<th>1</th>
+<th>1</th>
+<th>1</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>미로에서 1은 이동할 수 있는 칸을 나타내고, 0은 이동할 수 없는 칸을 나타낸다. 이러한 미로가 주어졌을 때, (1, 1)에서 출발하여 (N, M)의 위치로 이동할 때 지나야 하는 최소의 칸 수를 구하는 프로그램을 작성하시오. 한 칸에서 다른 칸으로 이동할 때, 서로 인접한 칸으로만 이동할 수 있다.</p>
+<p>위의 예에서는 15칸을 지나야 (N, M)의 위치로 이동할 수 있다. 칸을 셀 때에는 시작 위치와 도착 위치도 포함한다.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 두 정수 N, M(2 ≤ N, M ≤ 100)이 주어진다. 다음 N개의 줄에는 M개의 정수로 미로가 주어진다. 각각의 수들은 <strong>붙어서</strong> 입력으로 주어진다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 지나야 하는 최소의 칸 수를 출력한다. 항상 도착위치로 이동할 수 있는 경우만 입력으로 주어진다.</p>
+<h4 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4 6</span><br><span class="line">101111</span><br><span class="line">101010</span><br><span class="line">101011</span><br><span class="line">111011</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">15</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4 6</span><br><span class="line">110110</span><br><span class="line">110110</span><br><span class="line">111111</span><br><span class="line">111101</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2 25</span><br><span class="line">1011101110111011101110111</span><br><span class="line">1110111011101110111011101</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">38</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-입력-4"><a href="#예제-입력-4" class="headerlink" title="예제 입력 4"></a>예제 입력 4</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">7 7</span><br><span class="line">1011111</span><br><span class="line">1110001</span><br><span class="line">1000001</span><br><span class="line">1000001</span><br><span class="line">1000001</span><br><span class="line">1000001</span><br><span class="line">1111111</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-출력-4"><a href="#예제-출력-4" class="headerlink" title="예제 출력 4"></a>예제 출력 4</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    n, m = map(int, input().split())</span><br><span class="line">    data = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">        data.append(list(map(int, str(input()))))</span><br><span class="line">    distance = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(m)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">    distance[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">    queue = [[<span class="number">0</span>,<span class="number">0</span>]]</span><br><span class="line">    foot_prints = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        [i, j] = queue.pop(<span class="number">0</span>)</span><br><span class="line">        foot_prints.append([i,j])</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">if</span> j &gt; <span class="number">0</span> <span class="keyword">and</span> data[i][j<span class="number">-1</span>] == <span class="number">1</span> <span class="keyword">and</span> [i,j<span class="number">-1</span>] <span class="keyword">not</span> <span class="keyword">in</span> foot_prints <span class="keyword">and</span> [i,j<span class="number">-1</span>] <span class="keyword">not</span> <span class="keyword">in</span> queue:</span><br><span class="line">            queue.append([i,j<span class="number">-1</span>])</span><br><span class="line">            distance[i][j<span class="number">-1</span>] = distance[i][j] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> j &lt; m<span class="number">-1</span> <span class="keyword">and</span> data[i][j+<span class="number">1</span>] == <span class="number">1</span> <span class="keyword">and</span> [i,j+<span class="number">1</span>] <span class="keyword">not</span> <span class="keyword">in</span> foot_prints <span class="keyword">and</span> [i,j+<span class="number">1</span>] <span class="keyword">not</span> <span class="keyword">in</span> queue:</span><br><span class="line">            queue.append([i,j+<span class="number">1</span>])</span><br><span class="line">            distance[i][j+<span class="number">1</span>] = distance[i][j] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> data[i<span class="number">-1</span>][j] == <span class="number">1</span> <span class="keyword">and</span> [i<span class="number">-1</span>,j] <span class="keyword">not</span> <span class="keyword">in</span> foot_prints <span class="keyword">and</span> [i<span class="number">-1</span>,j] <span class="keyword">not</span> <span class="keyword">in</span> queue:</span><br><span class="line">            queue.append([i<span class="number">-1</span>,j])</span><br><span class="line">            distance[i<span class="number">-1</span>][j] = distance[i][j] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &lt; n<span class="number">-1</span> <span class="keyword">and</span> data[i+<span class="number">1</span>][j] == <span class="number">1</span> <span class="keyword">and</span> [i+<span class="number">1</span>,j] <span class="keyword">not</span> <span class="keyword">in</span> foot_prints <span class="keyword">and</span> [i+<span class="number">1</span>,j] <span class="keyword">not</span> <span class="keyword">in</span> queue:</span><br><span class="line">            queue.append([i+<span class="number">1</span>,j])    </span><br><span class="line">            distance[i+<span class="number">1</span>][j] = distance[i][j] + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> distance[n<span class="number">-1</span>][m<span class="number">-1</span>]</span><br><span class="line">    </span><br><span class="line">print(main())</span><br></pre></td></tr></table></figure>
+
+
+
+<p>큐를 이용한 bfs를 통해 문제 풀이를 하였다.</p>
+<p>(출처)[<a href="https://claude-u.tistory.com/212]" target="_blank" rel="noopener">https://claude-u.tistory.com/212]</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/23/backjoon-2178/" data-id="ckenwlouk002c6jc9hmqabmqw"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-backjoon-dfs-bfs" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -851,70 +977,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/03/12/angular-template-literal/" data-id="ckenwlou2001d6jc972fm7egp"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-angular-service-in-service" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/11/angular-service-in-service/">[앵귤러/Angular] 서비스 안에 서비스를 의존성으로 주입하기</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/11/angular-service-in-service/" class="article-date">
-  <time datetime="2020-03-11T09:50:00.000Z" itemprop="datePublished">2020-03-11</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; MessageService &#125; <span class="keyword">from</span> <span class="string">'./message.service'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroService &#123; </span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> messageService: MessageService</span>) &#123; &#125; </span><br><span class="line">  </span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>MessageService는 HeroService에 의존성으로 주입된다.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/11/angular-service-in-service/" data-id="ckenwlou000186jc9843g40z3"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>

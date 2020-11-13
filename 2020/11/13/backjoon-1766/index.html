@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [백준알고리즘] 1766: 문제집 - 위상정렬 (파이썬) |
+    
+    IT&#39;s easy if you try</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-backjoon-1766" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [백준알고리즘] 1766: 문제집 - 위상정렬 (파이썬)
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/11/13/backjoon-1766/" class="article-date">
+  <time datetime="2020-11-13T08:04:00.000Z" itemprop="datePublished">2020-11-13</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제링크: <a href="https://www.acmicpc.net/problem/1766" target="_blank" rel="noopener">https://www.acmicpc.net/problem/1766</a></li>
+</ul>
+<br>
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"></span><br><span class="line">n, m = map(int, input().split())</span><br><span class="line">tree = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> range(n+<span class="number">1</span>)]</span><br><span class="line">inDegree = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(n+<span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(m):</span><br><span class="line">  a, b = map(int, input().split())</span><br><span class="line">  tree[a].append(b)</span><br><span class="line">  inDegree[b] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">q = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">  <span class="keyword">if</span> inDegree[i] == <span class="number">0</span>: <span class="comment"># 차수가 0 인 문제를 최소 힙에 push</span></span><br><span class="line">    heapq.heappush(q, i)</span><br><span class="line"></span><br><span class="line">result = []</span><br><span class="line"><span class="keyword">while</span> q:</span><br><span class="line">  a = heapq.heappop(q)</span><br><span class="line">  result.append(a)</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> tree[a]: <span class="comment"># 문제쌍 B가 있는 경우에</span></span><br><span class="line">    inDegree[i] -= <span class="number">1</span> <span class="comment"># 문제쌍 B의 차수를 1 줄이고</span></span><br><span class="line">    <span class="keyword">if</span> inDegree[i] == <span class="number">0</span>: <span class="comment"># 문제쌍 B의 차수가 0 이면</span></span><br><span class="line">      heapq.heappush(q, i) <span class="comment"># 최소힙에 push</span></span><br><span class="line"></span><br><span class="line">print(*result) <span class="comment"># *result(*args) : 가변 위치인자 (임의 개수의 위치 인자를 tuple 형태의 변수로 저장)</span></span><br></pre></td></tr></table></figure>
+
+<p>위상 정렬을 모르고 풀었을 때 시간 초과가 나서 다른 풀이를 참고 했다. (출처: <a href="https://developmentdiary.tistory.com/466" target="_blank" rel="noopener">https://developmentdiary.tistory.com/466</a>)</p>
+<p>위상 정렬의 개념은 아래 블로그를 보면 자세하게 나와있다.</p>
+<p><a href="https://m.blog.naver.com/ndb796/221236874984" target="_blank" rel="noopener">https://m.blog.naver.com/ndb796/221236874984</a></p>
+<br>
+
+<p>위상 정렬을 새롭게 배우게 됐다. 위상 정렬에서 필요한 것은 <strong><code>tree</code>, <code>inDegree</code></strong> 이다. </p>
+<ul>
+<li><p><strong><code>tree</code></strong>는 n 개의 배열로 이루어져 있고, A번 문제를 먼저 풀어야 풀 수 있는 <strong>문제 B</strong>를 <strong><code>tree[A]</code></strong>에 <strong>append</strong> 한다.</p>
+</li>
+<li><p><strong><code>inDegree</code></strong>는 n개의 0으로 이루어져 있고, 먼저 풀어야되는 문제가 있는 문제들에 <strong>+ 1</strong> 을 해준다.</p>
+</li>
+<li><p>최소힙(<strong><code>heapq</code></strong>)을 사용했기 때문에 <strong><code>result</code></strong>에는 <strong>차수가 0</strong>이면서 난이도가 제일 <strong>낮은</strong> 문제부터 <strong>append</strong> 된다.</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/11/13/backjoon-1766/" data-id="ckhfzogms0000fhc98du661s6"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/11/12/error-operation-not-permitted/" class="article-nav-link">
+        <strong class="article-nav-caption">이전</strong>
+        <div class="article-nav-title">Mac Operation not permitted 오류 해결 - [Errno 1] Operation not permitted Program ended with exit code: 2</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2020 IT&#39;s easy if you try</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="IT&#39;s easy if you try"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="검색">
+        <i class="fe fe-search"></i>
+        검색
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>
