@@ -64,6 +64,86 @@
         
           
 
+<article id="post-backjoon-2667" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/11/17/backjoon-2667/">[백준알고리즘] 2667: 단지번호붙이기 - BFS (파이썬)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/11/17/backjoon-2667/" class="article-date">
+  <time datetime="2020-11-16T18:06:30.000Z" itemprop="datePublished">2020-11-17</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제링크 : <a href="https://www.acmicpc.net/problem/2667" target="_blank" rel="noopener">https://www.acmicpc.net/problem/2667</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이:"></a>풀이:</h1><p>BFS를 이용해서 풀었다. </p>
+<ul>
+<li>여기서 관건은 1의 위치를 찾아내서 BFS를 실행하는 것이다. <ul>
+<li>1의 위치를 찾아내는 것 또한 BFS를 이용했고, <code>find_one</code> 함수 내에도 자체 <code>visited</code> 배열인 <code>visited_one</code>을 만들어야 무한 루프 도는 것을 막을 수 있다.</li>
+<li><code>find_one</code>에서 <code>bfs</code> 함수를 실행하기 위한 조건에 <code>visited</code> 를 체크해서 단지 당 하나의 <code>bfs</code> 함수만 실행하게 된다.</li>
+</ul>
+</li>
+<li><code>bfs</code> 함수가 실행될 때마다 <code>total_apt += 1</code> 을 해서 총 단지 개수를 구한다.</li>
+<li><code>bfs</code> 함수마다 <code>cnt</code>(단지에 속하는 집의 수) 를 세서 <code>answer</code> 배열에 <code>append</code>한다.</li>
+<li>모든 <code>bfs</code> 함수 실행이 끝난 후, <code>answer</code> 을 오름차순으로 <code>sort</code> 하여 출력한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">n = int(input())</span><br><span class="line">space = []</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">    space.append(list(map(int, input().strip())))</span><br><span class="line"></span><br><span class="line">dx = [<span class="number">-1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">dy = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line">visited = [[<span class="number">0</span>] * n <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">total_apt = <span class="number">0</span></span><br><span class="line">answer = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> answer</span><br><span class="line">    <span class="keyword">global</span> total_apt</span><br><span class="line">    cnt = <span class="number">1</span></span><br><span class="line">    total_apt += <span class="number">1</span></span><br><span class="line">    queue = []</span><br><span class="line">    queue.append([x, y])</span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        x, y = queue.pop(<span class="number">0</span>)</span><br><span class="line">        visited[x][y] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">            nx = x + dx[i]</span><br><span class="line">            ny = y + dy[i]</span><br><span class="line">            <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; n <span class="keyword">and</span> <span class="number">0</span> &lt;= ny &lt; n <span class="keyword">and</span> space[nx][ny] == <span class="number">1</span> <span class="keyword">and</span> visited[nx][ny] == <span class="number">0</span>:</span><br><span class="line">                cnt += <span class="number">1</span></span><br><span class="line">                visited[nx][ny] = <span class="number">1</span></span><br><span class="line">                queue.append([nx, ny])</span><br><span class="line"></span><br><span class="line">    answer.append(cnt)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_one</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    queue = []</span><br><span class="line">    queue.append([x, y])</span><br><span class="line">    visited_one = [[<span class="number">0</span>] * n <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        x, y = queue.pop(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">            nx = x + dx[i]</span><br><span class="line">            ny = y + dy[i]</span><br><span class="line">            <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; n <span class="keyword">and</span> <span class="number">0</span> &lt;= ny &lt; n:</span><br><span class="line">                <span class="keyword">if</span> space[nx][ny] == <span class="number">1</span> <span class="keyword">and</span> visited[nx][ny] == <span class="number">0</span>:</span><br><span class="line">                    bfs(nx, ny)</span><br><span class="line">                <span class="keyword">if</span> visited_one[nx][ny] == <span class="number">0</span>:</span><br><span class="line">                    queue.append([nx, ny])</span><br><span class="line">                visited_one[nx][ny] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">()</span>:</span></span><br><span class="line">    find_one(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    print(total_apt)</span><br><span class="line">    answer.sort()</span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> answer:</span><br><span class="line">        print(a)</span><br><span class="line"></span><br><span class="line">solution()</span><br></pre></td></tr></table></figure>
+
+
+
+<p>오랜만에 BFS 복습 했당 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/11/17/backjoon-2667/" data-id="ckenwloul002e6jc9f6rlhl80"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-programmers-travel-routes" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -989,99 +1069,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/10/25/programmers-bridge-truck/" data-id="ckgp8m4230000bfc93pufaaq9"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-h-index-cpp" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/23/programmers-h-index-cpp/">[프로그래머스] H-Index : 정렬 (C++)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/10/23/programmers-h-index-cpp/" class="article-date">
-  <time datetime="2020-10-23T14:56:19.000Z" itemprop="datePublished">2020-10-23</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>문제 링크: <a href="https://programmers.co.kr/learn/courses/30/parts/12198" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/parts/12198</a> &gt; H-Index</p>
-<h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다. 어느 과학자의 H-Index를 나타내는 값인 h를 구하려고 합니다. 위키백과<a href="https://programmers.co.kr/learn/courses/30/lessons/42747#fn1" target="_blank" rel="noopener">1</a>에 따르면, H-Index는 다음과 같이 구합니다.</p>
-<p>어떤 과학자가 발표한 논문 <code>n</code>편 중, <code>h</code>번 이상 인용된 논문이 <code>h</code>편 이상이고 나머지 논문이 h번 이하 인용되었다면 <code>h</code>의 최댓값이 이 과학자의 H-Index입니다.</p>
-<p>어떤 과학자가 발표한 논문의 인용 횟수를 담은 배열 citations가 매개변수로 주어질 때, 이 과학자의 H-Index를 return 하도록 solution 함수를 작성해주세요.</p>
-<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
-<li>과학자가 발표한 논문의 수는 1편 이상 1,000편 이하입니다.</li>
-<li>논문별 인용 횟수는 0회 이상 10,000회 이하입니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>citations</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>[3, 0, 6, 1, 5]</td>
-<td>3</td>
-</tr>
-</tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>이 과학자가 발표한 논문의 수는 5편이고, 그중 3편의 논문은 3회 이상 인용되었습니다. 그리고 나머지 2편의 논문은 3회 이하 인용되었기 때문에 이 과학자의 H-Index는 3입니다.</p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solution</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; citations)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> answer = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    sort(citations.<span class="built_in">begin</span>(), citations.<span class="built_in">end</span>(), greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = citations.<span class="built_in">size</span>(); i&gt;<span class="number">0</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j =<span class="number">0</span>; j&lt;citations.<span class="built_in">size</span>();j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(citations[j] &gt;= i)</span><br><span class="line">                cnt ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(cnt &gt;= i)&#123;</span><br><span class="line">            answer = i;</span><br><span class="line">            <span class="keyword">return</span> answer;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><code>citations</code>를 <code>greater&lt;int&gt;()</code> 를 이용해 내림차순 정렬을 해준다.</p>
-</li>
-<li><p><code>n</code>개의 서적일 경우 <code>0</code>부터 <code>n</code> 까지 <code>for</code>문을 돌며 <code>i</code>개 이상 발행 된 경우 <code>cnt</code>를 하나 더한다.</p>
-</li>
-<li><p><code>i</code>이상 발행된 서적 수인 <code>cnt</code>가 <code>i</code> 이상이면 조건을 만족하는 최대 수이기 때문에 과학자의 H-Index가 된다.</p>
-</li>
-</ul>
-<p>  다른 풀이를 보면 <code>for</code>문 한번으로 푼 풀이도 있고, 이진탐색으로 푼 풀이도 있었다.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/23/programmers-h-index-cpp/" data-id="ckgmeeqt30000bbc98l5kgwn5"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
