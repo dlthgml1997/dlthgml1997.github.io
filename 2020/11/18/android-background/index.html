@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [안드로이드] 백그라운드 서비스 (Kotlin) |
+    
+    IT&#39;s easy if you try</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-android-background" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [안드로이드] 백그라운드 서비스 (Kotlin)
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/11/18/android-background/" class="article-date">
+  <time datetime="2020-11-18T06:50:14.000Z" itemprop="datePublished">2020-11-18</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="서비스-Service-란"><a href="#서비스-Service-란" class="headerlink" title="서비스(Service)란?"></a>서비스(Service)란?</h1><ul>
+<li>백그라운드에서 오래 실행되는 작업을 수행할 수 있는 애플리케이션 구성 요소 (사용자 인터페이스를 제공하지 않는다.)</li>
+<li>사용자가 다른 애플리케이션으로 전환하더라도 백그라운드에서 계속해서 실행된다.</li>
+<li>구성 요소를 서비스에 바인딩하여 서비스와 상호작용할 수 있다.</li>
+<li>프로세스 간 통신(IPC)도 수행할 수 있다.</li>
+</ul>
+<br>
+
+<h2 id="서비스의-세-가지-유형"><a href="#서비스의-세-가지-유형" class="headerlink" title="서비스의 세 가지 유형"></a>서비스의 세 가지 유형</h2><ol>
+<li><p><strong>포그라운드</strong></p>
+<ul>
+<li>사용자에게 잘 보이는 몇몇 작업을 수행</li>
+<li>예를 들어, 오디오 앱이라면 오디오 앱 트랙을 재생할 때 사용한다.</li>
+<li>포그라운드 서비스는 <strong>알림</strong> 을 표시해야 한다.<ul>
+<li>알림이 기기에 표시 되는 형식에는 <code>상태 표시줄 및 알림 창</code> , <code>헤드업 알림(사용자가 즉시 알아야 하는 중요한 알림, 기기가 잠금 해제될 때만 표시된다.)</code>, <code>잠금 화면</code>, <code>앱 아이콘 배지</code>, <code>Wear OS 기기</code> 이 있다.<br>(더 자세한 알림 설명 : <a href="https://developer.android.com/guide/topics/ui/notifiers/notifications?hl=ko" target="_blank" rel="noopener">https://developer.android.com/guide/topics/ui/notifiers/notifications?hl=ko</a>)</li>
+</ul>
+</li>
+<li>사용자가 앱과 상호작용하지 않을 때도 계속 실행된다.</li>
+</ul>
+</li>
+<li><p><strong>백그라운드</strong></p>
+<ul>
+<li><p>사용자에게 보이지 않는 작업을 수행</p>
+<blockquote>
+<p>백그라운드 서비스 실행에 대한 제한이 있다.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>바인드</strong></p>
+<ul>
+<li><p>애플리케이션 구성요소가 <code>bindService()</code> 를 호출하여 해당 서비스에 바인딩되면 서비스가 바인딩 된다.</p>
+</li>
+<li><p>구성 요소를 서비스에 바인딩하여 서비스와 상호작용할 수 있다.</p>
+</li>
+<li><p>프로세스 간 통신(IPC)도 수행할 수 있다.</p>
+</li>
+<li><p>바인딩된 서비스는 또 다른 애플리케이션 구성 요소가 이에 바인딩되어 있는 경우에만 실행된다.</p>
+</li>
+<li><p>모든 바인딩이 해제되면 해당 서비스는 소멸된다.</p>
+<br>
+
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="서비스를-생성하기-위해-확장할-수-있는-클래스-두가지"><a href="#서비스를-생성하기-위해-확장할-수-있는-클래스-두가지" class="headerlink" title="서비스를 생성하기 위해 확장할 수 있는 클래스 두가지"></a>서비스를 생성하기 위해 확장할 수 있는 클래스 두가지</h2><ol>
+<li><p><strong><code>Service</code></strong></p>
+<p>이것은 모든 서비스의 기본 클래스입니다. 이 클래스를 확장할 때는 서비스가 모든 작업을 완료할 수 있는 새 스레드를 생성하는 것이 중요합니다. 서비스는 기본적으로 애플리케이션의 기본 스레드를 사용하기 때문에 애플리케이션이 실행 중인 액티비티의 성능을 저하시킬 수 있습니다.</p>
+<blockquote>
+<p><strong>장점</strong></p>
+<ol>
+<li>각 호출을 onStartCommand()로 직접 처리할 수 있기 때문에 여러개의 요청을 동시에 수행할 수 있다.</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>단점</strong></p>
+<ol>
+<li>코드 작업이 더 많이 필요하다.</li>
+<li>작업이 완료되면 <code>stopSelf()</code> 또는 <code>stopService()</code>를 호출하여 서비스를 중단해야 한다.</li>
+</ol>
+</blockquote>
+</li>
+<li><p><strong><code>IntentService</code></strong></p>
+<p>이것은 <code>Service</code>의 하위 클래스로, 작업자 스레드를 사용하여 모든 시작 요청을 처리하되 한 번에 하나씩 처리합니다. 서비스가 여러 개의 요청을 동시에 처리하지 않아도 되는 경우에는 최선의 옵션입니다. <code>onHandleIntent()</code>를 구현합니다. 이는 각 시작 요청에 대해 인텐트를 수신해서 백그라운드 작업을 완료하도록 합니다.</p>
+<blockquote>
+<p><strong>장점</strong></p>
+<ol>
+<li>작업 큐로 한 번에 하나씩 요청을 수행하기 때문에, 다중 스레딩에 대해 염려할 필요가 없다.</li>
+<li><code>stopSelf()</code> 를 호출할 필요가 없다.</li>
+<li>생성자 하나와 <code>onHandleIntent()</code> 만으로 구현할 수 있다.</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>단점</strong></p>
+<ol>
+<li>여러 개의 요청을 동시에 처리할 수 없다.</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<br>
+
+<h1 id="IntentService-특징"><a href="#IntentService-특징" class="headerlink" title="IntentService 특징"></a>IntentService 특징</h1><ul>
+<li>애플리케이션의 기본 스레드와는 별도로, <code>onStartCommand()</code>에 전달된 모든 인텐트를 실행하는 기본 작업자 스레드를 생성합니다.</li>
+<li>인텐트를 한 번에 하나씩 <code>onHandleIntent()</code> 구현에 전달하는 작업 큐를 생성하므로, 다중 스레딩에 대해 염려할 필요가 전혀 없습니다.</li>
+<li>시작 요청이 모두 처리된 후 서비스를 중단하므로 개발자가 <code>stopSelf()</code>를 호출할 필요가 전혀 없습니다.</li>
+<li><code>onBind()</code>의 기본 구현을 제공하여 null을 반환하도록 합니다.</li>
+<li><code>onStartCommand()</code>의 기본 구현을 제공하여, 인텐트를 작업 큐로 보내고 그다음은 <code>onHandleIntent()</code> 구현으로 보냅니다.</li>
+</ul>
+<br>
+
+<h1 id="Service-특징"><a href="#Service-특징" class="headerlink" title="Service 특징"></a>Service 특징</h1><ul>
+<li><p>onStartCommand()가 반드시 정수를 반환해야 한다.</p>
+<ul>
+<li><p><code>START_NOT_STICKY</code></p>
+<p>시스템이 서비스를 <code>onStartCommand()</code> 반환 후에 중단시키면 서비스를 재생성하면 <em>안 됩니다</em>. 다만, 전달할 보류 인텐트가 있는 경우는 예외입니다.</p>
+<p>서비스가 불필요하게 실행되는 일을 피할 수 있는 가장 안전한 옵션이며, 애플리케이션이 완료되지 않은 모든 작업을 단순히 다시 시작할 수 있을 때 유용합니다.</p>
+</li>
+<li><p><code>START_STICKY</code></p>
+<p>시스템이 <code>onStartCommand()</code> 반환 후에 서비스를 중단하면 서비스를 다시 생성하고 <code>onStartCommand()</code>를 호출하되, 마지막 인텐트는 전달하지 <em>않습니다</em>. 그 대신 시스템이 null 인텐트로 <code>onStartCommand()</code>를 호출합니다. 다만, 전달할 보류 인텐트가 있는 경우에는 해당 인텐트가 전달됩니다. </p>
+<p>명령을 실행하지는 않지만 무한히 실행 중이며 작업을 기다리고 있는 미디어 플레이어와 같은 서비스에 적합합니다.</p>
+</li>
+<li><p><code>START_REDELIVER_INTENT</code></p>
+<p>시스템이 <code>onStartCommand()</code> 반환 후에 서비스를 중단하는 경우, 서비스를 다시 생성하고 이 서비스에 전달된 마지막 인텐트로 <code>onStartCommand()</code>를 호출하세요. 모든 보류 인텐트가 차례로 전달됩니다. </p>
+<p>즉시 재개되어야 하는 작업을 능동적으로 수행 중인 서비스(예: 파일 다운로드 등)에 적합합니다.</p>
+</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<ul>
+<li><strong>각 수명 주기 메서드</strong></li>
+</ul>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleService</span> : <span class="type">Service</span></span>() &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> startMode: <span class="built_in">Int</span> = <span class="number">0</span>             <span class="comment">// indicates how to behave if the service is killed</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> binder: IBinder? = <span class="literal">null</span>        <span class="comment">// interface for clients that bind</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> allowRebind: <span class="built_in">Boolean</span> = <span class="literal">false</span>   <span class="comment">// indicates whether onRebind should be used</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// The service is being create</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onStartCommand</span><span class="params">(intent: <span class="type">Intent</span>?, flags: <span class="type">Int</span>, startId: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">        <span class="comment">// The service is starting, due to a call to startService()</span></span><br><span class="line">        <span class="keyword">return</span> mStartMode</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onBind</span><span class="params">(intent: <span class="type">Intent</span>)</span></span>: IBinder? &#123;</span><br><span class="line">        <span class="comment">// A client is binding to the service with bindService()</span></span><br><span class="line">        <span class="keyword">return</span> mBinder</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onUnbind</span><span class="params">(intent: <span class="type">Intent</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="comment">// All clients have unbound with unbindService()</span></span><br><span class="line">        <span class="keyword">return</span> mAllowRebind</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onRebind</span><span class="params">(intent: <span class="type">Intent</span>)</span></span> &#123;</span><br><span class="line">        <span class="comment">// A client is binding to the service with bindService(),</span></span><br><span class="line">        <span class="comment">// after onUnbind() has already been called</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDestroy</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// The service is no longer used and is being destroyed</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong><code>startService()</code> 로 생성된 경우의 수명 주기</strong></p>
+<p><code>Call to startService()</code> ▶ <code>onCreate()</code> ▶ <em><code>onStartCommand()</code> ▶ <code>Service running</code> ▶ <code>service stoped(by itself or a client)</code></em> ▶ <code>on Destroy()</code> ▶ <code>Service shut down</code></p>
+</li>
+<li><p><strong><code>bindService()</code> 로 생성된 경우의 수명 주기</strong></p>
+<p><code>Call to bindService()</code> ▶ <code>onCreate()</code> ▶ <em><code>Clients are bound to service</code>▶ <code>All Clients unbind by calling unbindService()</code> ▶ <code>onUnbind()</code></em>  ▶ <code>onDestroy()</code> ▶ <code>Service shut down</code></p>
+</li>
+</ul>
+<p>기울어진 글자 부분이 Active Lifetime에 해당된다.</p>
+<hr>
+<p>참고 문서</p>
+<ul>
+<li><p><a href="https://developer.android.com/guide/background?hl=ko" target="_blank" rel="noopener">https://developer.android.com/guide/background?hl=ko</a> (백그라운드 처리 가이드)</p>
+</li>
+<li><p><a href="https://developer.android.com/training/run-background-service/send-request?hl=ko#kotlin" target="_blank" rel="noopener">https://developer.android.com/training/run-background-service/send-request?hl=ko#kotlin</a> (백그라운드 서비스에 작업 요청 전송)</p>
+</li>
+<li><p><a href="https://developer.android.com/training/run-background-service/create-service?hl=ko" target="_blank" rel="noopener">https://developer.android.com/training/run-background-service/create-service?hl=ko</a> (백그라운드 서비스 만들기)</p>
+</li>
+<li><p><a href="https://developer.android.com/guide/components/services?hl=ko" target="_blank" rel="noopener">https://developer.android.com/guide/components/services?hl=ko</a> (서비스 개요)</p>
+</li>
+<li><p><a href="https://developer.android.com/training/scheduling/alarms?hl=ko" target="_blank" rel="noopener">https://developer.android.com/training/scheduling/alarms?hl=ko</a> (반복 알람 예약)</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/11/18/android-background/" data-id="ckhnd19xy0000vlc92luk4r5n"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/11/17/backjoon-2667/" class="article-nav-link">
+        <strong class="article-nav-caption">이전</strong>
+        <div class="article-nav-title">[백준알고리즘] 2667: 단지번호붙이기 - BFS (파이썬)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2020 IT&#39;s easy if you try</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="IT&#39;s easy if you try"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="검색">
+        <i class="fe fe-search"></i>
+        검색
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>
