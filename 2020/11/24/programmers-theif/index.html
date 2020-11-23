@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [프로그래머스] 도둑질 - 동적계획법(Dynamic Programming) 파이썬 |
+    
+    IT&#39;s easy if you try</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-programmers-theif" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [프로그래머스] 도둑질 - 동적계획법(Dynamic Programming) 파이썬
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/11/24/programmers-theif/" class="article-date">
+  <time datetime="2020-11-23T17:10:07.000Z" itemprop="datePublished">2020-11-24</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크: <a href="https://programmers.co.kr/learn/courses/30/parts/12263" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/parts/12263</a> &gt; 도둑질</li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><ul>
+<li><p>원형으로 이루어져 있기 때문에 첫번째 집을 털었을 땐 마지막 집을 털지 못하고, 마지막 집을 털었을 땐 첫번째 집을 털지 못한다. 이를 2개의 case로 나누어서 메모이제이션하면서 푼다. </p>
+<blockquote>
+<p> 이때 주의할 점은 case는 i번째 집을 무조건 턴 경우의 최댓값을 저장하는 배열이 아니라 i번째 집까지 왔을 때 i번째 집을 털거나 안턴 값 중 큰 값을 저장하는 것이다. 이 말의 뜻은 바로 아래 더 자세하게 나와있다.</p>
+</blockquote>
+<ul>
+<li>*”인접한 앞 집(<code>i-1</code>) 까지 턴 money 값 ( <strong><code>case[i-1]</code></strong>)”* 과 *”인접해있지 않은 앞 집(<code>i-2</code>)까지 턴 money에 지금 집(<code>i</code>) money를 더한 값 ( <strong><code>money[i] + case1[i-2]</code></strong>)”* 을 비교해서 더 큰 값을 <strong><code>case[i]</code></strong> 에 저장한다.</li>
+<li>이때, <strong>case1</strong>은 마지막 집은 털지 않기 때문에 <code>len(money)-1</code> 까지 for문을 돈다.<ul>
+<li><code>case1[1]</code> 은 (두번째 집이 턴 money값을 저장하는 것이 아니라) 첫번째 집 money를 턴 경우와 두번째 집 money를 턴 경우 중 큰 값을 저장하는 것이기 때문에 <code>max(money[0],money[1])</code> 를 저장해야한다.</li>
+</ul>
+</li>
+<li><strong>case2</strong>는 첫번째 집은 털지 않기 때문에 <code>case2[0]</code> 을 <code>0</code> 으로 두고 마지막 집까지 for문을 돈다.</li>
+</ul>
+</li>
+<li><p>두가지 케이스 중 제일 큰 값이 정답이 된다.</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(money)</span>:</span></span><br><span class="line">    case1 = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(money))]</span><br><span class="line">    case2 = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(money))]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># case1 : 첫번째 집을 터는 케이스</span></span><br><span class="line">    case1[<span class="number">0</span>] = money[<span class="number">0</span>]</span><br><span class="line">    case1[<span class="number">1</span>] = max(money[<span class="number">0</span>],money[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, len(money)<span class="number">-1</span>):</span><br><span class="line">        case1[i] = max(case1[i<span class="number">-1</span>], money[i] + case1[i<span class="number">-2</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># case2 : 마지막 집을 터는 케이스</span></span><br><span class="line">    case2[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">    case2[<span class="number">1</span>] = money[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, len(money)):</span><br><span class="line">        case2[i] = max(case2[i<span class="number">-1</span>], money[i] + case2[i<span class="number">-2</span>])</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> max(max(case1),max(case2))</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/11/24/programmers-theif/" data-id="ckhutojtj00001lc9ater8o14"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/11/22/programmers-load-to-go-school/" class="article-nav-link">
+        <strong class="article-nav-caption">이전</strong>
+        <div class="article-nav-title">[프로그래머스] 등굣길 - 동적계획법(Dynamic Programming) 파이썬</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2020 IT&#39;s easy if you try</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="IT&#39;s easy if you try"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="검색">
+        <i class="fe fe-search"></i>
+        검색
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>
