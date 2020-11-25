@@ -87,9 +87,14 @@
 <li><code>inDegree</code>: 진입차수이며, a라는 건물 전에 건설되어야 하는 건물의 수만큼 1씩 증가한다. 예를 들어, 4 건물 전에 2 건물과 3 건물이 건설되어야하는 경우 inDegree[4] 는 2가 된다.</li>
 </ul>
 </li>
-<li><p>K줄에 걸쳐 영우의 게임 정보가 올 때, j 건물을 건설한 경우 j 를 건설한 다음 건설할 수 있는 건물들(<code>tree[j]</code>)의 진입 차수(<code>inDegree</code>)를 1만큼 줄인다. 그리고 건물이 건설될 때마다 <code>yw_cnt[해당건물번호] += 1</code> 을 해준다.</p>
-<blockquote>
-<p>건설할 수 없는 건물을 건설하거나, 건설한적 없는 건물이 파괴되었다면 ‘Lier!’ 를 출력하자.</p>
+<li><p>K줄에 걸쳐 영우의 게임 정보가 올 때, </p>
+<ul>
+<li><code>1 j</code> 가 왔을때는,<code>j</code> 를 건설한 다음 건설할 수 있는 건물들(<code>tree[j]</code>)의 진입 차수(<code>inDegree</code>)를 1만큼 줄인다. 그리고 건물이 건설될 때마다 <code>yw_cnt[해당건물번호] += 1</code> 을 해준다.</li>
+<li><code>2  j</code> 가 왔을 때는, <code>j</code> 가 건설되지 않았는데 <code>j</code>를 파괴한 경우 <code>answer</code> 를 “Lier!”로 바꾼다.</li>
+</ul>
+</li>
+<li><blockquote>
+<p>조건 : 건설할 수 없는 건물을 건설하거나, 건설한적 없는 건물이 파괴되었다면 ‘Lier!’ 를 출력하자.</p>
 </blockquote>
 <ol>
 <li><strong>건설할 수 없는 건물을 건설한 경우</strong>는 <code>inDegree</code> 가 <code>0보다 큰 경우</code>이다. (예를 들어, <code>inDegree</code>가 <code>1</code>이라는 것은 아직 우선되는 건물 하나가 건설되지 않았다는 뜻이기 때문이다.)</li>
