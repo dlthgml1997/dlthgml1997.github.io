@@ -83,8 +83,8 @@
 <ul>
 <li><p>저번에 풀었던 위상정렬 문제인 ‘’문제집’’ 에서 처럼 <code>tree</code> ,<code>inDegree</code> 를 이용해서 건물의 관계를 저장했다.</p>
 <ul>
-<li><code>tree</code>: a라는 건물이 세워진 후 세워져야하는 건물들을 tree[a] 에 저장한다. 예를 들어, 1 건물 다음 2 건물과 3 건물이 세워져야하는 경우 tree[1]에는 [2,3]이 저장된다.</li>
-<li><code>inDegree</code>: 진입차수이며, a라는 건물 전에 세워져야 하는 건물의 수만큼 1씩 증가한다. 예를 들어, 4 건물 전에 2 건물과 3 건물이 세워져야하는 경우 inDegree[4] 는 2가 된다.</li>
+<li><code>tree</code>: a라는 건물이 건설된 후 건설해야하는 건물들을 tree[a] 에 저장한다. 예를 들어, 1 건물 다음 2 건물과 3 건물이 건설되어야하는 경우 tree[1]에는 [2,3]이 저장된다.</li>
+<li><code>inDegree</code>: 진입차수이며, a라는 건물 전에 건설되어야 하는 건물의 수만큼 1씩 증가한다. 예를 들어, 4 건물 전에 2 건물과 3 건물이 건설되어야하는 경우 inDegree[4] 는 2가 된다.</li>
 </ul>
 </li>
 <li><p>K줄에 걸쳐 영우의 게임 정보가 올 때, j 건물을 건설한 경우 j 를 건설한 다음 건설할 수 있는 건물들(<code>tree[j]</code>)의 진입 차수(<code>inDegree</code>)를 1만큼 줄인다. 그리고 건물이 건설될 때마다 <code>yw_cnt[해당건물번호] += 1</code> 을 해준다.</p>
@@ -93,7 +93,7 @@
 </blockquote>
 <ol>
 <li><strong>건설할 수 없는 건물을 건설한 경우</strong>는 <code>inDegree</code> 가 <code>0보다 큰 경우</code>이다. (예를 들어, <code>inDegree</code>가 <code>1</code>이라는 것은 아직 우선되는 건물 하나가 건설되지 않았다는 뜻이기 때문이다.)</li>
-<li><strong>건설한 적 없는 건물이 파괴된 경우</strong>는 <code>yw_cnt[건물 번호]</code> 가 <code>0</code>인 경우이다. (세워진 건물이 없다는 의미이다.)</li>
+<li><strong>건설한 적 없는 건물이 파괴된 경우</strong>는 <code>yw_cnt[건물 번호]</code> 가 <code>0</code>인 경우이다. (건설된 건물이 없다는 의미이다.)</li>
 </ol>
 </li>
 <li><p>코드</p>
