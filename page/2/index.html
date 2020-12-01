@@ -64,6 +64,86 @@
         
           
 
+<article id="post-backjoon-1766" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/11/13/backjoon-1766/">[백준알고리즘] 1766: 문제집 - 위상정렬 (파이썬)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/11/13/backjoon-1766/" class="article-date">
+  <time datetime="2020-11-13T08:04:00.000Z" itemprop="datePublished">2020-11-13</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제링크: <a href="https://www.acmicpc.net/problem/1766" target="_blank" rel="noopener">https://www.acmicpc.net/problem/1766</a></li>
+</ul>
+<br>
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>위상 정렬을 모르고 풀었을 때 시간 초과가 나서 다른 풀이를 참고 했다. (출처: <a href="https://developmentdiary.tistory.com/466" target="_blank" rel="noopener">https://developmentdiary.tistory.com/466</a>)</p>
+<p>위상 정렬의 개념은 아래 블로그를 보면 자세하게 나와있다.</p>
+<p><a href="https://m.blog.naver.com/ndb796/221236874984" target="_blank" rel="noopener">https://m.blog.naver.com/ndb796/221236874984</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"></span><br><span class="line">n, m = map(int, input().split())</span><br><span class="line">tree = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> range(n+<span class="number">1</span>)]</span><br><span class="line">inDegree = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(n+<span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(m):</span><br><span class="line">  a, b = map(int, input().split())</span><br><span class="line">  tree[a].append(b)</span><br><span class="line">  inDegree[b] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">q = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">  <span class="keyword">if</span> inDegree[i] == <span class="number">0</span>: <span class="comment"># 차수가 0 인 문제를 최소 힙에 push</span></span><br><span class="line">    heapq.heappush(q, i)</span><br><span class="line"></span><br><span class="line">result = []</span><br><span class="line"><span class="keyword">while</span> q:</span><br><span class="line">  a = heapq.heappop(q)</span><br><span class="line">  result.append(a)</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> tree[a]: <span class="comment"># 문제쌍 B가 있는 경우에</span></span><br><span class="line">    inDegree[i] -= <span class="number">1</span> <span class="comment"># 문제쌍 B의 차수를 1 줄이고</span></span><br><span class="line">    <span class="keyword">if</span> inDegree[i] == <span class="number">0</span>: <span class="comment"># 문제쌍 B의 차수가 0 이면</span></span><br><span class="line">      heapq.heappush(q, i) <span class="comment"># 최소힙에 push</span></span><br><span class="line"></span><br><span class="line">print(*result) <span class="comment"># *result(*args) : 가변 위치인자 (임의 개수의 위치 인자를 tuple 형태의 변수로 저장)</span></span><br></pre></td></tr></table></figure>
+
+<p>위상 정렬을 새롭게 배우게 됐다. 위상 정렬에서 필요한 것은 <strong><code>tree</code>, <code>inDegree</code></strong> 이다. </p>
+<ul>
+<li><p><strong><code>tree</code></strong>는 n 개의 배열로 이루어져 있고, A번 문제를 먼저 풀어야 풀 수 있는 <strong>문제 B</strong>를 <strong><code>tree[A]</code></strong>에 <strong>append</strong> 한다.</p>
+</li>
+<li><p><strong><code>inDegree</code></strong>는 n개의 0으로 이루어져 있고, 먼저 풀어야되는 문제가 있는 문제들에 <strong>+ 1</strong> 을 해준다.</p>
+</li>
+<li><p>최소힙(<strong><code>heapq</code></strong>)을 사용했기 때문에 <strong><code>result</code></strong>에는 <strong>차수가 0</strong>이면서 난이도가 제일 <strong>낮은</strong> 문제부터 <strong>append</strong> 된다.</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/11/13/backjoon-1766/" data-id="ckhfzogms0000fhc98du661s6"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-error-operation-not-permitted" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -1012,83 +1092,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/10/23/programmers-kth-num-cpp/" data-id="ckgm0ddqy0000a2c9hqgd322z"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-backjoon-10451" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/23/backjoon-10451/">[백준알고리즘] 10451번: 순열 사이클 (C++)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/10/23/backjoon-10451/" class="article-date">
-  <time datetime="2020-10-22T15:50:18.000Z" itemprop="datePublished">2020-10-23</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>문제 링크 : <a href="https://www.acmicpc.net/problem/10451" target="_blank" rel="noopener">https://www.acmicpc.net/problem/10451</a></p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>간단하게 생각하면 오히려 더 쉬운 문제이다. 처음에 2차원 배열로 풀려고 해서 더 어려웠다 ㅠㅠ. 다른 블로그의 풀이를 참고했다!</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt; //memset을 이용하기 위한 라이브러리</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T, N;</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="keyword">int</span> nums[<span class="number">1001</span>];</span><br><span class="line"><span class="keyword">int</span> visited[<span class="number">1001</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">  visited[x] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span>(!visited[nums[x]])</span><br><span class="line">    dfs(nums[x]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">cin</span> &gt;&gt; T;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; T; i++)&#123;</span><br><span class="line">    <span class="keyword">int</span> answer = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; N;</span><br><span class="line">    <span class="comment">// 2</span></span><br><span class="line">    <span class="built_in">memset</span>(visited, <span class="number">0</span>, <span class="keyword">sizeof</span>(visited)); <span class="comment">// memset(초기화할 배열, 원하는 원소, 초기화를 원하는 길이);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;= N; i++)&#123;</span><br><span class="line">      <span class="built_in">cin</span> &gt;&gt; nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;= N; i++)&#123;</span><br><span class="line">      <span class="keyword">if</span>(!visited[i]) &#123;</span><br><span class="line">        dfs(i); answer++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; answer &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li><strong><code>visited</code> 배열과 <code>nums</code> 배열을 생성한다.</strong></li>
-</ol>
-<ul>
-<li><code>visited</code>: 방문 여부를 확인한다. (사이클 확인하기 위한 배열)</li>
-<li><code>nums</code>: 순열을 받아온다. </li>
-</ul>
-<ol start="2">
-<li><strong>새로운 테스트 케이스가 실행될 때, <code>visited</code> 배열 초기화 (<code>memset</code> 활용)</strong></li>
-<li><strong><code>1</code>부터 <code>N</code>까지 <code>for문</code>을 돌면서 방문하지 않은 수(<code>i</code>)는 <code>dfs</code> 실행 (방문한 경우: 이전 수의 사이클에 포함되어 이미 방문했다는 뜻)</strong></li>
-<li><strong>방문했으니 <code>visited[x]</code> 를 1로 바꿔준다. <code>nums[x]</code>에는 <code>x</code>와 선으로 연결되어 있는 수가 담겨져 있으므로 <code>dfs(nums[i])</code>를 호출해 연결된 수로 이동한다. (이때, <code>visited[nums[i]]</code>를 체크해서 사이클 무한 회전을 막는다.)</strong></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/23/backjoon-10451/" data-id="ckgl0omk80000bdc909aaglrm"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>

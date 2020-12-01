@@ -64,6 +64,123 @@
         
           
 
+<article id="post-programmers-phonebook" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/08/27/programmers-phonebook/">[프로그래머스] 해시- 전화번호 목록 (파이썬/ python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/08/27/programmers-phonebook/" class="article-date">
+  <time datetime="2020-08-27T12:10:35.325Z" itemprop="datePublished">2020-08-27</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>전화번호부에 적힌 전화번호 중, 한 번호가 다른 번호의 접두어인 경우가 있는지 확인하려 합니다.<br>전화번호가 다음과 같을 경우, 구조대 전화번호는 영석이의 전화번호의 접두사입니다.</p>
+<ul>
+<li>구조대 : 119</li>
+<li>박준영 : 97 674 223</li>
+<li>지영석 : 11 9552 4421</li>
+</ul>
+<p>전화번호부에 적힌 전화번호를 담은 배열 phone_book 이 solution 함수의 매개변수로 주어질 때, 어떤 번호가 다른 번호의 접두어인 경우가 있으면 false를 그렇지 않으면 true를 return 하도록 solution 함수를 작성해주세요.</p>
+<h5 id="제한-사항"><a href="#제한-사항" class="headerlink" title="제한 사항"></a>제한 사항</h5><ul>
+<li>phone_book의 길이는 1 이상 1,000,000 이하입니다.</li>
+<li>각 전화번호의 길이는 1 이상 20 이하입니다.</li>
+</ul>
+<h5 id="입출력-예제"><a href="#입출력-예제" class="headerlink" title="입출력 예제"></a>입출력 예제</h5><table>
+<thead>
+<tr>
+<th>phone_book</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[119, 97674223, 1195524421]</td>
+<td>false</td>
+</tr>
+<tr>
+<td>[123,456,789]</td>
+<td>true</td>
+</tr>
+<tr>
+<td>[12,123,1235,567,88]</td>
+<td>false</td>
+</tr>
+</tbody></table>
+<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>입출력 예 #1<br>앞에서 설명한 예와 같습니다.</p>
+<p>입출력 예 #2<br>한 번호가 다른 번호의 접두사인 경우가 없으므로, 답은 true입니다.</p>
+<p>입출력 예 #3<br>첫 번째 전화번호, “12”가 두 번째 전화번호 “123”의 접두사입니다. 따라서 답은 false입니다.</p>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(phone_book)</span>:</span></span><br><span class="line">    phone_book.sort()</span><br><span class="line">    answer = <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(phone_book)<span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">if</span> phone_book[i+<span class="number">1</span>].startswith(phone_book[i],<span class="number">0</span>,len(phone_book[i])):</span><br><span class="line">            answer = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>새로 알게 된 것 </p>
+<ul>
+<li><p>find() =&gt; 인덱스 위치 반환</p>
+</li>
+<li><p>startswith(확인하고자하는 문자, 시작위치, 끝위치) =&gt; True/ False 여부 반환</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'1'</span>)) <span class="comment"># True</span></span><br><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'2'</span>)) <span class="comment"># False</span></span><br><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'4'</span>,<span class="number">2</span>)) <span class="comment"># False</span></span><br><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'4'</span>,<span class="number">3</span>,<span class="number">4</span>)) <span class="comment"># True</span></span><br><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'1'</span>,<span class="number">2</span>,<span class="number">4</span>)) <span class="comment"># False</span></span><br><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'1'</span>,<span class="number">0</span>,<span class="number">2</span>)) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>endswith()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'12345'</span>.endswith(<span class="string">'5'</span>)) <span class="comment"># True</span></span><br><span class="line">print(<span class="string">'12345'</span>.endswith(<span class="string">'2'</span>,<span class="number">0</span>,<span class="number">2</span>)) <span class="comment"># True '12'</span></span><br><span class="line">print(<span class="string">'12345'</span>.endswith(<span class="string">'4'</span>,<span class="number">0</span>,<span class="number">5</span>)) <span class="comment"># False '12345'</span></span><br><span class="line">print(<span class="string">'12345'</span>.endswith(<span class="string">'5'</span>,<span class="number">4</span>,<span class="number">5</span>)) <span class="comment"># True '45'</span></span><br></pre></td></tr></table></figure>
+
+<p>위 예제들에서 알 수 있다싶이, 배열은 두번째 인수의 인덱스 부터 세번째 인수의 인덱스-1까지 자른 후 검사한다 ! </p>
+<p>default 는 배열 전체.</p>
+</li>
+</ul>
+</li>
+<li><p>phone_book.sort() 를 하면 스트링 sort이기 때문에</p>
+<p><code>[&#39;119&#39;, &#39;97674223&#39;, &#39;1195524421&#39;]</code>-&gt; <code>[&#39;119&#39;, &#39;1195524421&#39;, &#39;97674223&#39;]</code>  이러한 형식으로 sort 된다.</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/08/27/programmers-phonebook/" data-id="ckenwlouw00366jc9gph0gqkd"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-programmers-priority-queue" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -960,146 +1077,6 @@
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-backjoon-12761" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/19/backjoon-12761/">[알고리즘] 백준알고리즘(boj) - 12761: 돌다리 (파이썬/python)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/19/backjoon-12761/" class="article-date">
-  <time datetime="2020-08-18T16:03:00.000Z" itemprop="datePublished">2020-08-19</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
-<thead>
-<tr>
-<th align="left">시간 제한</th>
-<th align="left">메모리 제한</th>
-<th align="left">제출</th>
-<th align="left">정답</th>
-<th align="left">맞은 사람</th>
-<th align="left">정답 비율</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">1 초</td>
-<td align="left">128 MB</td>
-<td align="left">1856</td>
-<td align="left">923</td>
-<td align="left">773</td>
-<td align="left">51.091%</td>
-</tr>
-</tbody></table>
-<p>동규와 주미는 일직선 상의 돌 다리 위에있다. 돌의 번호는 0 부터 100,000 까지 존재하고 동규는 N번 돌 위에, 주미는 M번 돌 위에 위치하고 있다. 동규는 주미가 너무 보고싶기 때문에 최대한 빨리 주미에게 가기 위해 A,B 만큼의 힘을 가진 스카이 콩콩을 가져왔다. 동규가 정한 다리를 건너는 규칙은 턴 방식인데, 한 턴에 이동할 수 있는 거리는 이러하다. 현 위치에서 +1칸, -1칸을 이동할 수 있고, 스카이 콩콩을 이용해 현 위치에서 A나 B만큼 좌우로 점프할 수 있으며, 순간적으로 힘을 모아 현 위치의 A배나 B배의 위치로 이동을 할 수 있다. 예를 들어 지금 동규가 7번 돌 위에 있고 스카이 콩콩의 힘이 8이면 그냥 점프를 해서 15번 돌에 갈 수도 있고, 순간적으로 힘을 모아 56번 돌에 갈 수도 있다는 것이다. 주어진 8가지의 방법 중 적절한 방법을 골라서 최대한 빨리 동규가 주미를 만날 수 있게 도와주자. 단, 이동 과정에서 100,000보다 크거나 0보다 작은 번호의 돌은 존재하지 않으므로 갈 수 없고, 같은 방법을 계속 사용해도 되며 항상 도달할 수 있는 케이스만 주어진다.</p>
-<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>입력의 첫 줄에 스카이 콩콩의 힘 A와 B, 그리고 동규의 현재위치 N, 주미의 현재 위치 M이 주어진다. (단, 2≤A,B≤30 이고  0≤N,M≤100,000)</p>
-<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>동규가 주미에게 도달하기 위한 최소한의 이동 횟수를 출력하라.</p>
-<h3 id="예제-입력"><a href="#예제-입력" class="headerlink" title="예제 입력"></a>예제 입력</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2 3 1 20</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-출력"><a href="#예제-출력" class="headerlink" title="예제 출력"></a>예제 출력</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력"></a>예제 입력</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 7 2 98500</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력"></a>예제 출력</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        start = queue.pop(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):        </span><br><span class="line">            <span class="keyword">if</span> i &lt; <span class="number">6</span> <span class="keyword">and</span> <span class="number">0</span>&lt;= start+ steps[i] &lt; <span class="number">100001</span> <span class="keyword">and</span> foot_prints[start + steps[i]] == <span class="number">0</span>:</span><br><span class="line">                now = start + steps[i]</span><br><span class="line">                foot_prints[now] = <span class="number">1</span></span><br><span class="line">                queue.append(now)</span><br><span class="line">                count[now] += count[start] + <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> i &gt;= <span class="number">6</span> <span class="keyword">and</span> <span class="number">0</span> &lt;= start * steps[i] &lt; <span class="number">100001</span> <span class="keyword">and</span> foot_prints[start * steps[i]] == <span class="number">0</span> : </span><br><span class="line">                now = start * steps[i]</span><br><span class="line">                foot_prints[now] = <span class="number">1</span></span><br><span class="line">                queue.append(now)</span><br><span class="line">                count[now]+= count[start] + <span class="number">1</span></span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">a, b, n, m = map(int,input().split())</span><br><span class="line">steps = [<span class="number">-1</span>, <span class="number">1</span>, a, b, -a, -b, a, b]</span><br><span class="line">queue= [n]</span><br><span class="line">foot_prints = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">100001</span>)]</span><br><span class="line">count = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">100001</span>)]</span><br><span class="line">bfs()</span><br><span class="line">print(count[m])</span><br></pre></td></tr></table></figure>
-
-
-
-<p>bfs 를 이용해서 풀었다.</p>
-<ul>
-<li><p>steps 배열에 이동할 수 있는 모든 경우의 수를 넣는다 </p>
-<blockquote>
-<p>steps =  [-1칸 이동, +1칸 이동, a 만큼 이동, b만큼 이동, -a만큼 이동, -b만큼 이동, *a만큼 이동, *b만큼 이동]</p>
-</blockquote>
-</li>
-<li><p>foot_prints 를 길이 100000인 배열로 만드는 이유 ! </p>
-<ul>
-<li>내가 기존에 풀었던 방식인 <code>if start + steps[i] not in foot_prints</code> 으로 하면 foot_prints를 전체탐색해야하기 때문에 시간이 오래걸려서 </li>
-</ul>
-</li>
-<li><p><code>for i in range(8)</code>에서 start에서 steps의 모든 방법으로 이동한 곳의 count 를 1 증가시킨다. </p>
-<blockquote>
-<p>for 문이 i= 0 부터 i=7 까지 한번 돌면 (while 문이 1번 돈 상태)</p>
-<p>count[start-1]</p>
-<p>count[start+1]</p>
-<p>count[start+a]</p>
-<p>count[start+b]</p>
-<p>count[start-a]</p>
-<p>count[start-b]</p>
-<p>count[start*a]</p>
-<p>count[start-*b]</p>
-<p>(if 조건을 모두 만족한다면,)</p>
-<p>가 모두 1이 된다</p>
-</blockquote>
-<ul>
-<li><p>들린 곳을 모두 queue에 삽입하였기 때문에 들린 곳이 start가 되고 다시 steps의 모든 방법으로 이동한 곳의 count는 count[start]보다 1 증가한 값이 된다.</p>
-<blockquote>
-<p> while 문이 2번 돈 상태에서 ( if 조건을 모두 만족했다는 전제하에서는) count[now]는 2가 된다 (while 한번 돌았을 때 count[now] =1 이 되었기 때문) </p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>while 문은 start에서 steps로 가는 모든 경우(<code>for i in range(8)</code>)가 범위가 0이상 100000이하를 만족하지 못하거나  이미 다 들린 경우(<code>foot_prints가 1</code>) 끝난다.</p>
-</li>
-<li><p>이제 count[m]은 동규(n)가 주미(m)에게 가기 위해 이동한 횟수임을 알 수 있다 !</p>
-</li>
-</ul>
-<p>deque 이용하는 방법 익히려고 deque 이용한 코드도 남겨두기,,</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">두<span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        start = queue.popleft()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):        </span><br><span class="line">            <span class="keyword">if</span> i &lt; <span class="number">6</span> <span class="keyword">and</span> <span class="number">0</span>&lt;= start+ steps[i] &lt; <span class="number">100001</span> <span class="keyword">and</span> foot_prints[start + steps[i]] == <span class="number">0</span>:</span><br><span class="line">                now = start + steps[i]</span><br><span class="line">                foot_prints[now] = <span class="number">1</span></span><br><span class="line">                queue.append(now)</span><br><span class="line">                count[now] += count[start] + <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> i &gt;= <span class="number">6</span> <span class="keyword">and</span> <span class="number">0</span> &lt;= start * steps[i] &lt; <span class="number">100001</span> <span class="keyword">and</span> foot_prints[start * steps[i]] == <span class="number">0</span> : </span><br><span class="line">                now = start * steps[i]</span><br><span class="line">                foot_prints[now] = <span class="number">1</span></span><br><span class="line">                queue.append(now)</span><br><span class="line">                count[now]+= count[start] + <span class="number">1</span></span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">a, b, n, m = map(int,input().split())</span><br><span class="line">steps = [<span class="number">-1</span>, <span class="number">1</span>, a, b, -a, -b, a, b]</span><br><span class="line">queue = deque()</span><br><span class="line">queue.append(n)</span><br><span class="line">foot_prints = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">100001</span>)]</span><br><span class="line">count = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">100001</span>)]</span><br><span class="line">bfs()</span><br><span class="line">print(count[m])</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/08/19/backjoon-12761/" data-id="ckenwlou9001p6jc9g1rc6zs7"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
 
     </footer>
 
