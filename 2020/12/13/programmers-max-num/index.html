@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    [프로그래머스] 스킬 체크 레벨 1 풀어보기(파이썬) |
+    [프로그래머스] 가장 큰 수 (파이썬) |
     
     IT&#39;s easy if you try</title>
   
@@ -31,7 +31,7 @@
   <section class="outer">
   
 
-<article id="post-programmers-skill-checks-1" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-programmers-max-num" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -39,7 +39,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      [프로그래머스] 스킬 체크 레벨 1 풀어보기(파이썬)
+      [프로그래머스] 가장 큰 수 (파이썬)
     </h1>
   
   
@@ -52,8 +52,8 @@
 
     
       <div class="article-meta">
-        <a href="/2020/12/10/programmers-skill-checks-1/" class="article-date">
-  <time datetime="2020-12-10T09:00:00.000Z" itemprop="datePublished">2020-12-10</time>
+        <a href="/2020/12/13/programmers-max-num/" class="article-date">
+  <time datetime="2020-12-13T03:53:00.000Z" itemprop="datePublished">2020-12-13</time>
 </a>
         
       </div>
@@ -77,30 +77,22 @@
 
       
         <ul>
-<li>링크 : <a href="https://programmers.co.kr/skill_checks" target="_blank" rel="noopener">https://programmers.co.kr/skill_checks</a> &gt; 레벨 1</li>
+<li>문제링크 : <a href="https://programmers.co.kr/learn/courses/30/lessons/42746" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/lessons/42746</a></li>
 </ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>난이도가 좀 많이 쉬워서 올리기 민망하지만 ㅎㅎ 풀어보았다.</p>
-<ul>
-<li><p><strong>문제 1</strong></p>
-<p>n = 3 이면 ‘수박수’</p>
-<p>n = 5 이면 ‘수박수박수’ 와 같은 문자열을 반환한다.</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(n)</span>:</span></span><br><span class="line">    answer = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">if</span> i% <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">            answer += <span class="string">'수'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            answer += <span class="string">'박'</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>이 문제에서 중요한 점은 <code>[6,10,2]</code>가 주어진 경우에 단순한 sort로는 <code>1062</code>가 되어 문제를 해결할 수 없다는 것이다.</p>
+<p>프로그래머스 다른사람의 풀이에서 코드를 가져왔다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(numbers)</span>:</span></span><br><span class="line">    numbers = list(map(str, numbers))</span><br><span class="line">    numbers.sort(key = <span class="keyword">lambda</span> x : x*<span class="number">3</span> , reverse = <span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">return</span> str(int(<span class="string">''</span>.join(numbers)))</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p><strong>문제 2</strong></p>
-<p>배열 arr이 주어지면 최소 숫자를 제거한 배열을 반환한다.</p>
-<p>배열이 모두 비어진 경우에는 [-1]을 반환한다.</p>
-</li>
+<li><code>sort</code> 함수를 통해 <code>기존 숫자들의 길이* 3 한 수</code>를 <code>key</code>로 해서 내림차순 정렬을 한다. (<code>1000이하의 수</code>이기 때문에 <code>*3</code>을 해준다.)</li>
+<li><code>[0,0,0]</code>의 경우 정수는 <code>000</code>이 아닌 <code>0</code>이기 때문에 이를 위해 <code>int</code>로 변환했다가 다시 <code>str</code>로 변환한다.</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(arr)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(arr) == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> [<span class="number">-1</span>]</span><br><span class="line">    i = min(arr)</span><br><span class="line">    arr.remove(i)</span><br><span class="line">    answer = arr</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
+<p>새로운 정렬 방법을 알 수 있는 문제였다.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/12/10/programmers-skill-checks-1/" data-id="ckiim704s0000ozc97m3hgiz4"
+      <a data-url="http://yoursite.com/2020/12/13/programmers-max-num/" data-id="ckilvzd5v0000cac9fy353zol"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
@@ -113,19 +105,10 @@
     
   <nav class="article-nav">
     
-      <a href="/2020/12/13/programmers-max-num/" class="article-nav-link">
-        <strong class="article-nav-caption">최신</strong>
-        <div class="article-nav-title">
-          
-            [프로그래머스] 가장 큰 수 (파이썬)
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/12/02/android_underline/" class="article-nav-link">
+      <a href="/2020/12/10/programmers-skill-checks-1/" class="article-nav-link">
         <strong class="article-nav-caption">이전</strong>
-        <div class="article-nav-title">[안드로이드] TextView에 밑줄긋기</div>
+        <div class="article-nav-title">[프로그래머스] 스킬 체크 레벨 1 풀어보기(파이썬)</div>
       </a>
     
   </nav>
