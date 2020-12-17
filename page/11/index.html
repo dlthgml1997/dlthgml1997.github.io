@@ -64,6 +64,217 @@
         
           
 
+<article id="post-programmers-scoville" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/02/25/programmers-scoville/">[프로그래머스] 더 맵게 - 파이썬</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/02/25/programmers-scoville/" class="article-date">
+  <time datetime="2020-02-25T12:10:00.000Z" itemprop="datePublished">2020-02-25</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제설명"><a href="#문제설명" class="headerlink" title="문제설명"></a>문제설명</h1><p>매운 것을 좋아하는 Leo는 모든 음식의 스코빌 지수를 K 이상으로 만들고 싶습니다. 모든 음식의 스코빌 지수를 K 이상으로 만들기 위해 Leo는 스코빌 지수가 가장 낮은 두 개의 음식을 아래와 같이 특별한 방법으로 섞어 새로운 음식을 만듭니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">섞은 음식의 스코빌 지수 &#x3D; 가장 맵지 않은 음식의 스코빌 지수 + (두 번째로 맵지 않은 음식의 스코빌 지수 * 2)</span><br></pre></td></tr></table></figure>
+
+<p>Leo는 모든 음식의 스코빌 지수가 K 이상이 될 때까지 반복하여 섞습니다.<br>Leo가 가진 음식의 스코빌 지수를 담은 배열 scoville과 원하는 스코빌 지수 K가 주어질 때, 모든 음식의 스코빌 지수를 K 이상으로 만들기 위해 섞어야 하는 최소 횟수를 return 하도록 solution 함수를 작성해주세요.</p>
+<h5 id="제한-사항"><a href="#제한-사항" class="headerlink" title="제한 사항"></a>제한 사항</h5><ul>
+<li>scoville의 길이는 1 이상 1,000,000 이하입니다.</li>
+<li>K는 0 이상 1,000,000,000 이하입니다.</li>
+<li>scoville의 원소는 각각 0 이상 1,000,000 이하입니다.</li>
+<li>모든 음식의 스코빌 지수를 K 이상으로 만들 수 없는 경우에는 -1을 return 합니다.</li>
+</ul>
+<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
+<thead>
+<tr>
+<th>scoville</th>
+<th>K</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[1, 2, 3, 9, 10, 12]</td>
+<td>7</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><ol>
+<li>스코빌 지수가 1인 음식과 2인 음식을 섞으면 음식의 스코빌 지수가 아래와 같이 됩니다.<br>새로운 음식의 스코빌 지수 = 1 + (2 * 2) = 5<br>가진 음식의 스코빌 지수 = [5, 3, 9, 10, 12]</li>
+<li>스코빌 지수가 3인 음식과 5인 음식을 섞으면 음식의 스코빌 지수가 아래와 같이 됩니다.<br>새로운 음식의 스코빌 지수 = 3 + (5 * 2) = 13<br>가진 음식의 스코빌 지수 = [13, 9, 10, 12]</li>
+</ol>
+<p>모든 음식의 스코빌 지수가 7 이상이 되었고 이때 섞은 횟수는 2회입니다.</p>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(scoville, K)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> heapq</span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    heapq.heapify(scoville)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> len(scoville) &gt; <span class="number">1</span> :</span><br><span class="line">        i = heapq.heappop(scoville)</span><br><span class="line">        j = heapq.heappop(scoville)</span><br><span class="line">        <span class="keyword">if</span> i &lt; K:</span><br><span class="line">            answer += <span class="number">1</span></span><br><span class="line">            mixedK = i +j *<span class="number">2</span></span><br><span class="line">            heapq.heappush(scoville, mixedK)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> answer</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">if</span> scoville[<span class="number">0</span>] &gt; K:</span><br><span class="line">        <span class="keyword">return</span> answer</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>이를 풀기 위해 공부한 내용은 heapq 모듈이다.</p>
+</li>
+<li><p>계속 문제16번에서만 실패가 떠서 왜 그런지 찾아본 결과, <code>while len(scoville) &gt; 1</code> 을 했기 때문에 <code>if scoville[0] &gt; K: return answer</code> 를 써주지 않으면 scoville의 길이가 1일 때는 -1 이 return 되기 때문이었다.</p>
+</li>
+<li><p>scoville의 크기가 1 보다 크게 한 이유는 0보다 크게하면 RuntimeError가 발생하기 때문이다. </p>
+</li>
+<li><p>heappop은 힙에서 가장 작은 값을 반환한다. </p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/25/programmers-scoville/" data-id="ckenwlov0003e6jc9093qek6w"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-programmers-kth-number" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/02/22/programmers-kth-number/">[프로그래머스] K번째 수 - 파이썬</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/02/22/programmers-kth-number/" class="article-date">
+  <time datetime="2020-02-22T07:22:00.000Z" itemprop="datePublished">2020-02-22</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제-설명"><a href="#문제-설명" class="headerlink" title="문제 설명"></a>문제 설명</h1><p>배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다.</p>
+<p>예를 들어 array가 [1, 5, 2, 6, 3, 7, 4], i = 2, j = 5, k = 3이라면</p>
+<ol>
+<li>array의 2번째부터 5번째까지 자르면 [5, 2, 6, 3]입니다.</li>
+<li>1에서 나온 배열을 정렬하면 [2, 3, 5, 6]입니다.</li>
+<li>2에서 나온 배열의 3번째 숫자는 5입니다.</li>
+</ol>
+<p>배열 array, [i, j, k]를 원소로 가진 2차원 배열 commands가 매개변수로 주어질 때, commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 나온 결과를 배열에 담아 return 하도록 solution 함수를 작성해주세요.</p>
+<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
+<li>array의 길이는 1 이상 100 이하입니다.</li>
+<li>array의 각 원소는 1 이상 100 이하입니다.</li>
+<li>commands의 길이는 1 이상 50 이하입니다.</li>
+<li>commands의 각 원소는 길이가 3입니다.</li>
+</ul>
+<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
+<thead>
+<tr>
+<th>array</th>
+<th>commands</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[1, 5, 2, 6, 3, 7, 4]</td>
+<td>[[2, 5, 3], [4, 4, 1], [1, 7, 3]]</td>
+<td>[5, 6, 3]</td>
+</tr>
+</tbody></table>
+<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>[1, 5, 2, 6, 3, 7, 4]를 2번째부터 5번째까지 자른 후 정렬합니다. [2, 3, 5, 6]의 세 번째 숫자는 5입니다.<br>[1, 5, 2, 6, 3, 7, 4]를 4번째부터 4번째까지 자른 후 정렬합니다. [6]의 첫 번째 숫자는 6입니다.<br>[1, 5, 2, 6, 3, 7, 4]를 1번째부터 7번째까지 자릅니다. [1, 2, 3, 4, 5, 6, 7]의 세 번째 숫자는 3입니다.</p>
+<p><a href="https://neerc.ifmo.ru/subregions/northern.html" target="_blank" rel="noopener">출처</a></p>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(array, commands)</span>:</span></span><br><span class="line">    answer = []</span><br><span class="line">    <span class="keyword">for</span> command_list <span class="keyword">in</span> commands:</span><br><span class="line">        sliced_array = array[command_list[<span class="number">0</span>]<span class="number">-1</span> : command_list[<span class="number">1</span>]]</span><br><span class="line">        sliced_array.sort()</span><br><span class="line">        answer.append(sliced_array[command_list[<span class="number">2</span>]<span class="number">-1</span>])</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+
+
+<p>이번 문제를 위해 공부한 내용은 array의 <code>slicing</code> 과 <code>sort</code>이다.</p>
+<ol>
+<li><p><code>commands</code> 가 [[2, 5, 3], [4, 4, 1], [1, 7, 3]] 일 때, <code>for command_list in commands</code>를 통해  [2, 5, 3] <strong>-&gt;</strong> [4, 4, 1] <strong>-&gt;</strong> [1, 7, 3] 순서로 <code>command_list</code>에 담는다.  </p>
+</li>
+<li><p>예를 들어 <code>command_list</code>가 <em>[2,5,3]</em> 일 때, </p>
+<p><code>array</code>의 <em>command_list[0]-1</em> (1번 인덱스) 부터 <em>command_list[1]</em> (4번 인덱스까지)(<code>slicing</code>에서 <code>end</code>부분(5)은 자르지 않기때문에 -1 해줄 필요가 없다.)까지 잘라 <code>sliced_array</code>에 담는다.</p>
+</li>
+<li><p><code>sliced_array</code>를 <code>sort()</code> 로 정렬한다. </p>
+</li>
+<li><p><em><code>answer</code>에  command_list[2]-1</em> (3번 인덱스) 의 값을 더한다.</p>
+</li>
+</ol>
+<h3 id="시행착오"><a href="#시행착오" class="headerlink" title="시행착오"></a>시행착오</h3><p> 처음에<code>for i in range(len(commands))</code> 로 i에  인덱스를 담아 <code>array[commands[i] [0] -1 : commands[i] [1]]</code> 이렇게 접근하였다.</p>
+<p> 근데 <code>for command_list in commands</code> 를 사용하면 commands의 첫번째, 두번째, 세번째 배열을 command_list에 담으며 실행할 수 있다는 것을 알게 되었고 코드를 고칠 수 있었다.  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/22/programmers-kth-number/" data-id="ckenwlout00306jc9emrk2o0g"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-python-array-cutting" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
