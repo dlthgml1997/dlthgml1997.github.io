@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [프로그래머스] 위장(해시) - 파이썬 |
+    
+    IT&#39;s easy if you try</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-programmers-spy" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [프로그래머스] 위장(해시) - 파이썬
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/12/21/programmers-spy/" class="article-date">
+  <time datetime="2020-12-21T14:54:16.000Z" itemprop="datePublished">2020-12-21</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제링크: <a href="https://programmers.co.kr/learn/courses/30/lessons/42578?language=python3" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/lessons/42578?language=python3</a></li>
+</ul>
+<h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>스파이들은 매일 다른 옷을 조합하여 입어 자신을 위장합니다.</p>
+<p>예를 들어 스파이가 가진 옷이 아래와 같고 오늘 스파이가 동그란 안경, 긴 코트, 파란색 티셔츠를 입었다면 다음날은 청바지를 추가로 입거나 동그란 안경 대신 검정 선글라스를 착용하거나 해야 합니다.</p>
+<table>
+<thead>
+<tr>
+<th>종류</th>
+<th>이름</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>얼굴</td>
+<td>동그란 안경, 검정 선글라스</td>
+</tr>
+<tr>
+<td>상의</td>
+<td>파란색 티셔츠</td>
+</tr>
+<tr>
+<td>하의</td>
+<td>청바지</td>
+</tr>
+<tr>
+<td>겉옷</td>
+<td>긴 코트</td>
+</tr>
+</tbody></table>
+<p>스파이가 가진 의상들이 담긴 2차원 배열 clothes가 주어질 때 서로 다른 옷의 조합의 수를 return 하도록 solution 함수를 작성해주세요.</p>
+<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
+<li>clothes의 각 행은 [의상의 이름, 의상의 종류]로 이루어져 있습니다.</li>
+<li>스파이가 가진 의상의 수는 1개 이상 30개 이하입니다.</li>
+<li>같은 이름을 가진 의상은 존재하지 않습니다.</li>
+<li>clothes의 모든 원소는 문자열로 이루어져 있습니다.</li>
+<li>모든 문자열의 길이는 1 이상 20 이하인 자연수이고 알파벳 소문자 또는 ‘_’ 로만 이루어져 있습니다.</li>
+<li>스파이는 하루에 최소 한 개의 의상은 입습니다.</li>
+</ul>
+<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
+<thead>
+<tr>
+<th>clothes</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[[yellow_hat, headgear], [blue_sunglasses, eyewear], [green_turban, headgear]]</td>
+<td>5</td>
+</tr>
+<tr>
+<td>[[crow_mask, face], [blue_sunglasses, face], [smoky_makeup, face]]</td>
+<td>3</td>
+</tr>
+</tbody></table>
+<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>예제 #1<br>headgear에 해당하는 의상이 yellow_hat, green_turban이고 eyewear에 해당하는 의상이 blue_sunglasses이므로 아래와 같이 5개의 조합이 가능합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. yellow_hat</span><br><span class="line">2. blue_sunglasses</span><br><span class="line">3. green_turban</span><br><span class="line">4. yellow_hat + blue_sunglasses</span><br><span class="line">5. green_turban + blue_sunglasses</span><br></pre></td></tr></table></figure>
+
+<p>예제 #2<br>face에 해당하는 의상이 crow_mask, blue_sunglasses, smoky_makeup이므로 아래와 같이 3개의 조합이 가능합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. crow_mask</span><br><span class="line">2. blue_sunglasses</span><br><span class="line">3. smoky_makeup</span><br></pre></td></tr></table></figure>
+
+<br> 
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>이 문제는 알고리즘 스터디에서 설원언니가 풀이해준 문제인데, 복습하면 좋을 것 같아 다시 풀어보며 공부한 후, 정리했다.</p>
+<p><strong>풀이</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(clothes)</span>:</span></span><br><span class="line">    count = Counter([category <span class="keyword">for</span> name, category <span class="keyword">in</span> clothes])</span><br><span class="line">    <span class="keyword">return</span> reduce(<span class="keyword">lambda</span> x, y : x * (y + <span class="number">1</span>), count.values(), <span class="number">1</span>) <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>먼저 서로 다른 의상의 조합의 수를 구하는 공식</p>
+<p>clothes가 <code>[[yellow_hat, headgear], [blue_sunglasses, eyewear], [green_turban, headgear]]</code> 일 때로 예시를 들어보자.<br>여기서 <strong><code>headgear</code></strong>는 <code>yellow_hat</code>(노란모자) , <code>green_turban</code>(초록 터번) 총 2개이고  <strong><code>eyewear</code></strong>는 <code>blue_sunglasses</code>(파란 선글라스) 총 1개 이다. </p>
+<p>이때 <strong>종류가 겹치지 않게 입을 수 있는 의상 조합의 수</strong>는</p>
+<ul>
+<li>노란모자</li>
+<li>초록 터번</li>
+<li>파란 선글라스</li>
+<li>노란 모자 + 파란 선글라스</li>
+<li>초록 터번 + 파란 선글라스</li>
+</ul>
+<p>총 다섯 가지다 조합의 수는 아래와 같은 공식으로 구해질 수 있다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(headgear에 해당하는 의상 수 +<span class="number">1</span>) * (eyewear에 해당하는 의상 수 +<span class="number">1</span>) <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+<p>종류 마다 <strong><code>+1</code></strong> 을 하는 경우는 <strong>착용하지 않는 경우</strong>도 해당해야하기 때문이고, 마지막에 <strong><code>-1</code></strong> 을 하는 이유는 <strong>모든 의상을 착용하지 않는 경우는 빼야하기 때문</strong>이다.</p>
+<p>이제 이 식을 구현하기 위해 <code>Counter</code>와 <code>reduce</code>를 사용해보자 (아래 <strong>새로 배운 내용</strong>에 약간의 설명이 적혀있다.)</p>
+</li>
+<li><p><code>Counter</code>를 이용해 <code>category(종류)</code>에 해당하는 옷의 갯수를 딕셔너리 형태로 <code>count</code>에 담는다.</p>
+<ul>
+<li><p><strong>예를 들어</strong> <code>clothes</code>가 <code>[[yellow_hat, headgear], [blue_sunglasses, eyewear], [green_turban, headgear]]</code> 일 때, 아래와 같이 <code>count</code>가 출력된다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">count = Counter([category <span class="keyword">for</span> name, category <span class="keyword">in</span> clothes])</span><br><span class="line">print(count)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 	Counter(&#123;'headgear': 2, 'eyewear': 1&#125;)</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><pre><code class="python">(headgear에 해당하는 의상 수 +<span class="number">1</span>) * (eyewear에 해당하는 의상 수 +<span class="number">1</span>) <span class="number">-1</span>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">위 공식을 &#96;reduce&#96;로 나타내면 아래와 같다.</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;python</span><br><span class="line">reduce(lambda x, y : x * (y + 1), count.values(), 1) -1</span><br></pre></td></tr></table></figure>
+
+* <span class="number">3</span>번째 인자에 <span class="number">1</span>을 주어 x 를 <span class="number">1</span>로 초기화한다(initializer).
+
+* <span class="number">2</span>번째 인자는 category에 해당하는 의상의 수가 차례대로 y에 담기도록 한다. 
+
+* count가 `Counter({<span class="string">'headgear'</span>: <span class="number">2</span>, <span class="string">'eyewear'</span>: <span class="number">1</span>})` 일 때로 예시를 들어보면 reduce를 실행하면 아래 식이 계산된다.
+
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((<span class="number">1</span> * (<span class="number">2</span>+<span class="number">1</span>)) * (<span class="number">1</span>+<span class="number">1</span>)) <span class="number">-1</span> <span class="comment"># 5</span></span><br></pre></td></tr></table></figure>
+
+ 따라서 조합의 수 <span class="number">5</span>가 정답으로 <span class="keyword">return</span> 된다.
+</code></pre>
+</li>
+</ul>
+<br>
+
+<p><strong>새로 배운 내용</strong> </p>
+<ul>
+<li><p><strong>Counter</strong></p>
+<blockquote>
+<p><strong>사용 방법</strong></p>
+<p><code>from collections import Counter</code></p>
+</blockquote>
+<ul>
+<li><p>Counter 는 같은 값의 갯수를 딕셔너리 형태로 나타낸다. </p>
+</li>
+<li><p><strong>사용 예시</strong> </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="string">'a'</span>, <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'c'</span>]</span><br><span class="line">print(collections.Counter(list))</span><br></pre></td></tr></table></figure>
+
+<p>위와 같은 list를 Counter에 넣고 print 하면</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Counter(&#123;'a': 2, 'c': 2, 'b': 1&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<p>위와 같이 출력 된다. 이때 value(갯수) 기준 내림차순으로 담겨져있음을 알 수 있다.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>reduce</strong></p>
+<blockquote>
+<p><strong>사용 방법</strong></p>
+<p><code>from fucntools import reduce</code></p>
+</blockquote>
+<ul>
+<li><p>이는 특정 식을 수행할 수 있게 도와준다.</p>
+</li>
+<li><p>기본 사용 방식은 아래와 같다</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reduce(function, iterable[, initializer])</span><br><span class="line"><span class="comment"># [] 는 선택</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>사용 예시</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">answer = reduce(<span class="keyword">lambda</span> x, y : x + y, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line"><span class="comment"># ((((1 + 2) + 3) + 4) + 5)</span></span><br><span class="line"><span class="keyword">print</span> answer</span><br><span class="line"><span class="comment"># 15</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/12/21/programmers-spy/" data-id="ckiypqx3k0000erc9hmqm58yc"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/12/20/programmers-keypad/" class="article-nav-link">
+        <strong class="article-nav-caption">이전</strong>
+        <div class="article-nav-title">[프로그래머스] 카카오 인턴 기출 문제 - 키패드 누르기 (파이썬)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2020 IT&#39;s easy if you try</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="IT&#39;s easy if you try"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="검색">
+        <i class="fe fe-search"></i>
+        검색
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>
