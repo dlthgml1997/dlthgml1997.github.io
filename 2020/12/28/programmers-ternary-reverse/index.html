@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [프로그래머스] 3진법 뒤집기 (파이썬) |
+    
+    IT&#39;s easy if you try</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-programmers-ternary-reverse" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [프로그래머스] 3진법 뒤집기 (파이썬)
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/12/28/programmers-ternary-reverse/" class="article-date">
+  <time datetime="2020-12-28T13:58:40.000Z" itemprop="datePublished">2020-12-28</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크: <a href="https://programmers.co.kr/learn/courses/30/lessons/68935" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/lessons/68935</a></li>
+</ul>
+<br>
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><ul>
+<li><p><strong>10진법을 3진법으로 바꾸는 방법</strong></p>
+<p>n = 63의 경우,<br>3으로 나눈 나머지를 역순으로 더하면 된다. (이때, n은 몫)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">63</span> % <span class="number">3</span> = <span class="number">0</span> (n = <span class="number">21</span>)</span><br><span class="line"><span class="number">21</span> % <span class="number">3</span> = <span class="number">0</span> (n = <span class="number">7</span>)</span><br><span class="line"><span class="number">7</span> % <span class="number">3</span> = <span class="number">1</span> (n = <span class="number">2</span>)</span><br><span class="line"><span class="number">2</span> % <span class="number">3</span> = <span class="number">2</span> (n = <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>n 이 0이 되면 끝나고, <code>2100</code>이 3진수가 된다.</p>
+</li>
+<li><p><strong>3진법을 10진법으로 바꾸는 방법</strong></p>
+<p>주어진 3진수가 <code>2100</code> 일 경우,<br>3210 순으로 3의 n제곱한 수를 각 자리의 수에 곱한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>* <span class="number">3</span>^<span class="number">3</span> + <span class="number">1</span> * <span class="number">3</span>^<span class="number">2</span> + <span class="number">0</span> * <span class="number">3</span>^<span class="number">1</span> + <span class="number">0</span> * <span class="number">3</span>^<span class="number">0</span> = <span class="number">63</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<p><strong>첫번째 풀이</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(n)</span>:</span></span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    ternary = []</span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">0</span>: </span><br><span class="line">        ternary.append(n%<span class="number">3</span>)</span><br><span class="line">        n //= <span class="number">3</span></span><br><span class="line"></span><br><span class="line">    length = len(ternary) - <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> ternary:</span><br><span class="line">        <span class="keyword">if</span> i != <span class="number">0</span>:</span><br><span class="line">            num = <span class="number">1</span>        </span><br><span class="line">            <span class="keyword">for</span> _ <span class="keyword">in</span> range(length):</span><br><span class="line">                num *= <span class="number">3</span></span><br><span class="line">            answer += num * i</span><br><span class="line">        length -= <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>n이 0이 될 때까지 나누면서 나머지를 리스트에 더한다. 이때 뒤집지 않아도 되게 역순으로 더해진다.</li>
+<li>3진수를 10진수로 바꾸기 위해 리스트(ternary)에서 숫자(i)를 하나씩 빼오면서 0이 아닌 경우 3의 length 제곱수(num)를 숫자(i)에 곱해 답에 더한다.</li>
+</ul>
+<p><strong>두번째 풀이</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(n)</span>:</span></span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    ternary = []</span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">0</span>: </span><br><span class="line">        ternary.append(n%<span class="number">3</span>)</span><br><span class="line">        n //= <span class="number">3</span></span><br><span class="line">        </span><br><span class="line">    temp = <span class="string">''</span>.join(map(str, ternary))</span><br><span class="line">    <span class="keyword">return</span> int(temp, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>3진수가 역순으로 담긴 리스트를 str로 변환한 다음 int(temp, 3) 을 하면 10진수로 쉽게 바꿀 수 있다.</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/12/28/programmers-ternary-reverse/" data-id="ckj8nkyvl0000l4c9729r4jo0"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/12/21/programmers-spy/" class="article-nav-link">
+        <strong class="article-nav-caption">이전</strong>
+        <div class="article-nav-title">[프로그래머스] 위장(해시) - 파이썬</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2020 IT&#39;s easy if you try</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="IT&#39;s easy if you try"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="검색">
+        <i class="fe fe-search"></i>
+        검색
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>
