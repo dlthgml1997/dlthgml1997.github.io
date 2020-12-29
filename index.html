@@ -64,6 +64,95 @@
         
           
 
+<article id="post-swea-2043" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/12/30/swea-2043/">[SW Expert Academy] 2043. 서랍의 비밀번호 (파이썬)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/12/30/swea-2043/" class="article-date">
+  <time datetime="2020-12-29T16:00:00.000Z" itemprop="datePublished">2020-12-30</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>서랍의 비밀번호가 생각이 나지 않는다.</p>
+<p>비밀번호 P는 000부터 999까지 번호 중의 하나이다.</p>
+<p>주어지는 번호 K부터 1씩 증가하며 비밀번호를 확인해 볼 생각이다.</p>
+<p>예를 들어 비밀번호 P가 123 이고 주어지는 번호 K가 100 일 때, 100부터 123까지 24번 확인하여 비밀번호를 맞출 수 있다.</p>
+<p>P와 K가 주어지면 K부터 시작하여 몇 번 만에 P를 맞출 수 있는지 알아보자.</p>
+<br>
+**[입력]**
+
+<p>입력으로 P와 K가 빈 칸을 사이로 주어진다.</p>
+<p><strong>[출력]</strong></p>
+<p>몇 번 만에 비밀번호를 맞출 수 있는지 출력한다.</p>
+<br>
+
+<p><strong>입력 예시</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123 100</span><br></pre></td></tr></table></figure>
+
+<p><strong>출력 예시</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">24</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>SW Expert Academy 모의 테스트 방식에 익숙해지려고 풀어봤다.</p>
+<p><strong>풀이 1</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">P, K = map(int, input().split())</span><br><span class="line">print(P - K + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p><strong>풀이 2</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">P, K = map(int, input().split())</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(K, P+<span class="number">1</span>):</span><br><span class="line">    count += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> i == P:</span><br><span class="line">        print(count)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/12/30/swea-2043/" data-id="ckja6kdfh00003gc96o24alno"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-programmers-ternary-reverse" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -992,77 +1081,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/12/01/programmers-two-numbers-add/" data-id="cki5rqgaf00005lc95m20fyyw"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-backjoon-1080" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/12/01/backjoon-1080/">[백준알고리즘] 1080:행렬 (파이썬)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/12/01/backjoon-1080/" class="article-date">
-  <time datetime="2020-11-30T17:36:16.000Z" itemprop="datePublished">2020-12-01</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>문제 링크: <a href="https://www.acmicpc.net/problem/1080" target="_blank" rel="noopener">https://www.acmicpc.net/problem/1080</a></li>
-</ul>
-<br>
-
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n, m = map(int, input().split())</span><br><span class="line">A = []</span><br><span class="line">B = []</span><br><span class="line">cnt = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">    A.append(list(map(int, input().strip())))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">    B.append(list(map(int, input().strip())))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3X3 크기의 행렬에 있는 원소를 뒤집는다. (0 -&gt; 1, 1 -&gt; 0)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverseNum</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> cnt</span><br><span class="line">    <span class="comment"># 부분 행렬의 원소를 뒤집을 때마다 카운트를 센다.</span></span><br><span class="line">    cnt += <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(x, x+<span class="number">3</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(y, y+<span class="number">3</span>):</span><br><span class="line">            <span class="keyword">if</span> A[i][j] == <span class="number">0</span>:</span><br><span class="line">                A[i][j] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                A[i][j] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> cnt</span><br><span class="line">    <span class="comment"># 3X3 부분 행렬의 원소만 뒤집을 수 있기 때문에 n-3 X m-3 까지만 reverseNum 함수에 보낼 수 있다.</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-2</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(m<span class="number">-2</span>):</span><br><span class="line">            <span class="comment"># 원소가 다를 때마다 원소를 뒤집는 함수 호출</span></span><br><span class="line">            <span class="keyword">if</span> A[i][j] != B[i][j]:</span><br><span class="line">                reverseNum(i, j)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 뒤집을 수 있는 모든 경우의 수가 끝나고도 A의 원소와 B의 원소가 일치하지 않는다면 -1을 출력하고 종료한다.</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">            <span class="keyword">if</span> A[i][j] != B[i][j]:</span><br><span class="line">                cnt = <span class="number">-1</span></span><br><span class="line">                print(cnt)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">    print(cnt)</span><br><span class="line"></span><br><span class="line">solution()</span><br></pre></td></tr></table></figure>
-
-
-
-<p>벌써 12월이다..!</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/12/01/backjoon-1080/" data-id="cki4uac9t0000mkc9fz50eqg4"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
