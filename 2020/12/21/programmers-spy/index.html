@@ -166,19 +166,23 @@
 </li>
 </ul>
 </li>
-<li><pre><code class="python">(headgear에 해당하는 의상 수 +<span class="number">1</span>) * (eyewear에 해당하는 의상 수 +<span class="number">1</span>) <span class="number">-1</span>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">위 공식을 &#96;reduce&#96;로 나타내면 아래와 같다.</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;python</span><br><span class="line">reduce(lambda x, y : x * (y + 1), count.values(), 1) -1</span><br></pre></td></tr></table></figure>
+<li><p>위 공식을 <code>reduce</code>로 나타내보자.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(headgear에 해당하는 의상 수 +<span class="number">1</span>) * (eyewear에 해당하는 의상 수 +<span class="number">1</span>) <span class="number">-1</span></span><br></pre></td></tr></table></figure>
 
-* <span class="number">3</span>번째 인자에 <span class="number">1</span>을 주어 x 를 <span class="number">1</span>로 초기화한다(initializer).
+<p>아래와 같이 나타낼 수 있다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reduce(<span class="keyword">lambda</span> x, y : x * (y + <span class="number">1</span>), count.values(), <span class="number">1</span>) <span class="number">-1</span></span><br></pre></td></tr></table></figure>
 
-* <span class="number">2</span>번째 인자는 category에 해당하는 의상의 수가 차례대로 y에 담기도록 한다. 
+<ul>
+<li><p>3번째 인자에 1을 주어 x 를 1로 초기화한다(initializer).</p>
+</li>
+<li><p>2번째 인자는 category에 해당하는 의상의 수가 차례대로 y에 담기도록 한다. </p>
+</li>
+<li><p>count가 <code>Counter({&#39;headgear&#39;: 2, &#39;eyewear&#39;: 1})</code> 일 때로 예시를 들어보면 reduce를 실행하면 아래 식이 계산된다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((<span class="number">1</span> * (<span class="number">2</span>+<span class="number">1</span>)) * (<span class="number">1</span>+<span class="number">1</span>)) <span class="number">-1</span> <span class="comment"># 5</span></span><br></pre></td></tr></table></figure>
 
-* count가 `Counter({<span class="string">'headgear'</span>: <span class="number">2</span>, <span class="string">'eyewear'</span>: <span class="number">1</span>})` 일 때로 예시를 들어보면 reduce를 실행하면 아래 식이 계산된다.
-
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((<span class="number">1</span> * (<span class="number">2</span>+<span class="number">1</span>)) * (<span class="number">1</span>+<span class="number">1</span>)) <span class="number">-1</span> <span class="comment"># 5</span></span><br></pre></td></tr></table></figure>
-
- 따라서 조합의 수 <span class="number">5</span>가 정답으로 <span class="keyword">return</span> 된다.
-</code></pre>
+<p>따라서 조합의 수 5가 정답으로 return 된다.</p>
+</li>
+</ul>
 </li>
 </ul>
 <br>
