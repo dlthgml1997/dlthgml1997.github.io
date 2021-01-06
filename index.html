@@ -64,6 +64,83 @@
         
           
 
+<article id="post-backjoon-2839" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/01/06/backjoon-2839/">[백준알고리즘] 2839: 설탕 배달 (파이썬)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/06/backjoon-2839/" class="article-date">
+  <time datetime="2021-01-06T14:00:00.000Z" itemprop="datePublished">2021-01-06</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크: <a href="https://www.acmicpc.net/problem/2839" target="_blank" rel="noopener">https://www.acmicpc.net/problem/2839</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">()</span>:</span></span><br><span class="line">    n = int(input())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n // <span class="number">3</span> + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n // <span class="number">5</span> + <span class="number">1</span>):</span><br><span class="line">            answer = <span class="number">3</span> * i + <span class="number">5</span> * j</span><br><span class="line">            <span class="keyword">if</span> answer == n:</span><br><span class="line">                print(i+j)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    print(<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">solution()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>설탕을 정확하게 n 킬로그램 배달할 수 있을 때 (3과 5의 조합으로 나누어 떨어질 때), 5 킬로그램 봉지가 많을 수록 배달하는 봉지의 개수가 최소가 된다.<ul>
+<li>3 킬로그램 봉지를 하나씩 증가시키는 반복문 안에서 5 킬로그램 봉지를 하나씩 증가시키는 반복문을 실행한다.<ul>
+<li>이때, <code>range</code>는 설탕 n 키로그램을 담는 최대 봉지 개수( <strong><code>n // 3kg 또는 5kg</code></strong> ) 까지로 설정한다.</li>
+</ul>
+</li>
+<li>반복문이 실행될 때마다 <strong><code>3키로그램 봉지 개수(i) * 3 + 5 키로그램 봉지 개수(j) * 5</code></strong> 값이 <code>n</code> 과 같은지 비교한 후, 같으면 <code>i + j</code> 를 <code>print</code> 하고 종료한다.</li>
+</ul>
+</li>
+<li>반복문을 모두 돌았다는 것은 3과 5로 나누어지지 않는다는 것을 의미하기 때문에 <code>-1</code> 을 <code>print</code> 한다.</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/06/backjoon-2839/" data-id="ckjli44me0000p2c959f0f3lh"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-backjoon-10026" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -72,7 +149,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/02/backjoon-10026/">[백준알고리즘] 10026번: 적록색약</a>
+      <a class="article-title" href="/2021/01/02/backjoon-10026/">[백준알고리즘] 10026번: 적록색약 (파이썬)</a>
     </h2>
   
   
@@ -1073,87 +1150,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/12/13/programmers-max-num/" data-id="ckilvzd5v0000cac9fy353zol"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-skill-checks-1" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/12/10/programmers-skill-checks-1/">[프로그래머스] 스킬 체크 레벨 1 풀어보기(파이썬)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/12/10/programmers-skill-checks-1/" class="article-date">
-  <time datetime="2020-12-10T09:00:00.000Z" itemprop="datePublished">2020-12-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>링크 : <a href="https://programmers.co.kr/skill_checks" target="_blank" rel="noopener">https://programmers.co.kr/skill_checks</a> &gt; 레벨 1</li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>난이도가 좀 많이 쉬워서 올리기 민망하지만 ㅎㅎ 풀어보았다.</p>
-<ul>
-<li><p><strong>문제 1</strong></p>
-<p>n = 3 이면 ‘수박수’</p>
-<p>n = 5 이면 ‘수박수박수’ 와 같은 문자열을 반환한다.</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(n)</span>:</span></span><br><span class="line">    answer = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">if</span> i% <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">            answer += <span class="string">'수'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            answer += <span class="string">'박'</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>문제 2</strong></p>
-<p>배열 arr이 주어지면 최소 숫자를 제거한 배열을 반환한다.</p>
-<p>배열이 모두 비어진 경우에는 [-1]을 반환한다.</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(arr)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(arr) == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> [<span class="number">-1</span>]</span><br><span class="line">    i = min(arr)</span><br><span class="line">    arr.remove(i)</span><br><span class="line">    answer = arr</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/12/10/programmers-skill-checks-1/" data-id="ckiim704s0000ozc97m3hgiz4"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
