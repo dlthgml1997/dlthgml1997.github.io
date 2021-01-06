@@ -81,6 +81,7 @@
 <ol>
 <li>클래스 구조 이해</li>
 <li>클래스로부터 객체 생성</li>
+<li>메서드 (Method)</li>
 </ol>
 </blockquote>
 <br>
@@ -205,6 +206,69 @@
 </ul>
 <br>
 
+<h1 id="3-메서드-Method"><a href="#3-메서드-Method" class="headerlink" title="3) 메서드 (Method)"></a>3) 메서드 (Method)</h1><blockquote>
+<p>메서드를 정의함으로써 코드가 간결해지고 <strong>재사용성</strong>이 높아진다.</p>
+</blockquote>
+<h3 id="3-1-메서드-Modifier"><a href="#3-1-메서드-Modifier" class="headerlink" title="3-1) 메서드 Modifier"></a>3-1) 메서드 Modifier</h3><blockquote>
+<p>메서드 Modifier를 이용해 적절하게 정보 숨김을 구현할 수 있다.</p>
+<p>접근 권한을 나타내는 Modifier의 경우 그 쓰임이 멤버 변수와 동일하다.</p>
+</blockquote>
+<ul>
+<li><strong>메서드 Modifier - 접근 권한</strong><ul>
+<li>public : 모든 클래스에서 접근이 가능하다.</li>
+<li>protected : 동일 패키지에 속하는 클래스와 하위 클래스 관계의 클래스에 의해 접근이 가능하다.</li>
+<li>private : 클래스 내에서만 접근이 가능하다. </li>
+</ul>
+</li>
+<li><strong>메서드 Modifier - 활용 방법</strong><ul>
+<li>final : Overriding 이 불가능한 메서드를 정의할 때 이용한다.</li>
+<li>static : 클래스에 소속된 클래스 메서드를 의미하며, 클래스 생성 시 만들어진다.</li>
+<li>abstract : 추상 메서드를 의미하며, 하위 클래스에 의해 구현된다.</li>
+<li>syncronyzed: Thread의 동기화를 위한 메서드이다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-메서드의-자동-구현"><a href="#3-2-메서드의-자동-구현" class="headerlink" title="3-2) 메서드의 자동 구현"></a>3-2) 메서드의 자동 구현</h3><ul>
+<li><p><strong>정보 은닉</strong>의 기본</p>
+<ul>
+<li>멤버 변수들은 대부분의 경우 private 로 선언한다.</li>
+<li>public 으로 지정한 메서드를 통해 멤버 변수에 접근하도록 클래스를 구현한다.</li>
+</ul>
+</li>
+<li><p>이클립스에서는 private 변수에 대한 public Getter, Setter 메서드들을 자동으로 생성할 수 있는 기능을 제공한다.</p>
+<ul>
+<li><p>Getter 메서드</p>
+<p>private 변수에 저장된 값을 리턴하는 getXXX() 메서드를 의미한다.</p>
+</li>
+<li><p>Setter 메서드</p>
+<p>private 변수에 값을 저장하는 getXXX() 메서드를 의미한다.</p>
+</li>
+</ul>
+</li>
+<li><p>이클립스에서 Getter / Setter 메서드 자동 구현</p>
+<ol>
+<li><p>private으로 접근 제한된 변수들을 가진 클래스 정의</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">private</span> String name;</span><br><span class="line">  	<span class="keyword">private</span> in number;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>작성된 소스에서 <code>&lt;Alt&gt; + &lt;Shift&gt; + &lt;S&gt;</code> 키를 누른 후, 셋톱 박스에서 <code>Generate Getters and Setters</code>를 누른다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">return</span> name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getNumber</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">return</span> number;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNumber</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">this</span>.number = number;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>위와 같은 메서드가 클래스 안에 생성된다.</p>
+</li>
+</ol>
+</li>
+<li><p>toString() 메서드 자동 구현</p>
+<blockquote>
+<p>toString() 메서드는 생성된 객체의 상태를 쉽게 확인 가능하게 한다.</p>
+</blockquote>
+<ol>
+<li>작성된 소스에서 <code>&lt;Alt&gt; + &lt;Shift&gt; + &lt;S&gt;</code> 키를 누른 후, 셋톱 박스에서 <code>Generate toString()</code>을 누른다.</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">return</span> <span class="string">"Employee [name="</span> + name + <span class="string">", number="</span> + numver + <span class="string">"]"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>위와 같은 메서드가 클래스 안에 생성된다.</p>
+</li>
+</ul>
 
       
     </div>
