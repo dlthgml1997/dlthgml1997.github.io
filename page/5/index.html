@@ -64,6 +64,85 @@
         
           
 
+<article id="post-android-secure_properties" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/01/android-secure_properties/">[안드로이드] secure.properties 파일을 생성하여 구글 맵 API 키 입력하기</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/10/01/android-secure_properties/" class="article-date">
+  <time datetime="2020-10-01T14:54:00.000Z" itemprop="datePublished">2020-10-01</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>secure.properties 파일에 구글 맵 API키를 등록한 후 사용하면 노출 없이 안전하게 사용할 수 있다.</p>
+<ol>
+<li><p><code>secure.properties</code> 파일 생성</p>
+<p>특정 위치에 <code>secure.properties</code> 파일을 생성한다. 나는 <code>build.gradle</code> 파일과 같은 위치에 생성하였다.</p>
+<p>생성 후 아래와 같이 API 키를 적는다. (YOUR_API_KEY 부분 수정)</p>
+<img src="../image/스크린샷 2020-10-01 오후 11.23.26.png" alt="스크린샷 2020-10-01 오후 11.23.26" style="zoom:67%;" />
+</li>
+<li><p><code>build.gradle (Module:app)</code> 의 defaultConfig 안에 아래 코드 추가</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Read the API key from .&#x2F;secure.properties into R.string.maps_api_key</span><br><span class="line">        def secureProps &#x3D; new Properties()</span><br><span class="line">        if (file(&quot;..&#x2F;secure.properties&quot;).exists()) &#123;</span><br><span class="line">            file(&quot;..&#x2F;secure.properties&quot;)?.withInputStream &#123; secureProps.load(it) &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        resValue &quot;string&quot;, &quot;maps_api_key&quot;, (secureProps.getProperty(&quot;MAPS_API_KEY&quot;) ?: &quot;&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>여기서 <code>file(&quot;&quot;)</code>의 “”안에는 현재 파일에서 <code>secure.properties</code>의 위치를 상대 경로로 명시해두어야 한다.</p>
+<p>이렇게 코드를 추가하면 매니페스트에서 API 키를  <code>@string/maps_api_key</code> 로 가져다 쓸 수 있다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">     The API key for Google Maps-based APIs.</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta-data</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:name</span>=<span class="string">"com.google.android.geo.API_KEY"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:value</span>=<span class="string">"@string/maps_api_key"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/01/android-secure_properties/" data-id="ckfqxjc8l0002c7c9cpcf8b80"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-android-google-map-conf" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -1178,114 +1257,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/08/28/backjoon-15654/" data-id="ckenwloui00276jc9bxoccg4w"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-backjoon-15651" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/28/backjoon-15651/">[백준알고리즘] N과 M(3) - 15651 (파이썬/ python)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/28/backjoon-15651/" class="article-date">
-  <time datetime="2020-08-28T04:41:02.191Z" itemprop="datePublished">2020-08-28</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
-<thead>
-<tr>
-<th align="left">시간 제한</th>
-<th align="left">메모리 제한</th>
-<th align="left">제출</th>
-<th align="left">정답</th>
-<th align="left">맞은 사람</th>
-<th align="left">정답 비율</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">1 초</td>
-<td align="left">512 MB</td>
-<td align="left">13368</td>
-<td align="left">8665</td>
-<td align="left">6751</td>
-<td align="left">65.486%</td>
-</tr>
-</tbody></table>
-<p>자연수 N과 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오.</p>
-<ul>
-<li>1부터 N까지 자연수 중에서 M개를 고른 수열</li>
-<li>같은 수를 여러 번 골라도 된다.</li>
-</ul>
-<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 자연수 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 7)</p>
-<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>한 줄에 하나씩 문제의 조건을 만족하는 수열을 출력한다. 중복되는 수열을 여러 번 출력하면 안되며, 각 수열은 공백으로 구분해서 출력해야 한다.</p>
-<p>수열은 사전 순으로 증가하는 순서로 출력해야 한다.</p>
-<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 1</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4 2</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1 1</span><br><span class="line">1 2</span><br><span class="line">1 3</span><br><span class="line">1 4</span><br><span class="line">2 1</span><br><span class="line">2 2</span><br><span class="line">2 3</span><br><span class="line">2 4</span><br><span class="line">3 1</span><br><span class="line">3 2</span><br><span class="line">3 3</span><br><span class="line">3 4</span><br><span class="line">4 1</span><br><span class="line">4 2</span><br><span class="line">4 3</span><br><span class="line">4 4</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 3</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">1 1 1</span><br><span class="line">1 1 2</span><br><span class="line">1 1 3</span><br><span class="line">1 2 1</span><br><span class="line">1 2 2</span><br><span class="line">1 2 3</span><br><span class="line">1 3 1</span><br><span class="line">1 3 2</span><br><span class="line">1 3 3</span><br><span class="line">2 1 1</span><br><span class="line">2 1 2</span><br><span class="line">2 1 3</span><br><span class="line">2 2 1</span><br><span class="line">2 2 2</span><br><span class="line">2 2 3</span><br><span class="line">2 3 1</span><br><span class="line">2 3 2</span><br><span class="line">2 3 3</span><br><span class="line">3 1 1</span><br><span class="line">3 1 2</span><br><span class="line">3 1 3</span><br><span class="line">3 2 1</span><br><span class="line">3 2 2</span><br><span class="line">3 2 3</span><br><span class="line">3 3 1</span><br><span class="line">3 3 2</span><br><span class="line">3 3 3</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">N, M = map(int, input().split())</span><br><span class="line">queue = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(depth)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> depth == M:</span><br><span class="line">        print(<span class="string">' '</span>.join(map(str, queue)))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">        queue.append(i+<span class="number">1</span>)</span><br><span class="line">        dfs(depth+<span class="number">1</span>)</span><br><span class="line">        queue.pop()</span><br><span class="line"></span><br><span class="line">dfs(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>N과 M(1) 과 다르게 중복을 허용하기 때문에 방문여부를 체크하지 않아도 된다 !</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/08/28/backjoon-15651/" data-id="ckenwlouh00246jc9b06xghjf"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
