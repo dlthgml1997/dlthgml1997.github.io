@@ -89,15 +89,15 @@
 <ul>
 <li><p>day 를 -1 로 초기화한 이유</p>
 <ol>
-<li><p>먼저 예외 상황을 생각해보자. <strong>만약 모든 박스가 1과 -1로 채워져 있는 경우</strong>에는 주변을 익게 하지 않고도 모든 사과가 익어있는 상황이기 때문에 0이 프린트 되어야한다. 그러나 apples에는 1의 좌표가 모두 담겨있기 때문에 bfs 함수의 while이 한번은 실행될 것이다. 그렇기 때문에 day는 -1로 초기화 해준다.</p>
+<li><p>먼저 예외 상황을 생각해보자. <strong>만약 모든 박스가 <code>1</code>과<code>-1</code>로 채워져 있는 경우</strong>에는 주변을 익게 하지 않고도 모든 사과가 익어있는 상황이기 때문에 0이 프린트 되어야한다. 그러나 <code>apples</code>에는 <code>1</code>의 좌표가 모두 담겨있기 때문에 <code>bfs</code> 함수의 while문이 한번은 실행될 것이다. 그렇기 때문에 <code>day</code>는 <code>-1</code>로 초기화 해준다.</p>
 </li>
-<li><p>모든 사과가 익은 날에 마지막 익은 사과는 자신 주변에 안익은 사과가 없어도 apples에 좌표가 담긴다. 그렇기 때문에 마지막 while문이 실행되고 이때 day 가 + 1 되기 때문에 처음에 day를 -1로 초기화해야 정상적인 day 가 출력될 수 있다.</p>
+<li><p>모든 사과가 익은 날에 마지막 익은 사과는 자신 주변에 안익은 사과가 없어도 <code>apples</code>에 좌표가 담긴다. 그렇기 때문에 마지막 while문이 실행되고 이때 <code>day</code> 가 <code>+ 1</code> 되기 때문에 처음에<code>day</code>를 <code>-1</code>로 초기화해야 정상적인 <code>day</code> 가 출력될 수 있다.</p>
 </li>
 </ol>
 </li>
-<li><p>하루마다 전날 익은 사과는 apples에서 비우고 새롭게 익은 사과들을 apples에 담기도록 구현하기 위해 apples의 길이만큼 for문을 실행한다.</p>
+<li><p>하루마다 전날 익은 사과는 <code>apples</code>에서 비우고 새롭게 익은 사과들을 <code>apples</code>에 담기도록 구현하기 위해 <code>apples</code>의 길이만큼 for문을 실행한다.</p>
 </li>
-<li><p>모든 1주변 사과를 익게 만든 후, 안익은 사과가 있는지 확인하고 안익은 사과가 있다면 -1을 출력한다.</p>
+<li><p>모든 <code>1</code>주변 사과를 익게 만든 후, 안익은 사과가 있는지 확인하고 안익은 사과가 있다면 <code>-1</code>을 출력한다.</p>
 </li>
 </ul>
 </li>
@@ -106,7 +106,7 @@
 <p>중요 포인트 ! </p>
 </blockquote>
 <ul>
-<li><strong>기존에 사용해왔던 <code>queue = [] , queue.pop(0)</code> 방식으로 하면 O(n)으로 느려지기 때문에 collections의 deque로 구현해 O(1) 이 되도록 해야한다.</strong></li>
+<li><strong>기존에 사용해왔던 <code>queue = [] , queue.pop(0)</code> 방식으로 하면 O(n)으로 느려지기 때문에 <code>collections</code>의 <code>deque</code>로 구현해 O(1) 이 되도록 해야한다.</strong></li>
 </ul>
 <br>
 
@@ -117,12 +117,12 @@
 <li><p>이 풀이는 테스트 케이스는 맞았지만 시간 초과가 난 풀이이다. </p>
 <ul>
 <li>하루마다 while 문이 실행되도록 해서 이중 포문을 실행하는 거부터 문제다 ! <ul>
-<li>하루마다 익은 토마토 주변 토마토를 익게하고 visited에 몇일 지났는지를 표시한다.</li>
-<li>그 다음 날, while 문이 실행될 때 visited가 전날인 토마토를 찾아 다시 주변 토마토를 익게하도록 했다.</li>
+<li>하루마다 익은 토마토 주변 토마토를 익게하고 <code>visited</code>에 몇일 지났는지를 표시한다.</li>
+<li>그 다음 날, while 문이 실행될 때 <code>visited</code>가 전날인 토마토를 찾아 다시 주변 토마토를 익게하도록 했다.</li>
 </ul>
 </li>
 <li>while 문 종료 조건은 이중 포문을 다 돌았을 때, 한번도 주변 토마토를 익히지 않았을 때이다. (익힐 수 있는 토마토는 다 익힌 상태)</li>
-<li>첫날에 안익은 토마토 주변이 다 비어있으면 -1을 print하고 실행을 종료하는 check를 구현했다.</li>
+<li>첫날에 안익은 토마토 주변이 다 비어있으면 -1을 print하고 실행을 종료하는 <code>check</code> 함수를 구현했다.</li>
 </ul>
 </li>
 <li><p>아주 비효율적인 구현이었다.. ! </p>
