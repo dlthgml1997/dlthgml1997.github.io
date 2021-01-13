@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [Mac OS] Zulu JDK 설치하기 |
+    
+    IT&#39;s easy if you try</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-macos-zulu-jdk" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [Mac OS] Zulu JDK 설치하기
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/13/macos-zulu-jdk/" class="article-date">
+  <time datetime="2021-01-13T01:42:00.000Z" itemprop="datePublished">2021-01-13</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>먼저 기존 깔려있던 jdk 를 삭제해야 한다면, </p>
+<ol>
+<li><p><strong>brew 업데이트 진행</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew update &amp;&amp; brew upgrade</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>기존 JDK 삭제</strong> </p>
+<p>기존 JDK가 설치되어 있는 폴더로 이동한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd &#x2F;Library&#x2F;Java&#x2F;JavaVirtualMachines&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>ls 명령어로 삭제할 jdk 명을 확인한 후 아래 명령어를 통해 삭제한다. (‘[‘와 ‘]’는 입력하지 않는다.)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo rm -rf [삭제할 jdk명]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>zulu 로 이동</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew tap mdogan&#x2F;zulu</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>zulu 설치</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew cask install 버전명</span><br></pre></td></tr></table></figure>
+
+<p><strong>버전명</strong> </p>
+<table>
+<thead>
+<tr>
+<th align="left">JDK</th>
+<th align="left">Cask Name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">OpenJDK7</td>
+<td align="left"><code>zulu-jdk7</code></td>
+</tr>
+<tr>
+<td align="left">OpenJDK8</td>
+<td align="left"><code>zulu-jdk8</code></td>
+</tr>
+<tr>
+<td align="left">OpenJDK11</td>
+<td align="left"><code>zulu-jdk11</code></td>
+</tr>
+<tr>
+<td align="left">OpenJDK12</td>
+<td align="left"><code>zulu-jdk12</code></td>
+</tr>
+<tr>
+<td align="left">OpenJDK13</td>
+<td align="left"><code>zulu-jdk13</code></td>
+</tr>
+<tr>
+<td align="left">OpenJDK14</td>
+<td align="left"><code>zulu-jdk14</code></td>
+</tr>
+<tr>
+<td align="left">OpenJDK15</td>
+<td align="left"><code>zulu-jdk15</code></td>
+</tr>
+<tr>
+<td align="left">Misson Control</td>
+<td align="left"><code>zulu-mc</code></td>
+</tr>
+</tbody></table>
+<p>나는 OpenJDK8을 설치했는데 위 명령어를 입력했을 때 아래와 같은 에러메시지가 떴다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Calling brew cask install is disabled! Use brew install [--cask] instead.</span><br></pre></td></tr></table></figure>
+
+<p> 때문에 cask 를 안쓰고 아래처럼 입력했다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install zulu-jdk8</span><br></pre></td></tr></table></figure>
+
+<p>아래와 같이 뜨면 성공이다 (맥주 이모티콘 귀엽다)</p>
+<img src="../image/스크린샷 2021-01-13 오전 10.48.29.png" alt="스크린샷 2021-01-13 오전 10.48.29" style="zoom:50%;" />
+</li>
+<li><p>잘 설치 됐는지 확인하기 위해 아래와 같이 입력해 확인한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ java -version</span><br><span class="line">$ javac -version</span><br></pre></td></tr></table></figure>
+
+<p>아래와 같이 뜨면 된다.</p>
+<img src="../image/스크린샷 2021-01-13 오전 11.04.56.png" alt="스크린샷 2021-01-13 오전 11.04.56" style="zoom:50%;" />
+
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/13/macos-zulu-jdk/" data-id="ckjusbz150000lkc9e3969t43"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac%EC%84%A4%EC%B9%98/" rel="tag">Mac설치</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/01/11/java-inheritance/" class="article-nav-link">
+        <strong class="article-nav-caption">이전</strong>
+        <div class="article-nav-title">[Java Programming] 객체지향 핵심 원리 - 상속 / 오버라이딩 / 오버로딩</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2021 IT&#39;s easy if you try</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="IT&#39;s easy if you try"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="검색">
+        <i class="fe fe-search"></i>
+        검색
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [Java Programming] 객체지향 핵심 원리 - 상속 / 오버라이딩 / 오버로딩 |
+    
+    IT&#39;s easy if you try</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-java-inheritance" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [Java Programming] 객체지향 핵심 원리 - 상속 / 오버라이딩 / 오버로딩
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/11/java-inheritance/" class="article-date">
+  <time datetime="2021-01-11T13:42:22.000Z" itemprop="datePublished">2021-01-11</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="1-상속-Inheritance"><a href="#1-상속-Inheritance" class="headerlink" title="1. 상속(Inheritance)"></a>1. 상속(Inheritance)</h1><p>부모의 클래스를 상속 받아 새로운 클래스를 정의해 부모의 모든것을 물려받는 것</p>
+<ul>
+<li><p>부모 클래스 = 기본 클래스 = 상위 클래스</p>
+</li>
+<li><p>자식 클래스 = 파생 클래스 = 확장된 클래스 = 하위 클래스</p>
+</li>
+<li><p><code>extends</code> 예약어를 사용한다.</p>
+</li>
+<li><p><strong>예시 코드 (상속을 사용하지 않을 때)</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">  String name;</span><br><span class="line">  <span class="keyword">int</span> number;</span><br><span class="line">  <span class="keyword">int</span> age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span></span>&#123;</span><br><span class="line">  String name;</span><br><span class="line">  <span class="keyword">int</span> number;</span><br><span class="line">  <span class="keyword">int</span> age;</span><br><span class="line">  String jobOfManage;</span><br><span class="line">  String boss;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>예시 코드 (상속을 사용할 때)</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">  String name;</span><br><span class="line">  <span class="keyword">int</span> number;</span><br><span class="line">  <span class="keyword">int</span> age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span> <span class="keyword">extends</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">  String jobOfManage;</span><br><span class="line">  String boss;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>상속을 통해 소스코드의 <strong>재사용성</strong>이 보장되며 <strong>가독성</strong>이 높아진다.</p>
+</li>
+<li><p>공통된 기능을 갖는다고 모두 상속할 수 있는 것은 아니다. 부모 클래스와 자식 클래스의 관계가 <strong>일반화와 특별화의 관계, ‘is a~’관계</strong> 에 있어야 한다.</p>
+<ul>
+<li><p>문법적으로 강제되는 것이 아닌 논리적으로 ‘is a~’관계가 성립되어야 한다.</p>
+<blockquote>
+<p>예) 프린터가 부모 클래스일 때 도트 프린터, 잉크젯 프린터, 레이저 프린터는 프린터라는 공통적인 특징을 가지기 때문에 상속 관계가 성립될 수 있지만 N사 카메라와는 기능이 같더라도 상속 관계가 성립될 수 없다.</p>
+</blockquote>
+</li>
+<li><p><strong>부적절한 상속</strong>은 소스코드에 대한 분석과 개발을 어렵게 만든다.</p>
+</li>
+</ul>
+</li>
+<li><p>상속은 부모로부터 물려받은 특징에 <strong><em>자식 클래스에서만 가지는 추가적인 특징을 더해서 만들어진 것</em></strong>이다.</p>
+</li>
+<li><p>자바는 개발의 편의성과 가독성을 위해 문법적으로 <strong>단일 상속</strong>만을 허용한다.</p>
+<ul>
+<li>단일 상속이란, 하나의 클래스는 오직 하나의 부모 클래스만 상속할 수 있다는 것을 의미한다.</li>
+<li>다중 상속은 동일한 변수와 메서드를 상속 되는 문제가 발생한다.</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="생성자-자동-호출"><a href="#생성자-자동-호출" class="headerlink" title="생성자 자동 호출"></a>생성자 자동 호출</h2><blockquote>
+<p>상속된 자식 클래스 객체가 생성될 때 부모클래스의 생성자도 자동으로 호출되어 수행되면서 객체 초기화가 이루어지도록 한다.</p>
+</blockquote>
+<ul>
+<li><p>이때, <strong>부모 클래스의 생성자</strong>가 먼저 초기화를 수행한 <strong>다음 자식 클래스의 생성자</strong>가 초기화가 이루어지는 순서를 따르고, 자식 클래스에 의해 자동으로 호출되는 부모 생성자는 별도로 지정하지 않는경우 매개변수가 없는 기본 생성자가 호출된다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SuperClass</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">int</span> num;</span><br><span class="line">  	</span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="title">SuperClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      	System.out.println(<span class="string">"SuperClass 객체 생성"</span>);</span><br><span class="line">      	num1 = <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SubClass</span> <span class="keyword">extends</span> <span class="title">SuperClass</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">int</span> num2;</span><br><span class="line">  	</span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="title">SubClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      	System.out.println(<span class="string">"SubClass 객체 생성"</span>);</span><br><span class="line">      	num2 = <span class="number">10000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConstructorTest</span> </span>&#123;</span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">      	SubClass sub = <span class="keyword">new</span> SubClass();</span><br><span class="line">      	System.out.println(sub.num1);</span><br><span class="line">      	System.out.println(sub.num2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>아래와 같이 출력된다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SuperClass 객체 생성</span><br><span class="line">SubClass 객체 생성</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="number">10000</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>만약 부모 클래스에 기본 생성자가 없으면 자식 클래스는 컴파일이 되지 않는다.</p>
+</li>
+</ul>
+<br>
+
+<h2 id="부모-생성자-super"><a href="#부모-생성자-super" class="headerlink" title="부모 생성자 super()"></a>부모 생성자 super()</h2><ul>
+<li><p><code>this()</code> 생성자 호출: 클래스 안에서 오버로딩 된 또 다른 생성자를 호출하기 위해 사용한다.</p>
+</li>
+<li><p><code>super()</code> 생성자 호출: <strong>부모</strong> 클래스의 생성자가 오버로딩 되어 여러개 존재하는 경우 <strong>특정 생성자를 호출</strong>하기 위해 사용한다. super() 생성자를 호출하지 않으면 부모의 생성자는 매개변수가 없는 기본 생성자가 호출된다.</p>
+</li>
+<li><p><code>super()</code>는 반드시 생성자의 첫 번째 라인에 위치해야 한다.</p>
+</li>
+</ul>
+<h2 id="예약어-super"><a href="#예약어-super" class="headerlink" title="예약어 super"></a>예약어 super</h2><ul>
+<li><p>부모 객체에 접근할 때 사용된다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">super</span>.name</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<br>
+
+<h2 id="변수-상속"><a href="#변수-상속" class="headerlink" title="변수 상속"></a>변수 상속</h2><ul>
+<li>상속에서 제외되는 상황<ul>
+<li><code>private</code>로 정의된 변수는 상속에서 제외된다.</li>
+<li>자식 클래스에서 부모 클래스가 가진 변수와 같은 이름의 변수를 선언하면, 부모 클래스의 변수는 상속되지 않는다.<ul>
+<li>이는 인스턴스 변수, 클래스 변수(<code>static</code>) 모두 동일하다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="2-메서드-Overloading과-Overriding"><a href="#2-메서드-Overloading과-Overriding" class="headerlink" title="2. 메서드 Overloading과 Overriding"></a>2. 메서드 Overloading과 Overriding</h2><h2 id="메서드-오버라이딩-메서드-재정의"><a href="#메서드-오버라이딩-메서드-재정의" class="headerlink" title="메서드 오버라이딩 (메서드 재정의)"></a>메서드 오버라이딩 (메서드 재정의)</h2><blockquote>
+<p>상속 관계에 있는 두 개의 클래스에서 부모 클래스의 메서드를 재사용하지 않고 새롭게 정의하여 사용하는 것이다.</p>
+</blockquote>
+<ul>
+<li><p>자식 클래스에서 재정의된 메서드는 부모 클래스의 메서드와 메서드 이름, 매개변수의 유형과 개수가 동일해야한다. (동일한 시그니처를 가져야 한다.)</p>
+</li>
+<li><p>예제</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	String name;</span><br><span class="line">  	<span class="keyword">int</span> sheets;</span><br><span class="line">  </span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takePicture</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    		System.out.println(name + <span class="string">"로 "</span> + sheets + <span class="string">"번 사진을 찍는다."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PolaroidCamera</span> <span class="keyword">extends</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">int</span> batteryGage;</span><br><span class="line">  </span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takePicture</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      	<span class="keyword">super</span>.takePicture();</span><br><span class="line">      </span><br><span class="line">      	System.out.println(sheets + <span class="string">"장의 사진을 프린트한다."</span>);</span><br><span class="line">      	System.out.println(<span class="string">"현재 배터리 : "</span> + batteryGage + <span class="string">"%"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>super</code> 예약어를 사용해 메서드를 overriding 하면서 부모 클래스의 메서드를 사용할 수 있다.</li>
+</ul>
+</li>
+<li><p><code>final</code> 예약어와 Overriding</p>
+<ul>
+<li><p><code>final</code> + 변수 =&gt; 상수를 의미한다.</p>
+</li>
+<li><p><code>final</code> + 클래스 =&gt; 자식 클래스를 가질 수 없는 클래스임을 의미한다.</p>
+</li>
+<li><p><strong><code>final</code> + 메서드 =&gt; 오버라이딩을 금지하는 것을 의미한다.</strong></p>
+<ul>
+<li><p>자식 메서드가 부모 메서드를 오버라이딩할 때, 부모 메서드에 존재하는 메서드를 호출하지 않으면 문제가 발생한다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	String name;</span><br><span class="line">  	<span class="keyword">int</span> sheets;</span><br><span class="line">  </span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takePicture</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      	printPicture();</span><br><span class="line">    		System.out.println(name + <span class="string">"로 "</span> + sheets + <span class="string">"번 사진을 찍는다."</span>); 	</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PolaroidCamera</span> <span class="keyword">extends</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">int</span> batteryGage;</span><br><span class="line">  </span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takePicture</span><span class="params">()</span> </span>&#123; <span class="comment">// printPicture() 메서드 호출이 없기 때문에 문제가 발생한다.</span></span><br><span class="line">      	<span class="keyword">super</span>.takePicture();</span><br><span class="line">      </span><br><span class="line">      	System.out.println(sheets + <span class="string">"장의 사진을 프린트한다."</span>);</span><br><span class="line">      	System.out.println(<span class="string">"현재 배터리 : "</span> + batteryGage + <span class="string">"%"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>이를 방지하는 방법이 final 예약어를 사용하는 것이다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	String name;</span><br><span class="line">  	<span class="keyword">int</span> sheets;</span><br><span class="line">  </span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">takePicture</span><span class="params">()</span> </span>&#123; <span class="comment">// 오버라이딩을 하지 못하게 막음.</span></span><br><span class="line">      	printPicture();</span><br><span class="line">    		System.out.println(name + <span class="string">"로 "</span> + sheets + <span class="string">"번 사진을 찍는다."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PolaroidCamera</span> <span class="keyword">extends</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">int</span> batteryGage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="메서드-오버로딩"><a href="#메서드-오버로딩" class="headerlink" title="메서드 오버로딩"></a>메서드 오버로딩</h2><blockquote>
+<p>하나의 클래스에 동일한 이름의 메서드가 여러 개 중복 정의 되어 있는 것이다.</p>
+</blockquote>
+<ul>
+<li>부모 클래스와 메서드 이름이 동일해야 하며, 매개변수의 개수나 타입 중 최소 하나를 다르게 하여 재정의하는 것이다.</li>
+</ul>
+<p><strong>오버라이딩</strong>은 메서드를 새롭게 정의하는 것 ! <strong>오버로딩</strong>은 동일한 이름의 메서드를 여러 개로 정의하는 것!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/11/java-inheritance/" data-id="ckjusbz1a0001lkc9ar5a6wa6"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%9E%90%EB%B0%94/" rel="tag">자바</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2021/01/13/macos-zulu-jdk/" class="article-nav-link">
+        <strong class="article-nav-caption">최신</strong>
+        <div class="article-nav-title">
+          
+            [Mac OS] Zulu JDK 설치하기
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/01/11/backjoon-1065/" class="article-nav-link">
+        <strong class="article-nav-caption">이전</strong>
+        <div class="article-nav-title">[백준알고리즘] 1065: 한수 (파이썬)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2021 IT&#39;s easy if you try</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="IT&#39;s easy if you try"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="검색">
+        <i class="fe fe-search"></i>
+        검색
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>

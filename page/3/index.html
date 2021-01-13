@@ -64,6 +64,184 @@
         
           
 
+<article id="post-backjoon-14676" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/11/25/backjoon-14676/">[백준알고리즘] 14676: 영우는 사기꾼? (위상정렬) - 파이썬</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/11/25/backjoon-14676/" class="article-date">
+  <time datetime="2020-11-25T09:03:00.000Z" itemprop="datePublished">2020-11-25</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크 : <a href="https://www.acmicpc.net/problem/14676" target="_blank" rel="noopener">https://www.acmicpc.net/problem/14676</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p><strong>위상정렬</strong>이란, 순서가 정해져 있는 작업을 차례대로 수행해야할 때 그 순서를 결정해주기 위해 사용하는 알고리즘이다. </p>
+<ul>
+<li><p>저번에 풀었던 위상정렬 문제인 ‘’문제집’’ 에서 처럼 <code>tree</code> ,<code>inDegree</code> 를 이용해서 건물의 관계를 저장했다.</p>
+<ul>
+<li><p><code>tree</code>: a라는 건물이 건설된 후 건설해야하는 건물들을 tree[a] 에 저장한다. </p>
+<p>예를 들어, 1 건물 다음 2 건물과 3 건물이 건설되어야하는 경우 tree[1]에는 [2,3]이 저장된다.</p>
+</li>
+<li><p><code>inDegree</code>: 진입차수이며, a라는 건물 전에 건설되어야 하는 건물의 수만큼 1씩 증가한다. </p>
+<p>예를 들어, 4 건물 전에 2 건물과 3 건물이 건설되어야하는 경우 inDegree[4] 는 2가 된다.</p>
+</li>
+</ul>
+</li>
+<li><p>K줄에 걸쳐 영우의 게임 정보가 올 때, </p>
+<ul>
+<li><code>1 j</code> 가 왔을때는,<code>j</code> 를 건설한 다음 건설할 수 있는 건물들(<code>tree[j]</code>)의 진입 차수(<code>inDegree</code>)를 1만큼 줄인다. 그리고 건물이 건설될 때마다 <code>yw_cnt[해당건물번호] += 1</code> 을 해준다.</li>
+<li><code>2  j</code> 가 왔을 때는, <code>j</code> 가 건설되지 않았는데 <code>j</code>를 파괴한 경우 <code>answer</code> 를 “Lier!”로 바꾼다.</li>
+</ul>
+</li>
+<li><blockquote>
+<p>조건 : 건설할 수 없는 건물을 건설하거나, 건설한적 없는 건물이 파괴되었다면 ‘Lier!’ 를 출력하자.</p>
+</blockquote>
+<ol>
+<li><strong>건설할 수 없는 건물을 건설한 경우</strong>는 <code>inDegree</code> 가 <code>0보다 큰 경우</code>이다. (예를 들어, <code>inDegree</code>가 <code>1</code>이라는 것은 아직 우선되는 건물 하나가 건설되지 않았다는 뜻이기 때문이다.)</li>
+<li><strong>건설한 적 없는 건물이 파괴된 경우</strong>는 <code>yw_cnt[건물 번호]</code> 가 <code>0</code>인 경우이다. (건설된 건물이 없다는 의미이다.)</li>
+</ol>
+</li>
+<li><p>코드</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n, m, k = map(int, input().split())</span><br><span class="line">tree = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> range(n+<span class="number">1</span>)]</span><br><span class="line">inDegree = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(n+<span class="number">1</span>)]</span><br><span class="line">yw_cnt = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(n + <span class="number">1</span>)]</span><br><span class="line">answer = <span class="string">'King-God-Emperor'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(m):</span><br><span class="line">    i, j = map(int, input().split())</span><br><span class="line">    tree[i].append(j)</span><br><span class="line">    inDegree[j] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(k):</span><br><span class="line">    i, j = map(int, input().split())</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> tree[j]:</span><br><span class="line">            inDegree[a] -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> inDegree[j] &gt; <span class="number">0</span>:</span><br><span class="line">            answer = <span class="string">'Lier!'</span></span><br><span class="line">        yw_cnt[j] += <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> yw_cnt[j] == <span class="number">0</span>:</span><br><span class="line">            answer = <span class="string">'Lier!'</span></span><br><span class="line"></span><br><span class="line">print(answer)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/11/25/backjoon-14676/" data-id="ckhx75j8h0000atc9frewd5b5"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-programmers-theif" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/11/24/programmers-theif/">[프로그래머스] 도둑질 - 동적계획법(Dynamic Programming) 파이썬</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/11/24/programmers-theif/" class="article-date">
+  <time datetime="2020-11-23T17:10:07.000Z" itemprop="datePublished">2020-11-24</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크: <a href="https://programmers.co.kr/learn/courses/30/parts/12263" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/parts/12263</a> &gt; 도둑질</li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><ul>
+<li><p>원형으로 이루어져 있기 때문에 첫번째 집을 털었을 땐 마지막 집을 털지 못하고, 마지막 집을 털었을 땐 첫번째 집을 털지 못한다. 이를 2개의 case로 나누어서 메모이제이션하면서 푼다. </p>
+<blockquote>
+<p> 이때 주의할 점은 case는 i번째 집을 무조건 턴 경우의 최댓값을 저장하는 배열이 아니라 i번째 집까지 왔을 때 i번째 집을 털거나 안턴 값 중 큰 값을 저장하는 것이다. 이 말의 뜻은 바로 아래 더 자세하게 나와있다.</p>
+</blockquote>
+<ul>
+<li>*”인접한 앞 집(<code>i-1</code>) 까지 턴 money 값 ( <strong><code>case[i-1]</code></strong>)”* 과 *”인접해있지 않은 앞 집(<code>i-2</code>)까지 턴 money에 지금 집(<code>i</code>) money를 더한 값 ( <strong><code>money[i] + case1[i-2]</code></strong>)”* 을 비교해서 더 큰 값을 <strong><code>case[i]</code></strong> 에 저장한다.</li>
+<li>이때, <strong>case1</strong>은 마지막 집은 털지 않기 때문에 <code>len(money)-1</code> 까지 for문을 돈다.<ul>
+<li><code>case1[1]</code> 은 (두번째 집이 턴 money값을 저장하는 것이 아니라) 첫번째 집 money를 턴 경우와 두번째 집 money를 턴 경우 중 큰 값을 저장하는 것이기 때문에 <code>max(money[0],money[1])</code> 를 저장해야한다.</li>
+</ul>
+</li>
+<li><strong>case2</strong>는 첫번째 집은 털지 않기 때문에 <code>case2[0]</code> 을 <code>0</code> 으로 두고 마지막 집까지 for문을 돈다.</li>
+</ul>
+</li>
+<li><p>두가지 케이스 중 제일 큰 값이 정답이 된다.</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(money)</span>:</span></span><br><span class="line">    case1 = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(money))]</span><br><span class="line">    case2 = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(money))]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># case1 : 첫번째 집을 터는 케이스</span></span><br><span class="line">    case1[<span class="number">0</span>] = money[<span class="number">0</span>]</span><br><span class="line">    case1[<span class="number">1</span>] = max(money[<span class="number">0</span>],money[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, len(money)<span class="number">-1</span>):</span><br><span class="line">        case1[i] = max(case1[i<span class="number">-1</span>], money[i] + case1[i<span class="number">-2</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># case2 : 마지막 집을 터는 케이스</span></span><br><span class="line">    case2[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">    case2[<span class="number">1</span>] = money[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, len(money)):</span><br><span class="line">        case2[i] = max(case2[i<span class="number">-1</span>], money[i] + case2[i<span class="number">-2</span>])</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> max(max(case1),max(case2))</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/11/24/programmers-theif/" data-id="ckhutojtj00001lc9ater8o14"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-programmers-load-to-go-school" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -870,167 +1048,6 @@
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-backjoon-2447" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/11/10/backjoon-2447/">[백준알고리즘] 2447: 별 찍기 - 10 (파이썬)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/11/10/backjoon-2447/" class="article-date">
-  <time datetime="2020-11-09T17:37:21.000Z" itemprop="datePublished">2020-11-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>문제 링크: <a href="https://www.acmicpc.net/problem/2447" target="_blank" rel="noopener">https://www.acmicpc.net/problem/2447</a></p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>여러 풀이 중에 가장 이해가 잘 된 코드의 풀이를 이해하고 작성해 보았다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rm</span><span class="params">(i, j, size)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> size == <span class="number">1</span>: <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    new_size = size//<span class="number">3</span></span><br><span class="line">    <span class="keyword">for</span> ri <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">        <span class="keyword">for</span> rj <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">            <span class="keyword">if</span> ri == <span class="number">1</span> <span class="keyword">and</span> rj == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">for</span> ti <span class="keyword">in</span> range(i + ri*new_size, i + (ri+<span class="number">1</span>)*new_size):</span><br><span class="line">                    <span class="keyword">for</span> tj <span class="keyword">in</span> range(j + rj*new_size, j + (rj+<span class="number">1</span>)*new_size):</span><br><span class="line">                        table[ti][tj] = <span class="string">' '</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            rm(i + ri*new_size, j + rj*new_size, new_size)</span><br><span class="line"></span><br><span class="line">n = int(input())</span><br><span class="line">table = [[<span class="string">'*'</span>]*n <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">rm(<span class="number">0</span>, <span class="number">0</span>, n)</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> table:</span><br><span class="line">    print(<span class="string">''</span>.join(t))</span><br></pre></td></tr></table></figure>
-
-<p>재귀적인 패턴으로 별을 찍기 위해서 규칙을 찾아내는 것이 어려웠다. </p>
-<p>모든 공간을 ‘*’ 로 채운다음 큰 사각형 부터 가운데를 ‘ ‘로 바꾸기를 수행한다.</p>
-<br>
-
-<ul>
-<li><p>모든 경우에서 구역을 9개로 나누어 가운데를 비워야하기 때문에 맨처음 이중 for문이 작성됐다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ri <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">    <span class="keyword">for</span> rj <span class="keyword">in</span> range(<span class="number">3</span>):</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>size가 27 일 때 가운데 9X9 크기를 ‘ ‘로 채워야하는데, 가운데는 (9,9) 부터 (18,18) 이다. 이에 해당하는 코드는 아래와 같다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ti <span class="keyword">in</span> range(i + ri*new_size, i + (ri+<span class="number">1</span>)*new_size):</span><br><span class="line">	<span class="keyword">for</span> tj <span class="keyword">in</span> range(j + rj*new_size, j + (rj+<span class="number">1</span>)*new_size):</span><br><span class="line">		table[ti][tj] = <span class="string">' '</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>재귀함수를 호출해 모든 경우의 9개 구역에 해당하는 가운데를 계속해서 지워나간다.</p>
-</li>
-<li><p>size가 1일 때 재귀가 끝난다 = 모든 작은 단위까지 지웠다는 것을 의미한다.</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/11/10/backjoon-2447/" data-id="ckhauihvx0000q5c9cu4u66mc"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-android-thread-time" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/31/android-thread-time/">[안드로이드] 메인스레드와의 통신을 활용해 1초마다 특정시간과 현재시간 차이 구하기</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/10/31/android-thread-time/" class="article-date">
-  <time datetime="2020-10-30T20:10:20.000Z" itemprop="datePublished">2020-10-31</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <blockquote>
-<p> 목표 : 3분 이상 머물렀던 위치마다 이어주는 선을 그리기. </p>
-</blockquote>
-<ul>
-<li><p><strong>스레드</strong>에서는 1초마다 <strong>메인스레드</strong>에 알림을 보낸다. </p>
-<p>메인스레드가 아닌 곳에서 뷰를 변경하면 에러메시지(아래)가 발생한다.</p>
-<p><code>Only the original thread that created a view hierarchy can touch its views.</code></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">thread(start = <span class="literal">true</span>) &#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  	Thread.sleep(THREAD_MS)</span><br><span class="line">		mHandler?.sendEmptyMessage(<span class="number">0</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>메인스레드</strong>에서는 <strong>스레드</strong>에서 알림이 왔을 때, 현재시간과 변한 위치에서 머물기 시작한 시간의 차이를 계산해 3분 이상인 경우 <code>drawPath</code> 함수를 호출해 이전 위치부터 현재 위치까지 선(<code>polyline</code>)을 그릴 수 있도록 했다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressLint(<span class="meta-string">"HandlerLeak"</span>)</span></span><br><span class="line">mHandler = <span class="keyword">object</span> : Handler() &#123;</span><br><span class="line">	<span class="comment">// THREAD_MS(1초) 마다 실행됩니다.</span></span><br><span class="line">	<span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">handleMessage</span><span class="params">(msg: <span class="type">Message</span>)</span></span> &#123;</span><br><span class="line">		<span class="comment">// 이전 위치에서 이동해서(AND) 3분 이상 있었던 경우</span></span><br><span class="line">		<span class="keyword">if</span>(preLatLng != endLatLng &amp;&amp; getMinOfStay() &gt;= BASE_TIME) &#123;</span><br><span class="line">			drawPath(preLatLng, endLatLng)</span><br><span class="line">			preLatLng = endLatLng</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<br>
-
-<p>PS. 오늘이 해피 할로윈이라고 컨튜리뷰션 색이 변했다! 더 차있었으면 더 이뻤을 것 같다 ^-^ 개인적으로 검정색이 맘에 든당 !!!!</p>
-<img src="../image/스크린샷 2020-10-31 오전 5.13.17.png" alt="스크린샷 2020-10-31 오전 5.13.17" style="zoom:67%;" />
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/31/android-thread-time/" data-id="ckgwpka690000sic96gsx2ix3"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
 
     </footer>
 

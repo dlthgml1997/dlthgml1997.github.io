@@ -64,6 +64,327 @@
         
           
 
+<article id="post-macos-zulu-jdk" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/01/13/macos-zulu-jdk/">[Mac OS] Zulu JDK 설치하기</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/13/macos-zulu-jdk/" class="article-date">
+  <time datetime="2021-01-13T01:42:00.000Z" itemprop="datePublished">2021-01-13</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>먼저 기존 깔려있던 jdk 를 삭제해야 한다면, </p>
+<ol>
+<li><p><strong>brew 업데이트 진행</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew update &amp;&amp; brew upgrade</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>기존 JDK 삭제</strong> </p>
+<p>기존 JDK가 설치되어 있는 폴더로 이동한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd &#x2F;Library&#x2F;Java&#x2F;JavaVirtualMachines&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>ls 명령어로 삭제할 jdk 명을 확인한 후 아래 명령어를 통해 삭제한다. (‘[‘와 ‘]’는 입력하지 않는다.)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo rm -rf [삭제할 jdk명]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>zulu 로 이동</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew tap mdogan&#x2F;zulu</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>zulu 설치</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew cask install 버전명</span><br></pre></td></tr></table></figure>
+
+<p><strong>버전명</strong> </p>
+<table>
+<thead>
+<tr>
+<th align="left">JDK</th>
+<th align="left">Cask Name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">OpenJDK7</td>
+<td align="left"><code>zulu-jdk7</code></td>
+</tr>
+<tr>
+<td align="left">OpenJDK8</td>
+<td align="left"><code>zulu-jdk8</code></td>
+</tr>
+<tr>
+<td align="left">OpenJDK11</td>
+<td align="left"><code>zulu-jdk11</code></td>
+</tr>
+<tr>
+<td align="left">OpenJDK12</td>
+<td align="left"><code>zulu-jdk12</code></td>
+</tr>
+<tr>
+<td align="left">OpenJDK13</td>
+<td align="left"><code>zulu-jdk13</code></td>
+</tr>
+<tr>
+<td align="left">OpenJDK14</td>
+<td align="left"><code>zulu-jdk14</code></td>
+</tr>
+<tr>
+<td align="left">OpenJDK15</td>
+<td align="left"><code>zulu-jdk15</code></td>
+</tr>
+<tr>
+<td align="left">Misson Control</td>
+<td align="left"><code>zulu-mc</code></td>
+</tr>
+</tbody></table>
+<p>나는 OpenJDK8을 설치했는데 위 명령어를 입력했을 때 아래와 같은 에러메시지가 떴다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Calling brew cask install is disabled! Use brew install [--cask] instead.</span><br></pre></td></tr></table></figure>
+
+<p> 때문에 cask 를 안쓰고 아래처럼 입력했다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install zulu-jdk8</span><br></pre></td></tr></table></figure>
+
+<p>아래와 같이 뜨면 성공이다 (맥주 이모티콘 귀엽다)</p>
+<img src="../image/스크린샷 2021-01-13 오전 10.48.29.png" alt="스크린샷 2021-01-13 오전 10.48.29" style="zoom:50%;" />
+</li>
+<li><p>잘 설치 됐는지 확인하기 위해 아래와 같이 입력해 확인한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ java -version</span><br><span class="line">$ javac -version</span><br></pre></td></tr></table></figure>
+
+<p>아래와 같이 뜨면 된다.</p>
+<img src="../image/스크린샷 2021-01-13 오전 11.04.56.png" alt="스크린샷 2021-01-13 오전 11.04.56" style="zoom:50%;" />
+
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/13/macos-zulu-jdk/" data-id="ckjusbz150000lkc9e3969t43"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac%EC%84%A4%EC%B9%98/" rel="tag">Mac설치</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-java-inheritance" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/01/11/java-inheritance/">[Java Programming] 객체지향 핵심 원리 - 상속 / 오버라이딩 / 오버로딩</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/11/java-inheritance/" class="article-date">
+  <time datetime="2021-01-11T13:42:22.000Z" itemprop="datePublished">2021-01-11</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="1-상속-Inheritance"><a href="#1-상속-Inheritance" class="headerlink" title="1. 상속(Inheritance)"></a>1. 상속(Inheritance)</h1><p>부모의 클래스를 상속 받아 새로운 클래스를 정의해 부모의 모든것을 물려받는 것</p>
+<ul>
+<li><p>부모 클래스 = 기본 클래스 = 상위 클래스</p>
+</li>
+<li><p>자식 클래스 = 파생 클래스 = 확장된 클래스 = 하위 클래스</p>
+</li>
+<li><p><code>extends</code> 예약어를 사용한다.</p>
+</li>
+<li><p><strong>예시 코드 (상속을 사용하지 않을 때)</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">  String name;</span><br><span class="line">  <span class="keyword">int</span> number;</span><br><span class="line">  <span class="keyword">int</span> age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span></span>&#123;</span><br><span class="line">  String name;</span><br><span class="line">  <span class="keyword">int</span> number;</span><br><span class="line">  <span class="keyword">int</span> age;</span><br><span class="line">  String jobOfManage;</span><br><span class="line">  String boss;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>예시 코드 (상속을 사용할 때)</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">  String name;</span><br><span class="line">  <span class="keyword">int</span> number;</span><br><span class="line">  <span class="keyword">int</span> age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span> <span class="keyword">extends</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">  String jobOfManage;</span><br><span class="line">  String boss;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>상속을 통해 소스코드의 <strong>재사용성</strong>이 보장되며 <strong>가독성</strong>이 높아진다.</p>
+</li>
+<li><p>공통된 기능을 갖는다고 모두 상속할 수 있는 것은 아니다. 부모 클래스와 자식 클래스의 관계가 <strong>일반화와 특별화의 관계, ‘is a~’관계</strong> 에 있어야 한다.</p>
+<ul>
+<li><p>문법적으로 강제되는 것이 아닌 논리적으로 ‘is a~’관계가 성립되어야 한다.</p>
+<blockquote>
+<p>예) 프린터가 부모 클래스일 때 도트 프린터, 잉크젯 프린터, 레이저 프린터는 프린터라는 공통적인 특징을 가지기 때문에 상속 관계가 성립될 수 있지만 N사 카메라와는 기능이 같더라도 상속 관계가 성립될 수 없다.</p>
+</blockquote>
+</li>
+<li><p><strong>부적절한 상속</strong>은 소스코드에 대한 분석과 개발을 어렵게 만든다.</p>
+</li>
+</ul>
+</li>
+<li><p>상속은 부모로부터 물려받은 특징에 <strong><em>자식 클래스에서만 가지는 추가적인 특징을 더해서 만들어진 것</em></strong>이다.</p>
+</li>
+<li><p>자바는 개발의 편의성과 가독성을 위해 문법적으로 <strong>단일 상속</strong>만을 허용한다.</p>
+<ul>
+<li>단일 상속이란, 하나의 클래스는 오직 하나의 부모 클래스만 상속할 수 있다는 것을 의미한다.</li>
+<li>다중 상속은 동일한 변수와 메서드를 상속 되는 문제가 발생한다.</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="생성자-자동-호출"><a href="#생성자-자동-호출" class="headerlink" title="생성자 자동 호출"></a>생성자 자동 호출</h2><blockquote>
+<p>상속된 자식 클래스 객체가 생성될 때 부모클래스의 생성자도 자동으로 호출되어 수행되면서 객체 초기화가 이루어지도록 한다.</p>
+</blockquote>
+<ul>
+<li><p>이때, <strong>부모 클래스의 생성자</strong>가 먼저 초기화를 수행한 <strong>다음 자식 클래스의 생성자</strong>가 초기화가 이루어지는 순서를 따르고, 자식 클래스에 의해 자동으로 호출되는 부모 생성자는 별도로 지정하지 않는경우 매개변수가 없는 기본 생성자가 호출된다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SuperClass</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">int</span> num;</span><br><span class="line">  	</span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="title">SuperClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      	System.out.println(<span class="string">"SuperClass 객체 생성"</span>);</span><br><span class="line">      	num1 = <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SubClass</span> <span class="keyword">extends</span> <span class="title">SuperClass</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">int</span> num2;</span><br><span class="line">  	</span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="title">SubClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      	System.out.println(<span class="string">"SubClass 객체 생성"</span>);</span><br><span class="line">      	num2 = <span class="number">10000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConstructorTest</span> </span>&#123;</span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">      	SubClass sub = <span class="keyword">new</span> SubClass();</span><br><span class="line">      	System.out.println(sub.num1);</span><br><span class="line">      	System.out.println(sub.num2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>아래와 같이 출력된다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SuperClass 객체 생성</span><br><span class="line">SubClass 객체 생성</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="number">10000</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>만약 부모 클래스에 기본 생성자가 없으면 자식 클래스는 컴파일이 되지 않는다.</p>
+</li>
+</ul>
+<br>
+
+<h2 id="부모-생성자-super"><a href="#부모-생성자-super" class="headerlink" title="부모 생성자 super()"></a>부모 생성자 super()</h2><ul>
+<li><p><code>this()</code> 생성자 호출: 클래스 안에서 오버로딩 된 또 다른 생성자를 호출하기 위해 사용한다.</p>
+</li>
+<li><p><code>super()</code> 생성자 호출: <strong>부모</strong> 클래스의 생성자가 오버로딩 되어 여러개 존재하는 경우 <strong>특정 생성자를 호출</strong>하기 위해 사용한다. super() 생성자를 호출하지 않으면 부모의 생성자는 매개변수가 없는 기본 생성자가 호출된다.</p>
+</li>
+<li><p><code>super()</code>는 반드시 생성자의 첫 번째 라인에 위치해야 한다.</p>
+</li>
+</ul>
+<h2 id="예약어-super"><a href="#예약어-super" class="headerlink" title="예약어 super"></a>예약어 super</h2><ul>
+<li><p>부모 객체에 접근할 때 사용된다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">super</span>.name</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<br>
+
+<h2 id="변수-상속"><a href="#변수-상속" class="headerlink" title="변수 상속"></a>변수 상속</h2><ul>
+<li>상속에서 제외되는 상황<ul>
+<li><code>private</code>로 정의된 변수는 상속에서 제외된다.</li>
+<li>자식 클래스에서 부모 클래스가 가진 변수와 같은 이름의 변수를 선언하면, 부모 클래스의 변수는 상속되지 않는다.<ul>
+<li>이는 인스턴스 변수, 클래스 변수(<code>static</code>) 모두 동일하다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="2-메서드-Overloading과-Overriding"><a href="#2-메서드-Overloading과-Overriding" class="headerlink" title="2. 메서드 Overloading과 Overriding"></a>2. 메서드 Overloading과 Overriding</h2><h2 id="메서드-오버라이딩-메서드-재정의"><a href="#메서드-오버라이딩-메서드-재정의" class="headerlink" title="메서드 오버라이딩 (메서드 재정의)"></a>메서드 오버라이딩 (메서드 재정의)</h2><blockquote>
+<p>상속 관계에 있는 두 개의 클래스에서 부모 클래스의 메서드를 재사용하지 않고 새롭게 정의하여 사용하는 것이다.</p>
+</blockquote>
+<ul>
+<li><p>자식 클래스에서 재정의된 메서드는 부모 클래스의 메서드와 메서드 이름, 매개변수의 유형과 개수가 동일해야한다. (동일한 시그니처를 가져야 한다.)</p>
+</li>
+<li><p>예제</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	String name;</span><br><span class="line">  	<span class="keyword">int</span> sheets;</span><br><span class="line">  </span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takePicture</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    		System.out.println(name + <span class="string">"로 "</span> + sheets + <span class="string">"번 사진을 찍는다."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PolaroidCamera</span> <span class="keyword">extends</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">int</span> batteryGage;</span><br><span class="line">  </span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takePicture</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      	<span class="keyword">super</span>.takePicture();</span><br><span class="line">      </span><br><span class="line">      	System.out.println(sheets + <span class="string">"장의 사진을 프린트한다."</span>);</span><br><span class="line">      	System.out.println(<span class="string">"현재 배터리 : "</span> + batteryGage + <span class="string">"%"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>super</code> 예약어를 사용해 메서드를 overriding 하면서 부모 클래스의 메서드를 사용할 수 있다.</li>
+</ul>
+</li>
+<li><p><code>final</code> 예약어와 Overriding</p>
+<ul>
+<li><p><code>final</code> + 변수 =&gt; 상수를 의미한다.</p>
+</li>
+<li><p><code>final</code> + 클래스 =&gt; 자식 클래스를 가질 수 없는 클래스임을 의미한다.</p>
+</li>
+<li><p><strong><code>final</code> + 메서드 =&gt; 오버라이딩을 금지하는 것을 의미한다.</strong></p>
+<ul>
+<li><p>자식 메서드가 부모 메서드를 오버라이딩할 때, 부모 메서드에 존재하는 메서드를 호출하지 않으면 문제가 발생한다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	String name;</span><br><span class="line">  	<span class="keyword">int</span> sheets;</span><br><span class="line">  </span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takePicture</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      	printPicture();</span><br><span class="line">    		System.out.println(name + <span class="string">"로 "</span> + sheets + <span class="string">"번 사진을 찍는다."</span>); 	</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PolaroidCamera</span> <span class="keyword">extends</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">int</span> batteryGage;</span><br><span class="line">  </span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takePicture</span><span class="params">()</span> </span>&#123; <span class="comment">// printPicture() 메서드 호출이 없기 때문에 문제가 발생한다.</span></span><br><span class="line">      	<span class="keyword">super</span>.takePicture();</span><br><span class="line">      </span><br><span class="line">      	System.out.println(sheets + <span class="string">"장의 사진을 프린트한다."</span>);</span><br><span class="line">      	System.out.println(<span class="string">"현재 배터리 : "</span> + batteryGage + <span class="string">"%"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>이를 방지하는 방법이 final 예약어를 사용하는 것이다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	String name;</span><br><span class="line">  	<span class="keyword">int</span> sheets;</span><br><span class="line">  </span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">takePicture</span><span class="params">()</span> </span>&#123; <span class="comment">// 오버라이딩을 하지 못하게 막음.</span></span><br><span class="line">      	printPicture();</span><br><span class="line">    		System.out.println(name + <span class="string">"로 "</span> + sheets + <span class="string">"번 사진을 찍는다."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PolaroidCamera</span> <span class="keyword">extends</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">int</span> batteryGage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="메서드-오버로딩"><a href="#메서드-오버로딩" class="headerlink" title="메서드 오버로딩"></a>메서드 오버로딩</h2><blockquote>
+<p>하나의 클래스에 동일한 이름의 메서드가 여러 개 중복 정의 되어 있는 것이다.</p>
+</blockquote>
+<ul>
+<li>부모 클래스와 메서드 이름이 동일해야 하며, 매개변수의 개수나 타입 중 최소 하나를 다르게 하여 재정의하는 것이다.</li>
+</ul>
+<p><strong>오버라이딩</strong>은 메서드를 새롭게 정의하는 것 ! <strong>오버로딩</strong>은 동일한 이름의 메서드를 여러 개로 정의하는 것!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/11/java-inheritance/" data-id="ckjusbz1a0001lkc9ar5a6wa6"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%9E%90%EB%B0%94/" rel="tag">자바</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-backjoon-1065" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -1118,310 +1439,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/12/30/swea-2043/" data-id="ckja6kdfh00003gc96o24alno"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-ternary-reverse" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/12/28/programmers-ternary-reverse/">[프로그래머스] 3진법 뒤집기 (파이썬)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/12/28/programmers-ternary-reverse/" class="article-date">
-  <time datetime="2020-12-28T13:58:40.000Z" itemprop="datePublished">2020-12-28</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>문제 링크: <a href="https://programmers.co.kr/learn/courses/30/lessons/68935" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/lessons/68935</a></li>
-</ul>
-<br>
-
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><ul>
-<li><p><strong>10진법을 3진법으로 바꾸는 방법</strong></p>
-<p>n = 63의 경우,<br>3으로 나눈 나머지를 역순으로 더하면 된다. (이때, n은 몫)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">63</span> % <span class="number">3</span> = <span class="number">0</span> (n = <span class="number">21</span>)</span><br><span class="line"><span class="number">21</span> % <span class="number">3</span> = <span class="number">0</span> (n = <span class="number">7</span>)</span><br><span class="line"><span class="number">7</span> % <span class="number">3</span> = <span class="number">1</span> (n = <span class="number">2</span>)</span><br><span class="line"><span class="number">2</span> % <span class="number">3</span> = <span class="number">2</span> (n = <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<p>n 이 0이 되면 끝나고, <code>2100</code>이 3진수가 된다.</p>
-</li>
-<li><p><strong>3진법을 10진법으로 바꾸는 방법</strong></p>
-<p>주어진 3진수가 <code>2100</code> 일 경우,<br>3210 순으로 3의 n제곱한 수를 각 자리의 수에 곱한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>* <span class="number">3</span>^<span class="number">3</span> + <span class="number">1</span> * <span class="number">3</span>^<span class="number">2</span> + <span class="number">0</span> * <span class="number">3</span>^<span class="number">1</span> + <span class="number">0</span> * <span class="number">3</span>^<span class="number">0</span> = <span class="number">63</span></span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<p><strong>첫번째 풀이</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(n)</span>:</span></span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    ternary = []</span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">0</span>: </span><br><span class="line">        ternary.append(n%<span class="number">3</span>)</span><br><span class="line">        n //= <span class="number">3</span></span><br><span class="line"></span><br><span class="line">    length = len(ternary) - <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> ternary:</span><br><span class="line">        <span class="keyword">if</span> i != <span class="number">0</span>:</span><br><span class="line">            num = <span class="number">1</span>        </span><br><span class="line">            <span class="keyword">for</span> _ <span class="keyword">in</span> range(length):</span><br><span class="line">                num *= <span class="number">3</span></span><br><span class="line">            answer += num * i</span><br><span class="line">        length -= <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>n이 0이 될 때까지 나누면서 나머지를 리스트에 더한다. 이때 뒤집지 않아도 되게 역순으로 더해진다.</li>
-<li>3진수를 10진수로 바꾸기 위해 리스트(ternary)에서 숫자(i)를 하나씩 빼오면서 0이 아닌 경우 3의 length 제곱수(num)를 숫자(i)에 곱해 답에 더한다.</li>
-</ul>
-<p><strong>두번째 풀이</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(n)</span>:</span></span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    ternary = []</span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">0</span>: </span><br><span class="line">        ternary.append(n%<span class="number">3</span>)</span><br><span class="line">        n //= <span class="number">3</span></span><br><span class="line">        </span><br><span class="line">    temp = <span class="string">''</span>.join(map(str, ternary))</span><br><span class="line">    <span class="keyword">return</span> int(temp, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>3진수가 역순으로 담긴 리스트를 str로 변환한 다음 int(temp, 3) 을 하면 10진수로 쉽게 바꿀 수 있다.</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/12/28/programmers-ternary-reverse/" data-id="ckj8nkyvl0000l4c9729r4jo0"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-spy" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/12/21/programmers-spy/">[프로그래머스] 위장(해시) - 파이썬</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/12/21/programmers-spy/" class="article-date">
-  <time datetime="2020-12-21T14:54:16.000Z" itemprop="datePublished">2020-12-21</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>문제링크: <a href="https://programmers.co.kr/learn/courses/30/lessons/42578?language=python3" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/lessons/42578?language=python3</a></li>
-</ul>
-<h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>스파이들은 매일 다른 옷을 조합하여 입어 자신을 위장합니다.</p>
-<p>예를 들어 스파이가 가진 옷이 아래와 같고 오늘 스파이가 동그란 안경, 긴 코트, 파란색 티셔츠를 입었다면 다음날은 청바지를 추가로 입거나 동그란 안경 대신 검정 선글라스를 착용하거나 해야 합니다.</p>
-<table>
-<thead>
-<tr>
-<th>종류</th>
-<th>이름</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>얼굴</td>
-<td>동그란 안경, 검정 선글라스</td>
-</tr>
-<tr>
-<td>상의</td>
-<td>파란색 티셔츠</td>
-</tr>
-<tr>
-<td>하의</td>
-<td>청바지</td>
-</tr>
-<tr>
-<td>겉옷</td>
-<td>긴 코트</td>
-</tr>
-</tbody></table>
-<p>스파이가 가진 의상들이 담긴 2차원 배열 clothes가 주어질 때 서로 다른 옷의 조합의 수를 return 하도록 solution 함수를 작성해주세요.</p>
-<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
-<li>clothes의 각 행은 [의상의 이름, 의상의 종류]로 이루어져 있습니다.</li>
-<li>스파이가 가진 의상의 수는 1개 이상 30개 이하입니다.</li>
-<li>같은 이름을 가진 의상은 존재하지 않습니다.</li>
-<li>clothes의 모든 원소는 문자열로 이루어져 있습니다.</li>
-<li>모든 문자열의 길이는 1 이상 20 이하인 자연수이고 알파벳 소문자 또는 ‘_’ 로만 이루어져 있습니다.</li>
-<li>스파이는 하루에 최소 한 개의 의상은 입습니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>clothes</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>[[yellow_hat, headgear], [blue_sunglasses, eyewear], [green_turban, headgear]]</td>
-<td>5</td>
-</tr>
-<tr>
-<td>[[crow_mask, face], [blue_sunglasses, face], [smoky_makeup, face]]</td>
-<td>3</td>
-</tr>
-</tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>예제 #1<br>headgear에 해당하는 의상이 yellow_hat, green_turban이고 eyewear에 해당하는 의상이 blue_sunglasses이므로 아래와 같이 5개의 조합이 가능합니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. yellow_hat</span><br><span class="line">2. blue_sunglasses</span><br><span class="line">3. green_turban</span><br><span class="line">4. yellow_hat + blue_sunglasses</span><br><span class="line">5. green_turban + blue_sunglasses</span><br></pre></td></tr></table></figure>
-
-<p>예제 #2<br>face에 해당하는 의상이 crow_mask, blue_sunglasses, smoky_makeup이므로 아래와 같이 3개의 조합이 가능합니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. crow_mask</span><br><span class="line">2. blue_sunglasses</span><br><span class="line">3. smoky_makeup</span><br></pre></td></tr></table></figure>
-
-<br> 
-
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>이 문제는 알고리즘 스터디에서 설원언니가 풀이해준 문제인데, 복습하면 좋을 것 같아 다시 풀어보며 공부한 후, 정리했다.</p>
-<p><strong>풀이</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(clothes)</span>:</span></span><br><span class="line">    count = Counter([category <span class="keyword">for</span> name, category <span class="keyword">in</span> clothes])</span><br><span class="line">    <span class="keyword">return</span> reduce(<span class="keyword">lambda</span> x, y : x * (y + <span class="number">1</span>), count.values(), <span class="number">1</span>) <span class="number">-1</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>먼저 서로 다른 의상의 조합의 수를 구하는 공식</p>
-<p>clothes가 <code>[[yellow_hat, headgear], [blue_sunglasses, eyewear], [green_turban, headgear]]</code> 일 때로 예시를 들어보자.<br>여기서 <strong><code>headgear</code></strong>는 <code>yellow_hat</code>(노란모자) , <code>green_turban</code>(초록 터번) 총 2개이고  <strong><code>eyewear</code></strong>는 <code>blue_sunglasses</code>(파란 선글라스) 총 1개 이다. </p>
-<p>이때 <strong>종류가 겹치지 않게 입을 수 있는 의상 조합의 수</strong>는</p>
-<ul>
-<li>노란모자</li>
-<li>초록 터번</li>
-<li>파란 선글라스</li>
-<li>노란 모자 + 파란 선글라스</li>
-<li>초록 터번 + 파란 선글라스</li>
-</ul>
-<p>총 다섯 가지다 조합의 수는 아래와 같은 공식으로 구해질 수 있다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(headgear에 해당하는 의상 수 +<span class="number">1</span>) * (eyewear에 해당하는 의상 수 +<span class="number">1</span>) <span class="number">-1</span></span><br></pre></td></tr></table></figure>
-
-<p>종류 마다 <strong><code>+1</code></strong> 을 하는 경우는 <strong>착용하지 않는 경우</strong>도 해당해야하기 때문이고, 마지막에 <strong><code>-1</code></strong> 을 하는 이유는 <strong>모든 의상을 착용하지 않는 경우는 빼야하기 때문</strong>이다.</p>
-<p>이제 이 식을 구현하기 위해 <code>Counter</code>와 <code>reduce</code>를 사용해보자 (아래 <strong>새로 배운 내용</strong>에 약간의 설명이 적혀있다.)</p>
-</li>
-<li><p><code>Counter</code>를 이용해 <code>category(종류)</code>에 해당하는 옷의 갯수를 딕셔너리 형태로 <code>count</code>에 담는다.</p>
-<ul>
-<li><p><strong>예를 들어</strong> <code>clothes</code>가 <code>[[yellow_hat, headgear], [blue_sunglasses, eyewear], [green_turban, headgear]]</code> 일 때, 아래와 같이 <code>count</code>가 출력된다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">count = Counter([category <span class="keyword">for</span> name, category <span class="keyword">in</span> clothes])</span><br><span class="line">print(count)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 	Counter(&#123;'headgear': 2, 'eyewear': 1&#125;)</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>아래 공식을 <code>reduce</code>로 나타내보자.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(headgear에 해당하는 의상 수 +<span class="number">1</span>) * (eyewear에 해당하는 의상 수 +<span class="number">1</span>) <span class="number">-1</span></span><br></pre></td></tr></table></figure>
-
-<p>아래와 같이 나타낼 수 있다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reduce(<span class="keyword">lambda</span> x, y : x * (y + <span class="number">1</span>), count.values(), <span class="number">1</span>) <span class="number">-1</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>3번째 인자에 1을 주어 x 를 1로 초기화한다(initializer).</p>
-</li>
-<li><p>2번째 인자는 category에 해당하는 의상의 수가 차례대로 y에 담기도록 한다. </p>
-</li>
-<li><p>count가 <code>Counter({&#39;headgear&#39;: 2, &#39;eyewear&#39;: 1})</code> 일 때로 예시를 들어보면 reduce를 실행하면 아래 식이 계산된다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((<span class="number">1</span> * (<span class="number">2</span>+<span class="number">1</span>)) * (<span class="number">1</span>+<span class="number">1</span>)) <span class="number">-1</span> <span class="comment"># 5</span></span><br></pre></td></tr></table></figure>
-
-<p>따라서 조합의 수 5가 정답으로 return 된다.</p>
-</li>
-</ul>
-</li>
-</ul>
-<br>
-
-<p><strong>새로 배운 내용</strong> </p>
-<ul>
-<li><p><strong>Counter</strong></p>
-<blockquote>
-<p><strong>사용 방법</strong></p>
-<p><code>from collections import Counter</code></p>
-</blockquote>
-<ul>
-<li><p>이는 같은 값의 갯수를 딕셔너리 형태로 나타낸다. </p>
-</li>
-<li><p><strong>사용 예시</strong> </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="string">'a'</span>, <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'c'</span>]</span><br><span class="line">print(collections.Counter(list))</span><br></pre></td></tr></table></figure>
-
-<p>위와 같은 list를 Counter에 넣고 print 하면</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Counter(&#123;'a': 2, 'c': 2, 'b': 1&#125;)</span></span><br></pre></td></tr></table></figure>
-
-<p>위와 같이 출력 된다. 이때 value(갯수) 기준 내림차순으로 담겨져있음을 알 수 있다.</p>
-</li>
-</ul>
-</li>
-<li><p><strong>reduce</strong></p>
-<blockquote>
-<p><strong>사용 방법</strong></p>
-<p><code>from fucntools import reduce</code></p>
-</blockquote>
-<ul>
-<li><p>이는 특정 식을 수행할 수 있게 도와준다.</p>
-</li>
-<li><p>기본 사용 방식은 아래와 같다</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reduce(function, iterable[, initializer])</span><br><span class="line"><span class="comment"># [] 는 선택</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>사용 예시</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">answer = reduce(<span class="keyword">lambda</span> x, y : x + y, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line"><span class="comment"># ((((1 + 2) + 3) + 4) + 5)</span></span><br><span class="line"><span class="keyword">print</span> answer</span><br><span class="line"><span class="comment"># 15</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/12/21/programmers-spy/" data-id="ckiypqx3k0000erc9hmqm58yc"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
