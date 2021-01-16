@@ -64,6 +64,123 @@
         
           
 
+<article id="post-backjoon-9251" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/05/11/backjoon-9251/">[알고리즘] 백준알고리즘 9251 - LCS (파이썬/python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/05/11/backjoon-9251/" class="article-date">
+  <time datetime="2020-05-11T13:16:00.000Z" itemprop="datePublished">2020-05-11</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 초</td>
+<td align="left">256 MB</td>
+<td align="left">20545</td>
+<td align="left">8389</td>
+<td align="left">6261</td>
+<td align="left">41.156%</td>
+</tr>
+</tbody></table>
+<p>LCS(Longest Common Subsequence, 최장 공통 부분 수열)문제는 두 수열이 주어졌을 때, 모두의 부분 수열이 되는 수열 중 가장 긴 것을 찾는 문제이다.</p>
+<p>예를 들어, ACAYKP와 CAPCAK의 LCS는 ACAK가 된다.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄과 둘째 줄에 두 문자열이 주어진다. 문자열은 알파벳 대문자로만 이루어져 있으며, 최대 1000글자로 이루어져 있다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 입력으로 주어진 두 문자열의 LCS의 길이를 출력한다.</p>
+<h2 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ACAYKP</span><br><span class="line">CAPCAK</span><br></pre></td></tr></table></figure>
+
+<h2 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
+<li>문제를 만든 사람: <a href="https://www.acmicpc.net/user/baekjoon" target="_blank" rel="noopener">baekjoon</a></li>
+<li>데이터를 추가한 사람: <a href="https://www.acmicpc.net/user/qpwoeiruty" target="_blank" rel="noopener">qpwoeiruty</a></li>
+</ul>
+<h2 id="알고리즘-분류"><a href="#알고리즘-분류" class="headerlink" title="알고리즘 분류"></a>알고리즘 분류</h2><ul>
+<li>[다이나믹 프로그래밍](<a href="https://www.acmicpc.net/problem/tag/다이나믹" target="_blank" rel="noopener">https://www.acmicpc.net/problem/tag/다이나믹</a> 프로그래밍)</li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p><strong>LCS(Longest Common Subsequence)</strong> 는 문제에 나왔듯이 최장 공통 부분 수열을 뜻하며, </p>
+<p><strong>LCS(Longest Common Substring, 최장 공통 부분 문자열)</strong>과 헷갈릴 수 있다.</p>
+<p>공통 부분 문자열은 두 문자열이 가지는 공통적인 문자열 중 끊기지않고 연속적인 부분을 의미하고,</p>
+<p>공통 부분 수열은 두 문자열이 가지는 공통적인 문자열이 끊기더라도 순서가 맞으면 LCS로 인정하는 것을 의미한다.</p>
+<p><strong>ABCDHEF</strong> / <strong>BCDEF</strong> 두 문자열이 존재할 때</p>
+<p>최장 공통 부분 문자열은 BCD , 최장 공통 부분 수열은 BCDEF이다.</p>
+<h3 id="코드"><a href="#코드" class="headerlink" title="코드"></a>코드</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">n = list(str(input()))</span><br><span class="line">m = list(str(input()))</span><br><span class="line"></span><br><span class="line">lcs_list =[[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(n) + <span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(m) + <span class="number">1</span>)]</span><br><span class="line">answer = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(n)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(m)):</span><br><span class="line">        <span class="keyword">if</span> n[i] ==m[j]:</span><br><span class="line">            lcs_list[j+<span class="number">1</span>][i+<span class="number">1</span>] = lcs_list[j][i] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            lcs_list[j+<span class="number">1</span>][i+<span class="number">1</span>] = max(lcs_list[j][i+<span class="number">1</span>],lcs_list[j+<span class="number">1</span>][i])</span><br><span class="line">            </span><br><span class="line">print(lcs_list[<span class="number">-1</span>][<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<p>아래의 표를 만들어가는 코드이다. </p>
+<p>이 문제는 길이만 출력하면 되기 때문에 lcs_list 의 마지막(맨 오른쪽 아래) 값을 출력한다.</p>
+<p>​       A C A Y K P</p>
+<p>​    0 0 0 0 0 0 0 </p>
+<p>C  0 0 1 1 1 1 1 </p>
+<p>A  0 <strong>1</strong> 1 2 2 2 2 </p>
+<p>P  0 1 1 2 2 2 3 </p>
+<p>C  0 1 <strong>2</strong> 2 2 2 3</p>
+<p>A  0 1 2 <strong>3</strong> 3 3 3 </p>
+<p>K  0 1 2 3 3 <strong>4</strong> 4</p>
+<p>여기서 LCS 는 <strong>ACAK</strong> 가 된다. </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/11/backjoon-9251/" data-id="ckenwloum002h6jc9732ga9fl"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-backjoon-1912" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -921,132 +1038,6 @@
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-backjoon-2178" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/23/backjoon-2178/">[백준알고리즘] 2178번: 미로 탐색- 파이썬(python)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/23/backjoon-2178/" class="article-date">
-  <time datetime="2020-03-23T12:00:00.000Z" itemprop="datePublished">2020-03-23</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>N×M크기의 배열로 표현되는 미로가 있다.</p>
-<table>
-<thead>
-<tr>
-<th>1</th>
-<th>0</th>
-<th>1</th>
-<th>1</th>
-<th>1</th>
-<th>1</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody></table>
-<p>미로에서 1은 이동할 수 있는 칸을 나타내고, 0은 이동할 수 없는 칸을 나타낸다. 이러한 미로가 주어졌을 때, (1, 1)에서 출발하여 (N, M)의 위치로 이동할 때 지나야 하는 최소의 칸 수를 구하는 프로그램을 작성하시오. 한 칸에서 다른 칸으로 이동할 때, 서로 인접한 칸으로만 이동할 수 있다.</p>
-<p>위의 예에서는 15칸을 지나야 (N, M)의 위치로 이동할 수 있다. 칸을 셀 때에는 시작 위치와 도착 위치도 포함한다.</p>
-<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 두 정수 N, M(2 ≤ N, M ≤ 100)이 주어진다. 다음 N개의 줄에는 M개의 정수로 미로가 주어진다. 각각의 수들은 <strong>붙어서</strong> 입력으로 주어진다.</p>
-<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 지나야 하는 최소의 칸 수를 출력한다. 항상 도착위치로 이동할 수 있는 경우만 입력으로 주어진다.</p>
-<h4 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4 6</span><br><span class="line">101111</span><br><span class="line">101010</span><br><span class="line">101011</span><br><span class="line">111011</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">15</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4 6</span><br><span class="line">110110</span><br><span class="line">110110</span><br><span class="line">111111</span><br><span class="line">111101</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2 25</span><br><span class="line">1011101110111011101110111</span><br><span class="line">1110111011101110111011101</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">38</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-입력-4"><a href="#예제-입력-4" class="headerlink" title="예제 입력 4"></a>예제 입력 4</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">7 7</span><br><span class="line">1011111</span><br><span class="line">1110001</span><br><span class="line">1000001</span><br><span class="line">1000001</span><br><span class="line">1000001</span><br><span class="line">1000001</span><br><span class="line">1111111</span><br></pre></td></tr></table></figure>
-
-<h4 id="예제-출력-4"><a href="#예제-출력-4" class="headerlink" title="예제 출력 4"></a>예제 출력 4</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    n, m = map(int, input().split())</span><br><span class="line">    data = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">        data.append(list(map(int, str(input()))))</span><br><span class="line">    distance = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(m)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">    distance[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">    queue = [[<span class="number">0</span>,<span class="number">0</span>]]</span><br><span class="line">    foot_prints = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        [i, j] = queue.pop(<span class="number">0</span>)</span><br><span class="line">        foot_prints.append([i,j])</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">if</span> j &gt; <span class="number">0</span> <span class="keyword">and</span> data[i][j<span class="number">-1</span>] == <span class="number">1</span> <span class="keyword">and</span> [i,j<span class="number">-1</span>] <span class="keyword">not</span> <span class="keyword">in</span> foot_prints <span class="keyword">and</span> [i,j<span class="number">-1</span>] <span class="keyword">not</span> <span class="keyword">in</span> queue:</span><br><span class="line">            queue.append([i,j<span class="number">-1</span>])</span><br><span class="line">            distance[i][j<span class="number">-1</span>] = distance[i][j] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> j &lt; m<span class="number">-1</span> <span class="keyword">and</span> data[i][j+<span class="number">1</span>] == <span class="number">1</span> <span class="keyword">and</span> [i,j+<span class="number">1</span>] <span class="keyword">not</span> <span class="keyword">in</span> foot_prints <span class="keyword">and</span> [i,j+<span class="number">1</span>] <span class="keyword">not</span> <span class="keyword">in</span> queue:</span><br><span class="line">            queue.append([i,j+<span class="number">1</span>])</span><br><span class="line">            distance[i][j+<span class="number">1</span>] = distance[i][j] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> data[i<span class="number">-1</span>][j] == <span class="number">1</span> <span class="keyword">and</span> [i<span class="number">-1</span>,j] <span class="keyword">not</span> <span class="keyword">in</span> foot_prints <span class="keyword">and</span> [i<span class="number">-1</span>,j] <span class="keyword">not</span> <span class="keyword">in</span> queue:</span><br><span class="line">            queue.append([i<span class="number">-1</span>,j])</span><br><span class="line">            distance[i<span class="number">-1</span>][j] = distance[i][j] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &lt; n<span class="number">-1</span> <span class="keyword">and</span> data[i+<span class="number">1</span>][j] == <span class="number">1</span> <span class="keyword">and</span> [i+<span class="number">1</span>,j] <span class="keyword">not</span> <span class="keyword">in</span> foot_prints <span class="keyword">and</span> [i+<span class="number">1</span>,j] <span class="keyword">not</span> <span class="keyword">in</span> queue:</span><br><span class="line">            queue.append([i+<span class="number">1</span>,j])    </span><br><span class="line">            distance[i+<span class="number">1</span>][j] = distance[i][j] + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> distance[n<span class="number">-1</span>][m<span class="number">-1</span>]</span><br><span class="line">    </span><br><span class="line">print(main())</span><br></pre></td></tr></table></figure>
-
-
-
-<p>큐를 이용한 bfs를 통해 문제 풀이를 하였다.</p>
-<p>(출처)[<a href="https://claude-u.tistory.com/212]" target="_blank" rel="noopener">https://claude-u.tistory.com/212]</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/23/backjoon-2178/" data-id="ckenwlouk002c6jc9hmqabmqw"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
 
     </footer>
 
