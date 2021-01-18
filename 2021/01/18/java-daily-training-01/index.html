@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [Java] 기본 문법 응용: Loop -for, while / 조건문 if, switch |
+    
+    IT&#39;s easy if you try</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-java-daily-training-01" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [Java] 기본 문법 응용: Loop -for, while / 조건문 if, switch
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/18/java-daily-training-01/" class="article-date">
+  <time datetime="2021-01-18T13:14:00.000Z" itemprop="datePublished">2021-01-18</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="01-숫자출력-1"><a href="#01-숫자출력-1" class="headerlink" title="01 숫자출력(1)"></a>01 숫자출력(1)</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ssafy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DigitTest1</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">5</span> ; i &gt; <span class="number">0</span> ; i-- )&#123;</span><br><span class="line">			<span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; <span class="number">5</span>-i ; j++ ) &#123;</span><br><span class="line">				System.out.print(<span class="string">"   "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span>( <span class="keyword">int</span> k = <span class="number">1</span> ; k &lt;= i ; k++ )&#123;</span><br><span class="line">				System.out.printf(<span class="string">"%3d"</span>,num++);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println(<span class="string">'\n'</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span></span><br><span class="line"></span><br><span class="line">   <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span></span><br><span class="line"></span><br><span class="line">     <span class="number">10</span> <span class="number">11</span> <span class="number">12</span></span><br><span class="line"></span><br><span class="line">        <span class="number">13</span> <span class="number">14</span></span><br><span class="line"></span><br><span class="line">           <span class="number">15</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="02-숫자출력-2"><a href="#02-숫자출력-2" class="headerlink" title="02 숫자출력(2)"></a>02 숫자출력(2)</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ssafy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DigitTest2</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> num2 = <span class="number">5</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>; i &gt; <span class="number">0</span>; i--)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>-i; j++) &#123;</span><br><span class="line">				System.out.print(<span class="string">"   "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; num2; k++)&#123;</span><br><span class="line">				System.out.printf(<span class="string">"%3d"</span>,num++);</span><br><span class="line">			&#125;</span><br><span class="line">			num2-=<span class="number">2</span>;</span><br><span class="line">			System.out.println(<span class="string">'\n'</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		num2 = <span class="number">3</span>;</span><br><span class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">2</span> ; i &gt; <span class="number">0</span> ; i-- )&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">3</span>-i; j &lt; <span class="number">2</span>; j++ ) &#123;</span><br><span class="line">				System.out.print(<span class="string">"   "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">for</span>( <span class="keyword">int</span> k = <span class="number">0</span> ; k &lt; num2  ; k++)&#123;</span><br><span class="line">				System.out.printf(<span class="string">"%3d"</span>,num++);</span><br><span class="line">			&#125;</span><br><span class="line">			num2+=<span class="number">2</span>;</span><br><span class="line">			System.out.println(<span class="string">'\n'</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="출력-1"><a href="#출력-1" class="headerlink" title="출력"></a>출력</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span></span><br><span class="line"></span><br><span class="line">    <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span></span><br><span class="line"></span><br><span class="line">       <span class="number">9</span></span><br><span class="line"></span><br><span class="line">   <span class="number">10</span> <span class="number">11</span> <span class="number">12</span></span><br><span class="line"></span><br><span class="line"><span class="number">13</span> <span class="number">14</span> <span class="number">15</span> <span class="number">16</span> <span class="number">17</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="03-가위바위보-프로그램"><a href="#03-가위바위보-프로그램" class="headerlink" title="03 가위바위보 프로그램"></a>03 가위바위보 프로그램</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ssafy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GameTest</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Game</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">// 1: 짐</span></span><br><span class="line">		<span class="comment">// 2: 이김 </span></span><br><span class="line">		<span class="comment">// 3: 비김</span></span><br><span class="line">		System.out.print(<span class="string">"가위바위보 중 하나 입력: "</span>);</span><br><span class="line">		String finger = br.readLine();</span><br><span class="line">		<span class="keyword">int</span> comp_finger = (<span class="keyword">int</span>) (Math.random() * <span class="number">3</span>) + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">switch</span>(finger) &#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">"가위"</span>:</span><br><span class="line">				<span class="keyword">if</span>(comp_finger == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(comp_finger == <span class="number">3</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">"바위"</span>:</span><br><span class="line">				<span class="keyword">if</span>(comp_finger == <span class="number">3</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(comp_finger == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">"보"</span>:</span><br><span class="line">				<span class="keyword">if</span>(comp_finger == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(comp_finger == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>:</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NumberFormatException, IOException </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"가위바위보 게임을 시작합니다. 아래 보기 중 하나를 고르세요."</span>);</span><br><span class="line">		System.out.println(<span class="string">"1.5판 3승 \n2.3판 2승 \n3.1판 1승"</span>);</span><br><span class="line">		System.out.print(<span class="string">"번호를 입력하세요: "</span>);</span><br><span class="line">		<span class="keyword">int</span> num = Integer.parseInt(br.readLine());</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> comp_win = <span class="number">0</span>; <span class="comment">// 컴퓨터가 이긴 횟수</span></span><br><span class="line">		<span class="keyword">int</span> user_win = <span class="number">0</span>; <span class="comment">// 사용자가 이긴 횟수 </span></span><br><span class="line">		<span class="keyword">int</span> break_num = <span class="number">0</span>; </span><br><span class="line">		<span class="keyword">boolean</span> isOneRound = <span class="keyword">false</span>;</span><br><span class="line">		<span class="keyword">switch</span>(num) &#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>: <span class="comment">// 5판 3승</span></span><br><span class="line">				break_num = <span class="number">3</span>;</span><br><span class="line">				<span class="keyword">break</span>; </span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>: <span class="comment">// 3판 2승 </span></span><br><span class="line">				break_num = <span class="number">2</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>: <span class="comment">// 1판 1승</span></span><br><span class="line">				break_num = <span class="number">1</span>;</span><br><span class="line">				isOneRound = <span class="keyword">true</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>:</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span>(comp_win &lt; break_num &amp;&amp; user_win &lt; break_num) &#123;</span><br><span class="line">			<span class="keyword">int</span> result = Game();</span><br><span class="line">			<span class="keyword">switch</span> (result) &#123;</span><br><span class="line">				<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">					System.out.println(<span class="string">"졌습니다."</span>); <span class="comment">// 컴퓨터가 이김</span></span><br><span class="line">					comp_win++;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">					System.out.println(<span class="string">"이겼습니다."</span>); <span class="comment">// 사용자가 이김</span></span><br><span class="line">					user_win++;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">					System.out.println(<span class="string">"비겼습니다."</span>);</span><br><span class="line">					<span class="keyword">if</span>(isOneRound) &#123;</span><br><span class="line">						comp_win++; user_win++;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">default</span>:</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(comp_win &gt; user_win) &#123;</span><br><span class="line">			System.out.println(<span class="string">"### 컴퓨터 승!!!"</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (comp_win == user_win) &#123;</span><br><span class="line">			System.out.println(<span class="string">"### 무승부!!!"</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			System.out.println(<span class="string">"### 사용자 승!!!"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="출력-2"><a href="#출력-2" class="headerlink" title="출력"></a>출력</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">가위바위보 게임을 시작합니다. 아래 보기 중 하나를 고르세요.</span><br><span class="line"><span class="number">1.5</span>판 <span class="number">3</span>승 </span><br><span class="line"><span class="number">2.3</span>판 <span class="number">2</span>승 </span><br><span class="line"><span class="number">3.1</span>판 <span class="number">1</span>승</span><br><span class="line">번호를 입력하세요: <span class="number">2</span></span><br><span class="line">가위바위보 중 하나 입력: 가위</span><br><span class="line">졌습니다.</span><br><span class="line">가위바위보 중 하나 입력: 바위</span><br><span class="line">이겼습니다.</span><br><span class="line">가위바위보 중 하나 입력: 보</span><br><span class="line">이겼습니다.</span><br><span class="line">### 사용자 승!!!</span><br></pre></td></tr></table></figure>
+
+<p>코드가 깨끗하지 않은 것 같다..</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/18/java-daily-training-01/" data-id="ckk2lipuz0000bzc99w138xsn"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%9E%90%EB%B0%94/" rel="tag">자바</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/01/16/swea-2056/" class="article-nav-link">
+        <strong class="article-nav-caption">이전</strong>
+        <div class="article-nav-title">[SW Expert Academy] 2056: 연월일 달력</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2021 IT&#39;s easy if you try</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="IT&#39;s easy if you try"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="검색">
+        <i class="fe fe-search"></i>
+        검색
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>

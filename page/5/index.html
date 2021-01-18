@@ -64,6 +64,125 @@
         
           
 
+<article id="post-programmers-kth-num-cpp" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/23/programmers-kth-num-cpp/">[프로그래머스] K번째수-정렬 (C++)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/10/23/programmers-kth-num-cpp/" class="article-date">
+  <time datetime="2020-10-23T08:31:00.000Z" itemprop="datePublished">2020-10-23</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>문제 링크: <a href="https://programmers.co.kr/learn/courses/30/parts/12198" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/parts/12198</a> &gt; K번째 수</p>
+<h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다.</p>
+<p>예를 들어 array가 [1, 5, 2, 6, 3, 7, 4], i = 2, j = 5, k = 3이라면</p>
+<ol>
+<li>array의 2번째부터 5번째까지 자르면 [5, 2, 6, 3]입니다.</li>
+<li>1에서 나온 배열을 정렬하면 [2, 3, 5, 6]입니다.</li>
+<li>2에서 나온 배열의 3번째 숫자는 5입니다.</li>
+</ol>
+<p>배열 array, [i, j, k]를 원소로 가진 2차원 배열 commands가 매개변수로 주어질 때, commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 나온 결과를 배열에 담아 return 하도록 solution 함수를 작성해주세요.</p>
+<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
+<li>array의 길이는 1 이상 100 이하입니다.</li>
+<li>array의 각 원소는 1 이상 100 이하입니다.</li>
+<li>commands의 길이는 1 이상 50 이하입니다.</li>
+<li>commands의 각 원소는 길이가 3입니다.</li>
+</ul>
+<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
+<thead>
+<tr>
+<th>array</th>
+<th>commands</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[1, 5, 2, 6, 3, 7, 4]</td>
+<td>[[2, 5, 3], [4, 4, 1], [1, 7, 3]]</td>
+<td>[5, 6, 3]</td>
+</tr>
+</tbody></table>
+<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>[1, 5, 2, 6, 3, 7, 4]를 2번째부터 5번째까지 자른 후 정렬합니다. [2, 3, 5, 6]의 세 번째 숫자는 5입니다.<br>[1, 5, 2, 6, 3, 7, 4]를 4번째부터 4번째까지 자른 후 정렬합니다. [6]의 첫 번째 숫자는 6입니다.<br>[1, 5, 2, 6, 3, 7, 4]를 1번째부터 7번째까지 자릅니다. [1, 2, 3, 4, 5, 6, 7]의 세 번째 숫자는 3입니다.</p>
+<br>
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p><strong>나의 풀이</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt; //sort를 위해 필요한 라이브러리</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">solution</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">array</span>, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; commands)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; answer;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>; i&lt; commands.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">        temp = &#123;&#125;;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j= commands.at(i).at(<span class="number">0</span>)<span class="number">-1</span>; j &lt;= commands.at(i).at(<span class="number">1</span>)<span class="number">-1</span> ; j++)</span><br><span class="line">            temp.push_back(<span class="built_in">array</span>.at(j));</span><br><span class="line">        sort(temp.<span class="built_in">begin</span>(),temp.<span class="built_in">end</span>());</span><br><span class="line">        answer.push_back(temp.at(commands.at(i).at(<span class="number">2</span>)<span class="number">-1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>나는 이중 for문을 사용했고, temp를 잘라낸 후 sort를 진행했다. </li>
+</ul>
+<br>
+
+<p><strong>다른 사람 풀이</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt; </span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">solution</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">array</span>, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; commands)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; answer;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>; i&lt; commands.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">        temp = <span class="built_in">array</span>;</span><br><span class="line">        sort(temp.<span class="built_in">begin</span>() + commands.at(i).at(<span class="number">0</span>) - <span class="number">1</span>, temp.<span class="built_in">begin</span>() + commands.at(i).at(<span class="number">1</span>));</span><br><span class="line">        answer.push_back(temp.at(commands.at(i).at(<span class="number">0</span>) + commands.at(i).at(<span class="number">2</span>)<span class="number">-2</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>더 좋은 풀이인것 같아 가져왔다. commands 조건에 맞는 부분만 sort한 후 answer에 담는다.</li>
+</ul>
+<br>
+
+<p>새로 알게된 것.</p>
+<ol>
+<li><p><code>sort(처음, 끝)</code></p>
+<p>vector의 경우 처음부터 끝까지 sort하려면 <code>sort(vector.begin(), vector.end())</code>를 사용하면 된다.</p>
+</li>
+<li><p>at을 사용하는 것이 []로 vector에 접근하는 것보다 좋다고 하여 at을 적극 활용하려고 한다! </p>
+</li>
+<li><p>vector 초기화는 <code>vector = {};</code> 로 할 수 있다.</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/23/programmers-kth-num-cpp/" data-id="ckgm0ddqy0000a2c9hqgd322z"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-backjoon-10451" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -1095,128 +1214,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/10/01/android-secure_properties/" data-id="ckfqxjc8l0002c7c9cpcf8b80"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-android-google-map-conf" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/01/android-google-map-conf/">[안드로이드] google map api 프로젝트 구성 제대로 하기!</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/10/01/android-google-map-conf/" class="article-date">
-  <time datetime="2020-10-01T13:54:00.000Z" itemprop="datePublished">2020-10-01</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>구글맵 플랫폼 구글 클라우드 콘솔 설정 : <a href="https://developers.google.com/maps/gmp-get-started" target="_blank" rel="noopener">https://developers.google.com/maps/gmp-get-started</a></li>
-<li>API 키 가져오기 : <a href="https://developers.google.com/maps/documentation/android-sdk/get-api-key" target="_blank" rel="noopener">https://developers.google.com/maps/documentation/android-sdk/get-api-key</a></li>
-</ul>
-<p>위 링크의 과정이 끝난 후, <strong>Android Studio의 build.gradle / AndroidManifest.xml 을 구성하는 과정</strong>을 내가 공식문서를 보며 이해하고 설정한대로 적어보았다.</p>
-<p><strong>준비되어 있어야 하는 것</strong></p>
-<ul>
-<li><p>구글 클라우드 콘솔 설정</p>
-</li>
-<li><p>google play services 설치</p>
-<p><img src="../image/2020-10-0111.04.33.png" alt="2020-10-0111.04.33"></p>
-</li>
-<li><p>API 키</p>
-</li>
-</ul>
-<h1 id="1-AndroidManifest-xml-설정하기"><a href="#1-AndroidManifest-xml-설정하기" class="headerlink" title="1. AndroidManifest.xml 설정하기"></a>1. AndroidManifest.xml 설정하기</h1><ul>
-<li><p><strong><code>AndroidManifest.xml</code>의 <code>&lt;application&gt;</code> 요소 내에 다음 선언을 추가한다.</strong> 이렇게 하면 앱이 컴파일된 Google Play 서비스의 버전이 삽입된다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta-data</span><br><span class="line">    android:name&#x3D;&quot;com.google.android.gms.version&quot;</span><br><span class="line">    android:value&#x3D;&quot;@integer&#x2F;google_play_services_version&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>위 google_play_services_version은 프로젝트 위치 어딘가에 values.xml에 integer로 선언되어 있다.</p>
-</li>
-<li><p><strong>API 키를 AndroidManifest.xml 파일에 포함한다.</strong></p>
-<p>이 단계에서 새로 알게된 것은 매니패스트 파일에 API 키를 명시하지 않고 추적 또한 못하도록 하는 방법이다.</p>
-<p>다음 포스트에 그 방법을 작성하였다!</p>
-<img src="../image/스크린샷 2020-10-01 오후 11.17.47.png" alt="스크린샷 2020-10-01 오후 11.17.47" style="zoom:50%;" />
-
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">     The API key for Google Maps-based APIs.</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta-data</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:name</span>=<span class="string">"com.google.android.geo.API_KEY"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:value</span>=<span class="string">"@string/maps_api_key"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>외부 저장소 권한 등의 필수 권한 지정</strong></p>
-<p>사실, 더 이상 Maps SDK for Android를 사용하기 위한 외부 저장소 권한인  <code>WRITE_EXTERNAL_STORAGE</code> 는 Google Play 서비스 SDK <strong>버전 8.3 이상</strong>을 타겟팅하는 경우 필요하지 않다.</p>
-<p>그러나 Google Play 서비스 SDK의 <strong>이전 버전</strong>을 타겟팅하는 경우 <code>android.permission.WRITE_EXTERNAL_STORAGE</code>권한을 요청해야 한다.</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>또한, 이제는 <code>android.permission.INTERNET</code> (API가 Google 지도 서버에서 지도 타일을 다운로드하는 데 사용됨) 권한과 <code>android.permission.ACCESS_NETWORK_STATE</code>(API에서 연결 상태를 확인하여 데이터를 다운로드할 수 있는지 확인할 수 있음) 권환은 <strong>매니페스트에 자동으로 병합되기 때문에 매니페스트에 명시적으로 추가할 필요가 없다고 한다.</strong></p>
-</li>
-<li><p>최종 코드는 마지막에 사진으로 첨부해 두었다.</p>
-</li>
-</ul>
-<h1 id="2-build-gradle-설정하기"><a href="#2-build-gradle-설정하기" class="headerlink" title="2. build.gradle 설정하기"></a>2. build.gradle 설정하기</h1><ul>
-<li><p><code>build.gradle (Module:app)</code></p>
-<ol>
-<li><code>secure.properties</code>파일에서 API 키를 가져다쓰기 위한 코드 추가 (secure.properties 파일 생성 방법은 다음 포스트 참고)</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Read the API key from .&#x2F;secure.properties into R.string.maps_api_key</span><br><span class="line">        def secureProps &#x3D; new Properties()</span><br><span class="line">        if (file(&quot;..&#x2F;secure.properties&quot;).exists()) &#123;</span><br><span class="line">            file(&quot;..&#x2F;secure.properties&quot;)?.withInputStream &#123; secureProps.load(it) &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        resValue &quot;string&quot;, &quot;maps_api_key&quot;, (secureProps.getProperty(&quot;MAPS_API_KEY&quot;) ?: &quot;&quot;)</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>dependencies 추가</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; google map</span><br><span class="line">    implementation &#39;com.google.android.gms:play-services-maps:17.0.0&#39;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>Sync now 클릭</li>
-</ol>
-</li>
-</ul>
-<h1 id="최종-코드"><a href="#최종-코드" class="headerlink" title="최종 코드"></a>최종 코드</h1><img src="../image/스크린샷 2020-10-01 오후 11.33.07.png" alt="스크린샷 2020-10-01 오후 11.33.07" style="zoom:80%;" />
-
-<p><code>AndroidManifest.xml</code></p>
-<img src="../image/스크린샷 2020-10-01 오후 11.34.10.png" alt="스크린샷 2020-10-01 오후 11.34.10" style="zoom:80%;" />
-
-<p><code>build.gradle(Module: app)</code> (위에 잘림)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/01/android-google-map-conf/" data-id="ckfqxjc8j0001c7c97du589s9"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>

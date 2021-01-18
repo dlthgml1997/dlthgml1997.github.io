@@ -64,6 +64,116 @@
         
           
 
+<article id="post-python-array-sort" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/02/22/python-array-sort/">[파이썬] numpy array 정렬</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/02/22/python-array-sort/" class="article-date">
+  <time datetime="2020-02-22T06:03:00.000Z" itemprop="datePublished">2020-02-22</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="1차원배열-정렬"><a href="#1차원배열-정렬" class="headerlink" title="1차원배열 정렬"></a>1차원배열 정렬</h3><ul>
+<li>좌에서 우로 정렬: <strong>np.sort(x)</strong> </li>
+<li>거꾸로 정렬: <strong>np.sort(x)[::-1] , x[np.argsort(-x)]</strong></li>
+</ul>
+<h3 id="2차원배열-정렬"><a href="#2차원배열-정렬" class="headerlink" title="2차원배열 정렬"></a>2차원배열 정렬</h3><ul>
+<li><p>열 축 기준(좌에서 우로)으로 정렬 : <strong>np.sort(x, axis=1)</strong></p>
+</li>
+<li><p>행 축 기준(위에서 아래로)으로 정렬: <strong>np.sort(x, axis=0)</strong></p>
+</li>
+<li><p>행 축 기준(위에서 아래로)으로 거꾸로 정렬: <strong>np.sort(x, axis=0)[::-1]</strong></p>
+</li>
+</ul>
+<h4 id="예시"><a href="#예시" class="headerlink" title="예시"></a>예시</h4><hr>
+<ol>
+<li><p><strong><code>np.sort(x)</code></strong></p>
+<p>x = np.array([3,5,1]) <strong>— 정렬 후 —&gt;</strong> array([1,3,5])</p>
+</li>
+</ol>
+<ol start="2">
+<li><p><strong><code>np.sort(x)[::-1]</code></strong> , <strong><code>x[np.argsort(-x)]</code></strong></p>
+<p>x = np.array([3,5,1]) <strong>— 정렬 후 —&gt;</strong> array([5,3,1])</p>
+</li>
+</ol>
+<ol start="3">
+<li><p><strong><code>np.sort(x, axis=1)</code></strong></p>
+<p>x = np.array([3, 5, 1],                            array([1, 3, 5],</p>
+<p>​                       [2, 6, 3], <strong>— 정렬 후 —&gt;</strong>            [2, 3, 6],</p>
+<p>​                       [8, 3, 7])                                     [3, 7, 8])</p>
+</li>
+</ol>
+<ol start="4">
+<li><p><strong><code>np.sort(x, axis=0)</code></strong></p>
+<p>x = np.array([3, 5, 1],                            array([2, 3, 1],</p>
+<p>​                       [2, 6, 3], <strong>— 정렬 후 —&gt;</strong>            [3, 5, 3],</p>
+<p>​                       [8, 3, 7])                                     [8, 6, 7])</p>
+</li>
+</ol>
+<ol start="5">
+<li><p><strong><code>np.sort(x, axis=0)[::-1]</code></strong></p>
+<p>x = np.array([3, 5, 1],                            array([8, 6, 7],</p>
+<p>​                       [2, 6, 3], <strong>— 정렬 후 —&gt;</strong>            [3, 5, 3],</p>
+<p>​                       [8, 3, 7])                                     [2, 3, 1])</p>
+</li>
+</ol>
+<hr>
+<h3 id="x-sort-와-np-sort-x-의-차이점"><a href="#x-sort-와-np-sort-x-의-차이점" class="headerlink" title="x.sort()와 np.sort(x)의 차이점"></a><strong>x.sort()와 np.sort(x)의 차이점</strong></h3><p> np.sort(x)는 원래 배열은 그대로, 정렬 결과의 복사본을 반환한다. </p>
+<p> x.sort()는 배열 자체를 정렬한다.</p>
+<h4 id="다음-과제"><a href="#다음-과제" class="headerlink" title="다음 과제"></a><strong>다음 과제</strong></h4><p>DataFrame, Tuple 정렬, List 정렬 </p>
+<p><a href="https://rfriend.tistory.com/357" target="_blank" rel="noopener">참고</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/22/python-array-sort/" data-id="ckenwlov4003p6jc9bftv61rn"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-programmers-top" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
