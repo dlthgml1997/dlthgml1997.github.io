@@ -64,68 +64,6 @@
         
           
 
-<article id="post-angular-property-binding" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/10/angular-property-binding/">[앵귤러/Angular] 프로퍼티 바인딩 문법</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/10/angular-property-binding/" class="article-date">
-  <time datetime="2020-03-10T06:39:00.000Z" itemprop="datePublished">2020-03-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p><a href="https://angular.kr/guide/template-syntax#프로퍼티-바인딩" target="_blank" rel="noopener">프로퍼티 바인딩</a> 문법</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/angular-property-binding/" data-id="ckenwloty00136jc91m145a2g"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
 <article id="post-angular-input-decorater" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -804,6 +742,116 @@ b,c= map(int,input().split())</code></p>
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-programmers-carpet" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/04/programmers-carpet/">[프로그래머스] 카펫 - 파이썬</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/04/programmers-carpet/" class="article-date">
+  <time datetime="2020-03-04T12:06:00.000Z" itemprop="datePublished">2020-03-04</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제설명"><a href="#문제설명" class="headerlink" title="문제설명"></a>문제설명</h1><p>Leo는 카펫을 사러 갔다가 아래 그림과 같이 중앙에는 빨간색으로 칠해져 있고 테두리 1줄은 갈색으로 칠해져 있는 격자 모양 카펫을 봤습니다.</p>
+<p><img src="https://grepp-programmers.s3.amazonaws.com/files/ybm/7c94563a35/2ff27ac9-97d0-43a9-9cf8-a344b8e7912e.png" alt="image.png"></p>
+<p>Leo는 집으로 돌아와서 아까 본 카펫의 빨간색과 갈색으로 색칠된 격자의 개수는 기억했지만, 전체 카펫의 크기는 기억하지 못했습니다.</p>
+<p>Leo가 본 카펫에서 갈색 격자의 수 brown, 빨간색 격자의 수 red가 매개변수로 주어질 때 카펫의 가로, 세로 크기를 순서대로 배열에 담아 return 하도록 solution 함수를 작성해주세요.</p>
+<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
+<li>갈색 격자의 수 brown은 8 이상 5,000 이하인 자연수입니다.</li>
+<li>빨간색 격자의 수 red는 1 이상 2,000,000 이하인 자연수입니다.</li>
+<li>카펫의 가로 길이는 세로 길이와 같거나, 세로 길이보다 깁니다.</li>
+</ul>
+<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
+<thead>
+<tr>
+<th>brown</th>
+<th>red</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10</td>
+<td>2</td>
+<td>[4, 3]</td>
+</tr>
+<tr>
+<td>8</td>
+<td>1</td>
+<td>[3, 3]</td>
+</tr>
+<tr>
+<td>24</td>
+<td>24</td>
+<td>[8, 6]</td>
+</tr>
+</tbody></table>
+<p><a href="http://hsin.hr/coci/archive/2010_2011/contest4_tasks.pdf" target="_blank" rel="noopener">출처</a></p>
+<p>※ 공지 - 2020년 2월 3일 테스트케이스가 추가되었습니다.</p>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>이 문제는 완전 탐색(exhausitve search)를 이용하여 푸는 문제이다. </p>
+<p><strong>red</strong> 의 가로를 <code>x</code> 세로를 <code>y</code>라고할 때, </p>
+<p><strong>red</strong>는 <code>x*y</code> 가 되고 <strong>brown</strong>은 <code>2(x*y)+4</code>가 된다. </p>
+<p><strong>brown</strong>의 가로와 세로는 <code>x+2</code> , <code>y+2</code> 이다.</p>
+<p>이 때 <code>x</code>는 <code>y</code>보다 길거나 같으며 <code>red = x*y</code>를 성립하기 때문에, <code>y</code>는 <strong>red</strong>의 제곱근보다 작거나 같다.</p>
+<p>처음엔</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(brown, red)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">1</span>, int(red**<span class="number">0.5</span>)+<span class="number">1</span>):</span><br><span class="line">        x = red // y</span><br><span class="line">        <span class="keyword">if</span> <span class="number">2</span>*(x+y) +<span class="number">4</span> == brown:</span><br><span class="line">            <span class="keyword">return</span> [x+<span class="number">2</span>,y+<span class="number">2</span>]</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+<p>이렇게 풀었더니 13개의 테스트 중 5개를 실패하였다.</p>
+<p>이유는 나머지가 0이 아닌 상황이 나오기 때문이었다. </p>
+<p><code>if red % y == 0</code> 를 추가하였다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(brown, red)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">1</span>, int(red**<span class="number">0.5</span>)+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> red % y ==<span class="number">0</span>:</span><br><span class="line">            x = red // y</span><br><span class="line">            <span class="keyword">if</span> <span class="number">2</span>*(x+y) +<span class="number">4</span> == brown:</span><br><span class="line">                <span class="keyword">return</span> [x+<span class="number">2</span>,y+<span class="number">2</span>]</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+<p>끝 !</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/04/programmers-carpet/" data-id="ckenwlouq002s6jc9297p7ud0"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
 
     </footer>
 

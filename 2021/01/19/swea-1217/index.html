@@ -53,7 +53,7 @@
     
       <div class="article-meta">
         <a href="/2021/01/19/swea-1217/" class="article-date">
-  <time datetime="2021-01-19T14:29:21.539Z" itemprop="datePublished">2021-01-19</time>
+  <time datetime="2021-01-19T13:00:00.000Z" itemprop="datePublished">2021-01-19</time>
 </a>
         
       </div>
@@ -61,6 +61,8 @@
 
     
       
+    <div class="tocbot"></div>
+
 
 
 
@@ -74,13 +76,30 @@
       
 
       
-        
+        <ul>
+<li>문제: <a href="https://swexpertacademy.com/main/main.do" target="_blank" rel="noopener">https://swexpertacademy.com/main/main.do</a> &gt; 1215:거듭 제곱</li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">multiple</span><span class="params">(answer, num, cnt, limit)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> cnt == limit:</span><br><span class="line">        <span class="keyword">return</span> answer</span><br><span class="line">    <span class="keyword">return</span> multiple(answer * num, num, cnt + <span class="number">1</span>, limit)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    t = input()</span><br><span class="line">    a, b = map(int, input().split())</span><br><span class="line">    print(<span class="string">"#"</span>+t+<span class="string">" "</span>+str(multiple(a, a, <span class="number">1</span>, b)))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>테스트케이스 넘버와 함께 a의 b 제곱 값을 출력하는 문제이다.</li>
+<li><strong><code>multiple(answer, num, cnt, limit)</code></strong><ul>
+<li><strong><code>answer</code></strong>: 재귀 호출시마다 <code>num</code>(== <code>a</code>) 을 곱한다.</li>
+<li><strong><code>num</code></strong>: <code>a</code> 를 의미한다.</li>
+<li><strong><code>cnt</code></strong>: 현재 몇 제곱인지를 의미하며 재귀호출 시마다 <code>1</code> 더한다.er</li>
+<li><strong><code>limit</code></strong>: <code>b</code>를 의미하고 <code>cnt</code>에 <code>1</code>을 더해가다가 <code>limit</code>과 같아지면 종료한다.</li>
+</ul>
+</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2021/01/19/swea-1217/" data-id="ckk70fi2900029sc9cr1vdbfq"
          class="article-share-link">공유</a>
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
     </footer>
 
   </div>
@@ -89,11 +108,11 @@
     
   <nav class="article-nav">
     
-      <a href="/2021/01/20/ssafy-waterstrider/" class="article-nav-link">
+      <a href="/2021/01/21/swea-1221/" class="article-nav-link">
         <strong class="article-nav-caption">최신</strong>
         <div class="article-nav-title">
           
-            ssafy-waterstrider
+            [SW Expert Academy] 1221: GNS (JAVA)
           
         </div>
       </a>
