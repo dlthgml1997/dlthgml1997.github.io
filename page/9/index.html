@@ -64,6 +64,332 @@
         
           
 
+<article id="post-backjoon-1010" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/08/04/backjoon-1010/">[백준알고리즘] 1010: 다리 놓기 (파이썬) - 조합/ 다이나믹 프로그래밍</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/08/04/backjoon-1010/" class="article-date">
+  <time datetime="2020-08-04T08:52:00.000Z" itemprop="datePublished">2020-08-04</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">2 초</td>
+<td align="left">128 MB</td>
+<td align="left">25159</td>
+<td align="left">11697</td>
+<td align="left">9466</td>
+<td align="left">48.377%</td>
+</tr>
+</tbody></table>
+<h2 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h2><p>재원이는 한 도시의 시장이 되었다. 이 도시에는 도시를 동쪽과 서쪽으로 나누는 큰 강이 흐르고 있다. 하지만 재원이는 다리가 없어서 시민들이 강을 건너는데 큰 불편을 겪고 있음을 알고 다리를 짓기로 결심하였다. 강 주변에서 다리를 짓기에 적합한 곳을 사이트라고 한다. 재원이는 강 주변을 면밀히 조사해 본 결과 강의 서쪽에는 N개의 사이트가 있고 동쪽에는 M개의 사이트가 있다는 것을 알았다. (N ≤ M)</p>
+<p>재원이는 서쪽의 사이트와 동쪽의 사이트를 다리로 연결하려고 한다. (이때 한 사이트에는 최대 한 개의 다리만 연결될 수 있다.) 재원이는 다리를 최대한 많이 지으려고 하기 때문에 서쪽의 사이트 개수만큼 (N개) 다리를 지으려고 한다. 다리끼리는 서로 겹쳐질 수 없다고 할 때 다리를 지을 수 있는 경우의 수를 구하는 프로그램을 작성하라.</p>
+<img src="../image/스크린샷 2020-08-04 오후 5.57.11.png" alt="스크린샷 2020-08-04 오후 5.57.11" style="zoom:50%;" />
+
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>입력의 첫 줄에는 테스트 케이스의 개수 T가 주어진다. 그 다음 줄부터 각각의 테스트케이스에 대해 강의 서쪽과 동쪽에 있는 사이트의 개수 정수 N, M (0 &lt; N ≤ M &lt; 30)이 주어진다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>각 테스트 케이스에 대해 주어진 조건하에 다리를 지을 수 있는 경우의 수를 출력한다.</p>
+<h2 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">2 2</span><br><span class="line">1 5</span><br><span class="line">13 29</span><br></pre></td></tr></table></figure>
+
+<h2 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">5</span><br><span class="line">67863915</span><br></pre></td></tr></table></figure>
+
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
+<li>문제를 만든 사람: <a href="https://www.acmicpc.net/user/i274" target="_blank" rel="noopener">i274</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span><span class="params">(s)</span>:</span></span><br><span class="line">    a = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(s):</span><br><span class="line">        a *= (i+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> a</span><br><span class="line"></span><br><span class="line">t = int(input())</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(t):</span><br><span class="line">    n, m = map(int, input().split())</span><br><span class="line">    print(factorial(m) // factorial(n) // factorial(m-n))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>이 문제는 조합을 이용한다. (m개중 n개를 뽑는 조합의 수)</li>
+</ul>
+<img src="../image/image-20200804175123560.png" alt="image-20200804175123560" style="zoom:50%;" />
+
+<ul>
+<li><p>// 는 나누기이다.</p>
+</li>
+<li><pre><code>2 2
+1 5
+13 29 </code></pre><p>이런 식으로 같은 형식의 input 을 여러줄 받아올 때는 한 줄씩 받아오면서(<code>n, m = map(int, input().split())</code>) print를 처리해도 된다 ! </p>
+</li>
+</ul>
+<ul>
+<li>from itertools import combinations 를 이용해서 풀 수도 있지만 숫자가 크기 때문에 시간 초과가 된다 !</li>
+<li>식을 외워두는 것이 좋겠다 ㅎ-ㅎ </li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/08/04/backjoon-1010/" data-id="ckenwlou4001i6jc9a46hbhg6"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-backjoon-11053" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/08/02/backjoon-11053/">[알고리즘] 백준알고리즘 - 11053: 가장 긴 증가하는 부분 수열 (파이썬/python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/08/02/backjoon-11053/" class="article-date">
+  <time datetime="2020-08-02T10:07:00.000Z" itemprop="datePublished">2020-08-02</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>수열 A가 주어졌을 때, 가장 긴 증가하는 부분 수열을 구하는 프로그램을 작성하시오.</p>
+<p>예를 들어, 수열 A = {10, 20, 10, 30, 20, 50} 인 경우에 가장 긴 증가하는 부분 수열은 A = {<strong>10</strong>, <strong>20</strong>, 10, <strong>30</strong>, 20, <strong>50</strong>} 이고, 길이는 4이다.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 수열 A의 크기 N (1 ≤ N ≤ 1,000)이 주어진다.</p>
+<p>둘째 줄에는 수열 A를 이루고 있는 Ai가 주어진다. (1 ≤ Ai ≤ 1,000)</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 수열 A의 가장 긴 증가하는 부분 수열의 길이를 출력한다.</p>
+<h2 id="예제-입력"><a href="#예제-입력" class="headerlink" title="예제 입력"></a>예제 입력</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">10 20 10 30 20 50</span><br></pre></td></tr></table></figure>
+
+<h2 id="예제-출력"><a href="#예제-출력" class="headerlink" title="예제 출력"></a>예제 출력</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
+<li>문제를 만든 사람: <a href="https://www.acmicpc.net/user/baekjoon" target="_blank" rel="noopener">baekjoon</a></li>
+<li>데이터를 추가한 사람: <a href="https://www.acmicpc.net/user/harinboy" target="_blank" rel="noopener">harinboy</a></li>
+</ul>
+<h2 id="비슷한-문제"><a href="#비슷한-문제" class="headerlink" title="비슷한 문제"></a>비슷한 문제</h2><ul>
+<li>11054 , 11055, 11722, 12015, 12738, 14002, 14003 </li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">n = int(input())</span><br><span class="line">nums = list(map(int, input().split()))</span><br><span class="line">answer_list = []</span><br><span class="line">length = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    length = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(i):</span><br><span class="line">        <span class="keyword">if</span> nums[j] &lt; nums[i] <span class="keyword">and</span> answer_list[j] &gt;= length:</span><br><span class="line">            length = answer_list[j]</span><br><span class="line">    answer_list.append(length+<span class="number">1</span>)</span><br><span class="line">print(max(answer_list))</span><br></pre></td></tr></table></figure>
+
+<p>다이나믹 프로그래밍으로 푸는 문제이다.</p>
+<p>nums 배열의 각 인덱스까지의 증가하는 부분 수열의 최대 길이를 저장하는</p>
+<p>answer_list 배열을 만들어 이 중 최대 숫자를 반환하는 코드이다.</p>
+<table>
+<thead>
+<tr>
+<th align="center">nums</th>
+<th align="center">10</th>
+<th align="center">20</th>
+<th align="center">10</th>
+<th align="center">30</th>
+<th align="center">20</th>
+<th align="center">50</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">answer_list</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">4</td>
+</tr>
+</tbody></table>
+<p>예를 들어, answer_list[3] (nums[3]까지(10, 20, 10, 30)를 수열로 봤을 때 이루어질 수 있는 증가하는 부분 수열의 최대 길이값) 이 저장되는 과정은 ! </p>
+<ul>
+<li><p><code>for j in range(i)</code> 반복문을 돌며 nums[3] , answer_list[3] 이전 값들을 비교한다.</p>
+</li>
+<li><p>nums 가 30 보다 작고 이에 대응되는 answer_list가 length보다 크거나 같으면 length에 answer_list 값을 저장한다.</p>
+</li>
+<li><p><code>for j in range(i)</code> 반복문을 모두 돌면 30보다 작은 nums 값들에 대응 되는 answer_list 값들 중 가장 큰 <strong>answer_list (= 2)</strong> 값이 <strong>length</strong> 에 저장된다. </p>
+</li>
+<li><p>자신을 포함한 길이이기 때문에 length에 1을 더한 3을 answer_list[3] 에 저장한다.</p>
+</li>
+</ul>
+<p>최종적으로는 증가하는 부분수열의 최대 길이 값인 4가 answer_list[5] 에 저장된다.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/08/02/backjoon-11053/" data-id="ckenwloua001s6jc91jd49vu9"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-backjoon-1037" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/06/15/backjoon-1037/">[백준알고리즘/boj] 1037- 약수 파이썬(python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/06/15/backjoon-1037/" class="article-date">
+  <time datetime="2020-06-15T09:00:00.000Z" itemprop="datePublished">2020-06-15</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">2 초</td>
+<td align="left">512 MB</td>
+<td align="left">17208</td>
+<td align="left">8185</td>
+<td align="left">7162</td>
+<td align="left">48.921%</td>
+</tr>
+</tbody></table>
+<h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>양수 A가 N의 진짜 약수가 되려면, N이 A의 배수이고, A가 1과 N이 아니어야 한다. 어떤 수 N의 진짜 약수가 모두 주어질 때, N을 구하는 프로그램을 작성하시오.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 N의 진짜 약수의 개수가 주어진다. 이 개수는 50보다 작거나 같은 자연수이다. 둘째 줄에는 N의 진짜 약수가 주어진다. 1,000,000보다 작거나 같고, 2보다 크거나 같은 자연수이고, 중복되지 않는다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 N을 출력한다. N은 항상 32비트 부호있는 정수로 표현할 수 있다.</p>
+<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">4 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8</span><br></pre></td></tr></table></figure>
+
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
+<li>문제를 번역한 사람: <a href="https://www.acmicpc.net/user/baekjoon" target="_blank" rel="noopener">baekjoon</a></li>
+<li>빠진 조건을 찾은 사람: <a href="https://www.acmicpc.net/user/doju" target="_blank" rel="noopener">doju</a></li>
+<li>어색한 표현을 찾은 사람: <a href="https://www.acmicpc.net/user/jh05013" target="_blank" rel="noopener">jh05013</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>처음에 nums.pop(0) * nums[0] 로 풀었더니 당연히 ! 틀렸다.</p>
+<p>배열의 마지막 요소를 얻어오기 위해 nums[-1] 을 사용하면 된다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">n = map(int, input())</span><br><span class="line">nums = list(map(int, input().split()))</span><br><span class="line"></span><br><span class="line">nums.sort()</span><br><span class="line">print(nums[<span class="number">0</span>] * nums[<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/06/15/backjoon-1037/" data-id="ckenwlou7001k6jc90f3e7d60"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-backjoon-1057" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -740,325 +1066,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/05/01/programmers-tile/" data-id="ckenwlov1003g6jc987bhcjiz"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-n-dp" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/04/26/programmers-n-dp/">[알고리즘] 프로그래머스- N으로 표현 파이썬 (python)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/04/26/programmers-n-dp/" class="article-date">
-  <time datetime="2020-04-26T14:15:00.000Z" itemprop="datePublished">2020-04-26</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>아래와 같이 5와 사칙연산만으로 12를 표현할 수 있습니다.</p>
-<p>12 = 5 + 5 + (5 / 5) + (5 / 5)<br>12 = 55 / 5 + 5 / 5<br>12 = (55 + 5) / 5</p>
-<p>5를 사용한 횟수는 각각 6,5,4 입니다. 그리고 이중 가장 작은 경우는 4입니다.<br>이처럼 숫자 N과 number가 주어질 때, N과 사칙연산만 사용해서 표현 할 수 있는 방법 중 N 사용횟수의 최솟값을 return 하도록 solution 함수를 작성하세요.</p>
-<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
-<li>N은 1 이상 9 이하입니다.</li>
-<li>number는 1 이상 32,000 이하입니다.</li>
-<li>수식에는 괄호와 사칙연산만 가능하며 나누기 연산에서 나머지는 무시합니다.</li>
-<li>최솟값이 8보다 크면 -1을 return 합니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>N</th>
-<th>number</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>5</td>
-<td>12</td>
-<td>4</td>
-</tr>
-<tr>
-<td>2</td>
-<td>11</td>
-<td>3</td>
-</tr>
-</tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>예제 #1<br>문제에 나온 예와 같습니다.</p>
-<p>예제 #2<br><code>11 = 22 / 2</code>와 같이 2를 3번만 사용하여 표현할 수 있습니다.</p>
-<p><a href="https://www.oi.edu.pl/old/php/show.php?ac=e181413&module=show&file=zadania/oi6/monocyfr" target="_blank" rel="noopener">출처</a></p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p><strong>동적 프로그래밍 (Dynamic Programming)</strong>을 이용하여 푸는 문제이다.</p>
-<p>동적 프로그래밍이란, 큰 문제를 작은 단위의 문제로 나누어 풀고 이전에 계산했던 값을 저장해둔 다음 매번 다시 계산하지 않고 저장해둔 값을 재사용하는 프로그래밍 기법을 의미한다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(N, number)</span>:</span></span><br><span class="line">    case = [<span class="number">0</span>,[N]]</span><br><span class="line">    <span class="keyword">if</span> N == number: </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,<span class="number">9</span>): <span class="comment"># 2부터 8까지</span></span><br><span class="line">        num = int(str(N)*i)</span><br><span class="line">        cases = []</span><br><span class="line">        cases.append(num)</span><br><span class="line">        <span class="keyword">for</span> i_half <span class="keyword">in</span> range(<span class="number">1</span>, i//<span class="number">2</span>+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> x <span class="keyword">in</span> case[i_half]: </span><br><span class="line">                <span class="keyword">for</span> y <span class="keyword">in</span> case[i-i_half]: </span><br><span class="line">                    cases.append(x*y)</span><br><span class="line">                    cases.append(x+y)</span><br><span class="line">                    <span class="keyword">if</span> x &gt; y:</span><br><span class="line">                        cases.append(x-y)</span><br><span class="line">                    <span class="keyword">if</span> y &gt; x:</span><br><span class="line">                        cases.append(y-x)</span><br><span class="line">                    <span class="keyword">if</span> y != <span class="number">0</span>:</span><br><span class="line">                        cases.append(x/y)</span><br><span class="line">                    <span class="keyword">if</span> x != <span class="number">0</span>:</span><br><span class="line">                        cases.append(y/x)</span><br><span class="line">                <span class="keyword">if</span> number <span class="keyword">in</span> cases:</span><br><span class="line">                    <span class="keyword">return</span> i</span><br><span class="line">            case.append(cases)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>제일 이해하기 힘들었던 부분은 for문의 range를 i의 반만 도는 이유였다 </li>
-</ul>
-<p>풀이 추가하기,, </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/26/programmers-n-dp/" data-id="ckenwlous002y6jc9aig55yar"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-backjoon-11047" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/04/19/backjoon-11047/">[백준알고리즘] 11407 동전0 - 파이썬(python)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/04/19/backjoon-11047/" class="article-date">
-  <time datetime="2020-04-19T14:25:00.000Z" itemprop="datePublished">2020-04-19</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
-<thead>
-<tr>
-<th align="left">시간 제한</th>
-<th align="left">메모리 제한</th>
-<th align="left">제출</th>
-<th align="left">정답</th>
-<th align="left">맞은 사람</th>
-<th align="left">정답 비율</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">1 초</td>
-<td align="left">256 MB</td>
-<td align="left">27606</td>
-<td align="left">14939</td>
-<td align="left">12067</td>
-<td align="left">54.587%</td>
-</tr>
-</tbody></table>
-<p>준규가 가지고 있는 동전은 총 N종류이고, 각각의 동전을 매우 많이 가지고 있다.</p>
-<p>동전을 적절히 사용해서 그 가치의 합을 K로 만들려고 한다. 이때 필요한 동전 개수의 최솟값을 구하는 프로그램을 작성하시오.</p>
-<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 N과 K가 주어진다. (1 ≤ N ≤ 10, 1 ≤ K ≤ 100,000,000)</p>
-<p>둘째 줄부터 N개의 줄에 동전의 가치 Ai가 오름차순으로 주어진다. (1 ≤ Ai ≤ 1,000,000, A1 = 1, i ≥ 2인 경우에 Ai는 Ai-1의 배수)</p>
-<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 K원을 만드는데 필요한 동전 개수의 최솟값을 출력한다.</p>
-<h2 id="예제-입력-1-복사"><a href="#예제-입력-1-복사" class="headerlink" title="예제 입력 1 복사"></a>예제 입력 1 복사</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">10 4200</span><br><span class="line">1</span><br><span class="line">5</span><br><span class="line">10</span><br><span class="line">50</span><br><span class="line">100</span><br><span class="line">500</span><br><span class="line">1000</span><br><span class="line">5000</span><br><span class="line">10000</span><br><span class="line">50000</span><br></pre></td></tr></table></figure>
-
-<h2 id="예제-출력-1-복사"><a href="#예제-출력-1-복사" class="headerlink" title="예제 출력 1 복사"></a>예제 출력 1 복사</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">6</span><br></pre></td></tr></table></figure>
-
-<h2 id="예제-입력-2-복사"><a href="#예제-입력-2-복사" class="headerlink" title="예제 입력 2 복사"></a>예제 입력 2 복사</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">10 4790</span><br><span class="line">1</span><br><span class="line">5</span><br><span class="line">10</span><br><span class="line">50</span><br><span class="line">100</span><br><span class="line">500</span><br><span class="line">1000</span><br><span class="line">5000</span><br><span class="line">10000</span><br><span class="line">50000</span><br></pre></td></tr></table></figure>
-
-<h2 id="예제-출력-2-복사"><a href="#예제-출력-2-복사" class="headerlink" title="예제 출력 2 복사"></a>예제 출력 2 복사</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">12</span><br></pre></td></tr></table></figure>
-
-<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
-<li>문제를 만든 사람: <a href="https://www.acmicpc.net/user/baekjoon" target="_blank" rel="noopener">baekjoon</a></li>
-</ul>
-<h2 id="알고리즘-분류"><a href="#알고리즘-분류" class="headerlink" title="알고리즘 분류"></a>알고리즘 분류</h2><ul>
-<li>[그리디 알고리즘](<a href="https://www.acmicpc.net/problem/tag/그리디" target="_blank" rel="noopener">https://www.acmicpc.net/problem/tag/그리디</a> 알고리즘)</li>
-<li>[동전 교환](<a href="https://www.acmicpc.net/problem/tag/동전" target="_blank" rel="noopener">https://www.acmicpc.net/problem/tag/동전</a> 교환)</li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">n, k = map(int, input().split())</span><br><span class="line">coins = []</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">    coin = int(input())</span><br><span class="line">    <span class="keyword">if</span> coin &gt; k:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    coins.append(coin)</span><br><span class="line">     </span><br><span class="line">count = <span class="number">0</span></span><br><span class="line">answer = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">    count = k // coins[-i]</span><br><span class="line">    k = k % coins[-i]</span><br><span class="line">    answer += count</span><br><span class="line">    <span class="keyword">if</span> k == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">print(answer)</span><br></pre></td></tr></table></figure>
-
-<p>n과 k를 map(int, input().split()<code>.strip()</code>) 으로 가져오니 런타임에러가 떴다.. </p>
-<p>없애니 실행이 잘 됐다. </p>
-<p>애초에 k값보다 큰 coin 값은 제외하고 coins 배열에 넣었다.</p>
-<p>coins 배열의 인덱스를 반대로 돌면서 나눈 몫을 answer에 더하고 k엔 나눈 나머지 값을 저장하다가 k가 0이 되면 멈춘다. </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/19/backjoon-11047/" data-id="ckenwlou8001n6jc9ghme9gs3"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-clothes" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/04/15/programmers-clothes/">[알고리즘] 프로그래머스-체육복 (python 파이썬)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/04/15/programmers-clothes/" class="article-date">
-  <time datetime="2020-04-15T07:13:00.000Z" itemprop="datePublished">2020-04-15</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>점심시간에 도둑이 들어, 일부 학생이 체육복을 도난당했습니다. 다행히 여벌 체육복이 있는 학생이 이들에게 체육복을 빌려주려 합니다. 학생들의 번호는 체격 순으로 매겨져 있어, 바로 앞번호의 학생이나 바로 뒷번호의 학생에게만 체육복을 빌려줄 수 있습니다. 예를 들어, 4번 학생은 3번 학생이나 5번 학생에게만 체육복을 빌려줄 수 있습니다. 체육복이 없으면 수업을 들을 수 없기 때문에 체육복을 적절히 빌려 최대한 많은 학생이 체육수업을 들어야 합니다.</p>
-<p>전체 학생의 수 n, 체육복을 도난당한 학생들의 번호가 담긴 배열 lost, 여벌의 체육복을 가져온 학생들의 번호가 담긴 배열 reserve가 매개변수로 주어질 때, 체육수업을 들을 수 있는 학생의 최댓값을 return 하도록 solution 함수를 작성해주세요.</p>
-<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
-<li>전체 학생의 수는 2명 이상 30명 이하입니다.</li>
-<li>체육복을 도난당한 학생의 수는 1명 이상 n명 이하이고 중복되는 번호는 없습니다.</li>
-<li>여벌의 체육복을 가져온 학생의 수는 1명 이상 n명 이하이고 중복되는 번호는 없습니다.</li>
-<li>여벌 체육복이 있는 학생만 다른 학생에게 체육복을 빌려줄 수 있습니다.</li>
-<li>여벌 체육복을 가져온 학생이 체육복을 도난당했을 수 있습니다. 이때 이 학생은 체육복을 하나만 도난당했다고 가정하며, 남은 체육복이 하나이기에 다른 학생에게는 체육복을 빌려줄 수 없습니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>n</th>
-<th>lost</th>
-<th>reserve</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>5</td>
-<td>[2, 4]</td>
-<td>[1, 3, 5]</td>
-<td>5</td>
-</tr>
-<tr>
-<td>5</td>
-<td>[2, 4]</td>
-<td>[3]</td>
-<td>4</td>
-</tr>
-<tr>
-<td>3</td>
-<td>[3]</td>
-<td>[1]</td>
-<td>2</td>
-</tr>
-</tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>예제 #1<br>1번 학생이 2번 학생에게 체육복을 빌려주고, 3번 학생이나 5번 학생이 4번 학생에게 체육복을 빌려주면 학생 5명이 체육수업을 들을 수 있습니다.</p>
-<p>예제 #2<br>3번 학생이 2번 학생이나 4번 학생에게 체육복을 빌려주면 학생 4명이 체육수업을 들을 수 있습니다.</p>
-<p><a href="http://hsin.hr/coci/archive/2009_2010/contest6_tasks.pdf" target="_blank" rel="noopener">출처</a></p>
-<p>※ 공지 - 2019년 2월 18일 지문이 리뉴얼되었습니다.<br>※ 공지 - 2019년 2월 27일, 28일 테스트케이스가 추가되었습니다.</p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>초반 풀이 =&gt; 런타임 에러</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(n, lost, reserve)</span>:</span></span><br><span class="line">        </span><br><span class="line">    num =<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">if</span> i+<span class="number">1</span> <span class="keyword">in</span> lost:</span><br><span class="line">            <span class="keyword">if</span> i+<span class="number">1</span> <span class="keyword">in</span> reserve:</span><br><span class="line">                lost.remove(i+<span class="number">1</span>)</span><br><span class="line">                reserve.remove(i)</span><br><span class="line">            <span class="keyword">elif</span> i <span class="keyword">in</span> reserve:</span><br><span class="line">                lost.remove(i+<span class="number">1</span>)</span><br><span class="line">                reserve.remove(i)</span><br><span class="line">            <span class="keyword">elif</span> i+<span class="number">2</span> <span class="keyword">in</span> reserve:</span><br><span class="line">                lost.remove(i+<span class="number">1</span>)</span><br><span class="line">                reserve.remove(i+<span class="number">2</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                num+=<span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    answer = n-num</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-
-
-<p>두번째 풀이 (블로그들을 조금 참고하였다 ㅎ.ㅎ)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(n, lost, reserve)</span>:</span></span><br><span class="line">    clothes = [<span class="number">1</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">if</span> i+<span class="number">1</span> <span class="keyword">in</span> reserve:</span><br><span class="line">            clothes[i] =<span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> i+<span class="number">1</span> <span class="keyword">in</span> lost:</span><br><span class="line">            clothes[i] -=<span class="number">1</span></span><br><span class="line">            </span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">if</span> j&gt;<span class="number">0</span> <span class="keyword">and</span> clothes[j] == <span class="number">0</span> <span class="keyword">and</span> clothes[j<span class="number">-1</span>]==<span class="number">2</span>:</span><br><span class="line">            clothes[j] += <span class="number">1</span></span><br><span class="line">            clothes[j<span class="number">-1</span>] -=<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> j&lt;n<span class="number">-1</span> <span class="keyword">and</span> clothes[j] == <span class="number">0</span> <span class="keyword">and</span> clothes[j+<span class="number">1</span>]==<span class="number">2</span>:</span><br><span class="line">            clothes[j] += <span class="number">1</span></span><br><span class="line">            clothes[j+<span class="number">1</span>] -=<span class="number">1</span></span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> n-clothes.count(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<p>clothes에 reserve에 해당하는 index는 2로 lost에 해당하는 index는 0으로 아무것도 해당하지 않는 index는 1로 채운 다음 0인 index의 앞뒤 index가 2이면 두 index를 1로 바꾼다.</p>
-<p>마지막에 모든 학생수에서 clothes 배열의 0(체육복 없는 학생)의 수를 빼서 return한다.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/15/programmers-clothes/" data-id="ckenwlour002u6jc95eo0ca2o"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>

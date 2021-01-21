@@ -64,6 +64,226 @@
         
           
 
+<article id="post-angular-activatedRoute" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/12/angular-activatedRoute/">[앵귤러/Angular] URL에 존재하는 라우팅 변수 참조하기(ActivatedRoute 이용)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/12/angular-activatedRoute/" class="article-date">
+  <time datetime="2020-03-12T12:56:00.000Z" itemprop="datePublished">2020-03-12</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="ActivatedRoute"><a href="#ActivatedRoute" class="headerlink" title="ActivatedRoute"></a>ActivatedRoute</h3><ul>
+<li><p>컴포넌트의 인스턴스를 생성하면서 적용한 라우팅 규칙에 대한 정보를 담고있다.</p>
+</li>
+<li><p>아래 코드를 통해 로드할 수 있다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ActivatedRoute &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h4 id="URL에-존재하는-라우팅-변수-참조하기"><a href="#URL에-존재하는-라우팅-변수-참조하기" class="headerlink" title="URL에 존재하는 라우팅 변수 참조하기"></a>URL에 존재하는 라우팅 변수 참조하기</h4><ol>
+<li><p>라우팅 변수를 참고할 컴포넌트의 생성자에 ActivatedRoute를 private 프로퍼티로 선언한다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">  <span class="keyword">private</span> route: ActivatedRoute</span></span><br><span class="line"><span class="params"></span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>예를 들어 ‘/detail/:id’ 형태의 URL에서 id값을 가져오고 싶을 때, 아래 코드를 입력한다.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> id = +<span class="keyword">this</span>.route.snapshot.paraMap.get(<span class="string">'id'</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>route.snapshot</code>: 컴포넌트가 생성된 직후에 존재하는 라우팅 규칙에 대한 정보를 담고있는 객체이다.</li>
+<li><code>paraMap</code>: route.snapshot 객체가 paraMap을 사용하면 URL에 존재하는 라우팅 변수를 참조할 수 있다.</li>
+</ul>
+<blockquote>
+<p>추가: javaScript (+) 연산자를 사용해서 라우팅 변수를 숫자로 변환하였다.</p>
+</blockquote>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/12/angular-activatedRoute/" data-id="ckenwloto000g6jc98tprh3uw"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-anguler-interpolation-binding" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/12/anguler-interpolation-binding/">[앵귤러/Angular] 문자열 바인딩</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/12/anguler-interpolation-binding/" class="article-date">
+  <time datetime="2020-03-12T12:36:00.000Z" itemprop="datePublished">2020-03-12</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>—추가예정</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/12/anguler-interpolation-binding/" data-id="ckenwlou3001f6jc979xz7q11"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-angular-routerlink" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/12/angular-routerlink/">[앵귤러/Angular] 네비게이션 링크(routerLink) 추가하기</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/12/angular-routerlink/" class="article-date">
+  <time datetime="2020-03-12T12:19:00.000Z" itemprop="datePublished">2020-03-12</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <blockquote>
+<p>앞에 글(AppRoutingModule 생성하기)에서는 URL을 통해 이동하는 방법이었다면, 이 글에서는 네비게이션을 실행하는 링크를 클릭하여 이동하는 방법을 다룰것이다!</p>
+</blockquote>
+<p><em>AppComponent<em>의 탬플릿 (</em>app.component.html</em>)에 아래 코드를 추가한다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">routerLink</span>=<span class="string">"/heroes"</span>&gt;</span>Heroes<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>routerLink</code> : <em>RouterModule*이 제공하는 *RouterLink</em> <em>디렉티브</em>이며, 사용자가 이 디렉티브가 적용된 엘리먼트를 클릭하면 네비게이션을 실행한다.</li>
+<li><code>&quot;/heroes&quot;</code> : <code>routerLink</code> 어트리뷰트 값으로 url을 통해 이동할 컴포넌트에 해당하는 라우팅 경로이다.</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/12/angular-routerlink/" data-id="ckenwlotz00156jc9f5hj3gbk"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-angular-create-approutingmodule" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -777,203 +997,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/03/11/angular-cli-overview/" data-id="ckenwlotq000k6jc983ohdku3"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-angular-property-binding" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/10/angular-property-binding/">[앵귤러/Angular] 프로퍼티 바인딩 문법</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/10/angular-property-binding/" class="article-date">
-  <time datetime="2020-03-10T06:39:00.000Z" itemprop="datePublished">2020-03-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p><a href="https://angular.kr/guide/template-syntax#프로퍼티-바인딩" target="_blank" rel="noopener">프로퍼티 바인딩</a> 문법</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/angular-property-binding/" data-id="ckenwloty00136jc91m145a2g"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-angular-input-decorater" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/10/angular-input-decorater/">[앵귤러/Angular] @Input() 데코레이터란?</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/10/angular-input-decorater/" class="article-date">
-  <time datetime="2020-03-10T06:38:00.000Z" itemprop="datePublished">2020-03-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p><code>@Input()</code> 데코레이터</p>
-<p>– 추가예정 –</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/angular-input-decorater/" data-id="ckenwlotv000u6jc9as2v8spf"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-angular-class-binding" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/10/angular-class-binding/">[앵귤러/Angular] 클래스 바인딩 문법</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/10/angular-class-binding/" class="article-date">
-  <time datetime="2020-03-10T06:14:00.000Z" itemprop="datePublished">2020-03-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>Angular가 제공하는 <a href="https://angular.kr/guide/template-syntax#class-binding" target="_blank" rel="noopener">클래스 바인딩</a> 문법을 사용하면 특정 조건에 따라 CSS 클래스를 추가하거나 제거할 수 있습니다. 스타일을 지정하려는 엘리먼트에 <code>[class.some-css-class]=&quot;some-condition&quot;</code>와 같은 문법을 추가하면 됩니다.</p>
-<h4 id="html파일"><a href="#html파일" class="headerlink" title="html파일"></a>html파일</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[class.selected]="hero === selectedHero"</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>hero === selectedHero인 줄에 selected CSS 클래스가 추가된다. </li>
-</ul>
-<h4 id="css파일"><a href="#css파일" class="headerlink" title="css파일"></a>css파일</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.heroes</span> <span class="selector-tag">li</span><span class="selector-class">.selected</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#CFD8DC</span>;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.heroes</span> <span class="selector-tag">li</span><span class="selector-class">.selected</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#BBD8DC</span>;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>—추가예정—</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/angular-class-binding/" data-id="ckenwlotm000d6jc95t6787lx"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%B5%EA%B7%A4%EB%9F%AC/" rel="tag">앵귤러</a></li></ul>
