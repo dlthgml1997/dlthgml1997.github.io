@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [boj] 4889: 안정적인 문자열 (java) |
+    
+    IT&#39;s easy if you try</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-boj-4889" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [boj] 4889: 안정적인 문자열 (java)
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/27/boj-4889/" class="article-date">
+  <time datetime="2021-01-26T15:42:40.000Z" itemprop="datePublished">2021-01-27</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크: <a href="https://www.acmicpc.net/problem/4889" target="_blank" rel="noopener">https://www.acmicpc.net/problem/4889</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution4889</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> Stack&lt;String&gt; stack;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> testCase = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">			String input = br.readLine();</span><br><span class="line">			<span class="keyword">if</span> (input.contains(<span class="string">"-"</span>)) <span class="comment">// - 가 들어오면 실행 종료</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 새로운 테스트 케이스마다 스택 초기화</span></span><br><span class="line">			<span class="keyword">int</span> answer = <span class="number">0</span>;</span><br><span class="line">			stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">			StringTokenizer st = <span class="keyword">new</span> StringTokenizer(input);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">while</span> (st.hasMoreTokens()) &#123; <span class="comment">// 한 줄이 끝날때 까지</span></span><br><span class="line">				String[] data = st.nextToken().split(<span class="string">""</span>); </span><br><span class="line"></span><br><span class="line">				<span class="keyword">for</span> (String d : data) &#123; <span class="comment">// 괄호 하나씩 받아온다</span></span><br><span class="line">					<span class="keyword">if</span> (d.equals(<span class="string">"&#123;"</span>)) &#123; <span class="comment">// 열린 괄호는 무조건 push </span></span><br><span class="line">						stack.push(d); </span><br><span class="line">          &#125;</span><br><span class="line">					<span class="keyword">else</span> &#123; <span class="comment">// 닫힌 괄호는</span></span><br><span class="line">						<span class="keyword">if</span> (stack.isEmpty()) &#123;  <span class="comment">// 여기가 중요 ! 스택이 비어있을 땐</span></span><br><span class="line">							answer++; <span class="comment">// 뒤집어서</span></span><br><span class="line">							stack.push(<span class="string">"&#123;"</span>); <span class="comment">// 열린괄호 형태로 push한다.</span></span><br><span class="line">						&#125; <span class="keyword">else</span> &#123; <span class="comment">// 비어있지 않으면 열린 괄호만 들어있으므로 pop (한 괄호쌍 완성)</span></span><br><span class="line">							stack.pop();</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 한 줄 다 조건 검사가 끝나고나면 스택은 비어있거나, 열린 괄호만 들어 있다.</span></span><br><span class="line">			answer += (stack.size() / <span class="number">2</span>); <span class="comment">// 스택 길이의 반만 뒤집으면 안정적인 문자열이 된다. 스택 길이의 반을 answer에 더한다.</span></span><br><span class="line">			System.out.printf(<span class="string">"%d. %d\n"</span>, testCase, answer);</span><br><span class="line">			testCase++; <span class="comment">// 한줄이 끝날 때마다 testCase 1씩 증가</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>input 받는 부분을 함수로 빼는 것이 더 깔끔하고,<br>Stack<String> 이 아닌 Stack<Character> 를 사용하는 것이 .equals를 사용하지 않아도 돼서 코드가 더 깔끔해 보이는 것 같다. 오늘 못 푼 4889 문제에 적용해서 풀어봐야겠다!!</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/27/boj-4889/" data-id="ckke6m89y000002c9gmczf9eb"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/01/26/boj-10773/" class="article-nav-link">
+        <strong class="article-nav-caption">이전</strong>
+        <div class="article-nav-title">[BOJ] 10773:제로 (java)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2021 IT&#39;s easy if you try</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="IT&#39;s easy if you try"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="검색">
+        <i class="fe fe-search"></i>
+        검색
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>
