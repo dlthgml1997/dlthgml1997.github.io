@@ -64,6 +64,188 @@
         
           
 
+<article id="post-backjoon-1931" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/01/14/backjoon-1931/">[백준알고리즘/BOJ] 1931: 회의실 배정</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/14/backjoon-1931/" class="article-date">
+  <time datetime="2021-01-14T14:08:22.000Z" itemprop="datePublished">2021-01-14</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li><a href="https://www.acmicpc.net/problem/1931" target="_blank" rel="noopener">https://www.acmicpc.net/problem/1931</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">n = int(input())</span><br><span class="line"></span><br><span class="line">times = []</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">    a, b = map(int, input().split())</span><br><span class="line">    times.append([a, b])</span><br><span class="line"></span><br><span class="line">times.sort()</span><br><span class="line">times.sort(key = <span class="keyword">lambda</span> x: x[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">count = <span class="number">0</span></span><br><span class="line">end_time = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> st, et <span class="keyword">in</span> times:</span><br><span class="line">    <span class="keyword">if</span> end_time &lt;= st:</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">        end_time = et</span><br><span class="line"></span><br><span class="line">print(count)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>times 배열에 받아온다.</p>
+</li>
+<li><p>회의 시간은 시작시간이 빠른 순으로 정렬한 후, 끝나는 시간이 빠른 순으로 정렬한다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">times.sort()</span><br><span class="line">times.sort(key = <span class="keyword">lambda</span> x: x[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<p>위 코드는 아래 처럼 줄일 수 있다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">times.sort(key = <span class="keyword">lambda</span> x: (x[<span class="number">1</span>], x[<span class="number">2</span>]))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>정렬된 <code>times</code> 배열에서 하나씩 뽑아오며  <code>st</code>가 <code>end_time</code> 보다 크거나 같으면 <code>count</code>를 <code>1</code>더한다.</p>
+</li>
+<li><p><code>끝 시간(end_time)</code>에 <code>times 배열의 끝 시간(et)</code>으로 할당한다.<code>et</code>는 다음 회의 시작 시간과 비교할 대상이 되어야 하기 때문이다. </p>
+<ul>
+<li><code>end_time</code> : 회의 시간이 겹치지 않게 times의 회의 시간과 비교할 시간</li>
+<li><code>st</code>, <code>et</code> : 정렬된 <code>times</code> 배열에서의 시작, 끝 시간 </li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/14/backjoon-1931/" data-id="ckjwye2l50000whc9djys9o9b"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-programmers-joystick" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/01/14/programmers-joystick/">[프로그래머스] 조이스틱 - 탐욕법(Greedy) (파이썬)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/14/programmers-joystick/" class="article-date">
+  <time datetime="2021-01-13T16:07:22.000Z" itemprop="datePublished">2021-01-14</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제링크 : <a href="https://programmers.co.kr/learn/courses/30/lessons/42860" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/lessons/42860</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(name)</span>:</span></span><br><span class="line">    name_c = []</span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 1.</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> name:</span><br><span class="line">        name_c.append(min(ord(<span class="string">'Z'</span>) - ord(c) + <span class="number">1</span>, ord(c) - ord(<span class="string">'A'</span>)))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 2.</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">'A'</span> <span class="keyword">not</span> <span class="keyword">in</span> name:</span><br><span class="line">        answer = sum(name_c) + len(name) - <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> answer</span><br><span class="line">    </span><br><span class="line">    cursor = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        <span class="comment"># 3.</span></span><br><span class="line">        answer += name_c[cursor]</span><br><span class="line">        <span class="comment"># 4.</span></span><br><span class="line">        name_c[cursor] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> sum(name_c) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> answer</span><br><span class="line">        <span class="comment"># 5.</span></span><br><span class="line">        left = <span class="number">1</span></span><br><span class="line">        right = <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> name_c[cursor - left] == <span class="number">0</span>:</span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> name_c[cursor + right] == <span class="number">0</span>:</span><br><span class="line">            right += <span class="number">1</span></span><br><span class="line">        <span class="comment"># 6.</span></span><br><span class="line">        <span class="keyword">if</span> left &lt; right:</span><br><span class="line">            cursor -= left</span><br><span class="line">            answer+= left</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            cursor += right</span><br><span class="line">            answer += right</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>주어진 이름의 글자 하나씩을 받아오면서 <code>알파벳과 &#39;Z&#39;사이의 거리</code> 와 <code>알파벳과  &#39;A&#39; 사이의 거리</code> 중 더 작은 값을 담는다.</p>
+<ul>
+<li>이때, <code>Z와의 거리</code>에 <code>+1</code> 을 한 이유는 처음 방향에서 스틱을 한번 아래로 움직여야 <code>Z</code>로 가기 때문이다.</li>
+</ul>
+</li>
+<li><p><code>name</code>에 <code>A</code>가 없는 경우에는 조이 스틱의 좌우 방향을 조작할 필요가 없기 때문에 아래 식을 계산해 반환하면 된다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">상하 움직인 총 수(sum(name_c)) + 한 방향으로 쭉 이동 한 수(len(name) <span class="number">-1</span> )</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>이유: <code>A</code>가 있는 경우에는 위,아래 스틱을 조종하지 않아도 되기 때문에 이동하지 않는 것이 더 움직인 수가 적어질 수 있다. <code>A</code>가 있는 경우를 고려하는 코드는 3번에 나온다.</li>
+</ul>
+</li>
+<li><p>먼저 <code>answer</code>에 <code>커서가 가르치고 있는 글자의 상하 방향 움직인 수(name_c[cursor])</code>를 더한다. </p>
+</li>
+<li><p>while 문 종료 조건이 <code>name_c의 총 합이 0(모든 알파벳이 &#39;A&#39;가 됨)</code>인 경우이기 때문에 <code>answer</code>에 더한 값은 <code>0(=&#39;A&#39;)</code>으로 바꿔준다.</p>
+</li>
+<li><p>while 문은 상하 이동 수가 <code>0</code>일 동안 이동하며 left또는 right 의 값을 1씩 증가 시킨다.</p>
+<ul>
+<li>cursor에 -left하는 경우엔 왼쪽 인덱스로, cursor에 +right하는 경우엔 오른쪽 인덱스로 이동한다.<ul>
+<li>파이썬은 리스트에서 list[-1]은 마지막 인덱스를 가리킨다. 따로 처리하지 않아도 된다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>현재 인덱스</code>에서 <code>name_c가 0 (&#39;A&#39;)인 인덱스</code> 까지 왼쪽으로 이동한 수와 오른쪽으로 이동한 수를 비교하는 이유는 <code>상하 이동이 0인 인덱스</code>와 먼 인덱스 쪽으로 좌우를 움직이는 것이 더욱 조작 횟수를 줄이기 때문이다.</p>
+<ul>
+<li>비교한 후, 커서를 왼쪽 또는 오른쪽으로 이동시키고 다시 while문의 처음으로 돌아가 같은 과정을 반복해 모든 <code>0이 아닌 인덱스</code>를 조작해 ‘A’로 바꾸면 실행이 종료된다.</li>
+</ul>
+</li>
+</ol>
+<p>그리디 너무 어렵당..</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/14/programmers-joystick/" data-id="ckjvn8a8u0000b2c9eqlpdz8t"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-macos-zulu-jdk" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -1234,238 +1416,12 @@
 
 
         
-          
-
-<article id="post-java-1" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/01/java-1/">JAVA 언어 개요 - 특징</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/01/01/java-1/" class="article-date">
-  <time datetime="2020-12-31T15:00:00.000Z" itemprop="datePublished">2021-01-01</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="자바-언어의-탄생"><a href="#자바-언어의-탄생" class="headerlink" title="자바 언어의 탄생"></a>자바 언어의 탄생</h1><p><strong>1991년</strong> </p>
-<p>Green Project에서 가정용 전자기기에서 사용되는 작은 컴퓨터 언어를 디자인 했다.</p>
-<p>이때, </p>
-<ol>
-<li>작고 견고한 언어, 신뢰할 수 있는 코드</li>
-<li>특정 디바이스에 <strong>종속되지 않아야 함</strong></li>
-</ol>
-<p>와 같은 특성을 고려해 <strong>Virtual Machine</strong>에서 동작하는 중간코드를 생성해 이식성이 높은 언어를 디자인 했다.</p>
-<p><strong>1992년</strong></p>
-<p>초기 자바 언어는 절차지향언어와 객체지향 혼용해 사용했던 언어인 C++ 를 기반으로 개발되었다. 그러다가 C++ 의 여러가지 한계에 부딪혀 </p>
-<p>완벽한 객체지향 언어인 Oak 가 개발되었고 제임스 고슬링에 의해 명명된 Oak는 Oak라는 프로그램이 존재했기 때문에 이후 JAVA로 변경 되었다. </p>
-<p><strong>1994년</strong></p>
-<p>World Wide Web의 발전과 Mosaic의 사용에 주목</p>
-<p>자바를 기반으로 한 웹 브라우저 제작 (HotJava 브라우저로 발전함)</p>
-<p>applet이라 불리는 자바의 기능을 보여주기 위해 브라우저가 중간코드(bytecode)를 해석할 수 있도록 만듦</p>
-<p><strong>1996년~ 현재</strong></p>
-<p>Netscape 2.0에서부터 자바가 지원됨</p>
-<p>많은 업체들이 자바를 지원하게 됨</p>
-<p>자바 버전 1.2가 출시되면사. 자바 2 플랫폼으로 명명됨.</p>
-<br>
-
-<h1 id="자바-언어의-특징"><a href="#자바-언어의-특징" class="headerlink" title="자바 언어의 특징"></a>자바 언어의 특징</h1><ol>
-<li><p><strong>단순</strong> </p>
-<p>C++의 전위처리, 포인터 사용, 다중 상속, 구조체, goto문 사용, 연산자 중복 기능 등을 제외</p>
-<p>가비지 컬렉터에 의한 자동 메모리 관리로 할당된 메모리 해제를 신경쓰지 않아도 된다.</p>
-</li>
-<li><p><strong>객체지향(object-oriented)</strong></p>
-<p>​    언어라는 객체를 사용해서 프로그램을 작성하도록 하는 언어</p>
-<p>-&gt; 재사용성을 높일 수 있음. </p>
-<p>코드의 재사용을 넘어 객체의 재사용을 뜻하며, 프로그램 개발에 필요한 수많은 클래스 라이브러리들을 API로 제공함</p>
-</li>
-<li><p><strong>분산 처리(Distributed)에 용이하다.</strong></p>
-<p>분산 환경에서 TCP/IP 등의 프로토콜을 통해 효율적으로 실행할 수 있도록 설계된 언어이다.</p>
-<ul>
-<li>TCP/IP 네트워크 기능 내장</li>
-<li>HTTP/ FTP 등과 같은 프로토콜을 쉽게 사용할 수 있도록 라이브러리 제공</li>
-<li>서로 다른 컴퓨터 상의 객체들도 원격으로 호출하여 실행할 수 있는 원격 메서드 호출과 관련된 RMI(Remote Method Invocation)기능의 라이브러리 제공</li>
-</ul>
-</li>
-<li><p><strong>인터프리터에 의해 실행됨</strong></p>
-<p>.java 형태의 텍스트 파일 -&gt; 컴파일러에 의해 자바가상머신에서 수행될 수 있는 중간코드로 컴파일된다. -&gt; .class(클래스 파일 == 바이트 코드) -&gt; 실제 실행을 위해 인터프리터에 의해 기계어로 변환 -&gt; 컴퓨터에서 실행</p>
-<p>자바는 컴파일 언어임과 동시에 인터프리터 언어이다.</p>
-</li>
-<li><p><strong>견고</strong></p>
-<p>에러의 원인이 되는 요소들을 제거</p>
-<ul>
-<li>포인터를 사용하지 않음</li>
-<li>가비지 컬렉션</li>
-<li>데이터 타입 검사를 통해 에러 초기 검사</li>
-<li>실행시간에 발생하는 에러 초기</li>
-</ul>
-</li>
-<li><p><strong>안전</strong></p>
-<ul>
-<li>컴파일 시에 엄격하게 데이터 타입을 검사함으로써 프로그램 실행 시 발생할 수 있는 비정상적인 상황을 미리 감지</li>
-</ul>
-<p><img src="../image/image-20201231163725437.png" alt="image-20201231163725437"></p>
-</li>
-<li><p><strong>플랫폼 독립(Architecture Neutral)</strong></p>
-<p>사용하는 운영체제나 CPU 등의 하드웨어 사양에 관계없이 실행될 수 있음.</p>
-<p>이식성이 높다.</p>
-</li>
-<li><p><strong>높은 성능</strong></p>
-<p>가비지 컬렉션 : 메모리가 할당된 객체의 상태를 추적 관리, 더이상 참조 되지 않으면 다종으로 할당된 메모리 해제 (불필요한 메모리 낭비 방지) </p>
-</li>
-<li><p><strong>멀티스레드</strong></p>
-<p>스레드 : 독자적으로 수행하는 하나의 작은 프로그램</p>
-<p>멀티스레드: 한번의 여러개의 스레드가 동시에 수행되는 과정 / 하나의 CPU가 여러 개의 프로그램을 동시에 수행하도록 함 (수행 속도를 빠르게 함)</p>
-</li>
-<li><p><strong>동적</strong></p>
-<p>변화하는 환경에 잘 적응되도록 설계됨</p>
-<p>기존의 프로그램에 영향을 주지 않고, 라이브러리에 새로운 메서드나 속성들을 추가할 수 있음</p>
-<p>프로그램과 프로그램에서 사용되는 라이브러리와의 연결을 <strong>실행시간에 수행</strong>함</p>
-<p>-&gt; 라이브러리의 변화를 곧바로 적용할 수 있음</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/01/01/java-1/" data-id="ckjcz5wdc0000vyc9gdgoejss"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-swea-2043" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/12/30/swea-2043/">[SW Expert Academy] 2043. 서랍의 비밀번호 (파이썬)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/12/30/swea-2043/" class="article-date">
-  <time datetime="2020-12-29T16:00:00.000Z" itemprop="datePublished">2020-12-30</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>서랍의 비밀번호가 생각이 나지 않는다.</p>
-<p>비밀번호 P는 000부터 999까지 번호 중의 하나이다.</p>
-<p>주어지는 번호 K부터 1씩 증가하며 비밀번호를 확인해 볼 생각이다.</p>
-<p>예를 들어 비밀번호 P가 123 이고 주어지는 번호 K가 100 일 때, 100부터 123까지 24번 확인하여 비밀번호를 맞출 수 있다.</p>
-<p>P와 K가 주어지면 K부터 시작하여 몇 번 만에 P를 맞출 수 있는지 알아보자.</p>
-<br>
-
-<p><strong>[입력]</strong></p>
-<p>입력으로 P와 K가 빈 칸을 사이로 주어진다.</p>
-<p><strong>[출력]</strong></p>
-<p>몇 번 만에 비밀번호를 맞출 수 있는지 출력한다.</p>
-<br>
-
-<p><strong>입력 예시</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123 100</span><br></pre></td></tr></table></figure>
-
-<p><strong>출력 예시</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">24</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>SW Expert Academy 모의 테스트 방식에 익숙해지려고 풀어봤다.</p>
-<p><strong>풀이 1</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">P, K = map(int, input().split())</span><br><span class="line">print(P - K + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p><strong>풀이 2</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">P, K = map(int, input().split())</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(K, P+<span class="number">1</span>):</span><br><span class="line">    count += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> i == P:</span><br><span class="line">        print(count)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/12/30/swea-2043/" data-id="ckja6kdfh00003gc96o24alno"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
     </article>
     
   
     
       <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/">이전</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/3/">다음</a>
+        <a class="extend prev" rel="prev" href="/">이전</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/3/">다음</a>
       </nav>
     
   </section>

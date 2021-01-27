@@ -64,6 +64,149 @@
         
           
 
+<article id="post-programmers-two-numbers-add" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/12/01/programmers-two-numbers-add/">[프로그래머스] 두 개 뽑아서 더하기 - 조합 (파이썬)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/12/01/programmers-two-numbers-add/" class="article-date">
+  <time datetime="2020-12-01T09:15:21.000Z" itemprop="datePublished">2020-12-01</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제링크 : <a href="https://programmers.co.kr/learn/courses/30/lessons/68644" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/lessons/68644</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><ul>
+<li><p>조합을 이용해서 <code>numbers</code> 에서 2개의 수를 뽑는 모든 경우의 수에 반복문을 돌린다.</p>
+</li>
+<li><p>중복을 제거하기 위해 <code>set</code> 을 사용했고 오름차순 정렬을 위해 다시 <code>list</code> 로 바꾼 후 <code>sort</code> 하여 return 한다.</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> combinations</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(numbers)</span>:</span></span><br><span class="line">    answer = []</span><br><span class="line">    <span class="keyword">for</span> a,b <span class="keyword">in</span> combinations(numbers, <span class="number">2</span>):</span><br><span class="line">        answer.append(a+b)</span><br><span class="line">    answer = list(set(answer))</span><br><span class="line">    answer.sort()</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/12/01/programmers-two-numbers-add/" data-id="cki5rqgaf00005lc95m20fyyw"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-backjoon-1080" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/12/01/backjoon-1080/">[백준알고리즘] 1080:행렬 (파이썬)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/12/01/backjoon-1080/" class="article-date">
+  <time datetime="2020-11-30T17:36:16.000Z" itemprop="datePublished">2020-12-01</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크: <a href="https://www.acmicpc.net/problem/1080" target="_blank" rel="noopener">https://www.acmicpc.net/problem/1080</a></li>
+</ul>
+<br>
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n, m = map(int, input().split())</span><br><span class="line">A = []</span><br><span class="line">B = []</span><br><span class="line">cnt = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">    A.append(list(map(int, input().strip())))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">    B.append(list(map(int, input().strip())))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3X3 크기의 행렬에 있는 원소를 뒤집는다. (0 -&gt; 1, 1 -&gt; 0)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverseNum</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> cnt</span><br><span class="line">    <span class="comment"># 부분 행렬의 원소를 뒤집을 때마다 카운트를 센다.</span></span><br><span class="line">    cnt += <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(x, x+<span class="number">3</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(y, y+<span class="number">3</span>):</span><br><span class="line">            <span class="keyword">if</span> A[i][j] == <span class="number">0</span>:</span><br><span class="line">                A[i][j] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                A[i][j] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> cnt</span><br><span class="line">    <span class="comment"># 3X3 부분 행렬의 원소만 뒤집을 수 있기 때문에 n-3 X m-3 까지만 reverseNum 함수에 보낼 수 있다.</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-2</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(m<span class="number">-2</span>):</span><br><span class="line">            <span class="comment"># 원소가 다를 때마다 원소를 뒤집는 함수 호출</span></span><br><span class="line">            <span class="keyword">if</span> A[i][j] != B[i][j]:</span><br><span class="line">                reverseNum(i, j)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 뒤집을 수 있는 모든 경우의 수가 끝나고도 A의 원소와 B의 원소가 일치하지 않는다면 -1을 출력하고 종료한다.</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">            <span class="keyword">if</span> A[i][j] != B[i][j]:</span><br><span class="line">                cnt = <span class="number">-1</span></span><br><span class="line">                print(cnt)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">    print(cnt)</span><br><span class="line"></span><br><span class="line">solution()</span><br></pre></td></tr></table></figure>
+
+
+
+<p>벌써 12월이다..!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/12/01/backjoon-1080/" data-id="cki4uac9t0000mkc9fz50eqg4"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-backjoon-14676" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -870,204 +1013,12 @@
 
 
         
-          
-
-<article id="post-error-operation-not-permitted" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/11/12/error-operation-not-permitted/">Mac Operation not permitted 오류 해결 - [Errno 1] Operation not permitted Program ended with exit code: 2</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/11/12/error-operation-not-permitted/" class="article-date">
-  <time datetime="2020-11-12T10:57:33.000Z" itemprop="datePublished">2020-11-12</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>xcode에 python 사용 설정을 마친 후에 build를 했는데 콘솔에 아래와 같은 에러가 발생했다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;Applications&#x2F;Xcode.app&#x2F;Contents&#x2F;Developer&#x2F;usr&#x2F;bin&#x2F;python3: can&#39;t open file &#39;1766.py&#39;: [Errno 1] Operation not permitted</span><br><span class="line"></span><br><span class="line">Program ended with exit code: 2</span><br></pre></td></tr></table></figure>
-
-<p>실행 권한이 없어서 파일을 열 수 없다는 의미이다. </p>
-<br>
-
-<p>해결 방법은</p>
-<p><strong><code>설정 &gt; 보안 및 개인 정보 보호 &gt; 전체 디스크 접근 권한</code></strong> 에 들어가서 <code>python3</code>를 추가해주면 된다.  </p>
-<p>(<code>+</code> 버튼을 누르고 <code>shift</code> + <code>command</code> + <code>G</code> 를 눌러 <code>/usr/bin</code> 폴더로 접속해 <code>python3</code> 를 클릭해서 추가했다. )</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/11/12/error-operation-not-permitted/" data-id="ckheq9yr500006pc98ya9bsoh"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%98%A4%EB%A5%98%ED%95%B4%EA%B2%B0/" rel="tag">오류해결</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-words-target" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/11/11/programmers-words-target/">[프로그래머스] 단어 변환 - DFS/BFS (파이썬)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/11/11/programmers-words-target/" class="article-date">
-  <time datetime="2020-11-10T16:35:26.000Z" itemprop="datePublished">2020-11-11</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>문제 링크 : <a href="https://programmers.co.kr/learn/courses/30/parts/12421" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/parts/12421</a> &gt; 단어 변환</li>
-</ul>
-<br>
-
-<h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><h6 id="문제-설명"><a href="#문제-설명" class="headerlink" title="문제 설명"></a>문제 설명</h6><p>두 개의 단어 begin, target과 단어의 집합 words가 있습니다. 아래와 같은 규칙을 이용하여 begin에서 target으로 변환하는 가장 짧은 변환 과정을 찾으려고 합니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 한 번에 한 개의 알파벳만 바꿀 수 있습니다.</span><br><span class="line">2. words에 있는 단어로만 변환할 수 있습니다.</span><br></pre></td></tr></table></figure>
-
-<p>예를 들어 begin이 hit, target가 cog, words가 [hot,dot,dog,lot,log,cog]라면 hit -&gt; hot -&gt; dot -&gt; dog -&gt; cog와 같이 4단계를 거쳐 변환할 수 있습니다.</p>
-<p>두 개의 단어 begin, target과 단어의 집합 words가 매개변수로 주어질 때, 최소 몇 단계의 과정을 거쳐 begin을 target으로 변환할 수 있는지 return 하도록 solution 함수를 작성해주세요.</p>
-<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
-<li>각 단어는 알파벳 소문자로만 이루어져 있습니다.</li>
-<li>각 단어의 길이는 3 이상 10 이하이며 모든 단어의 길이는 같습니다.</li>
-<li>words에는 3개 이상 50개 이하의 단어가 있으며 중복되는 단어는 없습니다.</li>
-<li>begin과 target은 같지 않습니다.</li>
-<li>변환할 수 없는 경우에는 0를 return 합니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>begin</th>
-<th>target</th>
-<th>words</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>hit</td>
-<td>cog</td>
-<td>[hot, dot, dog, lot, log, cog]</td>
-<td>4</td>
-</tr>
-<tr>
-<td>hit</td>
-<td>cog</td>
-<td>[hot, dot, dog, lot, log]</td>
-<td>0</td>
-</tr>
-</tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>예제 #1<br>문제에 나온 예와 같습니다.</p>
-<p>예제 #2<br>target인 cog는 words 안에 없기 때문에 변환할 수 없습니다.</p>
-<br>
-
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(begin, target, words, visited)</span>:</span></span><br><span class="line">    stack = []</span><br><span class="line">    stack.append(begin)</span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    cnt = <span class="number">0</span></span><br><span class="line">    tar_cnt = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> stack:</span><br><span class="line">        b = stack.pop(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">if</span> b <span class="keyword">in</span> words:</span><br><span class="line">            visited[words.index(b)] = <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> wd <span class="keyword">in</span> words:</span><br><span class="line">            cnt = <span class="number">0</span></span><br><span class="line">            tar_cnt = <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> visited[words.index(wd)] == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(b)):</span><br><span class="line">                    <span class="keyword">if</span> b[i] != target[i] : tar_cnt += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">if</span> b[i] != wd[i]: cnt += <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> tar_cnt == <span class="number">1</span>:</span><br><span class="line">                    answer += <span class="number">1</span> </span><br><span class="line">                    <span class="keyword">return</span> answer</span><br><span class="line">                <span class="keyword">if</span> cnt == <span class="number">1</span>:</span><br><span class="line">                    stack.append(wd)</span><br><span class="line">                    answer += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">break</span>   </span><br><span class="line">    <span class="keyword">return</span> answer            </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(begin, target, words)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> target <span class="keyword">not</span> <span class="keyword">in</span> words: </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    visited = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(words))]</span><br><span class="line">    answer = dfs(begin, target, words, visited)</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-<p><strong>DFS</strong>를 이용하여 풀었다. </p>
-<ul>
-<li><p>맨 처음 <code>target</code>이 <code>words</code> 배열에 없는 경우를 체크하고 이런 경우 변환 될 수 없기 때문에 <code>0</code>을 반환 한다.</p>
-</li>
-<li><p>앞에서 비교하면서 한글자만 다른 경우 <code>answer += 1</code> 을하고 <code>stack</code>에 해당 단어를 넣고 <code>break</code> 했다.</p>
-</li>
-<li><p>앞에서부터 비교하기 때문에 문제의 <code>예제 #1</code> 같은 경우 <code>dog</code>-&gt; <code>log</code> -&gt; <code>cog</code> 로 변환될 경우가 있다. 이를 방지하기 위해 매번 <code>target</code>과도 한글자만 다른 경우가 있는지 검사해서 한글자만 다른경우 <code>answer += 1</code> 한 후 answer을 반환한다.</p>
-</li>
-<li><p><code>visited</code> 배열을 이용해서 이미 변환에 사용된 단어가 또 비교되는 경우가 없도록 했다.</p>
-</li>
-</ul>
-<p>어려웠던 점</p>
-<ol>
-<li><strong>단어를 비교하는 방법 :</strong> 처음에 단어가 한 개의 알파벳만 다른 경우를 어떻게 체크하지 라고 생각했는데 단순히 앞에서부터 한알파벳씩 비교하면서 <code>cnt</code>를 세주면 됐다.. 생각보다 단순했다!</li>
-<li><strong>‘최소’의 경우를 구하는 법 :</strong> 앞에서부터 모든 경우를 살펴보지만 매번 <code>target</code>과 한글자만 차이나는지를 비교하기 때문에 최소 값을 구할 수 있었다.</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/11/11/programmers-words-target/" data-id="ckhc7fnxl0000b4c943ofe1um"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
     </article>
     
   
     
       <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/page/3/">이전</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/5/">다음</a>
+        <a class="extend prev" rel="prev" href="/page/3/">이전</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/5/">다음</a>
       </nav>
     
   </section>
