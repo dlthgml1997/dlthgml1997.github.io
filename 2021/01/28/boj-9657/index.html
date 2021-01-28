@@ -81,6 +81,28 @@
 </ul>
 <h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">boolean</span>[] dp;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> rock;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> turn = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">		rock = Integer.valueOf(br.readLine());</span><br><span class="line"></span><br><span class="line">		dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="number">1001</span>];</span><br><span class="line">		dp[<span class="number">1</span>] = dp[<span class="number">3</span>] = dp[<span class="number">4</span>] = <span class="keyword">true</span>;</span><br><span class="line">		dp[<span class="number">2</span>] = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">5</span>; i &lt;= rock; i++) &#123;</span><br><span class="line">			dp[i] = !(dp[i - <span class="number">1</span>] &amp;&amp; dp[i - <span class="number">3</span>] &amp;&amp; dp[i - <span class="number">4</span>]);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (dp[rock])</span><br><span class="line">			System.out.println(<span class="string">"SK"</span>);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			System.out.println(<span class="string">"CY"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li><p>이 문제는 <code>dp</code>를 이용하는 문제이다. 나는 메모이제이션할 배열로(<code>dp</code>) <strong>상근이의 승리 여부</strong>를 사용했다.<br>예를 들어, <code>dp[6]</code>에는 <strong>돌이 6개일 때 상근이가 승리(true)할 지, 패배(false)할지</strong>가 담긴다.</p>
+<ul>
+<li><p>SK(상근이)가 먼저 게임을 시작하고 <code>1개</code> 또는 <code>3개</code> 또는 <code>4개</code>의 돌을 주어갈 수 있으므로,</p>
+<ul>
+<li><code>dp[1]</code>  <code>dp[3]</code>  <code>dp[4]</code> 는 무조건 <strong>SK가 승리(true)</strong>한다.</li>
+<li><code>dp[2]</code>는 SK가 1개 가져간 후, CY(창영이)가 1개 가져가는 방법밖에 없다. 즉, <strong>SK가 패배</strong>하는 것이 확실하므로 <code>dp[2]</code> 는 <strong>false</strong>이다.</li>
+</ul>
+</li>
+<li><p><code>dp[5]</code> 부터는 <code>마지막돌(5)</code> 기준으로 돌맹이 <code>하나 줍기전(4)</code>,<code>세개 줍기전(2)</code>,<code>네개 줍기 전(1)</code> 중에 한번이라도 <code>자신이 진 경우(2:false이다.)</code>가 있다면 !<br><code>진 경우(2)</code>에서 그만큼(<strong>세개</strong>) 주으면 <code>dp[5]</code>에서는 승리할 수 있다는 뜻이 되므로 SK가 무조건 승리할 수 있게 된다.</p>
+<ul>
+<li><p>이를 코드로 바꾸면 아래와 같다</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i] = !(dp[i - <span class="number">1</span>] &amp;&amp; dp[i - <span class="number">3</span>] &amp;&amp; dp[i - <span class="number">4</span>]);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -97,6 +119,15 @@
   
     
   <nav class="article-nav">
+    
+      <a href="/2021/01/28/boj-2941/" class="article-nav-link">
+        <strong class="article-nav-caption">최신</strong>
+        <div class="article-nav-title">
+          
+            [boj] 2941: 크로아티아 알파벳 (java)
+          
+        </div>
+      </a>
     
     
       <a href="/2021/01/28/boj-1002/" class="article-nav-link">

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [boj] 2941: 크로아티아 알파벳 (java) |
+    
+    IT&#39;s easy if you try</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-boj-2941" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [boj] 2941: 크로아티아 알파벳 (java)
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/28/boj-2941/" class="article-date">
+  <time datetime="2021-01-28T14:32:48.000Z" itemprop="datePublished">2021-01-28</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제링크: <a href="https://www.acmicpc.net/problem/2941" target="_blank" rel="noopener">https://www.acmicpc.net/problem/2941</a></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 클래스 이름 Main으로 바꾸기</span></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution2941</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> String[] kroatia = <span class="keyword">new</span> String[] &#123;<span class="string">"c="</span>,<span class="string">"c-"</span>,<span class="string">"dz="</span>,<span class="string">"d-"</span>,<span class="string">"lj"</span>,<span class="string">"nj"</span>,<span class="string">"s="</span>,<span class="string">"z="</span>&#125;;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		printResult(getLengthOfKroatiaWord(makeInput()));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLengthOfKroatiaWord</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// @param word: Make algorithm using variable `word`</span></span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> cursor = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line">		<span class="keyword">while</span>(cursor&lt; word.length()) &#123;</span><br><span class="line">			<span class="keyword">for</span>(String c : kroatia) &#123;</span><br><span class="line">				<span class="keyword">if</span>(word.substring(cursor,word.length()).startsWith(c)) &#123;</span><br><span class="line">					count++;</span><br><span class="line">					cursor += c.length();</span><br><span class="line">					flag =<span class="keyword">true</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(flag) &#123;</span><br><span class="line">				flag =<span class="keyword">false</span>;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				count++;</span><br><span class="line">				cursor++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> count; <span class="comment">// @return: the length Of Kroatia Word</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">makeInput</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">new</span> Scanner(System.in).next();&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printResult</span><span class="params">(<span class="keyword">int</span> lengthOfKroatiaWord)</span> </span>&#123; System.out.println(lengthOfKroatiaWord); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>cursor</code>는 인덱스 역할을 한다. <code>cursor</code>부터 끝까지 <code>word</code>를 자르고, <code>cursor</code>번째 위치에서 크로아티아 알파벳으로 시작하는지 검사한다.</p>
+<ul>
+<li>배열(<code>kroatia</code>)에 있는 알파벳으로 시작한다면(<code>startsWith</code>) <code>count(알파벳 수)</code>를 1 증가시키고, <code>cursor</code>는 해당 알파벳 길이만큼 증가시킨다.</li>
+<li>배열에 있는 알파벳으로 시작하지 않는다면, 한글자 알파벳이므로 <code>count</code>, <code>cursor</code> 모두 1 증가시킨다.</li>
+</ul>
+<br>
+
+<p><strong><code>replaceAll</code> 을 사용하면 더욱 깔끔한 코드를 짤 수 있고, 시간도 더 빠르다.</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> String[] kroatia = <span class="keyword">new</span> String[] &#123;<span class="string">"c="</span>,<span class="string">"c-"</span>,<span class="string">"dz="</span>,<span class="string">"d-"</span>,<span class="string">"lj"</span>,<span class="string">"nj"</span>,<span class="string">"s="</span>,<span class="string">"z="</span>&#125;;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		printResult(getLengthOfKroatiaWord(makeInput()));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLengthOfKroatiaWord</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// @param word: Make algorithm using variable `word`</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(String c: kroatia) &#123;</span><br><span class="line">			word = word.replace(c,<span class="string">"."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> word.length();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">makeInput</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">new</span> Scanner(System.in).next();&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printResult</span><span class="params">(<span class="keyword">int</span> lengthOfKroatiaWord)</span> </span>&#123; System.out.println(lengthOfKroatiaWord);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/28/boj-2941/" data-id="ckkh1yp3d0001coc95wlf4uyh"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2021/01/29/boj-1120/" class="article-nav-link">
+        <strong class="article-nav-caption">최신</strong>
+        <div class="article-nav-title">
+          
+            [boj] 1120:문자열 (java)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/01/28/boj-9657/" class="article-nav-link">
+        <strong class="article-nav-caption">이전</strong>
+        <div class="article-nav-title">[boj] 9657 돌 게임 3 (java)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2021 IT&#39;s easy if you try</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="IT&#39;s easy if you try"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="검색">
+        <i class="fe fe-search"></i>
+        검색
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>
