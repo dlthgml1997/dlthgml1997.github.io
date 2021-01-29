@@ -64,6 +64,263 @@
         
           
 
+<article id="post-programmers-bridge-truck" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/25/programmers-bridge-truck/">[프로그래머스] 다리를 지나가는 트럭: 스택/큐 (파이썬)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/10/25/programmers-bridge-truck/" class="article-date">
+  <time datetime="2020-10-25T14:41:25.000Z" itemprop="datePublished">2020-10-25</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>문제 링크 : <a href="https://programmers.co.kr/learn/courses/30/parts/12081" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/parts/12081</a> &gt; 다리를 지나는 트럭</p>
+<h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다. 트럭은 1초에 1만큼 움직이며, 다리 길이는 bridge_length이고 다리는 무게 weight까지 견딥니다.<br>※ 트럭이 다리에 완전히 오르지 않은 경우, 이 트럭의 무게는 고려하지 않습니다.</p>
+<p>예를 들어, 길이가 2이고 10kg 무게를 견디는 다리가 있습니다. 무게가 [7, 4, 5, 6]kg인 트럭이 순서대로 최단 시간 안에 다리를 건너려면 다음과 같이 건너야 합니다.</p>
+<table>
+<thead>
+<tr>
+<th>경과 시간</th>
+<th>다리를 지난 트럭</th>
+<th>다리를 건너는 트럭</th>
+<th>대기 트럭</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>[]</td>
+<td>[]</td>
+<td>[7,4,5,6]</td>
+</tr>
+<tr>
+<td>1~2</td>
+<td>[]</td>
+<td>[7]</td>
+<td>[4,5,6]</td>
+</tr>
+<tr>
+<td>3</td>
+<td>[7]</td>
+<td>[4]</td>
+<td>[5,6]</td>
+</tr>
+<tr>
+<td>4</td>
+<td>[7]</td>
+<td>[4,5]</td>
+<td>[6]</td>
+</tr>
+<tr>
+<td>5</td>
+<td>[7,4]</td>
+<td>[5]</td>
+<td>[6]</td>
+</tr>
+<tr>
+<td>6~7</td>
+<td>[7,4,5]</td>
+<td>[6]</td>
+<td>[]</td>
+</tr>
+<tr>
+<td>8</td>
+<td>[7,4,5,6]</td>
+<td>[]</td>
+<td>[]</td>
+</tr>
+</tbody></table>
+<p>따라서, 모든 트럭이 다리를 지나려면 최소 8초가 걸립니다.</p>
+<p>solution 함수의 매개변수로 다리 길이 bridge_length, 다리가 견딜 수 있는 무게 weight, 트럭별 무게 truck_weights가 주어집니다. 이때 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 return 하도록 solution 함수를 완성하세요.</p>
+<h5 id="제한-조건"><a href="#제한-조건" class="headerlink" title="제한 조건"></a>제한 조건</h5><ul>
+<li>bridge_length는 1 이상 10,000 이하입니다.</li>
+<li>weight는 1 이상 10,000 이하입니다.</li>
+<li>truck_weights의 길이는 1 이상 10,000 이하입니다.</li>
+<li>모든 트럭의 무게는 1 이상 weight 이하입니다.</li>
+</ul>
+<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
+<thead>
+<tr>
+<th>bridge_length</th>
+<th>weight</th>
+<th>truck_weights</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2</td>
+<td>10</td>
+<td>[7,4,5,6]</td>
+<td>8</td>
+</tr>
+<tr>
+<td>100</td>
+<td>100</td>
+<td>[10]</td>
+<td>101</td>
+</tr>
+<tr>
+<td>100</td>
+<td>100</td>
+<td>[10,10,10,10,10,10,10,10,10,10]</td>
+<td>110</td>
+</tr>
+</tbody></table>
+<br>
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(bridge_length, weight, truck_weights)</span>:</span></span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    bridge = [<span class="number">0</span>] * bridge_length</span><br><span class="line">    now_weight = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> truck_weights:</span><br><span class="line">        answer += <span class="number">1</span></span><br><span class="line">        <span class="comment"># 다리의 제일 앞 무게를 총 무게에서 뺀다. (다리를 지나간다.)</span></span><br><span class="line">        now_weight -= bridge.pop(<span class="number">0</span>) </span><br><span class="line">        truck = truck_weights[<span class="number">0</span>]</span><br><span class="line">        <span class="comment"># 대기 트럭 중 첫번째 트럭의 무게를 견딜 수 있으면</span></span><br><span class="line">        <span class="keyword">if</span> now_weight + truck &lt;= weight:</span><br><span class="line">            <span class="comment"># 대기 트럭에서 빠져나와 다리에 올라탄다.</span></span><br><span class="line">            truck_weights.pop(<span class="number">0</span>)</span><br><span class="line">            bridge.append(truck)</span><br><span class="line">            now_weight += truck</span><br><span class="line">        <span class="comment"># 견딜 수 없으면</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 다리에 올라타지 못한다.</span></span><br><span class="line">            bridge.append(<span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 다리 위 무게가 0이 될때까지</span></span><br><span class="line">    <span class="keyword">while</span> now_weight:</span><br><span class="line">        answer += <span class="number">1</span></span><br><span class="line">        <span class="comment"># 다리를 길이 1씩 건너면서 무게를 뺀다.</span></span><br><span class="line">        now_weight -= bridge.pop(<span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+<p><strong>풀이 과정</strong></p>
+<p>전체적인 풀이과정은 <code>truck_weight</code>에 있는 모든 트럭이 다리에 올라타면 첫번째 while문이 끝나고 , 트럭이 다리를 모두 건너면(다리 위 트럭 무게 총합이 0이면) 두번째 while문이 끝난다.</p>
+<ul>
+<li><code>answer</code>: 지나간 시간</li>
+<li><code>bridge</code>: 현재 다리 상태 (다리 길이만큼 인덱스를 갖는다.)</li>
+<li><code>now_weight</code>: 현재 다리에 올라가있는 트럭 무게들의 총합</li>
+<li><code>truck</code> : 트럭을 건너지 않은 트럭들 중 가장 앞에 있는 트럭</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/25/programmers-bridge-truck/" data-id="ckgp8m4230000bfc93pufaaq9"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-programmers-h-index-cpp" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/23/programmers-h-index-cpp/">[프로그래머스] H-Index : 정렬 (C++)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/10/23/programmers-h-index-cpp/" class="article-date">
+  <time datetime="2020-10-23T14:56:19.000Z" itemprop="datePublished">2020-10-23</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>문제 링크: <a href="https://programmers.co.kr/learn/courses/30/parts/12198" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/parts/12198</a> &gt; H-Index</p>
+<h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다. 어느 과학자의 H-Index를 나타내는 값인 h를 구하려고 합니다. 위키백과<a href="https://programmers.co.kr/learn/courses/30/lessons/42747#fn1" target="_blank" rel="noopener">1</a>에 따르면, H-Index는 다음과 같이 구합니다.</p>
+<p>어떤 과학자가 발표한 논문 <code>n</code>편 중, <code>h</code>번 이상 인용된 논문이 <code>h</code>편 이상이고 나머지 논문이 h번 이하 인용되었다면 <code>h</code>의 최댓값이 이 과학자의 H-Index입니다.</p>
+<p>어떤 과학자가 발표한 논문의 인용 횟수를 담은 배열 citations가 매개변수로 주어질 때, 이 과학자의 H-Index를 return 하도록 solution 함수를 작성해주세요.</p>
+<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
+<li>과학자가 발표한 논문의 수는 1편 이상 1,000편 이하입니다.</li>
+<li>논문별 인용 횟수는 0회 이상 10,000회 이하입니다.</li>
+</ul>
+<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
+<thead>
+<tr>
+<th>citations</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[3, 0, 6, 1, 5]</td>
+<td>3</td>
+</tr>
+</tbody></table>
+<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>이 과학자가 발표한 논문의 수는 5편이고, 그중 3편의 논문은 3회 이상 인용되었습니다. 그리고 나머지 2편의 논문은 3회 이하 인용되었기 때문에 이 과학자의 H-Index는 3입니다.</p>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solution</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; citations)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> answer = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    sort(citations.<span class="built_in">begin</span>(), citations.<span class="built_in">end</span>(), greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = citations.<span class="built_in">size</span>(); i&gt;<span class="number">0</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j =<span class="number">0</span>; j&lt;citations.<span class="built_in">size</span>();j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(citations[j] &gt;= i)</span><br><span class="line">                cnt ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(cnt &gt;= i)&#123;</span><br><span class="line">            answer = i;</span><br><span class="line">            <span class="keyword">return</span> answer;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>citations</code>를 <code>greater&lt;int&gt;()</code> 를 이용해 내림차순 정렬을 해준다.</p>
+</li>
+<li><p><code>n</code>개의 서적일 경우 <code>0</code>부터 <code>n</code> 까지 <code>for</code>문을 돌며 <code>i</code>개 이상 발행 된 경우 <code>cnt</code>를 하나 더한다.</p>
+</li>
+<li><p><code>i</code>이상 발행된 서적 수인 <code>cnt</code>가 <code>i</code> 이상이면 조건을 만족하는 최대 수이기 때문에 과학자의 H-Index가 된다.</p>
+</li>
+</ul>
+<p>  다른 풀이를 보면 <code>for</code>문 한번으로 푼 풀이도 있고, 이진탐색으로 푼 풀이도 있었다.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/23/programmers-h-index-cpp/" data-id="ckgmeeqt30000bbc98l5kgwn5"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-programmers-kth-num-cpp" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -1044,179 +1301,6 @@
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-python-:-::" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/08/python-:-::/">[파이썬] 사칙연산 &#39;/&#39;와 &#39;//&#39;의 차이</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/10/08/python-:-::/" class="article-date">
-  <time datetime="2020-10-08T14:51:20.000Z" itemprop="datePublished">2020-10-08</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>알고리즘을 푸는 와중,</p>
-<blockquote>
-<p>음수를 양수로 나눌 때는 C++14의 기준을 따른다. 즉, 양수로 바꾼 뒤 몫을 취하고, 그 몫을 음수로 바꾼 것과 같다.</p>
-</blockquote>
-<p>이러한 조건이 있는 문제를 만났다. </p>
-<br>
-
-<p>예를 들어, -4 를 3으로 나눈다고 할 때</p>
-<p><code>-4 * -1 // 3 * -1</code> 이렇게도 조건을 만족할 수 있지만, <strong><code>int(-4/3)</code></strong> 이렇게 하는 것 또한 조건을 만족할 수 있다.</p>
-<br>
-
-<p>그 이유가 궁금해서 <code>/</code> 와 <code>//</code> 의 차이를 알아보았다.</p>
-<br>
-
-<h1 id="와-의-차이"><a href="#와-의-차이" class="headerlink" title="/ 와 // 의 차이"></a>/ 와 // 의 차이</h1><ul>
-<li><p><code>/</code> : 나누기</p>
-</li>
-<li><p><code>//</code> : 나누기 연산 후 소수점 이하의 수를 버리고, 정수 부분의 수만 구함.</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="number">4</span>/<span class="number">3</span>) <span class="comment"># 1</span></span><br><span class="line">print(<span class="number">4</span>//<span class="number">3</span>) <span class="comment"># 1.3333333333333333</span></span><br><span class="line">print(int(<span class="number">4</span>/<span class="number">3</span>)) <span class="comment"># 1</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p><strong>내가 궁금했던 건 <code>/</code> 와 <code>//</code> 가 음수에 쓰일 때 였다.</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="number">-4</span>//<span class="number">3</span>) <span class="comment"># -2</span></span><br><span class="line">print(<span class="number">-4</span>/<span class="number">3</span>) <span class="comment"># -1.3333333333333333</span></span><br><span class="line">print(int(<span class="number">-4</span>/<span class="number">3</span>)) <span class="comment"># -1</span></span><br></pre></td></tr></table></figure>
-
-<p>음수를 양수로 나눌 때 !</p>
-<p><code>//</code> 는 내림을 하고,</p>
-<p><code>/</code> 는 올림을 한다. </p>
-<br>
-
-<p><strong>결론 : C++14 기준을 따라 음수를 양수로 나눌 때, <code>int(음수/양수)</code> 를 사용할 수 있다.</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/08/python-:-::/" data-id="ckg0yvbbu0000mgc95dxoatxs"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-android-secure_properties" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/01/android-secure_properties/">[안드로이드] secure.properties 파일을 생성하여 구글 맵 API 키 입력하기</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/10/01/android-secure_properties/" class="article-date">
-  <time datetime="2020-10-01T14:54:00.000Z" itemprop="datePublished">2020-10-01</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>secure.properties 파일에 구글 맵 API키를 등록한 후 사용하면 노출 없이 안전하게 사용할 수 있다.</p>
-<ol>
-<li><p><code>secure.properties</code> 파일 생성</p>
-<p>특정 위치에 <code>secure.properties</code> 파일을 생성한다. 나는 <code>build.gradle</code> 파일과 같은 위치에 생성하였다.</p>
-<p>생성 후 아래와 같이 API 키를 적는다. (YOUR_API_KEY 부분 수정)</p>
-<img src="../image/스크린샷 2020-10-01 오후 11.23.26.png" alt="스크린샷 2020-10-01 오후 11.23.26" style="zoom:67%;" />
-</li>
-<li><p><code>build.gradle (Module:app)</code> 의 defaultConfig 안에 아래 코드 추가</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Read the API key from .&#x2F;secure.properties into R.string.maps_api_key</span><br><span class="line">        def secureProps &#x3D; new Properties()</span><br><span class="line">        if (file(&quot;..&#x2F;secure.properties&quot;).exists()) &#123;</span><br><span class="line">            file(&quot;..&#x2F;secure.properties&quot;)?.withInputStream &#123; secureProps.load(it) &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        resValue &quot;string&quot;, &quot;maps_api_key&quot;, (secureProps.getProperty(&quot;MAPS_API_KEY&quot;) ?: &quot;&quot;)</span><br></pre></td></tr></table></figure>
-
-<p>여기서 <code>file(&quot;&quot;)</code>의 “”안에는 현재 파일에서 <code>secure.properties</code>의 위치를 상대 경로로 명시해두어야 한다.</p>
-<p>이렇게 코드를 추가하면 매니페스트에서 API 키를  <code>@string/maps_api_key</code> 로 가져다 쓸 수 있다.</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">     The API key for Google Maps-based APIs.</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta-data</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:name</span>=<span class="string">"com.google.android.geo.API_KEY"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:value</span>=<span class="string">"@string/maps_api_key"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/01/android-secure_properties/" data-id="ckfqxjc8l0002c7c9cpcf8b80"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
 
     </footer>
 

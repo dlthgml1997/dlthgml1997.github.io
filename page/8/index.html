@@ -64,6 +64,228 @@
         
           
 
+<article id="post-backjoon-15654" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/08/28/backjoon-15654/">[백준알고리즘] N과 M(5) - 15654 (파이썬/ python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/08/28/backjoon-15654/" class="article-date">
+  <time datetime="2020-08-28T05:28:49.784Z" itemprop="datePublished">2020-08-28</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 초</td>
+<td align="left">512 MB</td>
+<td align="left">6458</td>
+<td align="left">4805</td>
+<td align="left">3849</td>
+<td align="left">74.219%</td>
+</tr>
+</tbody></table>
+<p>N개의 자연수와 자연수 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오. N개의 자연수는 모두 다른 수이다.</p>
+<ul>
+<li>N개의 자연수 중에서 M개를 고른 수열</li>
+</ul>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 8)</p>
+<p>둘째 줄에 N개의 수가 주어진다. 입력으로 주어지는 수는 10,000보다 작거나 같은 자연수이다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>한 줄에 하나씩 문제의 조건을 만족하는 수열을 출력한다. 중복되는 수열을 여러 번 출력하면 안되며, 각 수열은 공백으로 구분해서 출력해야 한다.</p>
+<p>수열은 사전 순으로 증가하는 순서로 출력해야 한다.</p>
+<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3 1</span><br><span class="line">4 5 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4 2</span><br><span class="line">9 8 7 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1 7</span><br><span class="line">1 8</span><br><span class="line">1 9</span><br><span class="line">7 1</span><br><span class="line">7 8</span><br><span class="line">7 9</span><br><span class="line">8 1</span><br><span class="line">8 7</span><br><span class="line">8 9</span><br><span class="line">9 1</span><br><span class="line">9 7</span><br><span class="line">9 8</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4 4</span><br><span class="line">1231 1232 1233 1234</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1231 1232 1233 1234</span><br><span class="line">1231 1232 1234 1233</span><br><span class="line">1231 1233 1232 1234</span><br><span class="line">1231 1233 1234 1232</span><br><span class="line">1231 1234 1232 1233</span><br><span class="line">1231 1234 1233 1232</span><br><span class="line">1232 1231 1233 1234</span><br><span class="line">1232 1231 1234 1233</span><br><span class="line">1232 1233 1231 1234</span><br><span class="line">1232 1233 1234 1231</span><br><span class="line">1232 1234 1231 1233</span><br><span class="line">1232 1234 1233 1231</span><br><span class="line">1233 1231 1232 1234</span><br><span class="line">1233 1231 1234 1232</span><br><span class="line">1233 1232 1231 1234</span><br><span class="line">1233 1232 1234 1231</span><br><span class="line">1233 1234 1231 1232</span><br><span class="line">1233 1234 1232 1231</span><br><span class="line">1234 1231 1232 1233</span><br><span class="line">1234 1231 1233 1232</span><br><span class="line">1234 1232 1231 1233</span><br><span class="line">1234 1232 1233 1231</span><br><span class="line">1234 1233 1231 1232</span><br><span class="line">1234 1233 1232 1231</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">N, M = map(int, input().split())</span><br><span class="line">nums = list(map(int, input().split()))</span><br><span class="line">nums.sort()</span><br><span class="line"></span><br><span class="line">out = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(M)]</span><br><span class="line">visited = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(N)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(depth)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> depth == M:</span><br><span class="line">        print(<span class="string">' '</span>.join(map(str, out)))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">        <span class="keyword">if</span> visited[i] == <span class="number">0</span>:</span><br><span class="line">            visited[i] = <span class="number">1</span></span><br><span class="line">            out[depth] = nums[i]</span><br><span class="line">            dfs(depth+<span class="number">1</span>)</span><br><span class="line">            visited[i] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">dfs(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>다른 N과 M 문제와 다른 점은 N의 수가 지정되어 있다는 점이다.</p>
+<p>N의 수들을 sort 한 다음 똑같이 dfs를 수행한다. 중복을 허용하지 않기 때문에 visited를 검사한다.</p>
+<ul>
+<li><p>다른 N과 M 문제처럼 out 리스트에 append 후 pop 하는 코드로 구현하였더니, pop 할 때마다 원소들이 재 정렬되기 때문에 런타임 에러가 발생하였다. </p>
+<p>-&gt; 어차피 print 할 때마다 out은 초기화 되어야 하기 때문에 out을 m길이의 list로 정의 하고 depth를 탐색할 때 out[depth]를 탐색한 nums 로 지정한다. </p>
+</li>
+<li><p>int로 받아오고 str 로 print 하는 과정이 꼬이면 틀렸습니다가 나온다ㅠ </p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/08/28/backjoon-15654/" data-id="ckenwloui00276jc9bxoccg4w"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-backjoon-15651" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/08/28/backjoon-15651/">[백준알고리즘] N과 M(3) - 15651 (파이썬/ python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/08/28/backjoon-15651/" class="article-date">
+  <time datetime="2020-08-28T04:41:02.191Z" itemprop="datePublished">2020-08-28</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 초</td>
+<td align="left">512 MB</td>
+<td align="left">13368</td>
+<td align="left">8665</td>
+<td align="left">6751</td>
+<td align="left">65.486%</td>
+</tr>
+</tbody></table>
+<p>자연수 N과 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오.</p>
+<ul>
+<li>1부터 N까지 자연수 중에서 M개를 고른 수열</li>
+<li>같은 수를 여러 번 골라도 된다.</li>
+</ul>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 자연수 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 7)</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>한 줄에 하나씩 문제의 조건을 만족하는 수열을 출력한다. 중복되는 수열을 여러 번 출력하면 안되며, 각 수열은 공백으로 구분해서 출력해야 한다.</p>
+<p>수열은 사전 순으로 증가하는 순서로 출력해야 한다.</p>
+<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1 1</span><br><span class="line">1 2</span><br><span class="line">1 3</span><br><span class="line">1 4</span><br><span class="line">2 1</span><br><span class="line">2 2</span><br><span class="line">2 3</span><br><span class="line">2 4</span><br><span class="line">3 1</span><br><span class="line">3 2</span><br><span class="line">3 3</span><br><span class="line">3 4</span><br><span class="line">4 1</span><br><span class="line">4 2</span><br><span class="line">4 3</span><br><span class="line">4 4</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 3</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">1 1 1</span><br><span class="line">1 1 2</span><br><span class="line">1 1 3</span><br><span class="line">1 2 1</span><br><span class="line">1 2 2</span><br><span class="line">1 2 3</span><br><span class="line">1 3 1</span><br><span class="line">1 3 2</span><br><span class="line">1 3 3</span><br><span class="line">2 1 1</span><br><span class="line">2 1 2</span><br><span class="line">2 1 3</span><br><span class="line">2 2 1</span><br><span class="line">2 2 2</span><br><span class="line">2 2 3</span><br><span class="line">2 3 1</span><br><span class="line">2 3 2</span><br><span class="line">2 3 3</span><br><span class="line">3 1 1</span><br><span class="line">3 1 2</span><br><span class="line">3 1 3</span><br><span class="line">3 2 1</span><br><span class="line">3 2 2</span><br><span class="line">3 2 3</span><br><span class="line">3 3 1</span><br><span class="line">3 3 2</span><br><span class="line">3 3 3</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">N, M = map(int, input().split())</span><br><span class="line">queue = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(depth)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> depth == M:</span><br><span class="line">        print(<span class="string">' '</span>.join(map(str, queue)))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">        queue.append(i+<span class="number">1</span>)</span><br><span class="line">        dfs(depth+<span class="number">1</span>)</span><br><span class="line">        queue.pop()</span><br><span class="line"></span><br><span class="line">dfs(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>N과 M(1) 과 다르게 중복을 허용하기 때문에 방문여부를 체크하지 않아도 된다 !</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/08/28/backjoon-15651/" data-id="ckenwlouh00246jc9b06xghjf"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-programmers- Immigration" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -896,192 +1118,6 @@
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-android-keystore2" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/24/android-keystore2/">android-keystore2</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/24/android-keystore2/" class="article-date">
-  <time datetime="2020-08-24T06:30:04.925Z" itemprop="datePublished">2020-08-24</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>keyStore</p>
-<p><a href="https://developer.android.com/training/articles/keystore?hl=ko" target="_blank" rel="noopener">https://developer.android.com/training/articles/keystore?hl=ko</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/08/24/android-keystore2/" data-id="ckenwlotk00096jc9du1z6ck9"
-         class="article-share-link">공유</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-android-sign-verify" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/24/android-sign-verify/">[Android / Node.js] PrivateKey Signature, PublicKey Verify</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/24/android-sign-verify/" class="article-date">
-  <time datetime="2020-08-23T18:56:00.000Z" itemprop="datePublished">2020-08-24</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <blockquote>
-<p>클라이언트의 Private Key로 서명한 Challenge Number를 서버로 보내 (기존 클라이언트에게 받은)Public Key 로 Verify 하는 과정에서 우당탕탕 고통스러웠는데, 고통의 과정에서 알게 된 것을 한번 정리해 보려 한다 ! </p>
-</blockquote>
-<p><img src="../image/2020-08-242.50.59.png" alt="2020-08-242.50.59"></p>
-<p>위 플로우 중 4, 6 번의 과정을 다룰 것이다. (3번은 Key Generate 포스팅에서 다룰 예정이다.)</p>
-<h2 id="Private-Key-를-이용하여-Challenge-Number-에-서명하기-4번-과정-Client"><a href="#Private-Key-를-이용하여-Challenge-Number-에-서명하기-4번-과정-Client" class="headerlink" title="Private Key 를 이용하여 Challenge Number 에 서명하기 (4번 과정) - Client"></a>Private Key 를 이용하여 Challenge Number 에 서명하기 (4번 과정) - Client</h2><p>일단 코드는 아래와 같다. </p>
-<h4 id="getDigitalSignature"><a href="#getDigitalSignature" class="headerlink" title="getDigitalSignature()"></a>getDigitalSignature()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SIGNATURE_ALGORITHM = <span class="string">"SHA256withRSA"</span>;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getDigitalSignature</span><span class="params">(String packageName, String text)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);</span><br><span class="line">            signature.initSign(getPrivateKey(packageName));</span><br><span class="line"></span><br><span class="line">            <span class="keyword">byte</span>[] data = text.getBytes();</span><br><span class="line">            signature.update(data);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">byte</span>[] signatureBytes = signature.sign();</span><br><span class="line">            String signatureStr = Base64.encodeToString(signatureBytes, Base64.NO_WRAP);</span><br><span class="line">            Log.d(TAG, <span class="string">"Signature:"</span> + signatureStr);</span><br><span class="line">            <span class="keyword">return</span> signatureStr;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) &#123;</span><br><span class="line">            Log.e(TAG, <span class="string">"error in digital signature"</span> + e);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Public-Key-를-이용하여-Verify-Client"><a href="#Public-Key-를-이용하여-Verify-Client" class="headerlink" title="Public Key 를 이용하여 Verify - Client"></a>Public Key 를 이용하여 Verify - Client</h3><h4 id="verifySignature"><a href="#verifySignature" class="headerlink" title="verifySignature()"></a>verifySignature()</h4><p>일단 먼저 Client에서 Sign 및 Verify 가 완벽히 이루어 져야 Server에 코드를 짜고 테스트 해볼 수 있을 거라 생각하였기 때문에 verify 함수도 구현하였다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SIGNATURE_ALGORITHM = <span class="string">"SHA256withRSA"</span>;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">verifySignature</span><span class="params">(String packageName, String signature, String original)</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Signature sig = Signature.getInstance(SIGNATURE_ALGORITHM); <span class="comment">// getDigitalSignature와 같은 알고리즘 사용</span></span><br><span class="line">            sig.initVerify(getPublicKey(packageName));</span><br><span class="line"></span><br><span class="line">            <span class="keyword">byte</span>[] data = original.getBytes();</span><br><span class="line">            sig.update(data);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">boolean</span> result = sig.verify(Base64.decode(signature, Base64.NO_WRAP));</span><br><span class="line">            Log.d(TAG, <span class="string">"signatureString result :"</span> + result);</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            Log.e(TAG,<span class="string">"error for verify:"</span> + e.getMessage());</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<ol>
-<li><p>처음엔 <em>text<em>에 서명한 값을 *String</em>으로 변환하여 반환할 때, <em>Base64</em>를 이용하지 않고 <code>return new String(signatureBytes, &quot;UTF-8&quot;);</code> 이와 같은 방식으로 *Encode</em>, <em>Decode</em> 하였다. </p>
-<p>-&gt; verify 결과: false</p>
-</li>
-<li><p><em>getDigitalSignature()</em> 함수의 반환형을 <em>String</em> 아닌 <em>byte[]<em>로 반환하도록 코드를 수정하였다. (</em>signature.sign()</em> 값 형변환 x)</p>
-<p>-&gt; verify 결과: true </p>
-</li>
-</ol>
-<p>즉, <strong><em>byte Array</em>를 <em>String</em>으로 Encoding 하는 과정에서 데이터가 온전히 Encoding 되지 않는다</strong>는 뜻이었다. </p>
-<p>하지만 서버에는 <em>String</em> 형태로 보내야해서 어떻게든 <em>String<em>으로 형변환을 해야했다ㅠㅠ .. 엄청 헤매다가 초반 RSA를 이용한 Encrypt, Decrypt  함수 작성시에 *Base64</em>로 *Encoding</em> 한 코드를 참고하여 <em>Base64</em>를 이용해 보았다. 아래와 같은 코드였다.</p>
-<ol start="3">
-<li><p><code>String signatureStr = Base64.encodeToString(signatureBytes, Base64.DEFAULT);</code>  </p>
-<p>-&gt; verify 결과: false</p>
-<blockquote>
-<p> 다른 포스팅에서 작성한 글(‘Base64를 이용하여 Encoding, Decoding시 주의할 점’)에서 알 수 있듯이 디지털 서명은 암호화된 값과는 달리 길이가 길어서 <code>Base64.Default</code>를 이용하면 중간에 개행 문자(\n)가 삽입돼서 그런거였다.</p>
-</blockquote>
-</li>
-<li><p><code>String signatureStr = Base64.encodeToString(signatureBytes, Base64.NO_WRAP);</code></p>
-<p>-&gt; verify 결과: true</p>
-<blockquote>
-<p>드디어 true가 나왔다. </p>
-<p>NO_WRAP 은 개행 문자를 삽입하지 않고 한 줄로 encoding 한다. </p>
-</blockquote>
-</li>
-</ol>
-<h2 id="Public-Key-를-이용하여-Verify하기-6번-과정-Server"><a href="#Public-Key-를-이용하여-Verify하기-6번-과정-Server" class="headerlink" title="Public Key 를 이용하여 Verify하기 (6번 과정) - Server"></a>Public Key 를 이용하여 Verify하기 (6번 과정) - Server</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="string">"/auth"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> signedCN = req.body.challenge_number; <span class="comment">// Client에서 받아온 서명값</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"auth challenge_number from client : "</span>+ signedCN);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> verifier = crypto.createVerify(<span class="string">'sha256WithRSAEncryption'</span>); <span class="comment">// 알고리즘 Client와 일치해야함</span></span><br><span class="line">    verifier.update(challenge_number);</span><br><span class="line">    <span class="keyword">const</span> verifyResult = verifier.verify(public_key, Buffer.from(signedCN,<span class="string">'base64'</span>)); </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"auth verify result: "</span> + verifyResult);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> val = &#123;<span class="string">'mode'</span>:<span class="string">"auth"</span>, <span class="string">'result'</span>: verifyResult&#125;;</span><br><span class="line">    res.send(val);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>challenge_number(2번에서 Client에 전송한 값) 와 public_key(Client의 Private Key 와 한 쌍, 1번 과정에서 받아옴) 는 이미 서버가 알고 있다. </p>
-</blockquote>
-<p>클라이언트에서는 verify 결과가 true 였지만 서버 verify는 false여서 답답해하며 알아낸 것.</p>
-<ol>
-<li><p>Client와 동일한 알고리즘(<em>sha256WithRSAEncryption</em>)이 뭔지 알아내기 어려웠다.</p>
-<p>계속 ‘RSA-SHA256’이 같은 알고리즘일 것이라 생각했고 검색 끝에 알아내게 되었다.</p>
-</li>
-<li><p><code>Buffer.from(signedCN,&#39;base64&#39;))</code> </p>
-<p>예제 마다 <code>Buffer.from</code> 를 이용하여 <em>Decoding</em> 하는 객체가 달라서 너무 헷갈렸다ㅠ (<em>challenge_number, public_key, signedCN</em> 중 어느 것을 <em>Decoding</em> 하여야 하는지..? )</p>
-<ul>
-<li><p>서명 값(<em>signedCN</em>)이 <em>Base64*로 *Encoding</em> 되어 왔기 때문에 똑같이 <em>Base64*를 이용하여 *Decoding</em> 해주어야 했다.<br>(<a href="https://stackoverflow.com/questions/53813676/sha256withrsa-signature-verification-in-nodejs-returning-false-every-time" target="_blank" rel="noopener">https://stackoverflow.com/questions/53813676/sha256withrsa-signature-verification-in-nodejs-returning-false-every-time</a> 감사합니다.. )</p>
-</li>
-<li><p>Client에서는 update시에 challenge_number를 byte[]로 변환하기에 <code>Buffer.from</code> 을 이용해야하는 줄 알았는데 그냥 update에 넣어도 된다 ! </p>
-</li>
-</ul>
-</li>
-</ol>
-<h4 id="Private-Key-를-이용하여-Sign-6번-과정-Server"><a href="#Private-Key-를-이용하여-Sign-6번-과정-Server" class="headerlink" title="+) Private Key 를 이용하여 Sign (6번 과정) - Server"></a>+) Private Key 를 이용하여 Sign (6번 과정) - Server</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> signature = crypto.createSign(<span class="string">'sha256WithRSAEncryption'</span>);</span><br><span class="line">signature.update(challenge_number);</span><br><span class="line"><span class="keyword">const</span> sigresult = signature.sign(private_key);</span><br></pre></td></tr></table></figure>
-
-<p>-&gt; 초반에 Node.js 자체에서 sign과 verify가 정상적으로 되는지 테스트 해보려고 작성했던 코드이다.</p>
-<p>( 추후 3번 포스팅 할 때 추가할 내용 : public key encoding 시 Base64.DEFAULT 사용/ public key 앞 뒤에 header 추가해야함 ) </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/08/24/android-sign-verify/" data-id="ckenwlotl000b6jc99cxd4t4r"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
 
     </footer>
 
