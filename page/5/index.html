@@ -64,6 +64,101 @@
         
           
 
+<article id="post-backjoon-14676" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/11/25/backjoon-14676/">[백준알고리즘] 14676: 영우는 사기꾼? (위상정렬) - 파이썬</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/11/25/backjoon-14676/" class="article-date">
+  <time datetime="2020-11-25T09:03:00.000Z" itemprop="datePublished">2020-11-25</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크 : <a href="https://www.acmicpc.net/problem/14676" target="_blank" rel="noopener">https://www.acmicpc.net/problem/14676</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p><strong>위상정렬</strong>이란, 순서가 정해져 있는 작업을 차례대로 수행해야할 때 그 순서를 결정해주기 위해 사용하는 알고리즘이다. </p>
+<ul>
+<li><p>저번에 풀었던 위상정렬 문제인 ‘’문제집’’ 에서 처럼 <code>tree</code> ,<code>inDegree</code> 를 이용해서 건물의 관계를 저장했다.</p>
+<ul>
+<li><p><code>tree</code>: a라는 건물이 건설된 후 건설해야하는 건물들을 tree[a] 에 저장한다. </p>
+<p>예를 들어, 1 건물 다음 2 건물과 3 건물이 건설되어야하는 경우 tree[1]에는 [2,3]이 저장된다.</p>
+</li>
+<li><p><code>inDegree</code>: 진입차수이며, a라는 건물 전에 건설되어야 하는 건물의 수만큼 1씩 증가한다. </p>
+<p>예를 들어, 4 건물 전에 2 건물과 3 건물이 건설되어야하는 경우 inDegree[4] 는 2가 된다.</p>
+</li>
+</ul>
+</li>
+<li><p>K줄에 걸쳐 영우의 게임 정보가 올 때, </p>
+<ul>
+<li><code>1 j</code> 가 왔을때는,<code>j</code> 를 건설한 다음 건설할 수 있는 건물들(<code>tree[j]</code>)의 진입 차수(<code>inDegree</code>)를 1만큼 줄인다. 그리고 건물이 건설될 때마다 <code>yw_cnt[해당건물번호] += 1</code> 을 해준다.</li>
+<li><code>2  j</code> 가 왔을 때는, <code>j</code> 가 건설되지 않았는데 <code>j</code>를 파괴한 경우 <code>answer</code> 를 “Lier!”로 바꾼다.</li>
+</ul>
+</li>
+<li><blockquote>
+<p>조건 : 건설할 수 없는 건물을 건설하거나, 건설한적 없는 건물이 파괴되었다면 ‘Lier!’ 를 출력하자.</p>
+</blockquote>
+<ol>
+<li><strong>건설할 수 없는 건물을 건설한 경우</strong>는 <code>inDegree</code> 가 <code>0보다 큰 경우</code>이다. (예를 들어, <code>inDegree</code>가 <code>1</code>이라는 것은 아직 우선되는 건물 하나가 건설되지 않았다는 뜻이기 때문이다.)</li>
+<li><strong>건설한 적 없는 건물이 파괴된 경우</strong>는 <code>yw_cnt[건물 번호]</code> 가 <code>0</code>인 경우이다. (건설된 건물이 없다는 의미이다.)</li>
+</ol>
+</li>
+<li><p>코드</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">n, m, k = map(int, input().split())</span><br><span class="line">tree = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> range(n+<span class="number">1</span>)]</span><br><span class="line">inDegree = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(n+<span class="number">1</span>)]</span><br><span class="line">yw_cnt = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(n + <span class="number">1</span>)]</span><br><span class="line">answer = <span class="string">'King-God-Emperor'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(m):</span><br><span class="line">    i, j = map(int, input().split())</span><br><span class="line">    tree[i].append(j)</span><br><span class="line">    inDegree[j] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(k):</span><br><span class="line">    i, j = map(int, input().split())</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> tree[j]:</span><br><span class="line">            inDegree[a] -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> inDegree[j] &gt; <span class="number">0</span>:</span><br><span class="line">            answer = <span class="string">'Lier!'</span></span><br><span class="line">        yw_cnt[j] += <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> yw_cnt[j] == <span class="number">0</span>:</span><br><span class="line">            answer = <span class="string">'Lier!'</span></span><br><span class="line"></span><br><span class="line">print(answer)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/11/25/backjoon-14676/" data-id="ckhx75j8h0000atc9frewd5b5"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-programmers-theif" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -950,87 +1045,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2020/11/11/programmers-words-target/" data-id="ckhc7fnxl0000b4c943ofe1um"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-backjoon-2447" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/11/10/backjoon-2447/">[백준알고리즘] 2447: 별 찍기 - 10 (파이썬)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/11/10/backjoon-2447/" class="article-date">
-  <time datetime="2020-11-09T17:37:21.000Z" itemprop="datePublished">2020-11-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>문제 링크: <a href="https://www.acmicpc.net/problem/2447" target="_blank" rel="noopener">https://www.acmicpc.net/problem/2447</a></p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>여러 풀이 중에 가장 이해가 잘 된 코드의 풀이를 이해하고 작성해 보았다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rm</span><span class="params">(i, j, size)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> size == <span class="number">1</span>: <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    new_size = size//<span class="number">3</span></span><br><span class="line">    <span class="keyword">for</span> ri <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">        <span class="keyword">for</span> rj <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">            <span class="keyword">if</span> ri == <span class="number">1</span> <span class="keyword">and</span> rj == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">for</span> ti <span class="keyword">in</span> range(i + ri*new_size, i + (ri+<span class="number">1</span>)*new_size):</span><br><span class="line">                    <span class="keyword">for</span> tj <span class="keyword">in</span> range(j + rj*new_size, j + (rj+<span class="number">1</span>)*new_size):</span><br><span class="line">                        table[ti][tj] = <span class="string">' '</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            rm(i + ri*new_size, j + rj*new_size, new_size)</span><br><span class="line"></span><br><span class="line">n = int(input())</span><br><span class="line">table = [[<span class="string">'*'</span>]*n <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">rm(<span class="number">0</span>, <span class="number">0</span>, n)</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> table:</span><br><span class="line">    print(<span class="string">''</span>.join(t))</span><br></pre></td></tr></table></figure>
-
-<p>재귀적인 패턴으로 별을 찍기 위해서 규칙을 찾아내는 것이 어려웠다. </p>
-<p>모든 공간을 ‘*’ 로 채운다음 큰 사각형 부터 가운데를 ‘ ‘로 바꾸기를 수행한다.</p>
-<br>
-
-<ul>
-<li><p>모든 경우에서 구역을 9개로 나누어 가운데를 비워야하기 때문에 맨처음 이중 for문이 작성됐다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ri <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">    <span class="keyword">for</span> rj <span class="keyword">in</span> range(<span class="number">3</span>):</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>size가 27 일 때 가운데 9X9 크기를 ‘ ‘로 채워야하는데, 가운데는 (9,9) 부터 (18,18) 이다. 이에 해당하는 코드는 아래와 같다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ti <span class="keyword">in</span> range(i + ri*new_size, i + (ri+<span class="number">1</span>)*new_size):</span><br><span class="line">	<span class="keyword">for</span> tj <span class="keyword">in</span> range(j + rj*new_size, j + (rj+<span class="number">1</span>)*new_size):</span><br><span class="line">		table[ti][tj] = <span class="string">' '</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>재귀함수를 호출해 모든 경우의 9개 구역에 해당하는 가운데를 계속해서 지워나간다.</p>
-</li>
-<li><p>size가 1일 때 재귀가 끝난다 = 모든 작은 단위까지 지웠다는 것을 의미한다.</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/11/10/backjoon-2447/" data-id="ckhauihvx0000q5c9cu4u66mc"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>

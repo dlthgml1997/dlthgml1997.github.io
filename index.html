@@ -64,6 +64,78 @@
         
           
 
+<article id="post-swea-1208" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/02/02/swea-1208/">[SW Expert Academy] 1208: Flatten - D3 (java)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/02/02/swea-1208/" class="article-date">
+  <time datetime="2021-02-02T04:55:42.000Z" itemprop="datePublished">2021-02-02</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크(로그인 해야함) : <a href="https://swexpertacademy.com/main/solvingProblem/solvingProblem.do" target="_blank" rel="noopener">https://swexpertacademy.com/main/solvingProblem/solvingProblem.do</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.StringTokenizer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution_D3_1208_Flatten</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> N;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span>[] boxes = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> t = <span class="number">1</span>; t &lt;=<span class="number">10</span>; t++) &#123;</span><br><span class="line">			input();</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">				dump();</span><br><span class="line">			&#125;</span><br><span class="line">			Arrays.sort(boxes);</span><br><span class="line">			System.out.printf(<span class="string">"#%d %d\n"</span>, t, boxes[<span class="number">99</span>]-boxes[<span class="number">0</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		N = stoi(br.readLine());</span><br><span class="line">		st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">			boxes[i] = stoi(st.nextToken());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">dump</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Arrays.sort(boxes);</span><br><span class="line">		boxes[<span class="number">0</span>]++;</span><br><span class="line">		boxes[<span class="number">99</span>]--;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>나는 minNum 과 maxNum을 구해서 계속 빼고 더하고 갱신하는 방식으로 풀려고 했는데 잘 안됐다.</p>
+<p>위와 같이 풀면 훨씬 간단하고 복잡도도 적어진다.</p>
+<ul>
+<li>dump의 수 만큼 Arrays.sort()를 이용해 최솟값은 boxes[0] 에 위치시켜 +1 하고, 최댓값은 boxes[99]에 위치시켜 -1 한다.</li>
+<li>마지막 dump 수행 후, 한번더 sort해주어야한다. boxes[0]이 -1,  boxes[99]에 +1 한 상태로 끝났기 때문에 이들이 최소, 최댓값이 아닐수도 있기 때문이다.</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/02/swea-1208/" data-id="ckknja8hg0000lbc9cnup6lwt"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-boj-2164" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -776,75 +848,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2021/01/28/boj-1002/" data-id="ckkfr0zjx0001kcc94on1gamg"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-boj-4889" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/27/boj-4889/">[boj] 4889: 안정적인 문자열 (java)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/01/27/boj-4889/" class="article-date">
-  <time datetime="2021-01-26T15:42:40.000Z" itemprop="datePublished">2021-01-27</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>문제 링크: <a href="https://www.acmicpc.net/problem/4889" target="_blank" rel="noopener">https://www.acmicpc.net/problem/4889</a></li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution4889</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> Stack&lt;String&gt; stack;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> testCase = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">			String input = br.readLine();</span><br><span class="line">			<span class="keyword">if</span> (input.contains(<span class="string">"-"</span>)) <span class="comment">// - 가 들어오면 실행 종료</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 새로운 테스트 케이스마다 스택 초기화</span></span><br><span class="line">			<span class="keyword">int</span> answer = <span class="number">0</span>;</span><br><span class="line">			stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">			StringTokenizer st = <span class="keyword">new</span> StringTokenizer(input);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">while</span> (st.hasMoreTokens()) &#123; <span class="comment">// 한 줄이 끝날때 까지</span></span><br><span class="line">				String[] data = st.nextToken().split(<span class="string">""</span>); </span><br><span class="line"></span><br><span class="line">				<span class="keyword">for</span> (String d : data) &#123; <span class="comment">// 괄호 하나씩 받아온다</span></span><br><span class="line">					<span class="keyword">if</span> (d.equals(<span class="string">"&#123;"</span>)) &#123; <span class="comment">// 열린 괄호는 무조건 push </span></span><br><span class="line">						stack.push(d); </span><br><span class="line">          &#125;</span><br><span class="line">					<span class="keyword">else</span> &#123; <span class="comment">// 닫힌 괄호는</span></span><br><span class="line">						<span class="keyword">if</span> (stack.isEmpty()) &#123;  <span class="comment">// 여기가 중요 ! 스택이 비어있을 땐</span></span><br><span class="line">							answer++; <span class="comment">// 뒤집어서</span></span><br><span class="line">							stack.push(<span class="string">"&#123;"</span>); <span class="comment">// 열린괄호 형태로 push한다.</span></span><br><span class="line">						&#125; <span class="keyword">else</span> &#123; <span class="comment">// 비어있지 않으면 열린 괄호만 들어있으므로 pop (한 괄호쌍 완성)</span></span><br><span class="line">							stack.pop();</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 한 줄 다 조건 검사가 끝나고나면 스택은 비어있거나, 열린 괄호만 들어 있다.</span></span><br><span class="line">			answer += (stack.size() / <span class="number">2</span>); <span class="comment">// 스택 길이의 반만 뒤집으면 안정적인 문자열이 된다. 스택 길이의 반을 answer에 더한다.</span></span><br><span class="line">			System.out.printf(<span class="string">"%d. %d\n"</span>, testCase, answer);</span><br><span class="line">			testCase++; <span class="comment">// 한줄이 끝날 때마다 testCase 1씩 증가</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>input 받는 부분을 함수로 빼는 것이 더 깔끔하고,<br>Stack<String> 이 아닌 Stack<Character> 를 사용하는 것이 .equals를 사용하지 않아도 돼서 코드가 더 깔끔해 보이는 것 같다. 오늘 못 푼 4889 문제에 적용해서 풀어봐야겠다!!</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/01/27/boj-4889/" data-id="ckke6m89y000002c9gmczf9eb"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
