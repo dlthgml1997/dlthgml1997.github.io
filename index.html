@@ -64,6 +64,72 @@
         
           
 
+<article id="post-boj-10866" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/02/02/boj-10866/">[boj] 10866: 덱(java)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/02/02/boj-10866/" class="article-date">
+  <time datetime="2021-02-02T12:14:00.000Z" itemprop="datePublished">2021-02-02</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제링크: <a href="https://www.acmicpc.net/problem/10866" target="_blank" rel="noopener">https://www.acmicpc.net/problem/10866</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> BufferedWriter bw = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> OutputStreamWriter(System.out));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> T;</span><br><span class="line">	<span class="keyword">static</span> Deque&lt;Integer&gt; deque = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		T = stoi(br.readLine());</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span> ; i &lt; T; i++) &#123;</span><br><span class="line">			st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">			String doing = st.nextToken();</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">switch</span>(doing) &#123;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"push_front"</span> :</span><br><span class="line">					deque.addFirst(stoi(st.nextToken())); </span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"push_back"</span> :</span><br><span class="line">					deque.addLast(stoi(st.nextToken())); </span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"pop_front"</span> :</span><br><span class="line">					<span class="keyword">if</span>(deque.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="string">"-1\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					bw.append(deque.pollFirst()+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"pop_back"</span> :</span><br><span class="line">					<span class="keyword">if</span>(deque.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="string">"-1\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					bw.append(deque.pollLast()+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"size"</span> :</span><br><span class="line">					bw.append(deque.size()+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"empty"</span>:</span><br><span class="line">					<span class="keyword">if</span>(deque.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="number">1</span>+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">						bw.append(<span class="number">0</span>+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"front"</span> :</span><br><span class="line">					<span class="keyword">if</span>(deque.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="string">"-1\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					bw.append(deque.peekFirst()+<span class="string">"\n"</span>);<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"back"</span> :</span><br><span class="line">					<span class="keyword">if</span>(deque.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="string">"-1\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					bw.append(deque.peekLast()+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		bw.flush();</span><br><span class="line">		bw.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/02/boj-10866/" data-id="ckknyunh10000tnc945km2yoo"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-swea-1208" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -771,83 +837,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2021/01/28/boj-9657/" data-id="ckkfr0zjs0000kcc9ael97oi3"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-boj-1002" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/28/boj-1002/">[boj] 1002: 터렛 (java)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/01/28/boj-1002/" class="article-date">
-  <time datetime="2021-01-27T18:08:00.000Z" itemprop="datePublished">2021-01-28</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>문제링크:<a href="https://www.acmicpc.net/problem/1002" target="_blank" rel="noopener">https://www.acmicpc.net/problem/1002</a></li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> T;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> x1, y1, x2, y2;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">double</span> d;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> r1, r2;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> cnt;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> sumValue;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> subValue;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		T = stoi(br.readLine());</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="number">1</span>; t &lt;= T; t++) &#123;</span><br><span class="line">			cnt = <span class="number">0</span>; </span><br><span class="line">			input();</span><br><span class="line">			d = Math.sqrt(Math.pow(x1-x2, <span class="number">2</span>) + Math.pow(y1-y2, <span class="number">2</span>)); <span class="comment">// 좌표 사이 거리</span></span><br><span class="line">			sumValue = r1 + r2;</span><br><span class="line">			subValue = Math.abs(r1- r2);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span>(x1 == x2 &amp;&amp; y1 == y2) &#123; <span class="comment">// 좌표가 같을 때</span></span><br><span class="line">				</span><br><span class="line">				<span class="keyword">if</span>(r1 == r2) &#123; <span class="comment">// 원이 일치할 때</span></span><br><span class="line">					cnt = -<span class="number">1</span>;</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123; <span class="comment">// 큰원이 작은 원을 포함할 때 (동심원)</span></span><br><span class="line">					cnt = <span class="number">0</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123; <span class="comment">// 좌표가 다를 때</span></span><br><span class="line">				</span><br><span class="line">				<span class="comment">// 큰원 반지름(r1 또는 r2중 큰 값)에서 작은 반지름(작은 값을) 뺀 값이 좌표 사이 거리와 같으면 내접</span></span><br><span class="line">				<span class="keyword">if</span>(subValue == d) cnt = <span class="number">1</span>; </span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(sumValue &gt; d &amp;&amp; subValue &lt; d) cnt = <span class="number">2</span>; <span class="comment">// 반지름 둘을 더한 값이 좌표사이 거리 값보다 클 때 </span></span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(sumValue &lt; d) cnt = <span class="number">0</span>; <span class="comment">// 아예 동떨어져 있을 때</span></span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(sumValue == d) cnt = <span class="number">1</span>; <span class="comment">// 외접</span></span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			System.out.println(cnt);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">		x1 = stoi(st.nextToken());</span><br><span class="line">		y1 = stoi(st.nextToken());</span><br><span class="line">		r1 = stoi(st.nextToken());</span><br><span class="line">		x2 = stoi(st.nextToken());</span><br><span class="line">		y2 = stoi(st.nextToken());</span><br><span class="line">		r2 = stoi(st.nextToken());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.valueOf(input);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>중요 ! </p>
-<blockquote>
-<p> 점과 점사이 거리(d)는 double 형이여야한다.</p>
-</blockquote>
-<blockquote>
-<p>sumValue &gt; d &amp;&amp; <strong>subValue &lt; d</strong>  둘 다 만족하는 경우여야 점이 2개 겹치는 경우이다.</p>
-</blockquote>
-<ul>
-<li>원 사이의 거리를 구하는 방법(외접, 내접 등)으로 구하는 문제이다.</li>
-<li>6가지 조건 (일치하는 원, 동심원, 내접, 외접, 점이 2개 겹치는 경우, 동떨어져 있는 경우)을 생각해내는 것이 어려웠다.</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/01/28/boj-1002/" data-id="ckkfr0zjx0001kcc94on1gamg"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>

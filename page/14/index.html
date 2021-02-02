@@ -64,6 +64,119 @@
         
           
 
+<article id="post-backjoon-13458" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/03/07/backjoon-13458/">[백준알고리즘] 13458번: 시험감독 - 파이썬(python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/03/07/backjoon-13458/" class="article-date">
+  <time datetime="2020-03-07T07:51:00.000Z" itemprop="datePublished">2020-03-07</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제설명"><a href="#문제설명" class="headerlink" title="문제설명"></a>문제설명</h1><p>총 N개의 시험장이 있고, 각각의 시험장마다 응시자들이 있다. i번 시험장에 있는 응시자의 수는 Ai명이다.</p>
+<p>감독관은 총감독관과 부감독관으로 두 종류가 있다. 총감독관은 한 시험장에서 감시할 수 있는 응시자의 수가 B명이고, 부감독관은 한 시험장에서 감시할 수 있는 응시자의 수가 C명이다.</p>
+<p>각각의 시험장에 총감독관은 오직 1명만 있어야 하고, 부감독관은 여러 명 있어도 된다.</p>
+<p>각 시험장마다 응시생들을 모두 감시해야 한다. 이때, 필요한 감독관 수의 최솟값을 구하는 프로그램을 작성하시오.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 시험장의 개수 N(1 ≤ N ≤ 1,000,000)이 주어진다.</p>
+<p>둘째 줄에는 각 시험장에 있는 응시자의 수 Ai (1 ≤ Ai ≤ 1,000,000)가 주어진다.</p>
+<p>셋째 줄에는 B와 C가 주어진다. (1 ≤ B, C ≤ 1,000,000)</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>각 시험장마다 응시생을 모두 감독하기 위해 필요한 감독관의 최소 수를 출력한다.</p>
+<h4 id="예제-입력1"><a href="#예제-입력1" class="headerlink" title="예제 입력1"></a>예제 입력1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">1</span><br><span class="line">1 1</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-출력1"><a href="#예제-출력1" class="headerlink" title="예제 출력1"></a>예제 출력1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">3 4 5</span><br><span class="line">2 2</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">1000000 1000000 1000000 1000000 1000000</span><br><span class="line">5 7</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">714290</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-입력-4"><a href="#예제-입력-4" class="headerlink" title="예제 입력 4"></a>예제 입력 4</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">10 9 10 9 10</span><br><span class="line">7 20</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-출력-4"><a href="#예제-출력-4" class="headerlink" title="예제 출력 4"></a>예제 출력 4</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-입력-5"><a href="#예제-입력-5" class="headerlink" title="예제 입력 5"></a>예제 입력 5</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">10 9 10 9 10</span><br><span class="line">7 2</span><br></pre></td></tr></table></figure>
+
+<h4 id="예제-출력-5"><a href="#예제-출력-5" class="headerlink" title="예제 출력 5"></a>예제 출력 5</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h5><ul>
+<li>문제를 만든 사람: <a href="https://www.acmicpc.net/user/baekjoon" target="_blank" rel="noopener">baekjoon</a></li>
+<li>문제의 오타를 찾은 사람: <a href="https://www.acmicpc.net/user/citizen" target="_blank" rel="noopener">citizen</a> <a href="https://www.acmicpc.net/user/corea" target="_blank" rel="noopener">corea</a> <a href="https://www.acmicpc.net/user/jhpark1109" target="_blank" rel="noopener">jhpark1109</a></li>
+<li>데이터를 추가한 사람: <a href="https://www.acmicpc.net/user/doju" target="_blank" rel="noopener">doju</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">()</span>:</span></span><br><span class="line">    answer=<span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    n= int(input())</span><br><span class="line">    nums= list(map(int,input().split()))</span><br><span class="line">    b,c= map(int,input().split())</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> nums:</span><br><span class="line">        n -= b</span><br><span class="line">        answer +=<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> n &gt; <span class="number">0</span>:</span><br><span class="line">            answer += n // c</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> n % c==<span class="number">0</span>:</span><br><span class="line">                answer += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> answer            </span><br><span class="line"></span><br><span class="line">print(solution())</span><br></pre></td></tr></table></figure>
+
+
+
+<p>백준에서 푸는 건 처음이었어서.. 답을 print하는 법도 모르고 풀다가 왕창 틀려서</p>
+<p>왜이렇게 틀리지!!!!!!!!!!!?! 라고 생각했는데</p>
+<p>print(solution())으로 바꾸니까 바로 됐다.. 허무해…</p>
+<p>그래서 처음코드도 됐던거 아닐까? 하고 다시 돌려봤는데</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">()</span>:</span></span><br><span class="line">    </span><br><span class="line">    answer=<span class="number">0</span></span><br><span class="line">    n= int(input())</span><br><span class="line">    a= list(map(int,input().split()))</span><br><span class="line">    b,c= map(int,input().split())</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(a):</span><br><span class="line">        answer +=<span class="number">1</span></span><br><span class="line">        a[i] -= b</span><br><span class="line">        <span class="keyword">while</span> a[i]&gt;<span class="number">0</span>:</span><br><span class="line">            answer +=<span class="number">1</span></span><br><span class="line">            a[i]-= c</span><br><span class="line">    <span class="keyword">return</span> answer</span><br><span class="line"></span><br><span class="line">print(solution())</span><br></pre></td></tr></table></figure>
+
+<p>이 코드는 런타임 에러였다. while은 안쓰는게 좋은 걸까?? </p>
+<p>이번에 새로 알게 된 것은</p>
+<p>총 세줄로 되어있는 입력값을 쪼개는 방법이다!</p>
+<p><code>n= int(input())
+nums= list(map(int,input().split()))
+b,c= map(int,input().split())</code></p>
+<p>이와 관련된 포스팅도 작성해야겠다.. 끝 !</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/07/backjoon-13458/" data-id="ckenwlouc001u6jc96hcabl2g"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-python-indexing-slicing" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
