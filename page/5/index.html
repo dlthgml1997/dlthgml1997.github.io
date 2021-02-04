@@ -64,6 +64,78 @@
         
           
 
+<article id="post-programmers-two-numbers-add" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/12/01/programmers-two-numbers-add/">[프로그래머스] 두 개 뽑아서 더하기 - 조합 (파이썬)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/12/01/programmers-two-numbers-add/" class="article-date">
+  <time datetime="2020-12-01T09:15:21.000Z" itemprop="datePublished">2020-12-01</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제링크 : <a href="https://programmers.co.kr/learn/courses/30/lessons/68644" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/lessons/68644</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><ul>
+<li><p>조합을 이용해서 <code>numbers</code> 에서 2개의 수를 뽑는 모든 경우의 수에 반복문을 돌린다.</p>
+</li>
+<li><p>중복을 제거하기 위해 <code>set</code> 을 사용했고 오름차순 정렬을 위해 다시 <code>list</code> 로 바꾼 후 <code>sort</code> 하여 return 한다.</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> combinations</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(numbers)</span>:</span></span><br><span class="line">    answer = []</span><br><span class="line">    <span class="keyword">for</span> a,b <span class="keyword">in</span> combinations(numbers, <span class="number">2</span>):</span><br><span class="line">        answer.append(a+b)</span><br><span class="line">    answer = list(set(answer))</span><br><span class="line">    answer.sort()</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/12/01/programmers-two-numbers-add/" data-id="cki5rqgaf00005lc95m20fyyw"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-backjoon-1080" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -941,82 +1013,12 @@
 
 
         
-          
-
-<article id="post-error-operation-not-permitted" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/11/12/error-operation-not-permitted/">Mac Operation not permitted 오류 해결 - [Errno 1] Operation not permitted Program ended with exit code: 2</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/11/12/error-operation-not-permitted/" class="article-date">
-  <time datetime="2020-11-12T10:57:33.000Z" itemprop="datePublished">2020-11-12</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>xcode에 python 사용 설정을 마친 후에 build를 했는데 콘솔에 아래와 같은 에러가 발생했다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;Applications&#x2F;Xcode.app&#x2F;Contents&#x2F;Developer&#x2F;usr&#x2F;bin&#x2F;python3: can&#39;t open file &#39;1766.py&#39;: [Errno 1] Operation not permitted</span><br><span class="line"></span><br><span class="line">Program ended with exit code: 2</span><br></pre></td></tr></table></figure>
-
-<p>실행 권한이 없어서 파일을 열 수 없다는 의미이다. </p>
-<br>
-
-<p>해결 방법은</p>
-<p><strong><code>설정 &gt; 보안 및 개인 정보 보호 &gt; 전체 디스크 접근 권한</code></strong> 에 들어가서 <code>python3</code>를 추가해주면 된다.  </p>
-<p>(<code>+</code> 버튼을 누르고 <code>shift</code> + <code>command</code> + <code>G</code> 를 눌러 <code>/usr/bin</code> 폴더로 접속해 <code>python3</code> 를 클릭해서 추가했다. )</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/11/12/error-operation-not-permitted/" data-id="ckheq9yr500006pc98ya9bsoh"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%98%A4%EB%A5%98%ED%95%B4%EA%B2%B0/" rel="tag">오류해결</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
     </article>
     
   
     
       <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/page/4/">이전</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/6/">다음</a>
+        <a class="extend prev" rel="prev" href="/page/4/">이전</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/6/">다음</a>
       </nav>
     
   </section>
