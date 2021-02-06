@@ -64,6 +64,166 @@
         
           
 
+<article id="post-backjoon-2839" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/01/06/backjoon-2839/">[백준알고리즘] 2839: 설탕 배달 (파이썬)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/06/backjoon-2839/" class="article-date">
+  <time datetime="2021-01-06T14:00:00.000Z" itemprop="datePublished">2021-01-06</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크: <a href="https://www.acmicpc.net/problem/2839" target="_blank" rel="noopener">https://www.acmicpc.net/problem/2839</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">()</span>:</span></span><br><span class="line">    n = int(input())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n // <span class="number">3</span> + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n // <span class="number">5</span> + <span class="number">1</span>):</span><br><span class="line">            answer = <span class="number">3</span> * i + <span class="number">5</span> * j</span><br><span class="line">            <span class="keyword">if</span> answer == n:</span><br><span class="line">                print(i+j)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    print(<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">solution()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>설탕을 정확하게 n 킬로그램 배달할 수 있을 때 (3과 5의 조합으로 나누어 떨어질 때), 5 킬로그램 봉지가 많을 수록 배달하는 봉지의 개수가 최소가 된다.<ul>
+<li>3 킬로그램 봉지를 하나씩 증가시키는 반복문 안에서 5 킬로그램 봉지를 하나씩 증가시키는 반복문을 실행한다.<ul>
+<li>이때, <code>range</code>는 설탕 n 키로그램을 담는 최대 봉지 개수( <strong><code>n // 3kg 또는 5kg</code></strong> ) 까지로 설정한다.</li>
+</ul>
+</li>
+<li>반복문이 실행될 때마다 <strong><code>3키로그램 봉지 개수(i) * 3 + 5 키로그램 봉지 개수(j) * 5</code></strong> 값이 <code>n</code> 과 같은지 비교한 후, 같으면 <code>i + j</code> 를 <code>print</code> 하고 종료한다.</li>
+</ul>
+</li>
+<li>반복문을 모두 돌았다는 것은 3과 5로 나누어지지 않는다는 것을 의미하기 때문에 <code>-1</code> 을 <code>print</code> 한다.</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/06/backjoon-2839/" data-id="ckjli44me0000p2c959f0f3lh"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-backjoon-10026" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/01/02/backjoon-10026/">[백준알고리즘] 10026번: 적록색약 (파이썬)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/02/backjoon-10026/" class="article-date">
+  <time datetime="2021-01-02T10:24:00.000Z" itemprop="datePublished">2021-01-02</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크: <a href="https://www.acmicpc.net/problem/10026" target="_blank" rel="noopener">https://www.acmicpc.net/problem/10026</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><ul>
+<li><p><code>BFS</code>를 이용해서 풀었다.</p>
+</li>
+<li><p>적록색맹인 경우와 아닌 경우의 방문 여부를 확인하는 리스트인 <code>visited</code>, <code>visited2</code>를 생성했다.</p>
+</li>
+<li><p><code>BFS</code>를 돌때 같은 구역의 방문여부는 모두 <code>1</code>로 바뀐다. 그렇기 때문에 for문에서는 방문여부가 <code>0</code> 이라는 것이 새로운 구역을 만났다는 것을 뜻한다. 이때마다 <code>BFS</code>를 실행하도록 했고, 이때 각자의 <code>cnt</code>를 <code>1</code>씩 증가시켰다.</p>
+<ul>
+<li><p>적록색약인 경우의 <code>BFS(bfs2)</code>는 R 구역과 G 구역이 붙어있으면 같은 구역으로 취급해 visited를 모두 1로 바꾸어 주었다. 아래 코드로 처리해 주었다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">elif</span> color == <span class="string">'R'</span> <span class="keyword">and</span> room[nx][ny] == <span class="string">'G'</span>:</span><br><span class="line">		visited2[nx][ny] = <span class="number">1</span></span><br><span class="line">    queue.append([nx, ny])</span><br><span class="line"><span class="keyword">elif</span> color == <span class="string">'G'</span> <span class="keyword">and</span> room[nx][ny] == <span class="string">'R'</span>:</span><br><span class="line">    visited2[nx][ny] = <span class="number">1</span></span><br><span class="line">    queue.append([nx, ny])</span><br></pre></td></tr></table></figure>
+
+<br>
+
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>전체 코드</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">dx = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>]</span><br><span class="line">dy = [<span class="number">-1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">n = int(input())</span><br><span class="line">room = []</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">    room.append(list(input().strip()))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span><span class="params">(x, y, color)</span>:</span></span><br><span class="line">    <span class="comment"># 적록 색약 아닌 경우</span></span><br><span class="line">    <span class="keyword">global</span> visited</span><br><span class="line">    queue = []</span><br><span class="line">    queue.append([x, y])</span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        qx, qy = queue.pop(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">            nx = qx + dx[i]</span><br><span class="line">            ny = qy + dy[i]</span><br><span class="line">            <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; n <span class="keyword">and</span> <span class="number">0</span> &lt;= ny &lt; n <span class="keyword">and</span> visited[nx][ny] == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">if</span> room[nx][ny] == color:</span><br><span class="line">                    visited[nx][ny] = <span class="number">1</span></span><br><span class="line">                    queue.append([nx, ny])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs2</span><span class="params">(x, y, color)</span>:</span></span><br><span class="line">    <span class="comment"># 적록 색약인 경우</span></span><br><span class="line">    <span class="keyword">global</span> visited2</span><br><span class="line">    queue = []</span><br><span class="line">    queue.append([x,y])</span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        qx, qy = queue.pop(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">            nx = qx + dx[i]</span><br><span class="line">            ny = qy + dy[i]</span><br><span class="line">            <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; n <span class="keyword">and</span> <span class="number">0</span> &lt;= ny &lt; n <span class="keyword">and</span> visited2[nx][ny] == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">if</span> room[nx][ny] == color:</span><br><span class="line">                    visited2[nx][ny] = <span class="number">1</span></span><br><span class="line">                    queue.append([nx, ny])</span><br><span class="line">                <span class="keyword">elif</span> color == <span class="string">'R'</span> <span class="keyword">and</span> room[nx][ny] == <span class="string">'G'</span>:</span><br><span class="line">                    visited2[nx][ny] = <span class="number">1</span></span><br><span class="line">                    queue.append([nx, ny])</span><br><span class="line">                <span class="keyword">elif</span> color == <span class="string">'G'</span> <span class="keyword">and</span> room[nx][ny] == <span class="string">'R'</span>:</span><br><span class="line">                    visited2[nx][ny] = <span class="number">1</span></span><br><span class="line">                    queue.append([nx, ny])</span><br><span class="line"></span><br><span class="line">cnt1 = <span class="number">0</span></span><br><span class="line">cnt2 = <span class="number">0</span></span><br><span class="line">visited = [[<span class="number">0</span>] * n <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">visited2 = [[<span class="number">0</span>] * n <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">if</span> visited[i][j] == <span class="number">0</span>:</span><br><span class="line">            bfs(i, j, room[i][j])</span><br><span class="line">            cnt1 += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> visited2[i][j] == <span class="number">0</span>:</span><br><span class="line">            bfs2(i, j, room[i][j])</span><br><span class="line">            cnt2 += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(cnt1, cnt2)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/02/backjoon-10026/" data-id="ckjfs9fut0000s4c9hpoe1yn8"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-java-1" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -993,166 +1153,6 @@
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-skill-checks-1" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/12/10/programmers-skill-checks-1/">[프로그래머스] 스킬 체크 레벨 1 풀어보기(파이썬)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/12/10/programmers-skill-checks-1/" class="article-date">
-  <time datetime="2020-12-10T09:00:00.000Z" itemprop="datePublished">2020-12-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>링크 : <a href="https://programmers.co.kr/skill_checks" target="_blank" rel="noopener">https://programmers.co.kr/skill_checks</a> &gt; 레벨 1</li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>난이도가 좀 많이 쉬워서 올리기 민망하지만 ㅎㅎ 풀어보았다.</p>
-<ul>
-<li><p><strong>문제 1</strong></p>
-<p>n = 3 이면 ‘수박수’</p>
-<p>n = 5 이면 ‘수박수박수’ 와 같은 문자열을 반환한다.</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(n)</span>:</span></span><br><span class="line">    answer = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">if</span> i% <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">            answer += <span class="string">'수'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            answer += <span class="string">'박'</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>문제 2</strong></p>
-<p>배열 arr이 주어지면 최소 숫자를 제거한 배열을 반환한다.</p>
-<p>배열이 모두 비어진 경우에는 [-1]을 반환한다.</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(arr)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(arr) == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> [<span class="number">-1</span>]</span><br><span class="line">    i = min(arr)</span><br><span class="line">    arr.remove(i)</span><br><span class="line">    answer = arr</span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/12/10/programmers-skill-checks-1/" data-id="ckiim704s0000ozc97m3hgiz4"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-android_underline" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/12/02/android_underline/">[안드로이드] TextView에 밑줄긋기</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/12/02/android_underline/" class="article-date">
-  <time datetime="2020-12-01T16:21:50.000Z" itemprop="datePublished">2020-12-02</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h2 id="1-drawable-폴더에-underline-xml-파일-생성"><a href="#1-drawable-폴더에-underline-xml-파일-생성" class="headerlink" title="1. drawable 폴더에 underline.xml 파일 생성"></a>1. drawable 폴더에 underline.xml 파일 생성</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">layer-list</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:top</span>=<span class="string">"-10dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:left</span>=<span class="string">"-10dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:right</span>=<span class="string">"-10dp"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">shape</span> <span class="attr">android:shape</span>=<span class="string">"rectangle"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">solid</span> <span class="attr">android:color</span>=<span class="string">"@android:color/transparent"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">stroke</span> <span class="attr">android:width</span>=<span class="string">"8dp"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:color</span>=<span class="string">"@color/colorYellow"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">layer-list</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>결과 (안드로이드 스튜디오 바탕이 검정색이에용)</li>
-</ul>
-<img src="../image/스크린샷 2020-12-02 오전 1.23.00.png" alt="스크린샷 2020-12-02 오전 1.23.00" style="zoom:50%;" />
-
-<br>
-
-<h2 id="2-values-폴더에-styles-xml에-style로-등록"><a href="#2-values-폴더에-styles-xml에-style로-등록" class="headerlink" title="2. values 폴더에 styles.xml에 style로 등록"></a>2. values 폴더에 styles.xml에 style로 등록</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">..</span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"Underline"</span>&gt;</span></span><br><span class="line"><span class="xml">  	<span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textColor"</span>&gt;</span>@color/colorYellow<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:background"</span>&gt;</span>@drawable/underline<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">..</span><br><span class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h1 id="3-TextView에-style로-지정"><a href="#3-TextView에-style로-지정" class="headerlink" title="3. TextView에 style로 지정"></a>3. TextView에 style로 지정</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">	<span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">..</span></span></span><br><span class="line"><span class="tag">	<span class="attr">style</span>=<span class="string">"@style/Underline"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">android:text</span>=<span class="string">"장소 이름을 입력하세요"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>결과</strong></li>
-</ul>
-<img src="../image/스크린샷 2020-12-02 오전 1.28.47.png" alt="스크린샷 2020-12-02 오전 1.28.47" style="zoom:80%;" />
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/12/02/android_underline/" data-id="cki676f3u0000jfc94v14h2it"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
 
     </footer>
 

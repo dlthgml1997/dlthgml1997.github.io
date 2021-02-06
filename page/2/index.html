@@ -64,6 +64,183 @@
         
           
 
+<article id="post-boj-1120" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/01/29/boj-1120/">[boj] 1120:문자열 (java)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/29/boj-1120/" class="article-date">
+  <time datetime="2021-01-28T15:22:00.000Z" itemprop="datePublished">2021-01-29</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크 : <a href="https://www.acmicpc.net/problem/1120" target="_blank" rel="noopener">https://www.acmicpc.net/problem/1120</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p><strong>내가 푼 풀이</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 클래스 이름 Main으로 바꾸기</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution1120</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		System.out.println(MinimumDiffBetweenAB(sc.next(), sc.next()));</span><br><span class="line">		sc.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">MinimumDiffBetweenAB</span><span class="params">(String A, String B)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(A.length() == B.length()) &#123;</span><br><span class="line">			<span class="keyword">return</span> calcDif(A, B);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> sub = B.length() - A.length();</span><br><span class="line">		<span class="keyword">int</span> aN = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> minNum = <span class="number">50</span>;</span><br><span class="line">		<span class="keyword">while</span>(aN &lt; sub) &#123;</span><br><span class="line">			minNum = Math.min(minNum, getDif(A, B, aN, sub-aN));</span><br><span class="line">			minNum = Math.min(minNum, getDif(A, B, sub-aN, aN));</span><br><span class="line">			aN++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> minNum; <span class="comment">// @return: diff between A and B</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getDif</span><span class="params">(String A, String B, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">		String result = newString(A);</span><br><span class="line">		<span class="keyword">while</span>(i&gt;<span class="number">0</span>) &#123;</span><br><span class="line">			result = B.charAt(i-<span class="number">1</span>) + result;</span><br><span class="line">			i--;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span>(j&gt;<span class="number">0</span>) &#123;</span><br><span class="line">			result = result + B.charAt(B.length()-j);</span><br><span class="line">			j--;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> calcDif(result,B);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">newString</span><span class="params">(String a)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">char</span>[] result = <span class="keyword">new</span> <span class="keyword">char</span>[a.length()];</span><br><span class="line">		<span class="keyword">int</span> i= <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">char</span> c : a.toCharArray()) &#123;</span><br><span class="line">			result[i++] = c;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> String.copyValueOf(result);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">calcDif</span><span class="params">(String A, String B)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>; i&lt; B.length(); i++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(B.charAt(i) != A.charAt(i)) cnt++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> cnt;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>먼저 두 문자열 길이의 차이를 구한다.</p>
+<ul>
+<li><p>두 문자열이 길이가 같다면 calcDif 함수에서 다른 알파벳 수만큼 return하면 된다.</p>
+</li>
+<li><p>두 문자열의 길이가 다르다면 더 긴(B) 문자열에서 짧은 문자열(A) 길이를 뺀다(sub).</p>
+<ul>
+<li><p>A의 왼쪽과 오른쪽에 적절한 알파벳을 추가하며 minNum을 계속 갱신해 나간다.</p>
+<p><strong>getDif(A, B, aN, sub-aN)</strong> </p>
+<ul>
+<li>A: 더 짧은 문자열</li>
+<li>B: 더 긴 문자열</li>
+<li>aN: 왼쪽에 추가할 문자 수</li>
+<li>sub-aN: 오른쪽에 추가할 문자 수</li>
+</ul>
+</li>
+<li><p>깊은 복사를 위해 newString 함수를 만들었다.</p>
+<p>생각해보니까 A의 앞뒤에는 항상 B와 같은 알파벳을 추가하기 때문에 계속해서 문자열을 갱신해 나가며 계산할 필요가 없다. 이 뜻은 B 문자열의 비교 시작 인덱스만 다르게해서 A와 비교하면 된다는 뜻이다.. 아래와 같이 풀면 된다. </p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<p><strong>더 나은 풀이</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 클래스 이름 Main으로 바꾸기</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution1120</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		System.out.println(MinimumDiffBetweenAB(sc.next(), sc.next()));</span><br><span class="line">		sc.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">MinimumDiffBetweenAB</span><span class="params">(String A, String B)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(A.length() == B.length()) &#123;</span><br><span class="line">			<span class="keyword">return</span> getDif(A, B, <span class="number">0</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> sub = B.length() - A.length();</span><br><span class="line">		<span class="keyword">int</span> aN = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> minNum = <span class="number">50</span>;</span><br><span class="line">		<span class="keyword">while</span>(aN &lt;= sub) &#123; <span class="comment">// 0부터 문자열 길이 차이까지가 </span></span><br><span class="line">			minNum = Math.min(minNum, getDif(A, B, aN++)); <span class="comment">// B문자열의 비교 시작 인덱스가 된다.</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> minNum;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getDif</span><span class="params">(String A, String B, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i&lt; A.length(); i++, j++) &#123;</span><br><span class="line">				<span class="keyword">if</span>(B.charAt(j) != A.charAt(i)) cnt++;</span><br><span class="line">			&#125;</span><br><span class="line">		<span class="keyword">return</span> cnt;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/29/boj-1120/" data-id="ckkh1yp370000coc91qnoe4bp"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-boj-2941" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/01/28/boj-2941/">[boj] 2941: 크로아티아 알파벳 (java)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/28/boj-2941/" class="article-date">
+  <time datetime="2021-01-28T14:32:48.000Z" itemprop="datePublished">2021-01-28</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제링크: <a href="https://www.acmicpc.net/problem/2941" target="_blank" rel="noopener">https://www.acmicpc.net/problem/2941</a></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 클래스 이름 Main으로 바꾸기</span></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution2941</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> String[] kroatia = <span class="keyword">new</span> String[] &#123;<span class="string">"c="</span>,<span class="string">"c-"</span>,<span class="string">"dz="</span>,<span class="string">"d-"</span>,<span class="string">"lj"</span>,<span class="string">"nj"</span>,<span class="string">"s="</span>,<span class="string">"z="</span>&#125;;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		printResult(getLengthOfKroatiaWord(makeInput()));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLengthOfKroatiaWord</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// @param word: Make algorithm using variable `word`</span></span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> cursor = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line">		<span class="keyword">while</span>(cursor&lt; word.length()) &#123;</span><br><span class="line">			<span class="keyword">for</span>(String c : kroatia) &#123;</span><br><span class="line">				<span class="keyword">if</span>(word.substring(cursor,word.length()).startsWith(c)) &#123;</span><br><span class="line">					count++;</span><br><span class="line">					cursor += c.length();</span><br><span class="line">					flag =<span class="keyword">true</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(flag) &#123;</span><br><span class="line">				flag =<span class="keyword">false</span>;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				count++;</span><br><span class="line">				cursor++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> count; <span class="comment">// @return: the length Of Kroatia Word</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">makeInput</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">new</span> Scanner(System.in).next();&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printResult</span><span class="params">(<span class="keyword">int</span> lengthOfKroatiaWord)</span> </span>&#123; System.out.println(lengthOfKroatiaWord); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>cursor</code>는 인덱스 역할을 한다. <code>cursor</code>부터 끝까지 <code>word</code>를 자르고, <code>cursor</code>번째 위치에서 크로아티아 알파벳으로 시작하는지 검사한다.</p>
+<ul>
+<li>배열(<code>kroatia</code>)에 있는 알파벳으로 시작한다면(<code>startsWith</code>) <code>count(알파벳 수)</code>를 1 증가시키고, <code>cursor</code>는 해당 알파벳 길이만큼 증가시킨다.</li>
+<li>배열에 있는 알파벳으로 시작하지 않는다면, 한글자 알파벳이므로 <code>count</code>, <code>cursor</code> 모두 1 증가시킨다.</li>
+</ul>
+<br>
+
+<p><strong><code>replaceAll</code> 을 사용하면 더욱 깔끔한 코드를 짤 수 있고, 시간도 더 빠르다.</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> String[] kroatia = <span class="keyword">new</span> String[] &#123;<span class="string">"c="</span>,<span class="string">"c-"</span>,<span class="string">"dz="</span>,<span class="string">"d-"</span>,<span class="string">"lj"</span>,<span class="string">"nj"</span>,<span class="string">"s="</span>,<span class="string">"z="</span>&#125;;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		printResult(getLengthOfKroatiaWord(makeInput()));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLengthOfKroatiaWord</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// @param word: Make algorithm using variable `word`</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(String c: kroatia) &#123;</span><br><span class="line">			word = word.replace(c,<span class="string">"."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> word.length();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">makeInput</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">new</span> Scanner(System.in).next();&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printResult</span><span class="params">(<span class="keyword">int</span> lengthOfKroatiaWord)</span> </span>&#123; System.out.println(lengthOfKroatiaWord);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/28/boj-2941/" data-id="ckkh1yp3d0001coc95wlf4uyh"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-boj-9657" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -698,170 +875,6 @@
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">파이썬, 알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-java-daily-training-01" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/18/java-daily-training-01/">[Java] 기본 문법 응용: Loop -for, while / 조건문 if, switch</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/01/18/java-daily-training-01/" class="article-date">
-  <time datetime="2021-01-18T13:14:00.000Z" itemprop="datePublished">2021-01-18</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="01-숫자출력-1"><a href="#01-숫자출력-1" class="headerlink" title="01 숫자출력(1)"></a>01 숫자출력(1)</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ssafy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DigitTest1</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">5</span> ; i &gt; <span class="number">0</span> ; i-- )&#123;</span><br><span class="line">			<span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; <span class="number">5</span>-i ; j++ ) &#123;</span><br><span class="line">				System.out.print(<span class="string">"   "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span>( <span class="keyword">int</span> k = <span class="number">1</span> ; k &lt;= i ; k++ )&#123;</span><br><span class="line">				System.out.printf(<span class="string">"%3d"</span>,num++);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println(<span class="string">'\n'</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span></span><br><span class="line"></span><br><span class="line">   <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span></span><br><span class="line"></span><br><span class="line">     <span class="number">10</span> <span class="number">11</span> <span class="number">12</span></span><br><span class="line"></span><br><span class="line">        <span class="number">13</span> <span class="number">14</span></span><br><span class="line"></span><br><span class="line">           <span class="number">15</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h1 id="02-숫자출력-2"><a href="#02-숫자출력-2" class="headerlink" title="02 숫자출력(2)"></a>02 숫자출력(2)</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ssafy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DigitTest2</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> num2 = <span class="number">5</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>; i &gt; <span class="number">0</span>; i--)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>-i; j++) &#123;</span><br><span class="line">				System.out.print(<span class="string">"   "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; num2; k++)&#123;</span><br><span class="line">				System.out.printf(<span class="string">"%3d"</span>,num++);</span><br><span class="line">			&#125;</span><br><span class="line">			num2-=<span class="number">2</span>;</span><br><span class="line">			System.out.println(<span class="string">'\n'</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		num2 = <span class="number">3</span>;</span><br><span class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">2</span> ; i &gt; <span class="number">0</span> ; i-- )&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">3</span>-i; j &lt; <span class="number">2</span>; j++ ) &#123;</span><br><span class="line">				System.out.print(<span class="string">"   "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">for</span>( <span class="keyword">int</span> k = <span class="number">0</span> ; k &lt; num2  ; k++)&#123;</span><br><span class="line">				System.out.printf(<span class="string">"%3d"</span>,num++);</span><br><span class="line">			&#125;</span><br><span class="line">			num2+=<span class="number">2</span>;</span><br><span class="line">			System.out.println(<span class="string">'\n'</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="출력-1"><a href="#출력-1" class="headerlink" title="출력"></a>출력</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span></span><br><span class="line"></span><br><span class="line">    <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span></span><br><span class="line"></span><br><span class="line">       <span class="number">9</span></span><br><span class="line"></span><br><span class="line">   <span class="number">10</span> <span class="number">11</span> <span class="number">12</span></span><br><span class="line"></span><br><span class="line"><span class="number">13</span> <span class="number">14</span> <span class="number">15</span> <span class="number">16</span> <span class="number">17</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h1 id="03-가위바위보-프로그램"><a href="#03-가위바위보-프로그램" class="headerlink" title="03 가위바위보 프로그램"></a>03 가위바위보 프로그램</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ssafy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GameTest</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Game</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">// 1: 짐</span></span><br><span class="line">		<span class="comment">// 2: 이김 </span></span><br><span class="line">		<span class="comment">// 3: 비김</span></span><br><span class="line">		System.out.print(<span class="string">"가위바위보 중 하나 입력: "</span>);</span><br><span class="line">		String finger = br.readLine();</span><br><span class="line">		<span class="keyword">int</span> comp_finger = (<span class="keyword">int</span>) (Math.random() * <span class="number">3</span>) + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">switch</span>(finger) &#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">"가위"</span>:</span><br><span class="line">				<span class="keyword">if</span>(comp_finger == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(comp_finger == <span class="number">3</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">"바위"</span>:</span><br><span class="line">				<span class="keyword">if</span>(comp_finger == <span class="number">3</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(comp_finger == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">"보"</span>:</span><br><span class="line">				<span class="keyword">if</span>(comp_finger == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(comp_finger == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>:</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NumberFormatException, IOException </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"가위바위보 게임을 시작합니다. 아래 보기 중 하나를 고르세요."</span>);</span><br><span class="line">		System.out.println(<span class="string">"1.5판 3승 \n2.3판 2승 \n3.1판 1승"</span>);</span><br><span class="line">		System.out.print(<span class="string">"번호를 입력하세요: "</span>);</span><br><span class="line">		<span class="keyword">int</span> num = Integer.parseInt(br.readLine());</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> comp_win = <span class="number">0</span>; <span class="comment">// 컴퓨터가 이긴 횟수</span></span><br><span class="line">		<span class="keyword">int</span> user_win = <span class="number">0</span>; <span class="comment">// 사용자가 이긴 횟수 </span></span><br><span class="line">		<span class="keyword">int</span> break_num = <span class="number">0</span>; </span><br><span class="line">		<span class="keyword">boolean</span> isOneRound = <span class="keyword">false</span>;</span><br><span class="line">		<span class="keyword">switch</span>(num) &#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>: <span class="comment">// 5판 3승</span></span><br><span class="line">				break_num = <span class="number">3</span>;</span><br><span class="line">				<span class="keyword">break</span>; </span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>: <span class="comment">// 3판 2승 </span></span><br><span class="line">				break_num = <span class="number">2</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>: <span class="comment">// 1판 1승</span></span><br><span class="line">				break_num = <span class="number">1</span>;</span><br><span class="line">				isOneRound = <span class="keyword">true</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>:</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span>(comp_win &lt; break_num &amp;&amp; user_win &lt; break_num) &#123;</span><br><span class="line">			<span class="keyword">int</span> result = Game();</span><br><span class="line">			<span class="keyword">switch</span> (result) &#123;</span><br><span class="line">				<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">					System.out.println(<span class="string">"졌습니다."</span>); <span class="comment">// 컴퓨터가 이김</span></span><br><span class="line">					comp_win++;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">					System.out.println(<span class="string">"이겼습니다."</span>); <span class="comment">// 사용자가 이김</span></span><br><span class="line">					user_win++;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">					System.out.println(<span class="string">"비겼습니다."</span>);</span><br><span class="line">					<span class="keyword">if</span>(isOneRound) &#123;</span><br><span class="line">						comp_win++; user_win++;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">default</span>:</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(comp_win &gt; user_win) &#123;</span><br><span class="line">			System.out.println(<span class="string">"### 컴퓨터 승!!!"</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (comp_win == user_win) &#123;</span><br><span class="line">			System.out.println(<span class="string">"### 무승부!!!"</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			System.out.println(<span class="string">"### 사용자 승!!!"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="출력-2"><a href="#출력-2" class="headerlink" title="출력"></a>출력</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">가위바위보 게임을 시작합니다. 아래 보기 중 하나를 고르세요.</span><br><span class="line"><span class="number">1.5</span>판 <span class="number">3</span>승 </span><br><span class="line"><span class="number">2.3</span>판 <span class="number">2</span>승 </span><br><span class="line"><span class="number">3.1</span>판 <span class="number">1</span>승</span><br><span class="line">번호를 입력하세요: <span class="number">2</span></span><br><span class="line">가위바위보 중 하나 입력: 가위</span><br><span class="line">졌습니다.</span><br><span class="line">가위바위보 중 하나 입력: 바위</span><br><span class="line">이겼습니다.</span><br><span class="line">가위바위보 중 하나 입력: 보</span><br><span class="line">이겼습니다.</span><br><span class="line">### 사용자 승!!!</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/01/18/java-daily-training-01/" data-id="ckk2lipuz0000bzc99w138xsn"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%9E%90%EB%B0%94/" rel="tag">자바</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-swea-2056" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/16/swea-2056/">[SW Expert Academy] 2056: 연월일 달력</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/01/16/swea-2056/" class="article-date">
-  <time datetime="2021-01-16T06:33:00.000Z" itemprop="datePublished">2021-01-16</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li><p>문제 링크: <a href="https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5QLkdKAz4DFAUq" target="_blank" rel="noopener">https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5QLkdKAz4DFAUq</a></p>
-<p>(로그인해야 볼 수 있음.)</p>
-</li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">T = int(input())</span><br><span class="line"><span class="comment"># 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.</span></span><br><span class="line">days = &#123;<span class="number">1</span>: <span class="number">31</span>, <span class="number">2</span>: <span class="number">28</span>, <span class="number">3</span>: <span class="number">31</span>, <span class="number">4</span>: <span class="number">30</span>, <span class="number">5</span>: <span class="number">31</span>, <span class="number">6</span>: <span class="number">30</span>, <span class="number">7</span>: <span class="number">31</span>, <span class="number">8</span>: <span class="number">31</span>, <span class="number">9</span>: <span class="number">30</span>, <span class="number">10</span>: <span class="number">31</span>, <span class="number">11</span>: <span class="number">30</span>, <span class="number">12</span>: <span class="number">31</span>&#125;</span><br><span class="line"><span class="keyword">for</span> test_case <span class="keyword">in</span> range(<span class="number">1</span>, T + <span class="number">1</span>):</span><br><span class="line">    case = str(input())</span><br><span class="line">    year = case[<span class="number">0</span>:<span class="number">4</span>]</span><br><span class="line">    month = case[<span class="number">4</span>:<span class="number">6</span>]</span><br><span class="line">    day = case[<span class="number">6</span>:<span class="number">8</span>]</span><br><span class="line">    </span><br><span class="line">    answer = <span class="string">''</span></span><br><span class="line">    <span class="keyword">if</span> <span class="number">0</span> &lt; int(month) &lt; <span class="number">13</span> <span class="keyword">and</span> <span class="number">0</span> &lt; int(day) &lt;= days[int(month)]:</span><br><span class="line">        answer = year + <span class="string">'/'</span> + month + <span class="string">'/'</span> + day</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        answer += <span class="string">'-1'</span></span><br><span class="line"></span><br><span class="line">    print(<span class="string">"#"</span> + str(test_case) + <span class="string">" "</span> + answer)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>딕셔너리, 문자열 인덱싱을 통해 풀었다.</p>
-</li>
-<li><p><code>month</code>를 <code>키</code>로, <code>month</code>에 해당하는 <code>day의 최대 값</code> 을 <code>value</code>로 한 딕셔너리 <code>days</code>를 만들었다.</p>
-</li>
-<li><p>테스트 케이스 값을 string으로 전환한 후, 문자열 인덱싱을 통해 <code>year</code>,<code>month</code>,<code>day</code>로 나누었다.</p>
-</li>
-<li><p><code>year</code>는 모든 값이 유효하므로 검사하지 않아도 되고, <code>month</code>의 경우 1~12 중 하나인지, <code>day</code>는 <code>0</code> 보다 크고 <code>month</code>에 해당하는 값보다 작거나 같은지 검사한다.</p>
-<ul>
-<li><p>모든 조건을 만족한다면 <code>&#39;#[test_case] [year]/[month]/[day] &#39;</code>를 출력한다.</p>
-<ul>
-<li>여기서 주의할 점은 1월의 경우 01 과 같은 방식으로 출력되어야 하기 때문에 int 로 바꿨다가(‘01’ -&gt; 1) str(1 -&gt; ‘1’) 로 바꾼 후 출력하면 안된다.</li>
-</ul>
-</li>
-<li><p>만약 하나라도 조건을 만족하지 못하면 <code>&#39;#[test_case] -1&#39;</code>을 출력한다.</p>
-</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/01/16/swea-2056/" data-id="ckjzci25700003mc9d014d89l"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
 
     </footer>
 
