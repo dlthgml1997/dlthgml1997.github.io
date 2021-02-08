@@ -64,6 +64,83 @@
         
           
 
+<article id="post-boj-10826" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/02/08/boj-10826/">[boj] 10826:피보나치 수4 - BigInteger, DP (java)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/02/08/boj-10826/" class="article-date">
+  <time datetime="2021-02-08T12:43:00.000Z" itemprop="datePublished">2021-02-08</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크: <a href="https://www.acmicpc.net/problem/10826" target="_blank" rel="noopener">https://www.acmicpc.net/problem/10826</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.math.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main_BOJ_10826_</span>피보나치수4 </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> BufferedWriter bw = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> OutputStreamWriter(System.out));</span><br><span class="line">	<span class="keyword">static</span> BigInteger[] dp;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n = Integer.parseInt(br.readLine());</span><br><span class="line">		dp = <span class="keyword">new</span> BigInteger[n+<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">if</span>(n == <span class="number">0</span> || n == <span class="number">1</span>) &#123;</span><br><span class="line">			System.out.println(n);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		dp[<span class="number">0</span>]=BigInteger.ZERO; <span class="comment">// *</span></span><br><span class="line">		dp[<span class="number">1</span>]=BigInteger.ONE;</span><br><span class="line">		dp[<span class="number">2</span>]=BigInteger.ONE;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">3</span>; i&lt;=n; i++) &#123;</span><br><span class="line">			dp[i] = dp[i-<span class="number">1</span>].add(dp[i-<span class="number">2</span>]); <span class="comment">// *</span></span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(dp[n]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>이 문제의 경우 들어올 수 있는 수가 10,000까지 이기 때문에 일반 재귀로 풀어도 시간 초과가 나고, int / long의 범위도 넘어간다.</p>
+</li>
+<li><p>이때 사용할 수 있는게 <code>BigInteger</code> 이다. // * 에서 볼 수 있듯이 사용법이 좀 특이하다. String형식으로 사용되기 때문이다. 더 자세한 사용법은 아래 블로그에 나와 있다.</p>
+<blockquote>
+<p><a href="https://coding-factory.tistory.com/604" target="_blank" rel="noopener">https://coding-factory.tistory.com/604</a></p>
+</blockquote>
+</li>
+<li><p>dp 를 이용해 dp[n]까지 반복문을 돌린 후 dp[n]을 사용한다. 이 방법 같은 경우는 테스트 케이스가 여러개일 수록 더 좋다! </p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/08/boj-10826/" data-id="ckkwkley90000q5c92tklekbn"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-swea-5215" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -694,92 +771,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2021/02/01/boj-10845/" data-id="ckkmkdlq70000ezc954b73kp1"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-boj-2422" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/30/boj-2422/">[boj] 2422: 한윤정이 이탈리아에 가서 아이스크림을 사먹는데 (java)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/01/30/boj-2422/" class="article-date">
-  <time datetime="2021-01-29T16:32:34.000Z" itemprop="datePublished">2021-01-30</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>문제 링크: <a href="https://www.acmicpc.net/problem/2422" target="_blank" rel="noopener">https://www.acmicpc.net/problem/2422</a></li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> N, M;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">boolean</span>[][] noMix = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="number">201</span>][<span class="number">201</span>]; <span class="comment">// default : false</span></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> answer = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		input(); <span class="comment">// input 값 받아오기</span></span><br><span class="line">    <span class="comment">// 1.</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N-<span class="number">1</span>; i++) &#123;</span><br><span class="line">			getComb(<span class="number">1</span>, -<span class="number">1</span>, i);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(answer);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">		N = stoi(st.nextToken());</span><br><span class="line">		M = stoi(st.nextToken());</span><br><span class="line">		<span class="keyword">int</span> a,b;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; M; i++) &#123;</span><br><span class="line">			st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">      <span class="comment">// 예: 맛없어 지는 조합 1, 3</span></span><br><span class="line">			a = stoi(st.nextToken());</span><br><span class="line">			b = stoi(st.nextToken());</span><br><span class="line">			noMix[a][b] = <span class="keyword">true</span>; <span class="comment">// 섞으면 맛없어 지는 조합은 true (예: noMix[1][3])</span></span><br><span class="line">			noMix[b][a] = <span class="keyword">true</span>; <span class="comment">// (예: noMix[3][1])</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 2. </span></span><br><span class="line">  <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getComb</span><span class="params">(<span class="keyword">int</span> depth, <span class="keyword">int</span> pre, <span class="keyword">int</span> now)</span> </span>&#123; <span class="comment">// 맛있는 조합이면 answer 1 UP</span></span><br><span class="line">		<span class="keyword">if</span> (depth == <span class="number">3</span>) &#123; </span><br><span class="line">			answer++;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = now + <span class="number">1</span>; i &lt;= N; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(noMix[i][now]) <span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">if</span>(pre != -<span class="number">1</span> &amp;&amp; noMix[pre][i]) <span class="keyword">continue</span>;</span><br><span class="line">			getComb(depth + <span class="number">1</span>, now, i);</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li><p>i 는 맛있는 아이스크림 조합의 첫번째 아이스크림이다.  N-2(맛있는 아이스크림 조합은 총 3개의 조합이기 때문에 N-1번, N번째 아이스크림은 첫번째 아이스크림이 될 수 없다. ) 번 아이스크림까지 getComb 함수를 호출한다. </p>
-<ul>
-<li>이때, pre 부분을 -1로 두는 이유는 now로 보내는 i가 세가지 아이스크림 조합 중 첫번째 아이스크림이기 때문이다! 즉, pre가 존재하지 않는다.</li>
-</ul>
-</li>
-<li><p><code>static void getComb(int depth, int pre, int now)  // 맛있는 조합이면 answer 1 UP</code></p>
-<ul>
-<li><strong>depth</strong>: 현재 맛있는 조합에서 몇 번째 조합을 검사중인지 나타낸다.<ul>
-<li>depth가 3이 됐다는 뜻은 맛있는 조합 3가지가 모두 만들어졌다는 의미가 되기 때문에 answer++을 하고 return해 함수를 종료한다.</li>
-</ul>
-</li>
-<li><strong>pre</strong>: 맛있는 조합에서 이전 아이스크림 (3번째 아이스크림(i)의 경우 1번째 아이스크림(pre)과의 조합(noMix) 또한 확인해야 하기 때문에 필요하다.)</li>
-<li><strong>now</strong>: 맛있는 조합에서 현재 아이스크림</li>
-<li><strong>i</strong>: 맛있는 조합에서 다음 아이스크림이 될 후보</li>
-<li>pre가 -1인 경우, 조합 중 첫번째 아이스크림(now)이 왔다는 뜻이므로 now와 i가 맛없는 조합(<code>noMix[i][now]</code>== true)이 아니라면 무조건 getComb를 한번 더 실행한다.<br>그렇지 않은 경우, 이미 현재 아이스크림(now)과 맛있는 조합인 pre가 다음 아이스크림이 될 i 와 맛없는 조합인지 확인해야한다. 맛없는 조합이 아니면, getComb를 실행한다.</li>
-<li>if에서 필터링(continue) 되지 않았다면, 맛있는 조합이므로 ! i를 현재 아이스크림으로 보내고 , now는 이전 아이스크림으로 보낸다. 연결고리가 하나 생겼기 때문에 depth에 +1을 해서 호출한다.</li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/01/30/boj-2422/" data-id="ckkiiqihz0001iqc93f2yctwi"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
