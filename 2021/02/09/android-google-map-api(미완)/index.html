@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    android-google-map-api(미완) |
+    
+    IT&#39;s easy if you try</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-android-google-map-api(미완)" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android-google-map-api(미완)
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/02/09/android-google-map-api(%EB%AF%B8%EC%99%84)/" class="article-date">
+  <time datetime="2021-02-08T17:43:57.322Z" itemprop="datePublished">2021-02-09</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>Polyline을 활용한 프로젝트를 하는데 카카오 맵보다는 구글 맵이 Polyline 관련 내장 함수와 예제가 많아 Google Map API를 활용하기로 했다.</p>
+<h1 id="링크"><a href="#링크" class="headerlink" title="링크"></a>링크</h1><p>Maps SDK for Android 개요</p>
+<ul>
+<li><a href="https://developers.google.com/maps/documentation/android-sdk/intro?hl=ko" target="_blank" rel="noopener">https://developers.google.com/maps/documentation/android-sdk/intro?hl=ko</a></li>
+</ul>
+<p>콘솔</p>
+<ul>
+<li><a href="https://cloud.google.com/maps-platform/?hl=ko&amp;_ga=2.263340036.988101362.1601305047-1571628394.1597403267#get-started" target="_blank" rel="noopener">https://cloud.google.com/maps-platform/?hl=ko&amp;_ga=2.263340036.988101362.1601305047-1571628394.1597403267#get-started</a></li>
+</ul>
+<h1 id="애플리케이션-제한-맥-SHA1-서명-얻기"><a href="#애플리케이션-제한-맥-SHA1-서명-얻기" class="headerlink" title="애플리케이션 제한 (맥 SHA1 서명 얻기)"></a>애플리케이션 제한 (맥 SHA1 서명 얻기)</h1><ul>
+<li><p>아래 명령어를 터미널에 입력한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -list -v -keystore ~&#x2F;.android&#x2F;debug.keystore -alias androiddebugkey -storepass android -keypass android</span><br></pre></td></tr></table></figure>
+
+<p>![스크린샷 2020-10-01 오후 9.31.47](../image/스크린샷 2020-10-01 오후 9.31.47.png)</p>
+<p>위와 같이 SHA1 서명을 얻을 수 있다. (이건 여담이지만 시그니처 알고리즘으로 SHA1withRSA가 쓰이는구낭.ㅎ.)</p>
+</li>
+<li><p>출시를 위한 SHA1 키 서명은 아래 터미널에 입력한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -list -v -keystore your_keystore_name -alias your_alias_name</span><br></pre></td></tr></table></figure>
+
+<p><code>your_keystore_name</code> 과 <code>your_alias_name</code>은 변경해주어야 한다.</p>
+</li>
+</ul>
+<h1 id="API-제한"><a href="#API-제한" class="headerlink" title="API 제한"></a>API 제한</h1><p>API 키를 제한하는 것이 좋습니다. API 키를 제한하면 보안이 강화되고 승인된 요청만 API 키를 사용하여 수행할 수 있습니다. API 키 제한에는 두 가지가 있으며 두 가지를 모두 설정해야 합니다.</p>
+<ul>
+<li><p>애플리케이션 제한</p>
+<p>API 키 사용을 웹사이트(HTTP 리퍼러), 웹 서버(IP 주소) 또는 모바일 앱(Android 앱 또는 iOS 앱)으로 제한합니다. API 또는 SDK의 플랫폼을 기반으로 이 카테고리에서 하나의 제한만 선택할 수 있습니다(플랫폼별 GMP API참고).</p>
+<blockquote>
+<p> 참고: 동일한 (클라이언트측) 앱에서 웹, 웹 서비스 및 모바일 API를 호출해야 하는 경우 여러 개의 키를 만들고 제한하세요.</p>
+</blockquote>
+</li>
+<li><p><strong>API 제한:</strong> API 키 사용을 하나 이상의 API 또는 SDK로 제한합니다. API 키와 연결된 API 또는 SDK에 대한 요청이 처리됩니다. API 키와 연결되지 않은 API 또는 SDK에 대한 요청은 처리되지 않습니다. (API 또는 SDK가 <a href="https://developers.google.com/maps/gmp-get-started#enable-api-sdk" target="_blank" rel="noopener">사용 설정</a>되어야 하며 애플리케이션 제한을 지원해야 합니다.)</p>
+</li>
+</ul>
+<h1 id="최소-SDK-verision"><a href="#최소-SDK-verision" class="headerlink" title="최소 SDK verision"></a>최소 SDK verision</h1><p><strong>Note:</strong> The Maps SDK for Android requires at least API 16. Ensure the <code>minSdkVersion</code> for your application is set to API 16 or higher.</p>
+<h1 id="위치-관련-버전별-주요-변경-사항-빠진-내용-다수"><a href="#위치-관련-버전별-주요-변경-사항-빠진-내용-다수" class="headerlink" title="위치 관련 버전별 주요 변경 사항(빠진 내용 다수)"></a>위치 관련 버전별 주요 변경 사항(빠진 내용 다수)</h1><h2 id="1-android-version-9-파이"><a href="#1-android-version-9-파이" class="headerlink" title="1. android version 9(파이)"></a>1. android version 9(파이)</h2><p>주요 변경 사항은 <strong>백그라운드 앱의 권한 제한</strong> 이다.</p>
+<p><a href="https://developer.android.com/about/versions/oreo/background-location-limits?hl=ko" target="_blank" rel="noopener">https://developer.android.com/about/versions/oreo/background-location-limits?hl=ko</a></p>
+<p>관련 내용은 위의 링크를 확인하면 된다. </p>
+<h2 id="2-android-version-11"><a href="#2-android-version-11" class="headerlink" title="2. android version 11"></a>2. android version 11</h2><ul>
+<li><p>백그라운드 위치<a href="https://namu.wiki/w/안드로이드(운영체제)/11#fn-ANDROID11" target="_blank" rel="noopener">[ANDROID11]</a><a href="https://namu.wiki/w/안드로이드(운영체제)/11#fn-일부" target="_blank" rel="noopener">[일부]</a></p>
+<p>앱이 백그라운드 ‘위치’를 사용하려면 설정으로 이동해서 직접 동의를 받아야 한다.백그라운드 ‘위치’ 권한을 받는데 맞춤 UI를 이용해 이유를 설명하고 동의를 받아야 한다. 위치 권한 설정 팝업은 ‘항상 허용’ 옵션이 없어진다. 단 시스템 설정에서는 ‘항상 허용’ 옵션을 제공하며 앱 별로 설정할 수 있다.</p>
+</li>
+<li><p>포그라운드 서비스 권한<a href="https://namu.wiki/w/안드로이드(운영체제)/11#fn-ANDROID11" target="_blank" rel="noopener">[ANDROID11]</a></p>
+<p>Android 9 이후 앱은 포그라운드에서만 카메라 및 마이크에 액세스할 수 있도록 제한된다. 하지만 앱이 포그라운드 서비스에서 카메라 및 마이크와 관련된 데이터에 액세스한다면 포그라운드 서비스 선언을 변경해 주어야 한다. 자세한 내용은 <a href="https://developer.android.com/preview/privacy/foreground-service-types" target="_blank" rel="noopener">여기서</a> 확인하자.</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/09/android-google-map-api(%EB%AF%B8%EC%99%84)/" data-id="ckkwv7v0i000f7sc978aneayb"
+         class="article-share-link">공유</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2021/02/09/android-kakao-map-api/" class="article-nav-link">
+        <strong class="article-nav-caption">최신</strong>
+        <div class="article-nav-title">
+          
+            [안드로이드] Kakao Maps API 개발자 등록부터 뷰에 띄우기까지
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/02/09/algorythm-base-1/" class="article-nav-link">
+        <strong class="article-nav-caption">이전</strong>
+        <div class="article-nav-title">[실전 알고리즘] 기초 코드 작성 요령 1 정리 (시간복잡도, 공간복잡도)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2021 IT&#39;s easy if you try</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="IT&#39;s easy if you try"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="검색">
+        <i class="fe fe-search"></i>
+        검색
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>

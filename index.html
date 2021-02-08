@@ -64,7 +64,7 @@
         
           
 
-<article id="post-boj-2564" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-python-ceil" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -72,7 +72,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2021/02/08/boj-2564/">[boj] 2564:경비원 - 구현 (java)</a>
+      <a class="article-title" href="/2021/02/09/python-ceil/">[파이썬] 올림, 내림, 반올림</a>
     </h2>
   
   
@@ -85,8 +85,8 @@
 
     
       <div class="article-meta">
-        <a href="/2021/02/08/boj-2564/" class="article-date">
-  <time datetime="2021-02-08T12:48:00.000Z" itemprop="datePublished">2021-02-08</time>
+        <a href="/2021/02/09/python-ceil/" class="article-date">
+  <time datetime="2021-02-08T17:43:57.376Z" itemprop="datePublished">2021-02-09</time>
 </a>
         
       </div>
@@ -101,51 +101,136 @@
       
 
       
-        <ul>
-<li>문제 링크: <a href="https://www.acmicpc.net/problem/2564" target="_blank" rel="noopener">https://www.acmicpc.net/problem/2564</a></li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main_BOJ_2564_</span>경비원 </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br =<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> N, M; <span class="comment">// 블록 경계 행, 열</span></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> storeNum;</span><br><span class="line">	<span class="keyword">static</span> Stack&lt;Pos&gt; stack;</span><br><span class="line">	<span class="keyword">static</span> Pos dongPos;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">			input();</span><br><span class="line">			<span class="keyword">int</span> answer =<span class="number">0</span> ;</span><br><span class="line">			<span class="keyword">while</span>(!stack.isEmpty()) &#123;</span><br><span class="line">				Pos store = stack.pop();</span><br><span class="line">				<span class="keyword">if</span>(Math.abs(store.y - dongPos.y) == M) &#123; <span class="comment">// 1.</span></span><br><span class="line">					answer += Math.min(N-store.x + N- dongPos.x, store.x + dongPos.x) + M;</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span>(Math.abs(store.x - dongPos.x) == N) &#123; <span class="comment">// 2.</span></span><br><span class="line">					answer += Math.min(M-store.y + M- dongPos.y, store.y + dongPos.y) + N;</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123; <span class="comment">// 3.</span></span><br><span class="line">					answer+= Math.abs(store.x-dongPos.x) + Math.abs(store.y - dongPos.y);						</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println(answer);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">		M = stoi(st.nextToken()); <span class="comment">// 열</span></span><br><span class="line">		N = stoi(st.nextToken()); <span class="comment">// 행</span></span><br><span class="line">		</span><br><span class="line">		storeNum = stoi(br.readLine());</span><br><span class="line">		stack = <span class="keyword">new</span> Stack&lt;Pos&gt;();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt; storeNum; i++) &#123;</span><br><span class="line">			st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">			<span class="keyword">int</span> dir = stoi(st.nextToken());</span><br><span class="line">			<span class="keyword">int</span> pos = stoi(st.nextToken());</span><br><span class="line">			stack.add(realPos(dir, pos));</span><br><span class="line">		&#125;</span><br><span class="line">		st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">		dongPos = realPos(stoi(st.nextToken()), stoi(st.nextToken()));</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Pos <span class="title">realPos</span><span class="params">(<span class="keyword">int</span> dir, <span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(dir == <span class="number">1</span>) &#123; </span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> Pos(<span class="number">0</span>, pos);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span>(dir == <span class="number">2</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> Pos(N, pos);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span>(dir == <span class="number">3</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> Pos(pos, <span class="number">0</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span>(dir == <span class="number">4</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> Pos(pos, M);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pos</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	<span class="keyword">int</span> y;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Pos</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.x = x;</span><br><span class="line">		<span class="keyword">this</span>.y = y;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p><strong>올림: ceil</strong></p>
+<p><strong>내림: floor</strong></p>
+<p><strong>반올림: round</strong></p>
+<p>예시</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line">print(math.ceil(<span class="number">100</span>/<span class="number">33</span>)) <span class="comment"># 4</span></span><br><span class="line">print(math.ceil(<span class="number">0.3</span>)) <span class="comment"># 1</span></span><br><span class="line"></span><br><span class="line">print(math.floor(<span class="number">100</span>/<span class="number">33</span>)) <span class="comment"># 3</span></span><br><span class="line">print(math.floor(<span class="number">0.6</span>)) <span class="comment"># 0</span></span><br><span class="line"></span><br><span class="line">print(round(<span class="number">98</span>/<span class="number">6</span>)) <span class="comment">#16 (몫: 16 나머지: 2 -&gt; 나머지가 6의 반인 3보다 작은 값이기 때문에 내림 !)</span></span><br><span class="line">print(round(<span class="number">100</span>/<span class="number">6</span>)) <span class="comment"># 17 (몫: 16 나머지: 4 -&gt; 나머지가 6의 반인 3보다 큰 값이기 때문에 올림!)</span></span><br><span class="line">print(round(<span class="number">0.6</span>)) <span class="comment"># 1</span></span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>스토어와 동근이의 위치는 테두리에만 존재하기 때문에 1,2,3,4 (동서남북) 여부와 왼쪽, 위쪽으로부터의 위치가 주어지면 실제 좌표 위치를 알 수 있다. </li>
-</ul>
-<ol>
-<li><p>동근이와 경비해야할 store가 서, 동에 위치하는 경우</p>
-<img src="../image/image-20210208224433936.png" alt="image-20210208224433936" style="zoom:67%;" />
 
-<ul>
-<li><p>Math.abs(dongPos.y - store.y) 가 M이 라는 것은 서로 동, 서쪽으로 평행하다는 것을 의미한다. </p>
-</li>
-<li><p>이때 <strong>거리는 위로 가는 경우(회색), 아래로 가는 경우(빨간색) 중 거리가 더 가까운 값에 M 을 더한 값</strong>이다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">answer += Math.min(N-store.x + N- dongPos.x, store.x + dongPos.x) + M;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>동근이와 경비해야할 store가 북, 남에 위치하는 경우</p>
-<img src="/images/image-20210208224412843.png" alt="image-20210208224412843" style="zoom:67%;" />
 
-<ul>
-<li><p>Math.abs(dongPos.x - store.x) 가 N이 라는 것은 서로 북, 남쪽으로 평행하다는 것을 의미한다. </p>
-</li>
-<li><p>이때 <strong>거리는 동근이가 오른쪽로 가는 경우(회색), 왼쪽으로 가는 경우(빨간색) 중 거리가 더 가까운 값에 M 을 더한 값</strong>이다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">answer += Math.min(N-store.x + N- dongPos.x, store.x + dongPos.x) + M;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>동근이와 경비해야할 store가 평행하지 않는경우</p>
-<ul>
-<li><p>좌표끼리 뺀값의 절대값을 더한 값이 거리가 된다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">answer+= Math.abs(store.x-dongPos.x) + Math.abs(store.y - dongPos.y);</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/02/08/boj-2564/" data-id="ckkwuiz7d004rnzc9eixicenj"
+      <a data-url="http://yoursite.com/2021/02/09/python-ceil/" data-id="ckkwv7v3100867sc931hd9xi2"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-programmers-phonebook" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/02/09/programmers-phonebook/">[프로그래머스] 해시- 전화번호 목록 (파이썬/ python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/02/09/programmers-phonebook/" class="article-date">
+  <time datetime="2021-02-08T17:43:57.368Z" itemprop="datePublished">2021-02-09</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>전화번호부에 적힌 전화번호 중, 한 번호가 다른 번호의 접두어인 경우가 있는지 확인하려 합니다.<br>전화번호가 다음과 같을 경우, 구조대 전화번호는 영석이의 전화번호의 접두사입니다.</p>
+<ul>
+<li>구조대 : 119</li>
+<li>박준영 : 97 674 223</li>
+<li>지영석 : 11 9552 4421</li>
+</ul>
+<p>전화번호부에 적힌 전화번호를 담은 배열 phone_book 이 solution 함수의 매개변수로 주어질 때, 어떤 번호가 다른 번호의 접두어인 경우가 있으면 false를 그렇지 않으면 true를 return 하도록 solution 함수를 작성해주세요.</p>
+<h5 id="제한-사항"><a href="#제한-사항" class="headerlink" title="제한 사항"></a>제한 사항</h5><ul>
+<li>phone_book의 길이는 1 이상 1,000,000 이하입니다.</li>
+<li>각 전화번호의 길이는 1 이상 20 이하입니다.</li>
+</ul>
+<h5 id="입출력-예제"><a href="#입출력-예제" class="headerlink" title="입출력 예제"></a>입출력 예제</h5><table>
+<thead>
+<tr>
+<th>phone_book</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[119, 97674223, 1195524421]</td>
+<td>false</td>
+</tr>
+<tr>
+<td>[123,456,789]</td>
+<td>true</td>
+</tr>
+<tr>
+<td>[12,123,1235,567,88]</td>
+<td>false</td>
+</tr>
+</tbody></table>
+<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>입출력 예 #1<br>앞에서 설명한 예와 같습니다.</p>
+<p>입출력 예 #2<br>한 번호가 다른 번호의 접두사인 경우가 없으므로, 답은 true입니다.</p>
+<p>입출력 예 #3<br>첫 번째 전화번호, “12”가 두 번째 전화번호 “123”의 접두사입니다. 따라서 답은 false입니다.</p>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(phone_book)</span>:</span></span><br><span class="line">    phone_book.sort()</span><br><span class="line">    answer = <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(phone_book)<span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">if</span> phone_book[i+<span class="number">1</span>].startswith(phone_book[i],<span class="number">0</span>,len(phone_book[i])):</span><br><span class="line">            answer = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>새로 알게 된 것 </p>
+<ul>
+<li><p>find() =&gt; 인덱스 위치 반환</p>
+</li>
+<li><p>startswith(확인하고자하는 문자, 시작위치, 끝위치) =&gt; True/ False 여부 반환</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'1'</span>)) <span class="comment"># True</span></span><br><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'2'</span>)) <span class="comment"># False</span></span><br><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'4'</span>,<span class="number">2</span>)) <span class="comment"># False</span></span><br><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'4'</span>,<span class="number">3</span>,<span class="number">4</span>)) <span class="comment"># True</span></span><br><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'1'</span>,<span class="number">2</span>,<span class="number">4</span>)) <span class="comment"># False</span></span><br><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'1'</span>,<span class="number">0</span>,<span class="number">2</span>)) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>endswith()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'12345'</span>.endswith(<span class="string">'5'</span>)) <span class="comment"># True</span></span><br><span class="line">print(<span class="string">'12345'</span>.endswith(<span class="string">'2'</span>,<span class="number">0</span>,<span class="number">2</span>)) <span class="comment"># True '12'</span></span><br><span class="line">print(<span class="string">'12345'</span>.endswith(<span class="string">'4'</span>,<span class="number">0</span>,<span class="number">5</span>)) <span class="comment"># False '12345'</span></span><br><span class="line">print(<span class="string">'12345'</span>.endswith(<span class="string">'5'</span>,<span class="number">4</span>,<span class="number">5</span>)) <span class="comment"># True '45'</span></span><br></pre></td></tr></table></figure>
+
+<p>위 예제들에서 알 수 있다싶이, 배열은 두번째 인수의 인덱스 부터 세번째 인수의 인덱스-1까지 자른 후 검사한다 ! </p>
+<p>default 는 배열 전체.</p>
+</li>
+</ul>
+</li>
+<li><p>phone_book.sort() 를 하면 스트링 sort이기 때문에</p>
+<p><code>[&#39;119&#39;, &#39;97674223&#39;, &#39;1195524421&#39;]</code>-&gt; <code>[&#39;119&#39;, &#39;1195524421&#39;, &#39;97674223&#39;]</code>  이러한 형식으로 sort 된다.</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/09/programmers-phonebook/" data-id="ckkwv7v2n006y7sc9a3wg1okq"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
@@ -165,7 +250,7 @@
         
           
 
-<article id="post-boj-10826" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-programmers-price-of-stock" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -173,7 +258,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2021/02/08/boj-10826/">[boj] 10826:피보나치 수4 - BigInteger, DP (java)</a>
+      <a class="article-title" href="/2021/02/09/programmers-price-of-stock/">[프로그래머스] 주식가격 (파이썬/pyhton)</a>
     </h2>
   
   
@@ -186,8 +271,8 @@
 
     
       <div class="article-meta">
-        <a href="/2021/02/08/boj-10826/" class="article-date">
-  <time datetime="2021-02-08T12:43:00.000Z" itemprop="datePublished">2021-02-08</time>
+        <a href="/2021/02/09/programmers-price-of-stock/" class="article-date">
+  <time datetime="2021-02-08T17:43:57.368Z" itemprop="datePublished">2021-02-09</time>
 </a>
         
       </div>
@@ -202,27 +287,256 @@
       
 
       
-        <ul>
-<li>문제 링크: <a href="https://www.acmicpc.net/problem/10826" target="_blank" rel="noopener">https://www.acmicpc.net/problem/10826</a></li>
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>초 단위로 기록된 주식가격이 담긴 배열 prices가 매개변수로 주어질 때, 가격이 떨어지지 않은 기간은 몇 초인지를 return 하도록 solution 함수를 완성하세요.</p>
+<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
+<li>prices의 각 가격은 1 이상 10,000 이하인 자연수입니다.</li>
+<li>prices의 길이는 2 이상 100,000 이하입니다.</li>
 </ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.math.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main_BOJ_10826_</span>피보나치수4 </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> BufferedWriter bw = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> OutputStreamWriter(System.out));</span><br><span class="line">	<span class="keyword">static</span> BigInteger[] dp;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n = Integer.parseInt(br.readLine());</span><br><span class="line">		dp = <span class="keyword">new</span> BigInteger[n+<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">if</span>(n == <span class="number">0</span> || n == <span class="number">1</span>) &#123;</span><br><span class="line">			System.out.println(n);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		dp[<span class="number">0</span>]=BigInteger.ZERO; <span class="comment">// *</span></span><br><span class="line">		dp[<span class="number">1</span>]=BigInteger.ONE;</span><br><span class="line">		dp[<span class="number">2</span>]=BigInteger.ONE;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">3</span>; i&lt;=n; i++) &#123;</span><br><span class="line">			dp[i] = dp[i-<span class="number">1</span>].add(dp[i-<span class="number">2</span>]); <span class="comment">// *</span></span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(dp[n]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
+<thead>
+<tr>
+<th>prices</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[1, 2, 3, 2, 3]</td>
+<td>[4, 3, 1, 1, 0]</td>
+</tr>
+</tbody></table>
+<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><ul>
+<li><p>1초 시점의 ₩1은 끝까지 가격이 떨어지지 않았습니다.</p>
+</li>
+<li><p>2초 시점의 ₩2은 끝까지 가격이 떨어지지 않았습니다.</p>
+</li>
+<li><p>3초 시점의 ₩3은 1초뒤에 가격이 떨어집니다. 따라서 1초간 가격이 떨어지지 않은 것으로 봅니다.</p>
+</li>
+<li><p>4초 시점의 ₩2은 1초간 가격이 떨어지지 않았습니다.</p>
+</li>
+<li><p>5초 시점의 ₩3은 0초간 가격이 떨어지지 않았습니다.</p>
+</li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(prices)</span>:</span></span><br><span class="line">    answer = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(prices))]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(prices)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>, len(prices)):</span><br><span class="line">            <span class="keyword">if</span> prices[i] &gt; prices[j]:</span><br><span class="line">                answer[i] += <span class="number">1</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">else</span>: </span><br><span class="line">                answer[i] += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/09/programmers-price-of-stock/" data-id="ckkwv7v2n00707sc9hk2kei2b"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-programmers-func-develop" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/02/09/programmers-func-develop/">[프로그래머스] 기능개발 (파이썬/python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/02/09/programmers-func-develop/" class="article-date">
+  <time datetime="2021-02-08T17:43:57.363Z" itemprop="datePublished">2021-02-09</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>프로그래머스 팀에서는 기능 개선 작업을 수행 중입니다. 각 기능은 진도가 100%일 때 서비스에 반영할 수 있습니다.</p>
+<p>또, 각 기능의 개발속도는 모두 다르기 때문에 뒤에 있는 기능이 앞에 있는 기능보다 먼저 개발될 수 있고, 이때 뒤에 있는 기능은 앞에 있는 기능이 배포될 때 함께 배포됩니다.</p>
+<p>먼저 배포되어야 하는 순서대로 작업의 진도가 적힌 정수 배열 progresses와 각 작업의 개발 속도가 적힌 정수 배열 speeds가 주어질 때 각 배포마다 몇 개의 기능이 배포되는지를 return 하도록 solution 함수를 완성하세요.</p>
+<h5 id="제한-사항"><a href="#제한-사항" class="headerlink" title="제한 사항"></a>제한 사항</h5><ul>
+<li>작업의 개수(progresses, speeds배열의 길이)는 100개 이하입니다.</li>
+<li>작업 진도는 100 미만의 자연수입니다.</li>
+<li>작업 속도는 100 이하의 자연수입니다.</li>
+<li>배포는 하루에 한 번만 할 수 있으며, 하루의 끝에 이루어진다고 가정합니다. 예를 들어 진도율이 95%인 작업의 개발 속도가 하루에 4%라면 배포는 2일 뒤에 이루어집니다.</li>
+</ul>
+<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
+<thead>
+<tr>
+<th>progresses</th>
+<th>speeds</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[93,30,55]</td>
+<td>[1,30,5]</td>
+<td>[2,1]</td>
+</tr>
+</tbody></table>
+<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>첫 번째 기능은 93% 완료되어 있고 하루에 1%씩 작업이 가능하므로 7일간 작업 후 배포가 가능합니다.<br>두 번째 기능은 30%가 완료되어 있고 하루에 30%씩 작업이 가능하므로 3일간 작업 후 배포가 가능합니다. 하지만 이전 첫 번째 기능이 아직 완성된 상태가 아니기 때문에 첫 번째 기능이 배포되는 7일째 배포됩니다.<br>세 번째 기능은 55%가 완료되어 있고 하루에 5%씩 작업이 가능하므로 9일간 작업 후 배포가 가능합니다.</p>
+<p>따라서 7일째에 2개의 기능, 9일째에 1개의 기능이 배포됩니다.</p>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(progresses, speeds)</span>:</span></span><br><span class="line">    day = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(progresses))]</span><br><span class="line">    answer = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(progresses)):</span><br><span class="line">        day[i] = math.ceil((<span class="number">100</span> - progresses[i]) / speeds[i])</span><br><span class="line">        </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> day:</span><br><span class="line">        out = day.pop(<span class="number">0</span>)</span><br><span class="line">        count = <span class="number">1</span></span><br><span class="line">        index = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> len(day) &gt; <span class="number">0</span> <span class="keyword">and</span> out &gt;= day[index]:</span><br><span class="line">            day.pop(<span class="number">0</span>)</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">        answer.append(count)    </span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span>(answer)</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p>이 문제의 경우 들어올 수 있는 수가 10,000까지 이기 때문에 일반 재귀로 풀어도 시간 초과가 나고, int / long의 범위도 넘어간다.</p>
+<li>새로 알게 된 것<ul>
+<li>math의 올림 사용하기 (ceil) </li>
+</ul>
 </li>
-<li><p>이때 사용할 수 있는게 <code>BigInteger</code> 이다. // * 에서 볼 수 있듯이 사용법이 좀 특이하다. String형식으로 사용되기 때문이다. 더 자세한 사용법은 아래 블로그에 나와 있다.</p>
-<blockquote>
-<p><a href="https://coding-factory.tistory.com/604" target="_blank" rel="noopener">https://coding-factory.tistory.com/604</a></p>
+<li>스택/큐 를 이용하는 문제 !</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/09/programmers-func-develop/" data-id="ckkwv7v2f006a7sc9f9iw1et8"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-programmers- Immigration" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/02/09/programmers-%20Immigration/">[프로그래머스] 이분탐색 - 입국심사 (파이썬/ python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/02/09/programmers-%20Immigration/" class="article-date">
+  <time datetime="2021-02-08T17:43:57.360Z" itemprop="datePublished">2021-02-09</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>n명이 입국심사를 위해 줄을 서서 기다리고 있습니다. 각 입국심사대에 있는 심사관마다 심사하는데 걸리는 시간은 다릅니다.</p>
+<p>처음에 모든 심사대는 비어있습니다. 한 심사대에서는 동시에 한 명만 심사를 할 수 있습니다. 가장 앞에 서 있는 사람은 비어 있는 심사대로 가서 심사를 받을 수 있습니다. 하지만 더 빨리 끝나는 심사대가 있으면 기다렸다가 그곳으로 가서 심사를 받을 수도 있습니다.</p>
+<p>모든 사람이 심사를 받는데 걸리는 시간을 최소로 하고 싶습니다.</p>
+<p>입국심사를 기다리는 사람 수 n, 각 심사관이 한 명을 심사하는데 걸리는 시간이 담긴 배열 times가 매개변수로 주어질 때, 모든 사람이 심사를 받는데 걸리는 시간의 최솟값을 return 하도록 solution 함수를 작성해주세요.</p>
+<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
+<li>입국심사를 기다리는 사람은 1명 이상 1,000,000,000명 이하입니다.</li>
+<li>각 심사관이 한 명을 심사하는데 걸리는 시간은 1분 이상 1,000,000,000분 이하입니다.</li>
+<li>심사관은 1명 이상 100,000명 이하입니다.</li>
+</ul>
+<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
+<thead>
+<tr>
+<th>n</th>
+<th>times</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>6</td>
+<td>[7, 10]</td>
+<td>28</td>
+</tr>
+</tbody></table>
+<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>가장 첫 두 사람은 바로 심사를 받으러 갑니다.</p>
+<p>7분이 되었을 때, 첫 번째 심사대가 비고 3번째 사람이 심사를 받습니다.</p>
+<p>10분이 되었을 때, 두 번째 심사대가 비고 4번째 사람이 심사를 받습니다.</p>
+<p>14분이 되었을 때, 첫 번째 심사대가 비고 5번째 사람이 심사를 받습니다.</p>
+<p>20분이 되었을 때, 두 번째 심사대가 비지만 6번째 사람이 그곳에서 심사를 받지 않고 1분을 더 기다린 후에 첫 번째 심사대에서 심사를 받으면 28분에 모든 사람의 심사가 끝납니다.</p>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>이분 탐색을 이용하여 푸는 문제이다.</p>
+<h2 id="이분-탐색-이진-탐색-이란"><a href="#이분-탐색-이진-탐색-이란" class="headerlink" title="이분 탐색(이진 탐색)이란"></a>이분 탐색(이진 탐색)이란</h2><blockquote>
+<p>동영상을 보면 이분 탐색에 대한 이해가 쉬울 것이다! </p>
+<p>링크 : <a href="https://www.youtube.com/watch?v=SKcG0p73yo4" target="_blank" rel="noopener">https://www.youtube.com/watch?v=SKcG0p73yo4</a></p>
 </blockquote>
+<p><strong>이분 탐색</strong>은 탐색 기법 중 하나로써 원하는 탐색 범위를 두 부분으로 분할해서 찾는 방식이다. 탐색 범위는 반드시 <strong>정렬</strong>되어 있어야 한다. 전체 탐색에 비해 속도가 빠르다.</p>
+<p>탐색 범위의 <em>처음</em>(<em>left</em>)과 <em>끝</em>(<em>right</em>)의 <em>중간</em>(<em>mid</em>)과 탐색하고자 하는 값을 비교하여 </p>
+<ol>
+<li>탐색 값이 <em>중간</em>(<em>mid</em>)보다 작은 경우에는 범위의 <em>끝</em>(<em>right</em>)을 <em>중간-1</em>(<em>mid</em> -<em>1</em>)값으로 설정하고,</li>
+<li>탐색 값이 <em>중간</em>(<em>mid</em>)보다 큰 경우에는 범위의 <em>처음</em>(<em>left</em>)을 <em>중간+1</em>(<em>mid</em>+<em>1</em>)값으로 설정한다.</li>
+</ol>
+<p><em>left</em> 와 <em>right</em> 를 좁혀가며 최종적으로 탐색 값을 찾는다.</p>
+<p><strong>코드</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(n, times)</span>:</span></span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    <span class="comment"># right는 가장 비효율적으로 심사했을 때 걸리는 시간</span></span><br><span class="line">    <span class="comment"># 가장 긴 심사시간이 소요되는 심사관에게 n 명 모두 심사받는 경우이다.</span></span><br><span class="line">    left, right = <span class="number">1</span>, max(times) * n</span><br><span class="line">    <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">        mid = (left+ right) // <span class="number">2</span></span><br><span class="line">        people = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> time <span class="keyword">in</span> times:</span><br><span class="line">            <span class="comment"># people 은 모든 심사관들이 mid분 동안 심사한 사람의 수</span></span><br><span class="line">            people += mid // time</span><br><span class="line">            <span class="comment"># 모든 심사관을 거치지 않아도 mid분 동안 n명 이상의 심사를 할 수 있다면 반복문을 나간다.</span></span><br><span class="line">            <span class="keyword">if</span> people &gt;= n:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 심사한 사람의 수가 심사 받아야할 사람의 수(n)보다 많거나 같은 경우</span></span><br><span class="line">        <span class="keyword">if</span> people &gt;= n:</span><br><span class="line">            answer = mid</span><br><span class="line">            right = mid - <span class="number">1</span></span><br><span class="line">        <span class="comment"># 심사한 사람의 수가 심사 받아야할 사람의 수(n)보다 적은 경우</span></span><br><span class="line">        <span class="keyword">elif</span> people &lt; n:</span><br><span class="line">            left = mid + <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+<p>이분 탐색(이진 탐색)으로 알고리즘을 푸는 것이 처음이라서 블로그들의 설명을 요리조리 보면서 이해했다 ㅠㅠ 그래서 주석도 많다</p>
+<p>이분 탐색을 할 때는 <strong>‘이분 탐색의 범위는 무엇으로 할지’</strong> 와 <strong>‘이분 탐색의 기준을 무엇으로 할지’</strong> 을 잡아야한다.</p>
+<ul>
+<li><p>범위 : 심사를 하는데 총 걸리는 시간으로, 1분 부터 가장 비효율적으로 심사를 받았을 때 걸리는 시간(분)으로 하였다.</p>
 </li>
-<li><p>dp 를 이용해 dp[n]까지 반복문을 돌린 후 dp[n]을 사용한다. 이 방법 같은 경우는 테스트 케이스가 여러개일 수록 더 좋다! </p>
+<li><p>mid : 모든 심사관들에게 주어진 시간이다. 따라서 people 은 모든 심사관들이 mid분 동안 심사한 사람의 수가 된다.</p>
+</li>
+<li><p>기준 :  mid 동안 심사한 사람의 수(people)가 </p>
+<ol>
+<li>심사 받아야할 사람의 수(n)보다 <strong>많거나 같을 경우</strong>에는 시간이 충분했던 것이므로 <strong>주어진 시간을</strong> <strong>줄이고</strong> ( right = mid - 1 -&gt; right 를 줄이면 left와 right의 중간 값인 mid 도 줄어드니까 주어진 시간이 줄어든다.)  </li>
+<li>심사 받아야할 사람의 수(n)보다 <strong>적은 경우</strong>에는 시간이 부족했던 것이므로 <strong>주어진 시간을</strong> <strong>늘린다</strong>. (left = mid + 1)</li>
+</ol>
 </li>
 </ul>
+<p>이분 탐색은 범위와 기준을 잡는 것이 핵심인 것 같다!</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/02/08/boj-10826/" data-id="ckkwuiz7a004hnzc94w73fn7i"
+      <a data-url="http://yoursite.com/2021/02/09/programmers-%20Immigration/" data-id="ckkwv7v2a005t7sc94bt2csma"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
@@ -242,7 +556,7 @@
         
           
 
-<article id="post-swea-5215" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-backjoon-9328" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -250,7 +564,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2021/02/08/swea-5215/">[SW Expert Academy] 5215:햄버거다이어트 / 부분집합 (java)</a>
+      <a class="article-title" href="/2021/02/09/backjoon-9328/">[백준알고리즘] 9328번 열쇠 (파이썬/ python) - BFS , ord()</a>
     </h2>
   
   
@@ -263,8 +577,8 @@
 
     
       <div class="article-meta">
-        <a href="/2021/02/08/swea-5215/" class="article-date">
-  <time datetime="2021-02-08T06:32:45.000Z" itemprop="datePublished">2021-02-08</time>
+        <a href="/2021/02/09/backjoon-9328/" class="article-date">
+  <time datetime="2021-02-08T17:43:57.341Z" itemprop="datePublished">2021-02-09</time>
 </a>
         
       </div>
@@ -279,254 +593,530 @@
       
 
       
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br =<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> limit =<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> numOfFood=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span>[][] foodInfo;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">boolean</span>[] isSelected;</span><br><span class="line">	<span class="keyword">static</span> Queue&lt;<span class="keyword">int</span>[]&gt; queue;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> maxNum;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> T = Integer.parseInt(br.readLine());</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> t=<span class="number">1</span>; t&lt;=T; t++) &#123;</span><br><span class="line">			input();</span><br><span class="line">			maxNum = <span class="number">0</span>;</span><br><span class="line">			generateSubset(<span class="number">0</span>);</span><br><span class="line">			System.out.printf(<span class="string">"#%d %d\n"</span>, t, maxNum); <span class="comment">// 높은 스코어 출</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">generateSubset</span><span class="params">(<span class="keyword">int</span> cnt)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(cnt == numOfFood) &#123; <span class="comment">// 5개를 다 돌았을 때, </span></span><br><span class="line">			<span class="keyword">int</span> total =<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">int</span> sumOfScore =<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;numOfFood; i++) &#123;</span><br><span class="line">				<span class="keyword">if</span>(isSelected[i]) &#123; <span class="comment">// 선택 되어있으면</span></span><br><span class="line">					sumOfScore += foodInfo[i][<span class="number">0</span>]; <span class="comment">// 스코어 더함 </span></span><br><span class="line">					total += foodInfo[i][<span class="number">1</span>]; <span class="comment">// 음식 칼로리 더함</span></span><br><span class="line">					<span class="keyword">if</span>(total&gt;limit) <span class="keyword">return</span>; <span class="comment">// 만약 제한 칼로리를 넘으면 그냥 return</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			maxNum = Math.max(maxNum, sumOfScore); <span class="comment">// 제한 칼로리보다 낮으면서 높은 스코어를 갱신해서 저장</span></span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		isSelected[cnt] = <span class="keyword">true</span>; <span class="comment">// 선택</span></span><br><span class="line">		generateSubset(cnt+<span class="number">1</span>);</span><br><span class="line">		isSelected[cnt] = <span class="keyword">false</span>; <span class="comment">// 비선택</span></span><br><span class="line">		generateSubset(cnt+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">		numOfFood = Integer.parseInt(st.nextToken());</span><br><span class="line">		limit = Integer.parseInt(st.nextToken());</span><br><span class="line">		foodInfo = <span class="keyword">new</span> <span class="keyword">int</span>[numOfFood][<span class="number">2</span>];</span><br><span class="line">		isSelected = <span class="keyword">new</span> <span class="keyword">boolean</span>[numOfFood];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;numOfFood; i++) &#123;</span><br><span class="line">			st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">			foodInfo[i][<span class="number">0</span>] = Integer.parseInt(st.nextToken());</span><br><span class="line">			foodInfo[i][<span class="number">1</span>] = Integer.parseInt(st.nextToken());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/02/08/swea-5215/" data-id="ckkwuiz8u008znzc9fp2e93m5"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-boj-1010-java" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/02/06/boj-1010-java/">[boj] 1010:다리놓기 (java)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/02/06/boj-1010-java/" class="article-date">
-  <time datetime="2021-02-06T01:00:00.000Z" itemprop="datePublished">2021-02-06</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>문제링크: <a href="https://www.acmicpc.net/problem/1010" target="_blank" rel="noopener">https://www.acmicpc.net/problem/1010</a></li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> N, M;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> T;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">long</span>[][] dp= <span class="keyword">new</span> <span class="keyword">long</span>[<span class="number">31</span>][<span class="number">31</span>];</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		T = stoi(br.readLine());</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> t=<span class="number">0</span>; t&lt; T; t++) &#123;</span><br><span class="line">			input();</span><br><span class="line">				sb.append(combination(M,N)).append(<span class="string">"\n"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(sb);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">combination</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(dp[n][r] != <span class="number">0</span>) <span class="keyword">return</span> dp[n][r];</span><br><span class="line">		<span class="keyword">if</span>(n == r) &#123;</span><br><span class="line">			dp[n][r] = <span class="number">1</span>; <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">0</span> || r==<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(r == <span class="number">1</span>) &#123;</span><br><span class="line">			dp[n][r] = n; <span class="keyword">return</span> n;</span><br><span class="line">		&#125;</span><br><span class="line">		dp[n][r] = combination(n-<span class="number">1</span>,r-<span class="number">1</span>) + combination(n-<span class="number">1</span>, r);</span><br><span class="line">		<span class="keyword">return</span> dp[n][r];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">		N = stoi(st.nextToken());</span><br><span class="line">		M = stoi(st.nextToken());</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/02/06/boj-1010-java/" data-id="ckkwuiz780049nzc99yx940po"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-android-corutine-1" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/02/05/android-corutine-1/">[안드로이드] Corutine 간단 정리(미완성)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/02/05/android-corutine-1/" class="article-date">
-  <time datetime="2021-02-04T15:52:00.000Z" itemprop="datePublished">2021-02-05</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="코루틴이-뭘까-Corutine"><a href="#코루틴이-뭘까-Corutine" class="headerlink" title="코루틴이 뭘까 ? (Corutine)"></a>코루틴이 뭘까 ? (Corutine)</h1><p>코틀린 뿐만 아니라 파이썬, Javascript 등 여러언어에서 지원하고 있는 개념 !</p>
-<p>새로운 개념이 아닌 초창기부터 존재하던 개념이다.</p>
-<h2 id="근데-왜-지금-공부하는-걸까"><a href="#근데-왜-지금-공부하는-걸까" class="headerlink" title="근데 왜 지금 공부하는 걸까?"></a>근데 왜 지금 공부하는 걸까?</h2><p>코루틴을 사용하면 <strong>비동기 처리</strong>가 너무나도 쉽게 이루어질 수 있다.</p>
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p> <a href="https://www.acmicpc.net/problem/9328" target="_blank" rel="noopener">https://www.acmicpc.net/problem/9328</a></p>
+<table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 초</td>
+<td align="left">256 MB</td>
+<td align="left">8225</td>
+<td align="left">2174</td>
+<td align="left">1344</td>
+<td align="left">23.898%</td>
+</tr>
+</tbody></table>
+<p>상근이는 1층 빌딩에 침입해 매우 중요한 문서를 훔쳐오려고 한다. 상근이가 가지고 있는 평면도에는 문서의 위치가 모두 나타나 있다. 빌딩의 문은 모두 잠겨있기 때문에, 문을 열려면 열쇠가 필요하다. 상근이는 일부 열쇠를 이미 가지고 있고, 일부 열쇠는 빌딩의 바닥에 놓여져 있다.</p>
+<p>상근이가 훔칠 수 있는 문서의 최대 개수를 구하는 프로그램을 작성하시오.</p>
 <br>
 
-<blockquote>
-<p>코루틴 키워드 3가지</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 테스트 케이스의 개수가 주어진다. 테스트 케이스의 수는 100개를 넘지 않는다.</p>
+<p>각 테스트 케이스의 첫째 줄에는 지도의 높이와 너비 h와 w (2 ≤ h, w ≤ 100)가 주어진다. 다음 h개 줄에는 빌딩을 나타내는 w개의 문자가 주어지며, 각 문자는 다음 중 하나이다.</p>
+<ul>
+<li>‘.’는 빈 공간을 나타낸다.</li>
+<li>‘*’는 벽을 나타내며, 상근이는 벽을 통과할 수 없다.</li>
+<li>‘$’는 상근이가 훔쳐야하는 문서이다.</li>
+<li>알파벳 대문자는 문을 나타낸다.</li>
+<li>알파벳 소문자는 열쇠를 나타내며, 그 문자의 대문자인 모든 문을 열 수 있다.</li>
+</ul>
+<p>마지막 줄에는 상근이가 이미 가지고 있는 열쇠가 공백없이 주어진다. 만약, 열쇠를 하나도 가지고 있지 않는 경우에는 “0”이 주어진다.</p>
+<p>상근이는 처음에는 빌딩의 밖에 있으며, 빌딩 가장자리의 빈 공간이나 문을 통해 빌딩 안팎을 드나들 수 있다. 각각의 문에 대해서, 그 문을 열 수 있는 열쇠의 개수는 0개, 1개, 또는 그 이상이고, 각각의 열쇠에 대해서, 그 열쇠로 열 수 있는 문의 개수도 0개, 1개, 또는 그 이상이다. 열쇠는 여러 번 사용할 수 있다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>각 테스트 케이스 마다, 상근이가 훔칠 수 있는 문서의 최대 개수를 출력한다.</p>
+<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">5 17</span><br><span class="line">*****************</span><br><span class="line">.............**$*</span><br><span class="line">*B*A*P*C**X*Y*.X.</span><br><span class="line">*y*x*a*p**$*$**$*</span><br><span class="line">*****************</span><br><span class="line">cz</span><br><span class="line">5 11</span><br><span class="line">*.*********</span><br><span class="line">*...*...*x*</span><br><span class="line">*X*.*.*.*.*</span><br><span class="line">*$*...*...*</span><br><span class="line">***********</span><br><span class="line">0</span><br><span class="line">7 7</span><br><span class="line">*ABCDE*</span><br><span class="line">X.....F</span><br><span class="line">W.$$$.G</span><br><span class="line">V.$$$.H</span><br><span class="line">U.$$$.J</span><br><span class="line">T.....K</span><br><span class="line">*SQPML*</span><br><span class="line">irony</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">1</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"></span><br><span class="line">dx = [<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">dy = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span><span class="params">(x,y)</span>:</span></span><br><span class="line">    q = deque()</span><br><span class="line">    <span class="comment"># visted: 방문 여부 / + 2를 하는 이유는 newMaze() 함수를 수행 한 후 maze의 w,h 가 2씩 증가했기 때문이다.</span></span><br><span class="line">    visited = [[<span class="number">0</span>]* (w+<span class="number">2</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(h+<span class="number">2</span>)]</span><br><span class="line">    q.append([x,y])</span><br><span class="line">    visited[x][y] = <span class="number">1</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> q:</span><br><span class="line">        x, y = q.popleft()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">            nx = x + dx[i]</span><br><span class="line">            ny = y + dy[i]</span><br><span class="line">            <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; h+<span class="number">2</span> <span class="keyword">and</span> <span class="number">0</span> &lt;= ny &lt; w+<span class="number">2</span>:</span><br><span class="line">                <span class="comment"># 들리지 않았다면</span></span><br><span class="line">                <span class="keyword">if</span> visited[nx][ny] == <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">if</span> maze[nx][ny] == <span class="string">'$'</span>:</span><br><span class="line">                      	<span class="comment"># 문서 획득</span></span><br><span class="line">                        count += <span class="number">1</span></span><br><span class="line">                        maze[nx][ny] = <span class="string">'.'</span></span><br><span class="line">                        q.append([nx,ny])</span><br><span class="line">                        visited[nx][ny] = <span class="number">1</span></span><br><span class="line">                    <span class="keyword">elif</span> maze[nx][ny].islower():</span><br><span class="line">                      	<span class="comment"># 키 획득</span></span><br><span class="line">                        door[ord(maze[nx][ny])- ord(<span class="string">'a'</span>)] = <span class="number">1</span></span><br><span class="line">                        <span class="comment"># key를 주은 경우 key에 해당하는 문을 이미 지나쳤을 수도 있으니 visited와 q를 초기화 해준다.</span></span><br><span class="line">                        q = deque()</span><br><span class="line">                        visited = [[<span class="number">0</span>] * (w+<span class="number">2</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(h+<span class="number">2</span>)]</span><br><span class="line">                        maze[nx][ny] = <span class="string">'.'</span></span><br><span class="line">                        <span class="comment"># 이 위치부터 다시 시작</span></span><br><span class="line">                        q.append([nx,ny])</span><br><span class="line">                    <span class="keyword">elif</span> maze[nx][ny].isupper(): </span><br><span class="line">                      	<span class="comment"># 해당하는 키가 있다면</span></span><br><span class="line">                        <span class="keyword">if</span> door[ord(maze[nx][ny]) - ord(<span class="string">'A'</span>)]:</span><br><span class="line">                            maze[nx][ny] = <span class="string">'.'</span></span><br><span class="line">                            q.append([nx,ny])</span><br><span class="line">                            visited[nx][ny] = <span class="number">1</span></span><br><span class="line">                    <span class="keyword">elif</span> maze[nx][ny] == <span class="string">'.'</span>:</span><br><span class="line">                            q.append([nx,ny])</span><br><span class="line">                            visited[nx][ny] = <span class="number">1</span></span><br><span class="line">    print(count)         </span><br><span class="line"></span><br><span class="line"><span class="comment"># maze를 둘러싸는 '.' 라인을 만드는 함수</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">newMaze</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 행의 양 옆에 '.' 추가</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> maze:</span><br><span class="line">        i.insert(<span class="number">0</span>,<span class="string">'.'</span>)</span><br><span class="line">        i.append(<span class="string">'.'</span>)</span><br><span class="line">    <span class="comment"># 열의 위,아래에 '.' 추가</span></span><br><span class="line">    maze.insert(<span class="number">0</span>, [<span class="string">'.'</span>]*(w+<span class="number">2</span>))</span><br><span class="line">    maze.append([<span class="string">'.'</span>]*(w+<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n = int(input())</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">    h, w = map(int, input().split())</span><br><span class="line">    maze = [list(input().strip()) <span class="keyword">for</span> _ <span class="keyword">in</span> range(h)]</span><br><span class="line">    key= list(input().strip())</span><br><span class="line">    <span class="comment"># a 부터 z 까지</span></span><br><span class="line">    door = [<span class="number">0</span>] * <span class="number">26</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> key:</span><br><span class="line">        <span class="keyword">if</span> k != <span class="string">'0'</span>:</span><br><span class="line">            <span class="comment"># 예) j 가 'b'인 경우 door[98-97] 즉, door[1]에 1이 저장된다. </span></span><br><span class="line">            door[ord(k)- ord(<span class="string">'a'</span>)] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(h):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(w):</span><br><span class="line">            <span class="comment"># maze[i][j]가 대문자이면</span></span><br><span class="line">            <span class="keyword">if</span> maze[i][j].isupper():</span><br><span class="line">                <span class="comment"># 소문자와 대문자가 같은 문자일 경우</span></span><br><span class="line">                <span class="comment"># 예) maze[i][j]가 'B'일 경우 door[66-65] 즉, door[1]을 의미한다. door[1]은 'b' 키의 유무를 나타낸다.</span></span><br><span class="line">                <span class="keyword">if</span> door[ord(maze[i][j])- ord(<span class="string">'A'</span>)]:</span><br><span class="line">                    <span class="comment"># 들어갈 수 있으므로 '.' 으로 바꾼다.</span></span><br><span class="line">                    maze[i][j] = <span class="string">'.'</span></span><br><span class="line">    newMaze()</span><br><span class="line">    bfs(<span class="number">0</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>새로 배운 것</p>
+<ul>
+<li><p>새로운 bfs 방법 ! </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"></span><br><span class="line">dx = [<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">dy = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># n행 m열의 배열이라고 가정</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    q = deque()</span><br><span class="line">    q.append([x,y])</span><br><span class="line">    visited = [[<span class="number">0</span>]* m <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">    visited[x][y] = <span class="number">1</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> q:</span><br><span class="line">        x, y = q.popleft()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>): </span><br><span class="line">            nx = x + dx[i]</span><br><span class="line">            ny = y + dy[i]</span><br><span class="line">            <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; n <span class="keyword">and</span> <span class="number">0</span> &lt;= ny &lt; m:</span><br><span class="line">                <span class="keyword">if</span> visited[nx][ny] == <span class="number">0</span>:</span><br><span class="line">                    count += <span class="number">1</span></span><br><span class="line">                    q.append([nx,ny])</span><br><span class="line">                    visited[nx][ny] = <span class="number">1</span></span><br><span class="line">    print(count)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>deque는 popleft()를 이용하여 맨 왼쪽의 원소를 pop할 수 있다.</p>
+</li>
+<li><p>bfs 문제에서 입구를 찾기 애매한 경우(입구에 조건이 걸려있는 경우)에는 newMaze같은 함수를 통해 maze를 둘러싼 새로운 maze를 생성한다 ! </p>
+</li>
+<li><p><code>list(input().strip())</code> : input의 공백을 모두 제거한 후 list로 만든다. </p>
+<ul>
+<li>lstrip() : 왼쪽에 해당하는 공백제거</li>
+<li>rstrip() : 오른쪽에 해당하는 공백제거</li>
+<li>lstrip(‘.,’): 왼쪽에 존재하는 .와 ,를 제거. 이때, 공백은 제거하지 않는다.</li>
+</ul>
+</li>
+<li><p><code>ord()</code>: 하나의 유니코드 문자를 나타내는 문자열이 주어지면 해당 문자의 유니코드 코드 포인트를 나타내는 정수를 돌려준다. 예를 들어, ord(‘a’) 는 정수 97을 반환한다. 반대 개념으로는 <code>chr()</code> 이 있다.</p>
+<ul>
+<li><p>(참고) <strong>유니코드표</strong></p>
+<p><img src="../image/2020-09-086.32.13.png" alt="2020-09-086.32.13"><br> 출처: <a href="https://velog.io/@exploit017/%EC%95%84%EC%8A%A4%ED%82%A4-%EC%BD%94%EB%93%9C%ED%91%9C" target="_blank" rel="noopener">https://velog.io/@exploit017/%EC%95%84%EC%8A%A4%ED%82%A4-%EC%BD%94%EB%93%9C%ED%91%9C</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/09/backjoon-9328/" data-id="ckkwv7v1p00437sc9gptj7af4"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-backjoon-15654" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/02/09/backjoon-15654/">[백준알고리즘] N과 M(5) - 15654 (파이썬/ python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/02/09/backjoon-15654/" class="article-date">
+  <time datetime="2021-02-08T17:43:57.338Z" itemprop="datePublished">2021-02-09</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 초</td>
+<td align="left">512 MB</td>
+<td align="left">6458</td>
+<td align="left">4805</td>
+<td align="left">3849</td>
+<td align="left">74.219%</td>
+</tr>
+</tbody></table>
+<p>N개의 자연수와 자연수 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오. N개의 자연수는 모두 다른 수이다.</p>
+<ul>
+<li>N개의 자연수 중에서 M개를 고른 수열</li>
+</ul>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 8)</p>
+<p>둘째 줄에 N개의 수가 주어진다. 입력으로 주어지는 수는 10,000보다 작거나 같은 자연수이다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>한 줄에 하나씩 문제의 조건을 만족하는 수열을 출력한다. 중복되는 수열을 여러 번 출력하면 안되며, 각 수열은 공백으로 구분해서 출력해야 한다.</p>
+<p>수열은 사전 순으로 증가하는 순서로 출력해야 한다.</p>
+<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3 1</span><br><span class="line">4 5 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4 2</span><br><span class="line">9 8 7 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1 7</span><br><span class="line">1 8</span><br><span class="line">1 9</span><br><span class="line">7 1</span><br><span class="line">7 8</span><br><span class="line">7 9</span><br><span class="line">8 1</span><br><span class="line">8 7</span><br><span class="line">8 9</span><br><span class="line">9 1</span><br><span class="line">9 7</span><br><span class="line">9 8</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4 4</span><br><span class="line">1231 1232 1233 1234</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1231 1232 1233 1234</span><br><span class="line">1231 1232 1234 1233</span><br><span class="line">1231 1233 1232 1234</span><br><span class="line">1231 1233 1234 1232</span><br><span class="line">1231 1234 1232 1233</span><br><span class="line">1231 1234 1233 1232</span><br><span class="line">1232 1231 1233 1234</span><br><span class="line">1232 1231 1234 1233</span><br><span class="line">1232 1233 1231 1234</span><br><span class="line">1232 1233 1234 1231</span><br><span class="line">1232 1234 1231 1233</span><br><span class="line">1232 1234 1233 1231</span><br><span class="line">1233 1231 1232 1234</span><br><span class="line">1233 1231 1234 1232</span><br><span class="line">1233 1232 1231 1234</span><br><span class="line">1233 1232 1234 1231</span><br><span class="line">1233 1234 1231 1232</span><br><span class="line">1233 1234 1232 1231</span><br><span class="line">1234 1231 1232 1233</span><br><span class="line">1234 1231 1233 1232</span><br><span class="line">1234 1232 1231 1233</span><br><span class="line">1234 1232 1233 1231</span><br><span class="line">1234 1233 1231 1232</span><br><span class="line">1234 1233 1232 1231</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">N, M = map(int, input().split())</span><br><span class="line">nums = list(map(int, input().split()))</span><br><span class="line">nums.sort()</span><br><span class="line"></span><br><span class="line">out = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(M)]</span><br><span class="line">visited = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(N)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(depth)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> depth == M:</span><br><span class="line">        print(<span class="string">' '</span>.join(map(str, out)))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">        <span class="keyword">if</span> visited[i] == <span class="number">0</span>:</span><br><span class="line">            visited[i] = <span class="number">1</span></span><br><span class="line">            out[depth] = nums[i]</span><br><span class="line">            dfs(depth+<span class="number">1</span>)</span><br><span class="line">            visited[i] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">dfs(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>다른 N과 M 문제와 다른 점은 N의 수가 지정되어 있다는 점이다.</p>
+<p>N의 수들을 sort 한 다음 똑같이 dfs를 수행한다. 중복을 허용하지 않기 때문에 visited를 검사한다.</p>
+<ul>
+<li><p>다른 N과 M 문제처럼 out 리스트에 append 후 pop 하는 코드로 구현하였더니, pop 할 때마다 원소들이 재 정렬되기 때문에 런타임 에러가 발생하였다. </p>
+<p>-&gt; 어차피 print 할 때마다 out은 초기화 되어야 하기 때문에 out을 m길이의 list로 정의 하고 depth를 탐색할 때 out[depth]를 탐색한 nums 로 지정한다. </p>
+</li>
+<li><p>int로 받아오고 str 로 print 하는 과정이 꼬이면 틀렸습니다가 나온다ㅠ </p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/09/backjoon-15654/" data-id="ckkwv7v1h003c7sc9cjiu0edw"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-backjoon-1525" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/02/09/backjoon-1525/">[백준알고리즘] 퍼즐 - 1525 (파이썬/python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/02/09/backjoon-1525/" class="article-date">
+  <time datetime="2021-02-08T17:43:57.337Z" itemprop="datePublished">2021-02-09</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 초</td>
+<td align="left">32 MB</td>
+<td align="left">9234</td>
+<td align="left">3778</td>
+<td align="left">2219</td>
+<td align="left">39.386%</td>
+</tr>
+</tbody></table>
+<p>3×3 표에 다음과 같이 수가 채워져 있다. 오른쪽 아래 가장 끝 칸은 비어 있는 칸이다.</p>
+<table>
+<thead>
+<tr>
+<th align="left">1</th>
+<th>2</th>
+<th>3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">4</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td>8</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>어떤 수와 인접해 있는 네 개의 칸 중에 하나가 비어 있으면, 수를 그 칸으로 이동시킬 수가 있다. 물론 표 바깥으로 나가는 경우는 불가능하다. 우리의 목표는 초기 상태가 주어졌을 때, 최소의 이동으로 위와 같은 정리된 상태를 만드는 것이다. 다음의 예를 보자.</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th></th>
+<th>3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>2</td>
+<td>5</td>
+</tr>
+<tr>
+<td>7</td>
+<td>8</td>
+<td>6</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td></td>
+<td>5</td>
+</tr>
+<tr>
+<td>7</td>
+<td>8</td>
+<td>6</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>5</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>8</td>
+<td>6</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr>
+<td>7</td>
+<td>8</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>가장 윗 상태에서 세 번의 이동을 통해 정리된 상태를 만들 수 있다. 이와 같이 최소 이동 횟수를 구하는 프로그램을 작성하시오.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>세 줄에 걸쳐서 표에 채워져 있는 아홉 개의 수가 주어진다. 한 줄에 세 개의 수가 주어지며, 빈 칸은 0으로 나타낸다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 최소의 이동 횟수를 출력한다. 이동이 불가능한 경우 -1을 출력한다.</p>
+<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 0 3</span><br><span class="line">4 2 5</span><br><span class="line">7 8 6</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3 6 0</span><br><span class="line">8 1 2</span><br><span class="line">7 4 5</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
+<li>문제를 번역한 사람: <a href="https://www.acmicpc.net/user/baekjoon" target="_blank" rel="noopener">baekjoon</a></li>
+<li>잘못된 데이터를 찾은 사람: <a href="https://www.acmicpc.net/user/djm03178" target="_blank" rel="noopener">djm03178</a></li>
+<li>데이터를 추가한 사람: <a href="https://www.acmicpc.net/user/hello70825" target="_blank" rel="noopener">hello70825</a></li>
+<li>메모리 제한을 수정한 사람: <a href="https://www.acmicpc.net/user/portableangel" target="_blank" rel="noopener">portableangel</a></li>
+</ul>
+<h2 id="알고리즘-분류"><a href="#알고리즘-분류" class="headerlink" title="알고리즘 분류"></a>알고리즘 분류</h2><ul>
+<li><a href="https://www.acmicpc.net/problem/tag/7" target="_blank" rel="noopener">그래프 이론</a></li>
+<li><a href="https://www.acmicpc.net/problem/tag/11" target="_blank" rel="noopener">그래프 탐색</a></li>
+<li><a href="https://www.acmicpc.net/problem/tag/126" target="_blank" rel="noopener">너비 우선 탐색</a></li>
+<li><a href="https://www.acmicpc.net/problem/tag/14" target="_blank" rel="noopener">비트마스킹</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>BFS로 푸는 문제이다. 저번에 미로 문제를 풀 때 썼던 방식과 유사하게 풀면 될것이라 생각해서 풀었더니 완전 틀려버렸다ㅠㅠ..</p>
+<p>처음 제출했던 코드 (틀림)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">table = []</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">    table.append(list(map(int,input().split())))</span><br><span class="line"></span><br><span class="line">sorted = [[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>,<span class="number">0</span>]]</span><br><span class="line">visited = []</span><br><span class="line">queue = [[<span class="number">0</span>,<span class="number">0</span>]]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">()</span>:</span></span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        [i, j] = queue.pop(<span class="number">0</span>)</span><br><span class="line">        visited.append([i,j])</span><br><span class="line">        <span class="keyword">if</span> i&gt;<span class="number">0</span> <span class="keyword">and</span> [i<span class="number">-1</span>,j] <span class="keyword">not</span> <span class="keyword">in</span> visited:</span><br><span class="line">            <span class="keyword">if</span> table[i<span class="number">-1</span>][j] != sorted[i<span class="number">-1</span>][j] <span class="keyword">and</span> table[i][j] == <span class="number">0</span>:</span><br><span class="line">                answer += <span class="number">1</span></span><br><span class="line">                table[i][j] = table[i<span class="number">-1</span>][j]</span><br><span class="line">                table[i<span class="number">-1</span>][j] = <span class="number">0</span></span><br><span class="line">            queue.append([i<span class="number">-1</span>,j])</span><br><span class="line">        <span class="keyword">if</span> j&gt;<span class="number">0</span> <span class="keyword">and</span> [i,j<span class="number">-1</span>] <span class="keyword">not</span> <span class="keyword">in</span> visited:</span><br><span class="line">            <span class="keyword">if</span> table[i][j<span class="number">-1</span>] != sorted[i][j<span class="number">-1</span>] <span class="keyword">and</span> table[i][j] == <span class="number">0</span>:</span><br><span class="line">                answer += <span class="number">1</span></span><br><span class="line">                table[i][j] = table[i][j<span class="number">-1</span>]</span><br><span class="line">                table[i][j<span class="number">-1</span>] = <span class="number">0</span></span><br><span class="line">            queue.append([i,j<span class="number">-1</span>])</span><br><span class="line">        <span class="keyword">if</span> j&lt;<span class="number">2</span> <span class="keyword">and</span> [i,j+<span class="number">1</span>] <span class="keyword">not</span> <span class="keyword">in</span> visited:</span><br><span class="line">            <span class="keyword">if</span> table[i][j+<span class="number">1</span>] != sorted[i][j+<span class="number">1</span>] <span class="keyword">and</span> table[i][j] == <span class="number">0</span>:</span><br><span class="line">                answer += <span class="number">1</span></span><br><span class="line">                table[i][j] = table[i][j+<span class="number">1</span>]</span><br><span class="line">                table[i][j+<span class="number">1</span>] = <span class="number">0</span></span><br><span class="line">            queue.append([i,j+<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">if</span> i&lt;<span class="number">2</span> <span class="keyword">and</span> [i+<span class="number">1</span>,j] <span class="keyword">not</span> <span class="keyword">in</span> visited:</span><br><span class="line">            <span class="keyword">if</span> table[i+<span class="number">1</span>][j] != sorted[i+<span class="number">1</span>][j] <span class="keyword">and</span> table[i][j] == <span class="number">0</span>:</span><br><span class="line">                answer += <span class="number">1</span></span><br><span class="line">                table[i][j] = table[i+<span class="number">1</span>][j]</span><br><span class="line">                table[i+<span class="number">1</span>][j] = <span class="number">0</span></span><br><span class="line">            queue.append([i+<span class="number">1</span>,j])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> table != sorted:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> answer</span><br><span class="line"></span><br><span class="line">print(solution())</span><br></pre></td></tr></table></figure>
+
+<p>문제점 -&gt; 0이 움직일 수 있는 모든 조건을 검사하는 것이 아니다. 0이 움직일 수 있는 모든 조건을 검사하려면 queue 에 table 배열이 쌓여야하는데 이는 구현이 복잡할 뿐더러 메모리 제한 오류가 발생한다고 한다. 이 개념을 가능하게 하려면 배열이 아닌 string 형태로 table을 받아와 다루면 된다 (검색을 통해 알게 되었다.)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">()</span>:</span></span><br><span class="line">    queue = [table]</span><br><span class="line">    visited = &#123;table:<span class="number">0</span>&#125; <span class="comment"># 딕셔너리 key: table , value: 움직인 수</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        q = queue.pop(<span class="number">0</span>)</span><br><span class="line">        step = visited.get(q) <span class="comment"># 해당 테이블까지 움직인 step 수를 얻어온다.</span></span><br><span class="line">        zeroIdx = q.index(<span class="string">'0'</span>)</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span> q == <span class="string">'123456780'</span>:</span><br><span class="line">            <span class="keyword">return</span> step</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># q가 배열의 모습일 때, 0의 인덱스를 구한다.</span></span><br><span class="line">        i = zeroIdx//<span class="number">3</span></span><br><span class="line">        j = zeroIdx - <span class="number">3</span>*(zeroIdx//<span class="number">3</span>)</span><br><span class="line"> </span><br><span class="line">        step += <span class="number">1</span></span><br><span class="line">        ql = list(q)</span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">0</span>: <span class="comment"># 위</span></span><br><span class="line">            ql[zeroIdx], ql[zeroIdx<span class="number">-3</span>] = ql[zeroIdx<span class="number">-3</span>], ql[zeroIdx]</span><br><span class="line">            qs = <span class="string">''</span>.join(ql)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> visited.get(qs):</span><br><span class="line">                visited[qs] = step</span><br><span class="line">                queue.append(qs)</span><br><span class="line">            ql[zeroIdx], ql[zeroIdx<span class="number">-3</span>] = ql[zeroIdx<span class="number">-3</span>], ql[zeroIdx]</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span> i &lt; <span class="number">2</span>: <span class="comment"># 아래</span></span><br><span class="line">            ql[zeroIdx], ql[zeroIdx+<span class="number">3</span>] = ql[zeroIdx+<span class="number">3</span>], ql[zeroIdx]</span><br><span class="line">            qs = <span class="string">''</span>.join(ql)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> visited.get(qs):</span><br><span class="line">                visited[qs] = step</span><br><span class="line">                queue.append(qs)</span><br><span class="line">            ql[zeroIdx], ql[zeroIdx+<span class="number">3</span>] = ql[zeroIdx+<span class="number">3</span>], ql[zeroIdx]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> j &gt; <span class="number">0</span>: <span class="comment"># 왼쪽</span></span><br><span class="line">            ql[zeroIdx], ql[zeroIdx<span class="number">-1</span>] = ql[zeroIdx<span class="number">-1</span>], ql[zeroIdx]</span><br><span class="line">            qs = <span class="string">''</span>.join(ql)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> visited.get(qs):</span><br><span class="line">                visited[qs] = step</span><br><span class="line">                queue.append(qs)</span><br><span class="line">            ql[zeroIdx], ql[zeroIdx<span class="number">-1</span>] = ql[zeroIdx<span class="number">-1</span>], ql[zeroIdx]</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">if</span> j &lt; <span class="number">2</span>: <span class="comment"># 오른쪽</span></span><br><span class="line">            ql[zeroIdx], ql[zeroIdx+<span class="number">1</span>] = ql[zeroIdx+<span class="number">1</span>], ql[zeroIdx]</span><br><span class="line">            qs = <span class="string">''</span>.join(ql)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> visited.get(qs):</span><br><span class="line">                visited[qs] = step</span><br><span class="line">                queue.append(qs)</span><br><span class="line">            ql[zeroIdx], ql[zeroIdx+<span class="number">1</span>] = ql[zeroIdx+<span class="number">1</span>], ql[zeroIdx]</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 배열이 아닌 str 형태로 받아온다.</span></span><br><span class="line">table = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">    table += <span class="string">''</span>.join(sys.stdin.readline().split())</span><br><span class="line"> </span><br><span class="line">print(solution())</span><br></pre></td></tr></table></figure>
+
+<p>난 아직 많이 부족하다는 것을 깨달았다 ㅠ-ㅠ 그래도 딕셔너리 / 새로운 bfs 방식 / 새로운 문제 접근 방식 을 배운 것에 만족하자 ! </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/09/backjoon-1525/" data-id="ckkwv7v1f00357sc9d10d05wo"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-backjoon-15649" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/02/09/backjoon-15649/">[백준알고리즘/ boj] N과 M(1) - 15649 (파이썬/ python)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/02/09/backjoon-15649/" class="article-date">
+  <time datetime="2021-02-08T17:43:57.337Z" itemprop="datePublished">2021-02-09</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 초</td>
+<td align="left">512 MB</td>
+<td align="left">20319</td>
+<td align="left">12289</td>
+<td align="left">8369</td>
+<td align="left">60.261%</td>
+</tr>
+</tbody></table>
+<h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>실버 3 문제이당</p>
+<p>자연수 N과 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오.</p>
+<ul>
+<li>1부터 N까지 자연수 중에서 중복 없이 M개를 고른 수열</li>
+</ul>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 자연수 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 8)</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>한 줄에 하나씩 문제의 조건을 만족하는 수열을 출력한다. 중복되는 수열을 여러 번 출력하면 안되며, 각 수열은 공백으로 구분해서 출력해야 한다.</p>
+<p>수열은 사전 순으로 증가하는 순서로 출력해야 한다.</p>
+<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1 2</span><br><span class="line">1 3</span><br><span class="line">1 4</span><br><span class="line">2 1</span><br><span class="line">2 3</span><br><span class="line">2 4</span><br><span class="line">3 1</span><br><span class="line">3 2</span><br><span class="line">3 4</span><br><span class="line">4 1</span><br><span class="line">4 2</span><br><span class="line">4 3</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4 4</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1 2 3 4</span><br><span class="line">1 2 4 3</span><br><span class="line">1 3 2 4</span><br><span class="line">1 3 4 2</span><br><span class="line">1 4 2 3</span><br><span class="line">1 4 3 2</span><br><span class="line">2 1 3 4</span><br><span class="line">2 1 4 3</span><br><span class="line">2 3 1 4</span><br><span class="line">2 3 4 1</span><br><span class="line">2 4 1 3</span><br><span class="line">2 4 3 1</span><br><span class="line">3 1 2 4</span><br><span class="line">3 1 4 2</span><br><span class="line">3 2 1 4</span><br><span class="line">3 2 4 1</span><br><span class="line">3 4 1 2</span><br><span class="line">3 4 2 1</span><br><span class="line">4 1 2 3</span><br><span class="line">4 1 3 2</span><br><span class="line">4 2 1 3</span><br><span class="line">4 2 3 1</span><br><span class="line">4 3 1 2</span><br><span class="line">4 3 2 1</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>순열이랑 dfs 익히기 위해서 풀어보았당.</p>
 <ol>
-<li>협력형 멀티 태스킹</li>
-<li>동시성 프로그래밍 지원</li>
-<li>비동기 처리를 쉽게 도와줌</li>
-</ol>
-</blockquote>
-<h1 id="1-협력형-멀티-태스킹-Co-rutine"><a href="#1-협력형-멀티-태스킹-Co-rutine" class="headerlink" title="1. 협력형 멀티 태스킹 (Co + rutine)"></a>1. 협력형 멀티 태스킹 (Co + rutine)</h1><p><strong>Co</strong> 는 협력, 함께 라는 의미를 지니고 있다. </p>
-<p><strong>rutine</strong>은 하나의 태스크, 함수</p>
-<p>즉, 코루틴은 협력하는 함수이다.</p>
-<blockquote>
-<p>여기서 rutine은 main/ sub로 나누어지는데 흔하게 볼 수 있는 main 함수와 sub 함수 같은 개념으로 이해하면 편하다.</p>
-</blockquote>
-<p><strong>일반 함수</strong>는 루틴에 진입점(함수 호출)과 탈출점(return이나 닫는 괄호’}’)이 명확하다. <strong>코루틴</strong>은 진입점과 탈출점이 여러개이다.</p>
-<p><strong><code>suspend</code></strong> 로 선언된 함수를 만나면 코루틴 밖으로 잠시 나갈 수 있다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> draw <span class="title">Person</span><span class="params">()</span></span> &#123;</span><br><span class="line">  startCorutine()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">drawCircle</span><span class="params">()</span></span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>순열을 이용하는 방법 (순서 o)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> permutations</span><br><span class="line"></span><br><span class="line">input = sys.stdin.readline</span><br><span class="line">N, M = map(int,input().split())</span><br><span class="line"></span><br><span class="line">answer = permutations(range(<span class="number">1</span>, N+<span class="number">1</span>),M)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> answer:</span><br><span class="line">    print(<span class="string">' '</span>.join(map(str, i)))</span><br></pre></td></tr></table></figure>
 
-<p>참고</p>
-<p><a href="https://wooooooak.github.io/kotlin/2019/08/25/%EC%BD%94%ED%8B%80%EB%A6%B0-%EC%BD%94%EB%A3%A8%ED%8B%B4-%EA%B0%9C%EB%85%90-%EC%9D%B5%ED%9E%88%EA%B8%B0/" target="_blank" rel="noopener">코틀린 코루틴(corutine) 개념 익히기</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/02/05/android-corutine-1/" data-id="ckkwuiz5x000dnzc9087nbk31"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-boj-2493" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/02/04/boj-2493/">[boj] 2493: 탑 (java) / 스택</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/02/04/boj-2493/" class="article-date">
-  <time datetime="2021-02-04T11:18:00.000Z" itemprop="datePublished">2021-02-04</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>문제 링크: <a href="https://www.acmicpc.net/problem/2493" target="_blank" rel="noopener">https://www.acmicpc.net/problem/2493</a></li>
+<ul>
+<li>1 부터 N 까지니까 <code>range(1, N+1)</code></li>
+<li><code>print(&#39; &#39;.join(map(str, i)))</code> <ul>
+<li>한 칸 띄우고 join 한다, 출력이 string 형태여서 map 한다. </li>
 </ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> N = stoi(br.readLine());</span><br><span class="line">		st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">		Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">		<span class="keyword">int</span>[] topHeight = <span class="keyword">new</span> <span class="keyword">int</span>[N]; <span class="comment">// 탑의 높이가 담겨있다. topHeight[i] == 높이, i+1 == 탑의 번호</span></span><br><span class="line">		<span class="keyword">int</span>[] answer = <span class="keyword">new</span> <span class="keyword">int</span>[N]; <span class="comment">// 탑의 번호가 담겨진다.</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">			topHeight[i] = stoi(st.nextToken());</span><br><span class="line">		&#125;</span><br><span class="line">    <span class="comment">// 1.</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = N - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">			<span class="keyword">if</span> (stack.isEmpty()) &#123;</span><br><span class="line">				stack.add(i);</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">      <span class="comment">// 2. </span></span><br><span class="line">			<span class="keyword">while</span> (topHeight[stack.peek()] &lt;= topHeight[i]) &#123;</span><br><span class="line">				answer[stack.pop()] = i + <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">if</span> (stack.size() == <span class="number">0</span>)</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			stack.add(i);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">			System.out.print(answer[i] + <span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li><p><strong>오른쪽 탑에서부터 왼쪽</strong>으로 레이저 신호를 보내기 때문에 마지막 인덱스(오른쪽)부터 살펴본다(신호를 보낸다). <strong>stack</strong>에는 <strong>레이저 신호를 보냈지만 신호를 받은 탑이 등장하지 않은 탑</strong>들이 담긴다.</p>
-<blockquote>
-<p>이때, 주의할 점은 stack에는 탑의 번호(i)를 집어넣었다. answer 배열의 인덱스가 될 것이기 때문이다. </p>
-<p>answer 배열은 인덱스에 해당하는 탑의 레이저 수신호를 받은 탑의 번호가 담겨져야한다. </p>
-</blockquote>
 </li>
-<li><p>i번째 탑이 스택 값들보다 높이가 높거나 같으면 스택 값들을 빼고, 낮으면 그냥 add 한다.</p>
+<li>itertools ! permutations ! 외우기 !</li>
+</ul>
 </li>
 </ol>
-<ul>
-<li><p>스택 = 신호를 보낸 탑이 들어감 (<strong>아직 신호를 받은 탑은 없는 상태</strong>)</p>
+<ol start="2">
+<li><p>DFS 를 이용하는 방법</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">N, M = map(int, input().split())</span><br><span class="line">visited = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(N)]</span><br><span class="line">answer = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(depth)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> depth == M:</span><br><span class="line">        print(<span class="string">' '</span>.join(map(str, answer)))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(visited)):</span><br><span class="line">        <span class="keyword">if</span> visited[i] == <span class="number">0</span>:</span><br><span class="line">            visited[i] = <span class="number">1</span></span><br><span class="line">            answer.append(i+<span class="number">1</span>)</span><br><span class="line">            dfs(depth +<span class="number">1</span>)</span><br><span class="line">            visited[i] = <span class="number">0</span></span><br><span class="line">            answer.pop()</span><br><span class="line"></span><br><span class="line">dfs(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
 </li>
-<li><p><strong>i번째 탑</strong> = 스택 안에 있는 탑보다 높이가 <strong>높거나 같으면</strong> 이들의 <strong>레이저 신호를 받은것</strong>을 의미한다. </p>
-<ul>
-<li>i번째 탑의 높이보다 작거나 같은 스택값은 모조리 pop(신호를 받은 탑이 생겼다!!!! 하면서 나온다, 선입후출)한다. 신호를 보낸 탑의 번호인 <code>stack.pop()</code>은 <code>answer</code>의 <strong>인덱스</strong>가 되고, <code>i+1</code>을 <code>answer</code>에 넣으면 된다. (<code>i+1</code>인 이유는 탑의 번호가 1부터 시작하기 때문이다 ) </li>
-<li>i번째 탑의 인덱스는 스택에 <strong>무조건 add</strong> (i번째 탑의 신호를 받게될 탑은 다음 for문 이후로 나올것이기 때문 : remind! 신호는 <code>오른쪽에서 왼쪽</code>으로 보낸다)</li>
-</ul>
-</li>
-<li><p>스택에 값이 남았다는 것은 이들의 신호를 아무 탑도 받지 못했다는 것을 의미한다. (이유: 가장 왼쪽 탑이거나, 왼쪽 탑들보다 높이가 높은 경우)</p>
-<ul>
-<li>이땐 <code>answer[인덱스]</code>에 <code>0</code>을 할당해야하는데 <code>answer</code> 배열은 기본값이 <code>0</code>으로 초기화되어있기 때문에 그냥 끝낸다.</li>
-</ul>
-</li>
-</ul>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/02/04/boj-2493/" data-id="ckkwuiz7d004pnzc992q0gl6i"
+      <a data-url="http://yoursite.com/2021/02/09/backjoon-15649/" data-id="ckkwv7v1g00377sc91ovk205p"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
@@ -546,7 +1136,7 @@
         
           
 
-<article id="post-boj-10866" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-backjoon-15651" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -554,7 +1144,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2021/02/02/boj-10866/">[boj] 10866: 덱(java)</a>
+      <a class="article-title" href="/2021/02/09/backjoon-15651/">[백준알고리즘] N과 M(3) - 15651 (파이썬/ python)</a>
     </h2>
   
   
@@ -567,8 +1157,8 @@
 
     
       <div class="article-meta">
-        <a href="/2021/02/02/boj-10866/" class="article-date">
-  <time datetime="2021-02-02T12:14:00.000Z" itemprop="datePublished">2021-02-02</time>
+        <a href="/2021/02/09/backjoon-15651/" class="article-date">
+  <time datetime="2021-02-08T17:43:57.337Z" itemprop="datePublished">2021-02-09</time>
 </a>
         
       </div>
@@ -583,225 +1173,58 @@
       
 
       
-        <ul>
-<li>문제링크: <a href="https://www.acmicpc.net/problem/10866" target="_blank" rel="noopener">https://www.acmicpc.net/problem/10866</a></li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> BufferedWriter bw = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> OutputStreamWriter(System.out));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> T;</span><br><span class="line">	<span class="keyword">static</span> Deque&lt;Integer&gt; deque = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		T = stoi(br.readLine());</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span> ; i &lt; T; i++) &#123;</span><br><span class="line">			st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">			String doing = st.nextToken();</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">switch</span>(doing) &#123;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"push_front"</span> :</span><br><span class="line">					deque.addFirst(stoi(st.nextToken())); </span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"push_back"</span> :</span><br><span class="line">					deque.addLast(stoi(st.nextToken())); </span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"pop_front"</span> :</span><br><span class="line">					<span class="keyword">if</span>(deque.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="string">"-1\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					bw.append(deque.pollFirst()+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"pop_back"</span> :</span><br><span class="line">					<span class="keyword">if</span>(deque.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="string">"-1\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					bw.append(deque.pollLast()+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"size"</span> :</span><br><span class="line">					bw.append(deque.size()+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"empty"</span>:</span><br><span class="line">					<span class="keyword">if</span>(deque.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="number">1</span>+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">						bw.append(<span class="number">0</span>+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"front"</span> :</span><br><span class="line">					<span class="keyword">if</span>(deque.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="string">"-1\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					bw.append(deque.peekFirst()+<span class="string">"\n"</span>);<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"back"</span> :</span><br><span class="line">					<span class="keyword">if</span>(deque.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="string">"-1\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					bw.append(deque.peekLast()+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		bw.flush();</span><br><span class="line">		bw.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/02/02/boj-10866/" data-id="ckkwuiz7a004jnzc9blncdmiv"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-swea-1208" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/02/02/swea-1208/">[SW Expert Academy] 1208: Flatten - D3 (java)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/02/02/swea-1208/" class="article-date">
-  <time datetime="2021-02-02T04:55:42.000Z" itemprop="datePublished">2021-02-02</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>문제 링크(로그인 해야함) : <a href="https://swexpertacademy.com/main/solvingProblem/solvingProblem.do" target="_blank" rel="noopener">https://swexpertacademy.com/main/solvingProblem/solvingProblem.do</a></li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.StringTokenizer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution_D3_1208_Flatten</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> N;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span>[] boxes = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> t = <span class="number">1</span>; t &lt;=<span class="number">10</span>; t++) &#123;</span><br><span class="line">			input();</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">				dump();</span><br><span class="line">			&#125;</span><br><span class="line">			Arrays.sort(boxes);</span><br><span class="line">			System.out.printf(<span class="string">"#%d %d\n"</span>, t, boxes[<span class="number">99</span>]-boxes[<span class="number">0</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		N = stoi(br.readLine());</span><br><span class="line">		st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">			boxes[i] = stoi(st.nextToken());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">dump</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Arrays.sort(boxes);</span><br><span class="line">		boxes[<span class="number">0</span>]++;</span><br><span class="line">		boxes[<span class="number">99</span>]--;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>나는 minNum 과 maxNum을 구해서 계속 빼고 더하고 갱신하는 방식으로 풀려고 했는데 잘 안됐다.</p>
-<p>위와 같이 풀면 훨씬 간단하고 복잡도도 적어진다.</p>
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 초</td>
+<td align="left">512 MB</td>
+<td align="left">13368</td>
+<td align="left">8665</td>
+<td align="left">6751</td>
+<td align="left">65.486%</td>
+</tr>
+</tbody></table>
+<p>자연수 N과 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오.</p>
 <ul>
-<li>dump의 수 만큼 Arrays.sort()를 이용해 최솟값은 boxes[0] 에 위치시켜 +1 하고, 최댓값은 boxes[99]에 위치시켜 -1 한다.</li>
-<li>마지막 dump 수행 후, 한번더 sort해주어야한다. boxes[0]이 -1,  boxes[99]에 +1 한 상태로 끝났기 때문에 이들이 최소, 최댓값이 아닐수도 있기 때문이다.</li>
+<li>1부터 N까지 자연수 중에서 M개를 고른 수열</li>
+<li>같은 수를 여러 번 골라도 된다.</li>
 </ul>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 자연수 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 7)</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>한 줄에 하나씩 문제의 조건을 만족하는 수열을 출력한다. 중복되는 수열을 여러 번 출력하면 안되며, 각 수열은 공백으로 구분해서 출력해야 한다.</p>
+<p>수열은 사전 순으로 증가하는 순서로 출력해야 한다.</p>
+<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1 1</span><br><span class="line">1 2</span><br><span class="line">1 3</span><br><span class="line">1 4</span><br><span class="line">2 1</span><br><span class="line">2 2</span><br><span class="line">2 3</span><br><span class="line">2 4</span><br><span class="line">3 1</span><br><span class="line">3 2</span><br><span class="line">3 3</span><br><span class="line">3 4</span><br><span class="line">4 1</span><br><span class="line">4 2</span><br><span class="line">4 3</span><br><span class="line">4 4</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 3</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">1 1 1</span><br><span class="line">1 1 2</span><br><span class="line">1 1 3</span><br><span class="line">1 2 1</span><br><span class="line">1 2 2</span><br><span class="line">1 2 3</span><br><span class="line">1 3 1</span><br><span class="line">1 3 2</span><br><span class="line">1 3 3</span><br><span class="line">2 1 1</span><br><span class="line">2 1 2</span><br><span class="line">2 1 3</span><br><span class="line">2 2 1</span><br><span class="line">2 2 2</span><br><span class="line">2 2 3</span><br><span class="line">2 3 1</span><br><span class="line">2 3 2</span><br><span class="line">2 3 3</span><br><span class="line">3 1 1</span><br><span class="line">3 1 2</span><br><span class="line">3 1 3</span><br><span class="line">3 2 1</span><br><span class="line">3 2 2</span><br><span class="line">3 2 3</span><br><span class="line">3 3 1</span><br><span class="line">3 3 2</span><br><span class="line">3 3 3</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">N, M = map(int, input().split())</span><br><span class="line">queue = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(depth)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> depth == M:</span><br><span class="line">        print(<span class="string">' '</span>.join(map(str, queue)))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">        queue.append(i+<span class="number">1</span>)</span><br><span class="line">        dfs(depth+<span class="number">1</span>)</span><br><span class="line">        queue.pop()</span><br><span class="line"></span><br><span class="line">dfs(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>N과 M(1) 과 다르게 중복을 허용하기 때문에 방문여부를 체크하지 않아도 된다 !</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/02/02/swea-1208/" data-id="ckkwuiz8r008qnzc9ch1h7i7z"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-boj-1244" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/02/01/boj-1244/">[boj] 1244: 스위치 켜고 끄기 (java)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/02/01/boj-1244/" class="article-date">
-  <time datetime="2021-02-01T12:44:00.000Z" itemprop="datePublished">2021-02-01</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>문제 링크: <a href="https://www.acmicpc.net/problem/1244" target="_blank" rel="noopener">https://www.acmicpc.net/problem/1244</a></li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> T, N;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span>[] switches;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		input();</span><br><span class="line">		N = stoi(br.readLine());</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n &lt; N; n++) &#123;</span><br><span class="line">			st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">			<span class="keyword">int</span> sex = stoi(st.nextToken());</span><br><span class="line">			<span class="keyword">int</span> switchNum = stoi(st.nextToken());</span><br><span class="line">			reverseSwitch(switchNum, sex);</span><br><span class="line">		&#125;</span><br><span class="line">		printAnswer();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">reverseSwitch</span><span class="params">(<span class="keyword">int</span> sn, <span class="keyword">int</span> s)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> tempSn = sn;</span><br><span class="line">		<span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span> (s == <span class="number">1</span>) &#123; <span class="comment">// 남</span></span><br><span class="line">			<span class="keyword">while</span> (sn &lt;= T) &#123;</span><br><span class="line">				switches[sn] = switches[sn] == <span class="number">1</span> ? <span class="number">0</span> : <span class="number">1</span>; <span class="comment">// sn 이 0이면 1, 1이면 0으로 reverse</span></span><br><span class="line">				num++;</span><br><span class="line">				sn = tempSn * num; <span class="comment">// sn은 sn의 배수가 된다. </span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123; <span class="comment">// 여</span></span><br><span class="line">			switches[sn] = switches[sn] == <span class="number">1</span> ? <span class="number">0</span> : <span class="number">1</span>; <span class="comment">// 중심은 무조건 reverse</span></span><br><span class="line">      <span class="comment">// 좌우 탐색할 때 범위를 넘지 않고, 좌우 대칭이면</span></span><br><span class="line">			<span class="keyword">while</span> (sn + num &lt;= T &amp;&amp; sn - num &gt; <span class="number">0</span> &amp;&amp; switches[sn + num] == switches[sn - num]) &#123;</span><br><span class="line">				<span class="comment">// 좌우 값 reverse</span></span><br><span class="line">        switches[sn + num] = switches[sn + num] == <span class="number">1</span> ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">				switches[sn - num] = switches[sn - num] == <span class="number">1</span> ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 다음 좌우 탐색을 위해 num++</span></span><br><span class="line">				num++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		T = stoi(br.readLine());</span><br><span class="line">		switches = <span class="keyword">new</span> <span class="keyword">int</span>[T + <span class="number">1</span>];</span><br><span class="line">		st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="number">1</span>; t &lt;= T; t++) &#123;</span><br><span class="line">			switches[t] = stoi(st.nextToken());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printAnswer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="number">1</span>; t &lt;T; t++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (cnt &gt;= <span class="number">20</span>) &#123; <span class="comment">// 20개 출력했으면</span></span><br><span class="line">				System.out.println(switches[t]); <span class="comment">// 개행</span></span><br><span class="line">				cnt = <span class="number">1</span>; <span class="comment">// 다시 카운트 1로 초기화 </span></span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.print(switches[t] + <span class="string">" "</span>);</span><br><span class="line">				cnt++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.print(switches[T]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/02/01/boj-1244/" data-id="ckkwuiz7e004vnzc9herw5gvy"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-boj-2164" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/02/01/boj-2164/">[boj] 2164: 카드2 (java)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/02/01/boj-2164/" class="article-date">
-  <time datetime="2021-02-01T12:44:00.000Z" itemprop="datePublished">2021-02-01</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>문제 링크: <a href="https://www.acmicpc.net/problem/2164" target="_blank" rel="noopener">https://www.acmicpc.net/problem/2164</a></li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> T, N;</span><br><span class="line">	<span class="keyword">static</span> Queue&lt;Integer&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">boolean</span> isFloorTurn = <span class="keyword">true</span>; </span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		input();</span><br><span class="line">		<span class="keyword">while</span>(queue.size()&gt;<span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(isFloorTurn) &#123;</span><br><span class="line">				queue.poll();</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				queue.add(queue.poll());</span><br><span class="line">			&#125;</span><br><span class="line">			isFloorTurn = isFloorTurn ? <span class="keyword">false</span>: <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		printAnswer();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		T = stoi(br.readLine());</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> t = <span class="number">1</span> ; t&lt;=T; t++) &#123;</span><br><span class="line">			queue.add(t);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printAnswer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.print(queue.peek());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>queue 사이즈가 1보다 클동안 (카드가 두개 이상 남아있을 동안) <ul>
-<li>꼭대기 하나를 버릴 순서이면 poll해서 제거해버림</li>
-<li>꼭대기 하나를 버린 상태여서 아래로 넣어야하는 상태이면 poll로 제거한 카드를 add 해서 가장 아래로 깔아준다.</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/02/01/boj-2164/" data-id="ckkwuiz7f004xnzc95rqf9ihr"
+      <a data-url="http://yoursite.com/2021/02/09/backjoon-15651/" data-id="ckkwv7v1h003a7sc9b400444s"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
@@ -854,6 +1277,10 @@
   <button class="navbar-toggle"></button>
 <nav class="navbar">
   
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="IT&#39;s easy if you try"></a>
+    </div>
+  
   <ul class="nav nav-main">
     
       <li class="nav-item">
@@ -865,11 +1292,11 @@
       </li>
     
       <li class="nav-item">
-        <a class="nav-item-link" href="/tags">Tags</a>
+        <a class="nav-item-link" href="/gallery">Gallery</a>
       </li>
     
       <li class="nav-item">
-        <a class="nav-item-link" href="/atom.xml">rss</a>
+        <a class="nav-item-link" href="/about">About</a>
       </li>
     
     <li class="nav-item">
@@ -888,6 +1315,10 @@
 </div>
     </li>
     <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
       
     </li>
   </ul>

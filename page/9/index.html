@@ -64,7 +64,7 @@
         
           
 
-<article id="post-android-kakao-map-api" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-C++Sort" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -72,7 +72,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2020/09/01/android-kakao-map-api/">[안드로이드] Kakao Maps API 개발자 등록부터 뷰에 띄우기까지</a>
+      <a class="article-title" href="/2020/10/22/C++Sort/">C++ STL Sort</a>
     </h2>
   
   
@@ -85,8 +85,8 @@
 
     
       <div class="article-meta">
-        <a href="/2020/09/01/android-kakao-map-api/" class="article-date">
-  <time datetime="2020-09-01T07:56:16.920Z" itemprop="datePublished">2020-09-01</time>
+        <a href="/2020/10/22/C++Sort/" class="article-date">
+  <time datetime="2020-10-22T08:29:21.000Z" itemprop="datePublished">2020-10-22</time>
 </a>
         
       </div>
@@ -101,76 +101,854 @@
       
 
       
-        <h1 id="개발자사이트에-앱-생성하기"><a href="#개발자사이트에-앱-생성하기" class="headerlink" title="개발자사이트에 앱 생성하기"></a>개발자사이트에 앱 생성하기</h1><p><img src="../image/2020-09-015.31.51.png" alt="2020-09-015.31.51"></p>
+        <blockquote>
+<p>평소 알고리즘 문제를 파이썬으로 푸는데 코딩테스트에서 파이썬을 지원해주지 않아서 급하게 C++을 공부하고 시험을 봤다. 결과는 sort함수 사용법을 잘 몰라서 한문제를 풀지 못했다 ㅠㅠ 그래서 공부 겸 정리 ! </p>
+</blockquote>
+<h1 id="정의"><a href="#정의" class="headerlink" title="정의"></a>정의</h1><p>알고리즘 헤더파일에서 제공하는 STL로써 범위내에서 주어진 원소들을 정렬한다. 정렬하는 방식은 오름차순, 내림차순 등이 있으며 Default는 오름차순이고, 동일한 원소에 대해서는 순서가 보장되지 않는다. 숫자뿐만 아니라 대소 비교가 가능한 모든 원소(char, string 등)를 정렬할 수 있다.</p>
+<br>
+
+<h1 id="사용법"><a href="#사용법" class="headerlink" title="사용법"></a>사용법</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">RandomAccessIterator</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">void</span> <span class="title">sort</span> (<span class="title">RandomAccessIterator</span> <span class="title">first</span>, <span class="title">RandomAccessIterator</span> <span class="title">last</span>);</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">RandomAccessIterator</span>, <span class="title">class</span> <span class="title">Compare</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">void</span> <span class="title">sort</span> (<span class="title">RandomAccessIterator</span> <span class="title">first</span>, <span class="title">RandomAccessIterator</span> <span class="title">last</span>, <span class="title">Compare</span> <span class="title">comp</span>);</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>2개 또는 3개의 argument를 필요로 한다. <code>first</code>와 <code>last</code>는 iterator로써 범위를 나타낸다. 두 <strong>개의 객체를 비교해서 <code>first</code>가 <code>last</code>보다 작으면 true 그렇지 않다면 false를 리턴한다.</strong> </p>
+</li>
+<li><p><code>comp</code>에는 <code>greater&lt;&gt;()</code> 와 <code>less&lt;&gt;()</code>가 들어갈 수 있다. (예제는 아래에)</p>
+<ul>
+<li><p><code>greater&lt;&gt;()</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// greater는 첫번째 인자가 두번째 인자보다 크면 true를 반환한다.</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; greater&lt;<span class="keyword">int</span>&gt;()(<span class="number">10</span>, <span class="number">20</span>) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// true</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; greater&lt;<span class="keyword">int</span>&gt;()(<span class="number">20</span>, <span class="number">10</span>) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>less&lt;&gt;()</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// less는 첫번째 인자가 두번째 인자보다 크면 true를 반환한다.</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; less&lt;<span class="keyword">int</span>&gt;()(<span class="number">10</span>, <span class="number">20</span>) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// false</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; less&lt;<span class="keyword">int</span>&gt;()(<span class="number">20</span>, <span class="number">10</span>) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h1 id="소스예제"><a href="#소스예제" class="headerlink" title="소스예제"></a>소스예제</h1><ul>
+<li><p><strong>기본 정렬 예제</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="number">4</span>;</span><br><span class="line">    arr[<span class="number">2</span>] = <span class="number">3</span>;</span><br><span class="line">    arr[<span class="number">3</span>] = <span class="number">1</span>;</span><br><span class="line">    arr[<span class="number">4</span>] = <span class="number">5</span>;</span><br><span class="line">    sort(arr, arr + <span class="number">5</span>); <span class="comment">// Default : 오름차순</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>결과</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>정렬(greater)</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="number">4</span>;</span><br><span class="line">    arr[<span class="number">2</span>] = <span class="number">3</span>;</span><br><span class="line">    arr[<span class="number">3</span>] = <span class="number">1</span>;</span><br><span class="line">    arr[<span class="number">4</span>] = <span class="number">5</span>;</span><br><span class="line">    sort(arr, arr + <span class="number">5</span>, greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>결과</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>정렬(less)</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="number">4</span>;</span><br><span class="line">    arr[<span class="number">2</span>] = <span class="number">3</span>;</span><br><span class="line">    arr[<span class="number">3</span>] = <span class="number">1</span>;</span><br><span class="line">    arr[<span class="number">4</span>] = <span class="number">5</span>;</span><br><span class="line">    sort(arr, arr + <span class="number">5</span>, less&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>결과</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>사용자 정의 정렬 (이름을 기준으로 내림차순 정렬)</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">string</span> name;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    Person(<span class="built_in">string</span> name, <span class="keyword">int</span> age)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;name = name;</span><br><span class="line">        <span class="keyword">this</span>-&gt;age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> Person &amp;a, <span class="keyword">const</span> Person &amp;b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.name &gt; b.name; <span class="comment">// 부등호를 바꾸면 오름차순 정렬</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;Person&gt; v;</span><br><span class="line">    v.push_back(Person(<span class="string">"Ace"</span>, <span class="number">22</span>));</span><br><span class="line">    v.push_back(Person(<span class="string">"Luffy"</span>, <span class="number">28</span>));</span><br><span class="line">    v.push_back(Person(<span class="string">"Zoro"</span>, <span class="number">26</span>));</span><br><span class="line">    v.push_back(Person(<span class="string">"Robin"</span>, <span class="number">25</span>));</span><br><span class="line">    v.push_back(Person(<span class="string">"Brook"</span>, <span class="number">40</span>));</span><br><span class="line">    sort(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), cmp);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.<span class="built_in">size</span>(); i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; v[i].age  &lt;&lt; <span class="string">", "</span> &lt;&lt;  v[i].name &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>결과</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">26</span>, Zoro</span><br><span class="line"><span class="number">25</span>, Robin</span><br><span class="line"><span class="number">28</span>, Luffy</span><br><span class="line"><span class="number">40</span>, Brook</span><br><span class="line"><span class="number">22</span>, Ace</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>사용자 정의 정렬(숫자를 기준으로 오름차순 정렬)</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">asc</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a &lt; b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> data[<span class="number">5</span>] = &#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>&#125;;</span><br><span class="line">  </span><br><span class="line">  sort(data, data+<span class="number">5</span>, asc);</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt; <span class="number">5</span>; i++)&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; data[i] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>결과</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+</li>
+</ul>
+<p>출처 : (<a href="https://www.acmicpc.net/blog/view/22" target="_blank" rel="noopener">https://www.acmicpc.net/blog/view/22</a>) , (<a href="https://hongku.tistory.com/153" target="_blank" rel="noopener">https://hongku.tistory.com/153</a>), (<a href="https://hyeonstorage.tistory.com/315" target="_blank" rel="noopener">https://hyeonstorage.tistory.com/315</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/22/C++Sort/" data-id="ckkwv7v0400007sc9e7005fi9"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-backjoon-14889" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/15/backjoon-14889/">[백준알고리즘] 14889번: 스타트와 링크 (파이썬)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/10/15/backjoon-14889/" class="article-date">
+  <time datetime="2020-10-15T02:12:08.000Z" itemprop="datePublished">2020-10-15</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">2 초</td>
+<td align="left">512 MB</td>
+<td align="left">29887</td>
+<td align="left">15465</td>
+<td align="left">8838</td>
+<td align="left">48.802%</td>
+</tr>
+</tbody></table>
+<p>오늘은 스타트링크에 다니는 사람들이 모여서 축구를 해보려고 한다. 축구는 평일 오후에 하고 의무 참석도 아니다. 축구를 하기 위해 모인 사람은 총 N명이고 신기하게도 N은 짝수이다. 이제 N/2명으로 이루어진 스타트 팀과 링크 팀으로 사람들을 나눠야 한다.</p>
+<p>BOJ를 운영하는 회사 답게 사람에게 번호를 1부터 N까지로 배정했고, 아래와 같은 능력치를 조사했다. 능력치 Sij는 i번 사람과 j번 사람이 같은 팀에 속했을 때, 팀에 더해지는 능력치이다. 팀의 능력치는 팀에 속한 모든 쌍의 능력치 Sij의 합이다. Sij는 Sji와 다를 수도 있으며, i번 사람과 j번 사람이 같은 팀에 속했을 때, 팀에 더해지는 능력치는 Sij와 Sji이다.</p>
+<p>N=4이고, S가 아래와 같은 경우를 살펴보자.</p>
+<table>
+<thead>
+<tr>
+<th align="left">i\j</th>
+<th align="left">1</th>
+<th align="left">2</th>
+<th align="left">3</th>
+<th align="left">4</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left"></td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">3</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">4</td>
+<td align="left"></td>
+<td align="left">5</td>
+<td align="left">6</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">7</td>
+<td align="left">1</td>
+<td align="left"></td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">3</td>
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p>예를 들어, 1, 2번이 스타트 팀, 3, 4번이 링크 팀에 속한 경우에 두 팀의 능력치는 아래와 같다.</p>
+<ul>
+<li>스타트 팀: S12 + S21 = 1 + 4 = 5</li>
+<li>링크 팀: S34 + S43 = 2 + 5 = 7</li>
+</ul>
+<p>1, 3번이 스타트 팀, 2, 4번이 링크 팀에 속하면, 두 팀의 능력치는 아래와 같다.</p>
+<ul>
+<li>스타트 팀: S13 + S31 = 2 + 7 = 9</li>
+<li>링크 팀: S24 + S42 = 6 + 4 = 10</li>
+</ul>
+<p>축구를 재미있게 하기 위해서 스타트 팀의 능력치와 링크 팀의 능력치의 차이를 최소로 하려고 한다. 위의 예제와 같은 경우에는 1, 4번이 스타트 팀, 2, 3번 팀이 링크 팀에 속하면 스타트 팀의 능력치는 6, 링크 팀의 능력치는 6이 되어서 차이가 0이 되고 이 값이 최소이다.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 N(4 ≤ N ≤ 20, N은 짝수)이 주어진다. 둘째 줄부터 N개의 줄에 S가 주어진다. 각 줄은 N개의 수로 이루어져 있고, i번 줄의 j번째 수는 Sij 이다. Sii는 항상 0이고, 나머지 Sij는 1보다 크거나 같고, 100보다 작거나 같은 정수이다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 스타트 팀과 링크 팀의 능력치의 차이의 최솟값을 출력한다.</p>
+<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">0 1 2 3</span><br><span class="line">4 0 5 6</span><br><span class="line">7 1 0 2</span><br><span class="line">3 4 5 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">0 1 2 3 4 5</span><br><span class="line">1 0 2 3 4 5</span><br><span class="line">1 2 0 3 4 5</span><br><span class="line">1 2 3 0 4 5</span><br><span class="line">1 2 3 4 0 5</span><br><span class="line">1 2 3 4 5 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">0 5 4 5 4 5 4 5</span><br><span class="line">4 0 5 1 2 3 4 5</span><br><span class="line">9 8 0 1 2 3 1 2</span><br><span class="line">9 9 9 0 9 9 9 9</span><br><span class="line">1 1 1 1 0 1 1 1</span><br><span class="line">8 7 6 5 4 0 3 2</span><br><span class="line">9 1 9 1 9 1 0 9</span><br><span class="line">6 5 4 3 2 1 9 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<h2 id="힌트"><a href="#힌트" class="headerlink" title="힌트"></a>힌트</h2><p>예제 2의 경우에 (1, 3, 6), (2, 4, 5)로 팀을 나누면 되고, 예제 3의 경우에는 (1, 2, 4, 5), (3, 6, 7, 8)로 팀을 나누면 된다.</p>
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
+<li>문제를 만든 사람: <a href="https://www.acmicpc.net/user/baekjoon" target="_blank" rel="noopener">baekjoon</a></li>
+<li>데이터를 추가한 사람: <a href="https://www.acmicpc.net/user/jh05013" target="_blank" rel="noopener">jh05013</a> <a href="https://www.acmicpc.net/user/sait2000" target="_blank" rel="noopener">sait2000</a> <a href="https://www.acmicpc.net/user/sc613" target="_blank" rel="noopener">sc613</a></li>
+</ul>
+<h2 id="알고리즘-분류"><a href="#알고리즘-분류" class="headerlink" title="알고리즘 분류"></a>알고리즘 분류</h2><ul>
+<li><a href="https://www.acmicpc.net/problem/tag/125" target="_blank" rel="noopener">브루트포스 알고리즘</a></li>
+<li><a href="https://www.acmicpc.net/problem/tag/14" target="_blank" rel="noopener">비트마스킹</a></li>
+<li><a href="https://www.acmicpc.net/problem/tag/5" target="_blank" rel="noopener">백트래킹</a></li>
+</ul>
+<br>
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>브루트포스 알고리즘(완전 탐색이라고 생각하면 된당)으로 풀었다. 나는 아래와 같이 풀었는데 채점시간이 어마무시하게 오래걸렸다(조합을 너무 많이 써서 그런거 같당..) 다른 블로그를 보니 더 간편하고 빠르게 푼 풀이가 있어서 아래에 추가했다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> combinations</span><br><span class="line"></span><br><span class="line">N = int(input())</span><br><span class="line">capacities = []</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(N):</span><br><span class="line">    capacities.append(list(map(int, input().split())))</span><br><span class="line"></span><br><span class="line">min_num = sys.maxsize</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line">team_list = set(combinations(range(N),N//<span class="number">2</span>))</span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line"><span class="keyword">for</span> team1 <span class="keyword">in</span> team_list:</span><br><span class="line">    team1_total = <span class="number">0</span></span><br><span class="line">    team2_total = <span class="number">0</span></span><br><span class="line">    players = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(N)]</span><br><span class="line">    <span class="comment"># 3</span></span><br><span class="line">    <span class="keyword">for</span> team1_caps <span class="keyword">in</span> combinations(team1,<span class="number">2</span>):</span><br><span class="line">        i, j = team1_caps</span><br><span class="line">        team1_total += (capacities[i][j] + capacities[j][i])</span><br><span class="line">    <span class="comment"># 4 </span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> team1:</span><br><span class="line">        players.remove(i)</span><br><span class="line">    <span class="comment"># 5</span></span><br><span class="line">    <span class="keyword">for</span> team2_caps <span class="keyword">in</span> combinations(players,<span class="number">2</span>):</span><br><span class="line">        i, j = team2_caps</span><br><span class="line">        team2_total += (capacities[i][j] + capacities[j][i])</span><br><span class="line">    <span class="comment"># 6</span></span><br><span class="line">    min_num = min(min_num,abs(team1_total- team2_total))</span><br><span class="line"><span class="comment"># 7</span></span><br><span class="line">print(min_num)</span><br></pre></td></tr></table></figure>
+
 <ol>
-<li><p><strong>아래 링크에서 로그인 한 후 내 애플리케이션에 들어간다</strong></p>
-<p><a href="https://developers.kakao.com/" target="_blank" rel="noopener">https://developers.kakao.com/</a></p>
+<li><p>먼저 팀을 나누기 위해 N명 중 N//2 명을 뽑는 조합을 실행한다. </p>
 </li>
-<li><p><strong>애플리케이션 추가하기 버튼 클릭</strong></p>
-<img src="../image/2020-09-011.png" alt="2020-09-011" style="zoom:50%;" />
+<li><p>조합으로 나온 경우의 수에서 한팀씩 뽑아내 team1이라고 가정한다.</p>
 </li>
-<li><p><strong>앱 이름 및 회사 이름 설정</strong></p>
-<img src="../image/2020-09-015.08.13.png" alt="2020-09-015.08.13" style="zoom:50%;" />
+<li><p>team1의 능력치를 구하기 위해 ! N//2 명 중 2명을 뽑는 조합을 실행한 후,  능력치 배열에서 가져와 team1_total에 더한다.</p>
 </li>
-<li><p><strong>생성한 앱을 클릭하여 Android 플랫폼 등록</strong></p>
-<img src="../image/2020-09-015.11.25.png" alt="2020-09-015.11.25" style="zoom:30%;" />
+<li><p>player 목록인 players 에서 team1에 해당하는 player를 제거한다.</p>
 </li>
-<li><p><strong>패키지명 입력</strong><br>패키지명은 maps api를 사용하고자 하는 안드로이드 스튜디오 프로젝트의 AndroidManifest.xml 파일의 package 속성의 값을 입력하면 된다.</p>
-<p><img src="../image/2020-09-015.14.22.png" alt="2020-09-015.14.22"></p>
-<p>아래와 같이 입력하면 된다!</p>
-<img src="../image/2020-09-015.23.17.png" alt="2020-09-015.23.17" style="zoom:50%;" />
+<li><p>team1 player가 제거된 players 는 team2 이므로 team2의 능력치를 구하기 위해 3번과 같은 과정을 실행한다.</p>
 </li>
-<li><p><strong>키 해시 입력</strong></p>
-<p>키 해시를 얻는 방법은 여러가지가 있지만 나는 안드로이드 프로젝트 로그로 얻는 방법을 선택했다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;     </span><br><span class="line">            <span class="keyword">val</span> info = packageManager.getPackageInfo(<span class="string">"com.example.scookie"</span>, PackageManager.GET_SIGNATURES) <span class="comment">// 본인의 패키지명으로 변경하여야 한다.</span></span><br><span class="line">            <span class="keyword">for</span> (signature <span class="keyword">in</span> info.signatures) &#123;</span><br><span class="line">                <span class="keyword">val</span> md = MessageDigest.getInstance(<span class="string">"SHA"</span>)</span><br><span class="line">                md.update(signature.toByteArray())</span><br><span class="line">                <span class="keyword">val</span> sign = Base64.encodeToString(md.digest(), Base64.DEFAULT)</span><br><span class="line">                Log.e(<span class="string">"hash key TAG"</span>, <span class="string">"hash key : <span class="variable">$sign</span>"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: PackageManager.NameNotFoundException) &#123;</span><br><span class="line">            Log.e(<span class="string">"hash key TAG"</span>, <span class="string">"error: <span class="variable">$e</span>"</span>)</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: NoSuchAlgorithmException) &#123;</span><br><span class="line">            Log.e(<span class="string">"hash key TAG"</span>, <span class="string">"error: <span class="variable">$e</span>"</span>)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-<p>위 코드를 액티비티의 onCreate 함수 안에 넣어서 실행을 하면 로그에서 키를 얻을 수 있다. </p>
-<img src="../image/2020-09-015.29.14.png" alt="2020-09-015.29.14" style="zoom:30%;" />
-얻은 해시 키를 복사해서 아래 키 해시 입력창에 입력하면 된다 ! 
-<img src="../image/2020-09-015.24.23.png" alt="2020-09-015.24.23" style="zoom:50%;" />
-
-<p>저장을 누른다.</p>
+<li><p>abs() 는 절대값을 구하는 것으로, team1 능력치와 team2 능력치 차의 최솟값을 계속 갱신한다.</p>
 </li>
-<li><p>네이티브 앱 키 / 패키지명 / 키 해시를 기억해둔다.</p>
+<li><p>최솟값 출력</p>
 </li>
 </ol>
-<h1 id="라이브러리-파일-추가"><a href="#라이브러리-파일-추가" class="headerlink" title="라이브러리 파일 추가"></a>라이브러리 파일 추가</h1><ol>
-<li><p>아래 링크에서 SDK 파일을 다운로드 한다.</p>
-<p><a href="https://apis.map.kakao.com/android/guide/" target="_blank" rel="noopener">https://apis.map.kakao.com/android/guide/</a> </p>
-</li>
-<li><p>프로젝트 구조를 Android에서 Project로 변경한 후</p>
-<img src="../image/2020-09-015.42.09.png" alt="2020-09-015.42.09" style="zoom:50%;" />
-아래와 동일해 지도록 SDK 파일들을 복사해 준다. 
+<ul>
+<li><p>다른 풀이 (출처: <a href="https://suri78.tistory.com/180" target="_blank" rel="noopener">https://suri78.tistory.com/180</a> [공부노트])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> maxsize</span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> combinations</span><br><span class="line"></span><br><span class="line">n = int(input())</span><br><span class="line">s = [list(map(int, input().split())) <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">cb = combinations(range(n), n//<span class="number">2</span>)</span><br><span class="line">ans = maxsize</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> cb:</span><br><span class="line">    a = set(c)</span><br><span class="line">    b = list(set(range(n)) - a)</span><br><span class="line">    a = list(a)</span><br><span class="line"></span><br><span class="line">    a_teamwork, b_teamwork = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n//<span class="number">2</span> - <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, n//<span class="number">2</span>):</span><br><span class="line">            a_teamwork += s[a[i]][a[j]] + s[a[j]][a[i]]</span><br><span class="line">            b_teamwork += s[b[i]][b[j]] + s[b[j]][b[i]]</span><br><span class="line"></span><br><span class="line">    ans = min(ans, abs(b_teamwork - a_teamwork))</span><br><span class="line"></span><br><span class="line">print(ans)</span><br></pre></td></tr></table></figure>
 
-<p><img src="../image/2020-09-015.41.00.png" alt="2020-09-015.41.00"></p>
+<ul>
+<li>나와 다른 점은 나는 플레이어 리스트에서 team1을 제거하기 위해 for문을 돌렸는데 그냥 <code>list(set(range(n)) - a)</code> 이렇게 하면 됐었다! 새로 배웠다. (set에서 set을 빼면 중복되는 값을 제거한다.)</li>
+<li>이중 for문을 사용해서 team1과 team2의 능력치를 한번에 구했다. </li>
+</ul>
 </li>
-<li><p>AndroidManifest.xml에 uses-permission과 meta-data를 추가한다.</p>
-<p><img src="../image/2020-09-015.49.10.png" alt="2020-09-015.49.10"></p>
-<p>나는 meta-data를 application 사이에 추가하였다.</p>
-<p>meta-data의 value 는 네이티브 앱 키를 입력한다.</p>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/15/backjoon-14889/" data-id="ckkwv7v1e00327sc94lsdhlho"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EC%A1%B0%ED%95%A9/" rel="tag">알고리즘, 조합</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-backjoon-16236" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/13/backjoon-16236/">[백준알고리즘] 16236번: 아기 상어 (파이썬)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/10/13/backjoon-16236/" class="article-date">
+  <time datetime="2020-10-12T16:15:19.000Z" itemprop="datePublished">2020-10-13</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>문제 링크: <a href="https://www.acmicpc.net/problem/16236" target="_blank" rel="noopener">https://www.acmicpc.net/problem/16236</a></p>
+<h1 id="아기-상어"><a href="#아기-상어" class="headerlink" title="아기 상어"></a>아기 상어</h1><table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">2 초</td>
+<td align="left">512 MB</td>
+<td align="left">22234</td>
+<td align="left">9327</td>
+<td align="left">5217</td>
+<td align="left">38.262%</td>
+</tr>
+</tbody></table>
+<h2 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h2><p>N×N 크기의 공간에 물고기 M마리와 아기 상어 1마리가 있다. 공간은 1×1 크기의 정사각형 칸으로 나누어져 있다. 한 칸에는 물고기가 최대 1마리 존재한다.</p>
+<p>아기 상어와 물고기는 모두 크기를 가지고 있고, 이 크기는 자연수이다. 가장 처음에 아기 상어의 크기는 2이고, 아기 상어는 1초에 상하좌우로 인접한 한 칸씩 이동한다.</p>
+<p>아기 상어는 자신의 크기보다 큰 물고기가 있는 칸은 지나갈 수 없고, 나머지 칸은 모두 지나갈 수 있다. 아기 상어는 자신의 크기보다 작은 물고기만 먹을 수 있다. 따라서, 크기가 같은 물고기는 먹을 수 없지만, 그 물고기가 있는 칸은 지나갈 수 있다.</p>
+<p>아기 상어가 어디로 이동할지 결정하는 방법은 아래와 같다.</p>
+<ul>
+<li>더 이상 먹을 수 있는 물고기가 공간에 없다면 아기 상어는 엄마 상어에게 도움을 요청한다.</li>
+<li>먹을 수 있는 물고기가 1마리라면, 그 물고기를 먹으러 간다.</li>
+<li>먹을 수 있는 물고기가 1마리보다 많다면, 거리가 가장 가까운 물고기를 먹으러 간다.<ul>
+<li>거리는 아기 상어가 있는 칸에서 물고기가 있는 칸으로 이동할 때, 지나야하는 칸의 개수의 최솟값이다.</li>
+<li>거리가 가까운 물고기가 많다면, 가장 위에 있는 물고기, 그러한 물고기가 여러마리라면, 가장 왼쪽에 있는 물고기를 먹는다.</li>
+</ul>
 </li>
+</ul>
+<p>아기 상어의 이동은 1초 걸리고, 물고기를 먹는데 걸리는 시간은 없다고 가정한다. 즉, 아기 상어가 먹을 수 있는 물고기가 있는 칸으로 이동했다면, 이동과 동시에 물고기를 먹는다. 물고기를 먹으면, 그 칸은 빈 칸이 된다.</p>
+<p>아기 상어는 자신의 크기와 같은 수의 물고기를 먹을 때 마다 크기가 1 증가한다. 예를 들어, 크기가 2인 아기 상어는 물고기를 2마리 먹으면 크기가 3이 된다.</p>
+<p>공간의 상태가 주어졌을 때, 아기 상어가 몇 초 동안 엄마 상어에게 도움을 요청하지 않고 물고기를 잡아먹을 수 있는지 구하는 프로그램을 작성하시오.</p>
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 공간의 크기 N(2 ≤ N ≤ 20)이 주어진다.</p>
+<p>둘째 줄부터 N개의 줄에 공간의 상태가 주어진다. 공간의 상태는 0, 1, 2, 3, 4, 5, 6, 9로 이루어져 있고, 아래와 같은 의미를 가진다.</p>
+<ul>
+<li>0: 빈 칸</li>
+<li>1, 2, 3, 4, 5, 6: 칸에 있는 물고기의 크기</li>
+<li>9: 아기 상어의 위치</li>
+</ul>
+<p>아기 상어는 공간에 한 마리 있다.</p>
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 아기 상어가 엄마 상어에게 도움을 요청하지 않고 물고기를 잡아먹을 수 있는 시간을 출력한다.</p>
+<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">0 0 0</span><br><span class="line">0 0 0</span><br><span class="line">0 9 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">0 0 1</span><br><span class="line">0 0 0</span><br><span class="line">0 9 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">4 3 2 1</span><br><span class="line">0 0 0 0</span><br><span class="line">0 0 9 0</span><br><span class="line">1 2 3 4</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">14</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-4"><a href="#예제-입력-4" class="headerlink" title="예제 입력 4"></a>예제 입력 4</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">5 4 3 2 3 4</span><br><span class="line">4 3 2 3 4 5</span><br><span class="line">3 2 9 5 6 6</span><br><span class="line">2 1 2 3 4 5</span><br><span class="line">3 2 1 6 5 4</span><br><span class="line">6 6 6 6 6 6</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-4"><a href="#예제-출력-4" class="headerlink" title="예제 출력 4"></a>예제 출력 4</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">60</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-5"><a href="#예제-입력-5" class="headerlink" title="예제 입력 5"></a>예제 입력 5</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">6 0 6 0 6 1</span><br><span class="line">0 0 0 0 0 2</span><br><span class="line">2 3 4 5 6 6</span><br><span class="line">0 0 0 0 0 2</span><br><span class="line">0 2 0 0 0 0</span><br><span class="line">3 9 3 0 0 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-5"><a href="#예제-출력-5" class="headerlink" title="예제 출력 5"></a>예제 출력 5</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">48</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-6"><a href="#예제-입력-6" class="headerlink" title="예제 입력 6"></a>예제 입력 6</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">1 1 1 1 1 1</span><br><span class="line">2 2 6 2 2 3</span><br><span class="line">2 2 5 2 2 3</span><br><span class="line">2 2 2 4 6 3</span><br><span class="line">0 0 0 0 0 6</span><br><span class="line">0 0 0 0 0 9</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-6"><a href="#예제-출력-6" class="headerlink" title="예제 출력 6"></a>예제 출력 6</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">39</span><br></pre></td></tr></table></figure>
+
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
+<li>문제를 만든 사람: <a href="https://www.acmicpc.net/user/baekjoon" target="_blank" rel="noopener">baekjoon</a></li>
+<li>데이터를 추가한 사람: <a href="https://www.acmicpc.net/user/djm03178" target="_blank" rel="noopener">djm03178</a></li>
+</ul>
+<h2 id="알고리즘-분류"><a href="#알고리즘-분류" class="headerlink" title="알고리즘 분류"></a>알고리즘 분류</h2><ul>
+<li><a href="https://www.acmicpc.net/problem/tag/102" target="_blank" rel="noopener">구현</a></li>
+<li><a href="https://www.acmicpc.net/problem/tag/7" target="_blank" rel="noopener">그래프 이론</a></li>
+<li><a href="https://www.acmicpc.net/problem/tag/11" target="_blank" rel="noopener">그래프 탐색</a></li>
+<li><a href="https://www.acmicpc.net/problem/tag/126" target="_blank" rel="noopener">너비 우선 탐색</a></li>
+<li><a href="https://www.acmicpc.net/problem/tag/141" target="_blank" rel="noopener">시뮬레이션</a></li>
+</ul>
+<br>
+
+<br>
+
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><ul>
+<li>코드</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"></span><br><span class="line"><span class="comment"># -1, 0: 위 / 0, -1: 왼쪽 / 0, 1: 오른쪽 / 1, 0: 아래</span></span><br><span class="line">dx = [<span class="number">-1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>]</span><br><span class="line">dy = [<span class="number">0</span>,<span class="number">-1</span>,<span class="number">1</span>,<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span><span class="params">(x,y)</span>:</span></span><br><span class="line">    q = []</span><br><span class="line">    visited = [[<span class="number">0</span>] * N <span class="keyword">for</span> _ <span class="keyword">in</span> range(N)]</span><br><span class="line">    <span class="comment"># 9 있던 자리 0 으로 초기화 (다시 돌아올 수 있으므로 visited는 체크하지 않는다.)</span></span><br><span class="line">    space[x][y] = <span class="number">0</span></span><br><span class="line">    size, eat_count, distance = <span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    <span class="comment"># distance는 시작 위치부터 현재까지의 이동 횟수(거리)</span></span><br><span class="line">    heapq.heappush(q, (distance, x, y))</span><br><span class="line">    <span class="keyword">while</span> q:</span><br><span class="line">        d, x, y = heapq.heappop(q)</span><br><span class="line">        <span class="comment"># 아기상어보다 물고기 크기가 작은경우</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> &lt; space[x][y] &lt; size :</span><br><span class="line">            <span class="comment"># 먹는다.</span></span><br><span class="line">            eat_count += <span class="number">1</span></span><br><span class="line">            space[x][y] = <span class="number">0</span></span><br><span class="line">            <span class="comment"># 먹은 횟수와 아기상어 크기가 같아지면</span></span><br><span class="line">            <span class="keyword">if</span> eat_count == size:</span><br><span class="line">                <span class="comment"># 아기상어 사이즈 증가</span></span><br><span class="line">                size += <span class="number">1</span></span><br><span class="line">                <span class="comment"># 먹은 횟수 초기화</span></span><br><span class="line">                eat_count = <span class="number">0</span></span><br><span class="line">            <span class="comment"># 먹을 때마다 큐와 visited 초기화 (그 자리에서 bfs 다시 실행하기 위해서)</span></span><br><span class="line">            q = []</span><br><span class="line">            visited = [[<span class="number">0</span>] * N <span class="keyword">for</span> _ <span class="keyword">in</span> range(N)]</span><br><span class="line">            <span class="comment"># 총 거리에 시작점부터 현재위치까지의 거리 더하기</span></span><br><span class="line">            distance += d</span><br><span class="line">            <span class="comment"># 총거리에 더했기 때문에 d를 0으로 초기화</span></span><br><span class="line">            d = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>): <span class="comment"># 상하좌우 이동</span></span><br><span class="line">            nx = x + dx[i]</span><br><span class="line">            ny = y + dy[i]</span><br><span class="line">            <span class="comment"># 이동했으니 거리 +1 </span></span><br><span class="line">            nd = d+ <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; N <span class="keyword">and</span> <span class="number">0</span>&lt;= ny &lt; N:</span><br><span class="line">                <span class="keyword">if</span> visited[nx][ny] == <span class="number">0</span>:</span><br><span class="line">                    <span class="comment"># 아기상어보다 물고기 크기가 큰 경우에는 방문, push 안함</span></span><br><span class="line">                    <span class="keyword">if</span> space[nx][ny] &gt; size:</span><br><span class="line">                        <span class="keyword">continue</span></span><br><span class="line">                    <span class="comment"># 아기상어보다 물고기 크기가 같거나 작은 경우</span></span><br><span class="line">                    visited[nx][ny] = <span class="number">1</span></span><br><span class="line">                    heapq.heappush(q, (nd, nx, ny))</span><br><span class="line">    print(distance)</span><br><span class="line"></span><br><span class="line">N = int(input())</span><br><span class="line">space = []</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(N):</span><br><span class="line">    space.append(list(map(int, input().split())))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(N):</span><br><span class="line">        <span class="comment"># 9 인덱스부터 bfs 시작</span></span><br><span class="line">        <span class="keyword">if</span> space[i][j] == <span class="number">9</span>:</span><br><span class="line">            bfs(i,j)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>heapq를 사용하는 이유</strong></p>
+<p>터미널에 pop 할때(+ pop하기 전 heapq)와 push 할 때 로그를 찍어보았다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">4 3 2 1</span><br><span class="line">0 0 0 0</span><br><span class="line">0 0 9 0</span><br><span class="line">1 2 3 4</span><br><span class="line"></span><br><span class="line">&gt; [(0, 2, 2)]</span><br><span class="line">out d:0, x:2, y:2</span><br><span class="line">in d:1, x:2, y:3</span><br><span class="line">in d:1, x:2, y:1</span><br><span class="line">in d:1, x:1, y:2</span><br><span class="line"># 1,2,3 이 먼저 들어갔지만 index 0번째는 1,1,2가 들어가 있다. (최소힙 만족)</span><br><span class="line">[(1, 1, 2), (1, 2, 3), (1, 2, 1)] </span><br><span class="line">out d:1, x:1, y:2</span><br><span class="line">in d:2, x:1, y:3</span><br><span class="line">in d:2, x:1, y:1</span><br><span class="line">in d:2, x:0, y:2</span><br><span class="line">in d:2, x:2, y:2</span><br><span class="line">[(1, 2, 1), (1, 2, 3), (2, 1, 3), (2, 1, 1), (2, 0, 2), (2, 2, 2)]</span><br></pre></td></tr></table></figure>
+
+<p>위에서 볼 수 있듯이, <strong>heapq</strong> 는 최소힙을 만족(index가 0인 원소가 최솟값)하며 push, pop 하기 때문에 </p>
+<blockquote>
+<p>먹을 수 있는 물고기가 1마리보다 많다면, 거리가 가장 가까운 물고기를 먹으러 간다.</p>
+<ul>
+<li>거리는 아기 상어가 있는 칸에서 물고기가 있는 칸으로 이동할 때, 지나야하는 칸의 개수의 최솟값이다.</li>
+<li>거리가 가까운 물고기가 많다면, 가장 위에 있는 물고기, 그러한 물고기가 여러마리라면, 가장 왼쪽에 있는 물고기를 먹는다.</li>
+</ul>
+</blockquote>
+<p>위 조건을 만족 할 수 있다.</p>
+<p>-&gt; deque 를 사용할거면 sort 해주어야함 !</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/13/backjoon-16236/" data-id="ckkwv7v1i003f7sc923m1bx40"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-BFS/" rel="tag">알고리즘, BFS</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-algorythm-dfs-bfs" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/12/algorythm-dfs-bfs/">DFS BFS</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/10/12/algorythm-dfs-bfs/" class="article-date">
+  <time datetime="2020-10-11T16:50:43.000Z" itemprop="datePublished">2020-10-12</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <blockquote>
+<p>DFS , BFS는 <strong>모든 노드</strong>를 방문하고자 하는 경우 사용 될 수 있는 알고리즘이다. 그 안에서 차이점을 찾아보자 ! <br></p>
+</blockquote>
+<h1 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h1><p>깊이 우선 탐색 ༼ つ ◕_◕ ༽つ<br></p>
+<ul>
+<li><p>코드 작성 : <strong>스택</strong> 또는 <strong>재귀함수</strong>를 이용해 코드를 작성한다.</p>
+</li>
+<li><p>사용 : <strong>미로찾기</strong>와 같이 막힌 곳까지 쭉 갔다가 막히면 다시 가까운 갈림길로 돌아와 다른 방향으로 탐색 / <strong>경로의 특징</strong>을 가져야 할 때</p>
+</li>
+<li><p>차이점 : 구현이 좀 더 간단 / 검색 속도 자체는 BFS 에 비해 <strong>느림</strong><br></p>
+</li>
+<li><p>코드 (재귀함수)</p>
+<p>문제 링크 : <a href="https://www.acmicpc.net/problem/15654" target="_blank" rel="noopener">https://www.acmicpc.net/problem/15654</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">N, M = map(int, input().split())</span><br><span class="line">nums = list(map(int, input().split()))</span><br><span class="line">nums.sort()</span><br><span class="line"></span><br><span class="line">out = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(M)]</span><br><span class="line">visited = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(N)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(depth)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> depth == M:</span><br><span class="line">        print(<span class="string">' '</span>.join(map(str, out)))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">        <span class="keyword">if</span> visited[i] == <span class="number">0</span>:</span><br><span class="line">            visited[i] = <span class="number">1</span></span><br><span class="line">            out[depth] = nums[i]</span><br><span class="line">            dfs(depth+<span class="number">1</span>)</span><br><span class="line">            visited[i] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">dfs(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>코드 (스택)</p>
+<p>출처링크 : <a href="https://itholic.github.io/python-bfs-dfs/" target="_blank" rel="noopener">https://itholic.github.io/python-bfs-dfs/</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(graph, start_node)</span>:</span></span><br><span class="line">    visit = list()</span><br><span class="line">    stack = list()</span><br><span class="line"></span><br><span class="line">    stack.append(start_node)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> stack:</span><br><span class="line">        node = stack.pop()</span><br><span class="line">        <span class="keyword">if</span> node <span class="keyword">not</span> <span class="keyword">in</span> visit:</span><br><span class="line">            visit.append(node)</span><br><span class="line">            stack.extend(graph[node])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> visit</span><br></pre></td></tr></table></figure>
+
+<br>
+
+</li>
+</ul>
+<h1 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h1><p>넓이 우선 탐색 ༼ つ ◕_◕ ༽つ<br></p>
+<ul>
+<li><p>코드 작성 : <strong>큐</strong>를 이용한다.</p>
+</li>
+<li><p>사용 : 루트 노드와 인접한 노드를 먼저 탐색하기 때문에 <strong>최단 경로</strong>를 찾을 때 사용 <br></p>
+</li>
+<li><p>코드</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"></span><br><span class="line">dx = [<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">dy = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># n행 m열의 배열이라고 가정</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    q = deque()</span><br><span class="line">    q.append([x,y])</span><br><span class="line">    visited = [[<span class="number">0</span>]* m <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">    visited[x][y] = <span class="number">1</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> q:</span><br><span class="line">        x, y = q.popleft()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>): </span><br><span class="line">            nx = x + dx[i]</span><br><span class="line">            ny = y + dy[i]</span><br><span class="line">            <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; n <span class="keyword">and</span> <span class="number">0</span> &lt;= ny &lt; m:</span><br><span class="line">                <span class="keyword">if</span> visited[nx][ny] == <span class="number">0</span>:</span><br><span class="line">                    count += <span class="number">1</span></span><br><span class="line">                    q.append([nx,ny])</span><br><span class="line">                    visited[nx][ny] = <span class="number">1</span></span><br><span class="line">    print(count)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/12/algorythm-dfs-bfs/" data-id="ckkwv7v0e00087sc926e9ggf4"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-backjoon-14888" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/09/backjoon-14888/">[백준알고리즘] 14888번: 연산자 끼워넣기 파이썬</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/10/09/backjoon-14888/" class="article-date">
+  <time datetime="2020-10-08T15:35:33.000Z" itemprop="datePublished">2020-10-09</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <table>
+<thead>
+<tr>
+<th align="left">시간 제한</th>
+<th align="left">메모리 제한</th>
+<th align="left">제출</th>
+<th align="left">정답</th>
+<th align="left">맞은 사람</th>
+<th align="left">정답 비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">2 초</td>
+<td align="left">512 MB</td>
+<td align="left">29994</td>
+<td align="left">16086</td>
+<td align="left">9846</td>
+<td align="left">49.861%</td>
+</tr>
+</tbody></table>
+<br>
+
+<h2 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h2><p>N개의 수로 이루어진 수열 A1, A2, …, AN이 주어진다. 또, 수와 수 사이에 끼워넣을 수 있는 N-1개의 연산자가 주어진다. 연산자는 덧셈(+), 뺄셈(-), 곱셈(×), 나눗셈(÷)으로만 이루어져 있다.</p>
+<p>우리는 수와 수 사이에 연산자를 하나씩 넣어서, 수식을 하나 만들 수 있다. 이때, 주어진 수의 순서를 바꾸면 안 된다.</p>
+<p>예를 들어, 6개의 수로 이루어진 수열이 1, 2, 3, 4, 5, 6이고, 주어진 연산자가 덧셈(+) 2개, 뺄셈(-) 1개, 곱셈(×) 1개, 나눗셈(÷) 1개인 경우에는 총 60가지의 식을 만들 수 있다. 예를 들어, 아래와 같은 식을 만들 수 있다.</p>
+<ul>
+<li>1+2+3-4×5÷6</li>
+<li>1÷2+3+4-5×6</li>
+<li>1+2÷3×4-5+6</li>
+<li>1÷2×3-4+5+6</li>
+</ul>
+<p>식의 계산은 연산자 우선 순위를 무시하고 앞에서부터 진행해야 한다. 또, 나눗셈은 정수 나눗셈으로 몫만 취한다. 음수를 양수로 나눌 때는 C++14의 기준을 따른다. 즉, 양수로 바꾼 뒤 몫을 취하고, 그 몫을 음수로 바꾼 것과 같다. 이에 따라서, 위의 식 4개의 결과를 계산해보면 아래와 같다.</p>
+<ul>
+<li>1+2+3-4×5÷6 = 1</li>
+<li>1÷2+3+4-5×6 = 12</li>
+<li>1+2÷3×4-5+6 = 5</li>
+<li>1÷2×3-4+5+6 = 7</li>
+</ul>
+<p>N개의 수와 N-1개의 연산자가 주어졌을 때, 만들 수 있는 식의 결과가 최대인 것과 최소인 것을 구하는 프로그램을 작성하시오.</p>
+<br>
+
+<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 수의 개수 N(2 ≤ N ≤ 11)가 주어진다. 둘째 줄에는 A1, A2, …, AN이 주어진다. (1 ≤ Ai ≤ 100) 셋째 줄에는 합이 N-1인 4개의 정수가 주어지는데, 차례대로 덧셈(+)의 개수, 뺄셈(-)의 개수, 곱셈(×)의 개수, 나눗셈(÷)의 개수이다. </p>
+<br>
+
+<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>첫째 줄에 만들 수 있는 식의 결과의 최댓값을, 둘째 줄에는 최솟값을 출력한다. 연산자를 어떻게 끼워넣어도 항상 -10억보다 크거나 같고, 10억보다 작거나 같은 결과가 나오는 입력만 주어진다. 또한, 앞에서부터 계산했을 때, 중간에 계산되는 식의 결과도 항상 -10억보다 크거나 같고, 10억보다 작거나 같다.</p>
+<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">5 6</span><br><span class="line">0 0 1 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">30</span><br><span class="line">30</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">3 4 5</span><br><span class="line">1 0 1 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">35</span><br><span class="line">17</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">1 2 3 4 5 6</span><br><span class="line">2 1 1 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">54</span><br><span class="line">-24</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="힌트"><a href="#힌트" class="headerlink" title="힌트"></a>힌트</h2><p>세 번째 예제의 경우에 다음과 같은 식이 최댓값/최솟값이 나온다.</p>
+<ul>
+<li>최댓값: 1-2÷3+4+5×6</li>
+<li>최솟값: 1+2+3÷4-5×6</li>
+</ul>
+<p><br><br></p>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>두 가지 방식이 있다. </p>
+<p>첫 번째는 <strong>permutations 와 set을 이용하는 방식</strong></p>
+<p>두 번째는 <strong>재귀 함수를 이용하는 방식</strong>이다.</p>
+<p>실행 시간은 첫 번째 방식이 624ms였고, 재귀 함수를 이용하는 방식인 두번째 방식은 92ms로 약 7배 빨랐다. </p>
+<p>재귀 함수는 이해하는 것도 어렵지만 구현해내기 위해 구상하는 것도 정말 어려운 것 같다 .. ㅠㅠ </p>
+<br>
+
+<p>나는 첫 번째 방법으로 풀었고, 두 번째 방법은 다른 블로그의 코드를 참고했다.</p>
+<br>
+
+<ol>
+<li><strong>첫 번째 방법</strong> 코드 </li>
 </ol>
-<h1 id="화면에-맵-띄우기"><a href="#화면에-맵-띄우기" class="headerlink" title="화면에 맵 띄우기"></a>화면에 맵 띄우기</h1><ol>
-<li><p>먼저 layout 파일에 아래와 같은 코드를 작성한다.</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- xml layout --&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">RelativeLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span> <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">RelativeLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/map_view"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Activity 파일에 아래 코드를 작성한다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// kotlin code</span></span><br><span class="line"><span class="keyword">val</span> mapView = MapView(<span class="keyword">this</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> mapViewContainer = map_view <span class="keyword">as</span> ViewGroup</span><br><span class="line">mapViewContainer.addView(mapView)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> permutations</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">N = int(input())</span><br><span class="line">nums = list(map(int, input().split()))</span><br><span class="line"><span class="comment"># + - x //</span></span><br><span class="line">oper_num = list(map(int, input().split()))</span><br><span class="line"></span><br><span class="line">oper_list = []</span><br><span class="line">operation = [<span class="string">'+'</span>,<span class="string">'-'</span>,<span class="string">'*'</span>,<span class="string">'//'</span>]</span><br><span class="line">answer_list = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):    </span><br><span class="line">    o = operation[i]</span><br><span class="line">    temp = [o] * oper_num[i]</span><br><span class="line">    oper_list.extend(temp)</span><br><span class="line"></span><br><span class="line">oper_cases = set(permutations(oper_list, N<span class="number">-1</span>))</span><br><span class="line">answer = nums[<span class="number">0</span>]</span><br><span class="line">i = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> oper <span class="keyword">in</span> oper_cases:</span><br><span class="line">    <span class="keyword">for</span> o <span class="keyword">in</span> oper:</span><br><span class="line">        <span class="keyword">if</span> o == <span class="string">'+'</span>:</span><br><span class="line">            answer += nums[i]</span><br><span class="line">        <span class="keyword">elif</span> o == <span class="string">'-'</span>:</span><br><span class="line">            answer -= nums[i]</span><br><span class="line">        <span class="keyword">elif</span> o == <span class="string">'*'</span>:</span><br><span class="line">            answer *= nums[i]</span><br><span class="line">        <span class="keyword">elif</span> o == <span class="string">'//'</span>:</span><br><span class="line">            <span class="keyword">if</span> answer &lt; <span class="number">0</span>:</span><br><span class="line">                answer *= <span class="number">-1</span></span><br><span class="line">                answer //= nums[i]</span><br><span class="line">                answer *= <span class="number">-1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                answer //= nums[i]</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    answer_list.append(answer)</span><br><span class="line">    answer = nums[<span class="number">0</span>]</span><br><span class="line">    i = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(max(answer_list))</span><br><span class="line">print(min(answer_list))</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// java code</span></span><br><span class="line">MapView mapView = <span class="keyword">new</span> MapView(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);</span><br><span class="line">mapViewContainer.addView(mapView);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong><code>permutations(M, N)</code></strong> : 순서를 염두해 M에서 N개만큼 뽑아내는 경우의 수이다. </li>
+<li><strong><code>set</code></strong> : 중복을 제거해 준다. <code>permutations</code>에서 <code>[&#39;+&#39;,&#39;+&#39;,&#39;+&#39;,&#39;+&#39;]</code> 의 경우 순서를 염두하기 때문에 복수개가 만들어 질텐데, 이때 <code>set</code>은 중복을 제거해서 경우의 수를 하나로 줄여준다.</li>
+<li><strong><code>extend</code></strong>: 한가지가 아닌 복수의 요소를 리스트에 추가할 때 사용한다. for문을 안써도 돼서 시간이 단축된다.</li>
+<li>for 문 사용을 줄이기 위해 <code>temp = [o] * oper_num[i]</code>를 작성했다. <code>o</code> 가 <code>&#39;+&#39;</code> 이고 <code>oper_num[i]</code>이 <code>2</code>인 경우, <code>temp</code>는 <code>[&#39;+&#39;, &#39;+&#39;]</code> 가 된다.</li>
+</ul>
+<br>
 
-<p>이 때, MapView는 <strong>net.daum.android.map.MapView</strong> 가 아닌</p>
-<p><strong>net.daum.mf.map.api.MapView</strong> 를 사용하여야 아래와 같은 에러가 뜨지 않는다.</p>
-<p><img src="../image/2020-09-021.20.21.png" alt="2020-09-021.20.21"></p>
+<ol start="2">
+<li><strong>두 번째 방식</strong> 코드</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> permutations</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">(answer, idx, add, sub, mul, div)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> max_num, min_num </span><br><span class="line">    <span class="keyword">if</span> idx == N:</span><br><span class="line">        max_num = max(answer, max_num)</span><br><span class="line">        min_num = min(answer, min_num)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> add:</span><br><span class="line">            calc(answer + nums[idx], idx+ <span class="number">1</span>, add<span class="number">-1</span>, sub, mul, div)</span><br><span class="line">        <span class="keyword">if</span> sub:</span><br><span class="line">            calc(answer - nums[idx], idx+ <span class="number">1</span>, add, sub<span class="number">-1</span>, mul, div)</span><br><span class="line">        <span class="keyword">if</span> mul:</span><br><span class="line">            calc(answer * nums[idx], idx+ <span class="number">1</span>, add, sub, mul<span class="number">-1</span>, div)</span><br><span class="line">        <span class="keyword">if</span> div:</span><br><span class="line">            calc(int(answer/ nums[idx]), idx+ <span class="number">1</span> , add, sub, mul, div<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">N = int(input())</span><br><span class="line">nums = list(map(int, input().split()))</span><br><span class="line"><span class="comment"># + - x //</span></span><br><span class="line">operation = list(map(int, input().split()))</span><br><span class="line"></span><br><span class="line">max_num= -sys.maxsize <span class="number">-1</span> <span class="comment"># 가장 작은 값으로 지정해둔다.</span></span><br><span class="line">min_num = sys.maxsize <span class="comment"># 가장 큰 값으로 지정해둔다.</span></span><br><span class="line"></span><br><span class="line">calc(nums[<span class="number">0</span>], <span class="number">1</span>, operation[<span class="number">0</span>], operation[<span class="number">1</span>], operation[<span class="number">2</span>], operation[<span class="number">3</span>])</span><br><span class="line">print(max_num)</span><br><span class="line">print(min_num)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>재귀함수 종료 조건:</strong> 모든 num을 연산했을 때</li>
+<li><strong><code>max_num = -sys.maxsize -1</code> / <code>min_num = sys.maxsize</code>:</strong> 최댓값 최솟값 초기화를 위해 사용한다. </li>
+<li>각 연산자의 횟수가 1 이상인 경우 <code>calc</code> 수행</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/09/backjoon-14888/" data-id="ckkwv7v1d00307sc9cqyy3r7r"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-python-:-::" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/08/python-:-::/">[파이썬] 사칙연산 &#39;/&#39;와 &#39;//&#39;의 차이</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/10/08/python-:-::/" class="article-date">
+  <time datetime="2020-10-08T14:51:20.000Z" itemprop="datePublished">2020-10-08</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>알고리즘을 푸는 와중,</p>
+<blockquote>
+<p>음수를 양수로 나눌 때는 C++14의 기준을 따른다. 즉, 양수로 바꾼 뒤 몫을 취하고, 그 몫을 음수로 바꾼 것과 같다.</p>
+</blockquote>
+<p>이러한 조건이 있는 문제를 만났다. </p>
+<br>
+
+<p>예를 들어, -4 를 3으로 나눈다고 할 때</p>
+<p><code>-4 * -1 // 3 * -1</code> 이렇게도 조건을 만족할 수 있지만, <strong><code>int(-4/3)</code></strong> 이렇게 하는 것 또한 조건을 만족할 수 있다.</p>
+<br>
+
+<p>그 이유가 궁금해서 <code>/</code> 와 <code>//</code> 의 차이를 알아보았다.</p>
+<br>
+
+<h1 id="와-의-차이"><a href="#와-의-차이" class="headerlink" title="/ 와 // 의 차이"></a>/ 와 // 의 차이</h1><ul>
+<li><p><code>/</code> : 나누기</p>
 </li>
-<li><p>실행 결과 지도가 띄워지는 것을 확인할 수 있다 ( 참고 : 에뮬레이터에서는 보이지 않는다.)</p>
+<li><p><code>//</code> : 나누기 연산 후 소수점 이하의 수를 버리고, 정수 부분의 수만 구함.</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="number">4</span>/<span class="number">3</span>) <span class="comment"># 1</span></span><br><span class="line">print(<span class="number">4</span>//<span class="number">3</span>) <span class="comment"># 1.3333333333333333</span></span><br><span class="line">print(int(<span class="number">4</span>/<span class="number">3</span>)) <span class="comment"># 1</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p><strong>내가 궁금했던 건 <code>/</code> 와 <code>//</code> 가 음수에 쓰일 때 였다.</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="number">-4</span>//<span class="number">3</span>) <span class="comment"># -2</span></span><br><span class="line">print(<span class="number">-4</span>/<span class="number">3</span>) <span class="comment"># -1.3333333333333333</span></span><br><span class="line">print(int(<span class="number">-4</span>/<span class="number">3</span>)) <span class="comment"># -1</span></span><br></pre></td></tr></table></figure>
+
+<p>음수를 양수로 나눌 때 !</p>
+<p><code>//</code> 는 내림을 하고,</p>
+<p><code>/</code> 는 올림을 한다. </p>
+<br>
+
+<p><strong>결론 : C++14 기준을 따라 음수를 양수로 나눌 때, <code>int(음수/양수)</code> 를 사용할 수 있다.</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/08/python-:-::/" data-id="ckkwv7v2z007x7sc9ezgthqdm"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-android-secure_properties" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/01/android-secure_properties/">[안드로이드] secure.properties 파일을 생성하여 구글 맵 API 키 입력하기</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/10/01/android-secure_properties/" class="article-date">
+  <time datetime="2020-10-01T14:54:00.000Z" itemprop="datePublished">2020-10-01</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>secure.properties 파일에 구글 맵 API키를 등록한 후 사용하면 노출 없이 안전하게 사용할 수 있다.</p>
+<ol>
+<li><p><code>secure.properties</code> 파일 생성</p>
+<p>특정 위치에 <code>secure.properties</code> 파일을 생성한다. 나는 <code>build.gradle</code> 파일과 같은 위치에 생성하였다.</p>
+<p>생성 후 아래와 같이 API 키를 적는다. (YOUR_API_KEY 부분 수정)</p>
+<img src="../image/스크린샷 2020-10-01 오후 11.23.26.png" alt="스크린샷 2020-10-01 오후 11.23.26" style="zoom:67%;" />
+</li>
+<li><p><code>build.gradle (Module:app)</code> 의 defaultConfig 안에 아래 코드 추가</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Read the API key from .&#x2F;secure.properties into R.string.maps_api_key</span><br><span class="line">        def secureProps &#x3D; new Properties()</span><br><span class="line">        if (file(&quot;..&#x2F;secure.properties&quot;).exists()) &#123;</span><br><span class="line">            file(&quot;..&#x2F;secure.properties&quot;)?.withInputStream &#123; secureProps.load(it) &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        resValue &quot;string&quot;, &quot;maps_api_key&quot;, (secureProps.getProperty(&quot;MAPS_API_KEY&quot;) ?: &quot;&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>여기서 <code>file(&quot;&quot;)</code>의 “”안에는 현재 파일에서 <code>secure.properties</code>의 위치를 상대 경로로 명시해두어야 한다.</p>
+<p>이렇게 코드를 추가하면 매니페스트에서 API 키를  <code>@string/maps_api_key</code> 로 가져다 쓸 수 있다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">     The API key for Google Maps-based APIs.</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta-data</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:name</span>=<span class="string">"com.google.android.geo.API_KEY"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:value</span>=<span class="string">"@string/maps_api_key"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2020/09/01/android-kakao-map-api/" data-id="ckkwuiz61000nnzc9fd5i3xvs"
+      <a data-url="http://yoursite.com/2020/10/01/android-secure_properties/" data-id="ckkwv7v0n000r7sc9arh91uih"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
@@ -190,7 +968,7 @@
         
           
 
-<article id="post-backjoon-15654" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-android-google-map-conf" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -198,7 +976,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/28/backjoon-15654/">[백준알고리즘] N과 M(5) - 15654 (파이썬/ python)</a>
+      <a class="article-title" href="/2020/10/01/android-google-map-conf/">[안드로이드] google map api 프로젝트 구성 제대로 하기!</a>
     </h2>
   
   
@@ -211,8 +989,8 @@
 
     
       <div class="article-meta">
-        <a href="/2020/08/28/backjoon-15654/" class="article-date">
-  <time datetime="2020-08-28T05:28:49.784Z" itemprop="datePublished">2020-08-28</time>
+        <a href="/2020/10/01/android-google-map-conf/" class="article-date">
+  <time datetime="2020-10-01T13:54:00.000Z" itemprop="datePublished">2020-10-01</time>
 </a>
         
       </div>
@@ -227,67 +1005,75 @@
       
 
       
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
-<thead>
-<tr>
-<th align="left">시간 제한</th>
-<th align="left">메모리 제한</th>
-<th align="left">제출</th>
-<th align="left">정답</th>
-<th align="left">맞은 사람</th>
-<th align="left">정답 비율</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">1 초</td>
-<td align="left">512 MB</td>
-<td align="left">6458</td>
-<td align="left">4805</td>
-<td align="left">3849</td>
-<td align="left">74.219%</td>
-</tr>
-</tbody></table>
-<p>N개의 자연수와 자연수 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오. N개의 자연수는 모두 다른 수이다.</p>
-<ul>
-<li>N개의 자연수 중에서 M개를 고른 수열</li>
+        <ul>
+<li>구글맵 플랫폼 구글 클라우드 콘솔 설정 : <a href="https://developers.google.com/maps/gmp-get-started" target="_blank" rel="noopener">https://developers.google.com/maps/gmp-get-started</a></li>
+<li>API 키 가져오기 : <a href="https://developers.google.com/maps/documentation/android-sdk/get-api-key" target="_blank" rel="noopener">https://developers.google.com/maps/documentation/android-sdk/get-api-key</a></li>
 </ul>
-<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 8)</p>
-<p>둘째 줄에 N개의 수가 주어진다. 입력으로 주어지는 수는 10,000보다 작거나 같은 자연수이다.</p>
-<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>한 줄에 하나씩 문제의 조건을 만족하는 수열을 출력한다. 중복되는 수열을 여러 번 출력하면 안되며, 각 수열은 공백으로 구분해서 출력해야 한다.</p>
-<p>수열은 사전 순으로 증가하는 순서로 출력해야 한다.</p>
-<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3 1</span><br><span class="line">4 5 2</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4 2</span><br><span class="line">9 8 7 1</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1 7</span><br><span class="line">1 8</span><br><span class="line">1 9</span><br><span class="line">7 1</span><br><span class="line">7 8</span><br><span class="line">7 9</span><br><span class="line">8 1</span><br><span class="line">8 7</span><br><span class="line">8 9</span><br><span class="line">9 1</span><br><span class="line">9 7</span><br><span class="line">9 8</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4 4</span><br><span class="line">1231 1232 1233 1234</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1231 1232 1233 1234</span><br><span class="line">1231 1232 1234 1233</span><br><span class="line">1231 1233 1232 1234</span><br><span class="line">1231 1233 1234 1232</span><br><span class="line">1231 1234 1232 1233</span><br><span class="line">1231 1234 1233 1232</span><br><span class="line">1232 1231 1233 1234</span><br><span class="line">1232 1231 1234 1233</span><br><span class="line">1232 1233 1231 1234</span><br><span class="line">1232 1233 1234 1231</span><br><span class="line">1232 1234 1231 1233</span><br><span class="line">1232 1234 1233 1231</span><br><span class="line">1233 1231 1232 1234</span><br><span class="line">1233 1231 1234 1232</span><br><span class="line">1233 1232 1231 1234</span><br><span class="line">1233 1232 1234 1231</span><br><span class="line">1233 1234 1231 1232</span><br><span class="line">1233 1234 1232 1231</span><br><span class="line">1234 1231 1232 1233</span><br><span class="line">1234 1231 1233 1232</span><br><span class="line">1234 1232 1231 1233</span><br><span class="line">1234 1232 1233 1231</span><br><span class="line">1234 1233 1231 1232</span><br><span class="line">1234 1233 1232 1231</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">N, M = map(int, input().split())</span><br><span class="line">nums = list(map(int, input().split()))</span><br><span class="line">nums.sort()</span><br><span class="line"></span><br><span class="line">out = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(M)]</span><br><span class="line">visited = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(N)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(depth)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> depth == M:</span><br><span class="line">        print(<span class="string">' '</span>.join(map(str, out)))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">        <span class="keyword">if</span> visited[i] == <span class="number">0</span>:</span><br><span class="line">            visited[i] = <span class="number">1</span></span><br><span class="line">            out[depth] = nums[i]</span><br><span class="line">            dfs(depth+<span class="number">1</span>)</span><br><span class="line">            visited[i] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">dfs(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<p>다른 N과 M 문제와 다른 점은 N의 수가 지정되어 있다는 점이다.</p>
-<p>N의 수들을 sort 한 다음 똑같이 dfs를 수행한다. 중복을 허용하지 않기 때문에 visited를 검사한다.</p>
+<p>위 링크의 과정이 끝난 후, <strong>Android Studio의 build.gradle / AndroidManifest.xml 을 구성하는 과정</strong>을 내가 공식문서를 보며 이해하고 설정한대로 적어보았다.</p>
+<p><strong>준비되어 있어야 하는 것</strong></p>
 <ul>
-<li><p>다른 N과 M 문제처럼 out 리스트에 append 후 pop 하는 코드로 구현하였더니, pop 할 때마다 원소들이 재 정렬되기 때문에 런타임 에러가 발생하였다. </p>
-<p>-&gt; 어차피 print 할 때마다 out은 초기화 되어야 하기 때문에 out을 m길이의 list로 정의 하고 depth를 탐색할 때 out[depth]를 탐색한 nums 로 지정한다. </p>
+<li><p>구글 클라우드 콘솔 설정</p>
 </li>
-<li><p>int로 받아오고 str 로 print 하는 과정이 꼬이면 틀렸습니다가 나온다ㅠ </p>
+<li><p>google play services 설치</p>
+<p><img src="../image/2020-10-0111.04.33.png" alt="2020-10-0111.04.33"></p>
+</li>
+<li><p>API 키</p>
 </li>
 </ul>
+<h1 id="1-AndroidManifest-xml-설정하기"><a href="#1-AndroidManifest-xml-설정하기" class="headerlink" title="1. AndroidManifest.xml 설정하기"></a>1. AndroidManifest.xml 설정하기</h1><ul>
+<li><p><strong><code>AndroidManifest.xml</code>의 <code>&lt;application&gt;</code> 요소 내에 다음 선언을 추가한다.</strong> 이렇게 하면 앱이 컴파일된 Google Play 서비스의 버전이 삽입된다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta-data</span><br><span class="line">    android:name&#x3D;&quot;com.google.android.gms.version&quot;</span><br><span class="line">    android:value&#x3D;&quot;@integer&#x2F;google_play_services_version&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>위 google_play_services_version은 프로젝트 위치 어딘가에 values.xml에 integer로 선언되어 있다.</p>
+</li>
+<li><p><strong>API 키를 AndroidManifest.xml 파일에 포함한다.</strong></p>
+<p>이 단계에서 새로 알게된 것은 매니패스트 파일에 API 키를 명시하지 않고 추적 또한 못하도록 하는 방법이다.</p>
+<p>다음 포스트에 그 방법을 작성하였다!</p>
+<img src="../image/스크린샷 2020-10-01 오후 11.17.47.png" alt="스크린샷 2020-10-01 오후 11.17.47" style="zoom:50%;" />
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">     The API key for Google Maps-based APIs.</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta-data</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:name</span>=<span class="string">"com.google.android.geo.API_KEY"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:value</span>=<span class="string">"@string/maps_api_key"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>외부 저장소 권한 등의 필수 권한 지정</strong></p>
+<p>사실, 더 이상 Maps SDK for Android를 사용하기 위한 외부 저장소 권한인  <code>WRITE_EXTERNAL_STORAGE</code> 는 Google Play 서비스 SDK <strong>버전 8.3 이상</strong>을 타겟팅하는 경우 필요하지 않다.</p>
+<p>그러나 Google Play 서비스 SDK의 <strong>이전 버전</strong>을 타겟팅하는 경우 <code>android.permission.WRITE_EXTERNAL_STORAGE</code>권한을 요청해야 한다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>또한, 이제는 <code>android.permission.INTERNET</code> (API가 Google 지도 서버에서 지도 타일을 다운로드하는 데 사용됨) 권한과 <code>android.permission.ACCESS_NETWORK_STATE</code>(API에서 연결 상태를 확인하여 데이터를 다운로드할 수 있는지 확인할 수 있음) 권환은 <strong>매니페스트에 자동으로 병합되기 때문에 매니페스트에 명시적으로 추가할 필요가 없다고 한다.</strong></p>
+</li>
+<li><p>최종 코드는 마지막에 사진으로 첨부해 두었다.</p>
+</li>
+</ul>
+<h1 id="2-build-gradle-설정하기"><a href="#2-build-gradle-설정하기" class="headerlink" title="2. build.gradle 설정하기"></a>2. build.gradle 설정하기</h1><ul>
+<li><p><code>build.gradle (Module:app)</code></p>
+<ol>
+<li><code>secure.properties</code>파일에서 API 키를 가져다쓰기 위한 코드 추가 (secure.properties 파일 생성 방법은 다음 포스트 참고)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Read the API key from .&#x2F;secure.properties into R.string.maps_api_key</span><br><span class="line">        def secureProps &#x3D; new Properties()</span><br><span class="line">        if (file(&quot;..&#x2F;secure.properties&quot;).exists()) &#123;</span><br><span class="line">            file(&quot;..&#x2F;secure.properties&quot;)?.withInputStream &#123; secureProps.load(it) &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        resValue &quot;string&quot;, &quot;maps_api_key&quot;, (secureProps.getProperty(&quot;MAPS_API_KEY&quot;) ?: &quot;&quot;)</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>dependencies 추가</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; google map</span><br><span class="line">    implementation &#39;com.google.android.gms:play-services-maps:17.0.0&#39;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Sync now 클릭</li>
+</ol>
+</li>
+</ul>
+<h1 id="최종-코드"><a href="#최종-코드" class="headerlink" title="최종 코드"></a>최종 코드</h1><img src="../image/스크린샷 2020-10-01 오후 11.33.07.png" alt="스크린샷 2020-10-01 오후 11.33.07" style="zoom:80%;" />
+
+<p><code>AndroidManifest.xml</code></p>
+<img src="../image/스크린샷 2020-10-01 오후 11.34.10.png" alt="스크린샷 2020-10-01 오후 11.34.10" style="zoom:80%;" />
+
+<p><code>build.gradle(Module: app)</code> (위에 잘림)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2020/08/28/backjoon-15654/" data-id="ckkwuiz6z003enzc92o24hsv2"
+      <a data-url="http://yoursite.com/2020/10/01/android-google-map-conf/" data-id="ckkwv7v0j000h7sc9csa23gcn"
          class="article-share-link">공유</a>
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" rel="tag">안드로이드</a></li></ul>
 
     </footer>
 
@@ -304,7 +1090,7 @@
         
           
 
-<article id="post-backjoon-15651" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-programmers-str-reduce" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -312,7 +1098,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/28/backjoon-15651/">[백준알고리즘] N과 M(3) - 15651 (파이썬/ python)</a>
+      <a class="article-title" href="/2020/09/24/programmers-str-reduce/">[프로그래머스] 문자열 압축(파이썬) - 카카오 2020 1차 코딩 테스트 문제</a>
     </h2>
   
   
@@ -325,8 +1111,8 @@
 
     
       <div class="article-meta">
-        <a href="/2020/08/28/backjoon-15651/" class="article-date">
-  <time datetime="2020-08-28T04:41:02.191Z" itemprop="datePublished">2020-08-28</time>
+        <a href="/2020/09/24/programmers-str-reduce/" class="article-date">
+  <time datetime="2020-09-24T14:55:00.000Z" itemprop="datePublished">2020-09-24</time>
 </a>
         
       </div>
@@ -341,177 +1127,66 @@
       
 
       
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><table>
-<thead>
-<tr>
-<th align="left">시간 제한</th>
-<th align="left">메모리 제한</th>
-<th align="left">제출</th>
-<th align="left">정답</th>
-<th align="left">맞은 사람</th>
-<th align="left">정답 비율</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">1 초</td>
-<td align="left">512 MB</td>
-<td align="left">13368</td>
-<td align="left">8665</td>
-<td align="left">6751</td>
-<td align="left">65.486%</td>
-</tr>
-</tbody></table>
-<p>자연수 N과 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오.</p>
-<ul>
-<li>1부터 N까지 자연수 중에서 M개를 고른 수열</li>
-<li>같은 수를 여러 번 골라도 된다.</li>
-</ul>
-<h2 id="입력"><a href="#입력" class="headerlink" title="입력"></a>입력</h2><p>첫째 줄에 자연수 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 7)</p>
-<h2 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h2><p>한 줄에 하나씩 문제의 조건을 만족하는 수열을 출력한다. 중복되는 수열을 여러 번 출력하면 안되며, 각 수열은 공백으로 구분해서 출력해야 한다.</p>
-<p>수열은 사전 순으로 증가하는 순서로 출력해야 한다.</p>
-<h3 id="예제-입력-1"><a href="#예제-입력-1" class="headerlink" title="예제 입력 1"></a>예제 입력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 1</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-출력-1"><a href="#예제-출력-1" class="headerlink" title="예제 출력 1"></a>예제 출력 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-입력-2"><a href="#예제-입력-2" class="headerlink" title="예제 입력 2"></a>예제 입력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4 2</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-출력-2"><a href="#예제-출력-2" class="headerlink" title="예제 출력 2"></a>예제 출력 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1 1</span><br><span class="line">1 2</span><br><span class="line">1 3</span><br><span class="line">1 4</span><br><span class="line">2 1</span><br><span class="line">2 2</span><br><span class="line">2 3</span><br><span class="line">2 4</span><br><span class="line">3 1</span><br><span class="line">3 2</span><br><span class="line">3 3</span><br><span class="line">3 4</span><br><span class="line">4 1</span><br><span class="line">4 2</span><br><span class="line">4 3</span><br><span class="line">4 4</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-입력-3"><a href="#예제-입력-3" class="headerlink" title="예제 입력 3"></a>예제 입력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 3</span><br></pre></td></tr></table></figure>
-
-<h3 id="예제-출력-3"><a href="#예제-출력-3" class="headerlink" title="예제 출력 3"></a>예제 출력 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">1 1 1</span><br><span class="line">1 1 2</span><br><span class="line">1 1 3</span><br><span class="line">1 2 1</span><br><span class="line">1 2 2</span><br><span class="line">1 2 3</span><br><span class="line">1 3 1</span><br><span class="line">1 3 2</span><br><span class="line">1 3 3</span><br><span class="line">2 1 1</span><br><span class="line">2 1 2</span><br><span class="line">2 1 3</span><br><span class="line">2 2 1</span><br><span class="line">2 2 2</span><br><span class="line">2 2 3</span><br><span class="line">2 3 1</span><br><span class="line">2 3 2</span><br><span class="line">2 3 3</span><br><span class="line">3 1 1</span><br><span class="line">3 1 2</span><br><span class="line">3 1 3</span><br><span class="line">3 2 1</span><br><span class="line">3 2 2</span><br><span class="line">3 2 3</span><br><span class="line">3 3 1</span><br><span class="line">3 3 2</span><br><span class="line">3 3 3</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">input = sys.stdin.readline</span><br><span class="line"></span><br><span class="line">N, M = map(int, input().split())</span><br><span class="line">queue = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(depth)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> depth == M:</span><br><span class="line">        print(<span class="string">' '</span>.join(map(str, queue)))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">        queue.append(i+<span class="number">1</span>)</span><br><span class="line">        dfs(depth+<span class="number">1</span>)</span><br><span class="line">        queue.pop()</span><br><span class="line"></span><br><span class="line">dfs(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>N과 M(1) 과 다르게 중복을 허용하기 때문에 방문여부를 체크하지 않아도 된다 !</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2020/08/28/backjoon-15651/" data-id="ckkwuiz6y003anzc9fdwo53v7"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers- Immigration" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/27/programmers-%20Immigration/">[프로그래머스] 이분탐색 - 입국심사 (파이썬/ python)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/27/programmers-%20Immigration/" class="article-date">
-  <time datetime="2020-08-27T13:37:53.936Z" itemprop="datePublished">2020-08-27</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>n명이 입국심사를 위해 줄을 서서 기다리고 있습니다. 각 입국심사대에 있는 심사관마다 심사하는데 걸리는 시간은 다릅니다.</p>
-<p>처음에 모든 심사대는 비어있습니다. 한 심사대에서는 동시에 한 명만 심사를 할 수 있습니다. 가장 앞에 서 있는 사람은 비어 있는 심사대로 가서 심사를 받을 수 있습니다. 하지만 더 빨리 끝나는 심사대가 있으면 기다렸다가 그곳으로 가서 심사를 받을 수도 있습니다.</p>
-<p>모든 사람이 심사를 받는데 걸리는 시간을 최소로 하고 싶습니다.</p>
-<p>입국심사를 기다리는 사람 수 n, 각 심사관이 한 명을 심사하는데 걸리는 시간이 담긴 배열 times가 매개변수로 주어질 때, 모든 사람이 심사를 받는데 걸리는 시간의 최솟값을 return 하도록 solution 함수를 작성해주세요.</p>
-<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
-<li>입국심사를 기다리는 사람은 1명 이상 1,000,000,000명 이하입니다.</li>
-<li>각 심사관이 한 명을 심사하는데 걸리는 시간은 1분 이상 1,000,000,000분 이하입니다.</li>
-<li>심사관은 1명 이상 100,000명 이하입니다.</li>
+        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>데이터 처리 전문가가 되고 싶은 <strong>어피치</strong>는 문자열을 압축하는 방법에 대해 공부를 하고 있습니다. 최근에 대량의 데이터 처리를 위한 간단한 비손실 압축 방법에 대해 공부를 하고 있는데, 문자열에서 같은 값이 연속해서 나타나는 것을 그 문자의 개수와 반복되는 값으로 표현하여 더 짧은 문자열로 줄여서 표현하는 알고리즘을 공부하고 있습니다.<br>간단한 예로 aabbaccc의 경우 2a2ba3c(문자가 반복되지 않아 한번만 나타난 경우 1은 생략함)와 같이 표현할 수 있는데, 이러한 방식은 반복되는 문자가 적은 경우 압축률이 낮다는 단점이 있습니다. 예를 들면, abcabcdede와 같은 문자열은 전혀 압축되지 않습니다. 어피치는 이러한 단점을 해결하기 위해 문자열을 1개 이상의 단위로 잘라서 압축하여 더 짧은 문자열로 표현할 수 있는지 방법을 찾아보려고 합니다.</p>
+<p>예를 들어, ababcdcdababcdcd의 경우 문자를 1개 단위로 자르면 전혀 압축되지 않지만, 2개 단위로 잘라서 압축한다면 2ab2cd2ab2cd로 표현할 수 있습니다. 다른 방법으로 8개 단위로 잘라서 압축한다면 2ababcdcd로 표현할 수 있으며, 이때가 가장 짧게 압축하여 표현할 수 있는 방법입니다.</p>
+<p>다른 예로, abcabcdede와 같은 경우, 문자를 2개 단위로 잘라서 압축하면 abcabc2de가 되지만, 3개 단위로 자른다면 2abcdede가 되어 3개 단위가 가장 짧은 압축 방법이 됩니다. 이때 3개 단위로 자르고 마지막에 남는 문자열은 그대로 붙여주면 됩니다.</p>
+<p>압축할 문자열 s가 매개변수로 주어질 때, 위에 설명한 방법으로 1개 이상 단위로 문자열을 잘라 압축하여 표현한 문자열 중 가장 짧은 것의 길이를 return 하도록 solution 함수를 완성해주세요.</p>
+<h3 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h3><ul>
+<li>s의 길이는 1 이상 1,000 이하입니다.</li>
+<li>s는 알파벳 소문자로만 이루어져 있습니다.</li>
 </ul>
 <h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
 <thead>
 <tr>
-<th>n</th>
-<th>times</th>
-<th>return</th>
+<th>s</th>
+<th>result</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>6</td>
-<td>[7, 10]</td>
-<td>28</td>
+<td><code>&quot;aabbaccc&quot;</code></td>
+<td>7</td>
+</tr>
+<tr>
+<td><code>&quot;ababcdcdababcdcd&quot;</code></td>
+<td>9</td>
+</tr>
+<tr>
+<td><code>&quot;abcabcdede&quot;</code></td>
+<td>8</td>
+</tr>
+<tr>
+<td><code>&quot;abcabcabcabcdededededede&quot;</code></td>
+<td>14</td>
+</tr>
+<tr>
+<td><code>&quot;xababcdcdababcdcd&quot;</code></td>
+<td>17</td>
 </tr>
 </tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>가장 첫 두 사람은 바로 심사를 받으러 갑니다.</p>
-<p>7분이 되었을 때, 첫 번째 심사대가 비고 3번째 사람이 심사를 받습니다.</p>
-<p>10분이 되었을 때, 두 번째 심사대가 비고 4번째 사람이 심사를 받습니다.</p>
-<p>14분이 되었을 때, 첫 번째 심사대가 비고 5번째 사람이 심사를 받습니다.</p>
-<p>20분이 되었을 때, 두 번째 심사대가 비지만 6번째 사람이 그곳에서 심사를 받지 않고 1분을 더 기다린 후에 첫 번째 심사대에서 심사를 받으면 28분에 모든 사람의 심사가 끝납니다.</p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>이분 탐색을 이용하여 푸는 문제이다.</p>
-<h2 id="이분-탐색-이진-탐색-이란"><a href="#이분-탐색-이진-탐색-이란" class="headerlink" title="이분 탐색(이진 탐색)이란"></a>이분 탐색(이진 탐색)이란</h2><blockquote>
-<p>동영상을 보면 이분 탐색에 대한 이해가 쉬울 것이다! </p>
-<p>링크 : <a href="https://www.youtube.com/watch?v=SKcG0p73yo4" target="_blank" rel="noopener">https://www.youtube.com/watch?v=SKcG0p73yo4</a></p>
-</blockquote>
-<p><strong>이분 탐색</strong>은 탐색 기법 중 하나로써 원하는 탐색 범위를 두 부분으로 분할해서 찾는 방식이다. 탐색 범위는 반드시 <strong>정렬</strong>되어 있어야 한다. 전체 탐색에 비해 속도가 빠르다.</p>
-<p>탐색 범위의 <em>처음</em>(<em>left</em>)과 <em>끝</em>(<em>right</em>)의 <em>중간</em>(<em>mid</em>)과 탐색하고자 하는 값을 비교하여 </p>
-<ol>
-<li>탐색 값이 <em>중간</em>(<em>mid</em>)보다 작은 경우에는 범위의 <em>끝</em>(<em>right</em>)을 <em>중간-1</em>(<em>mid</em> -<em>1</em>)값으로 설정하고,</li>
-<li>탐색 값이 <em>중간</em>(<em>mid</em>)보다 큰 경우에는 범위의 <em>처음</em>(<em>left</em>)을 <em>중간+1</em>(<em>mid</em>+<em>1</em>)값으로 설정한다.</li>
-</ol>
-<p><em>left</em> 와 <em>right</em> 를 좁혀가며 최종적으로 탐색 값을 찾는다.</p>
-<p><strong>코드</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(n, times)</span>:</span></span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    <span class="comment"># right는 가장 비효율적으로 심사했을 때 걸리는 시간</span></span><br><span class="line">    <span class="comment"># 가장 긴 심사시간이 소요되는 심사관에게 n 명 모두 심사받는 경우이다.</span></span><br><span class="line">    left, right = <span class="number">1</span>, max(times) * n</span><br><span class="line">    <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">        mid = (left+ right) // <span class="number">2</span></span><br><span class="line">        people = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> time <span class="keyword">in</span> times:</span><br><span class="line">            <span class="comment"># people 은 모든 심사관들이 mid분 동안 심사한 사람의 수</span></span><br><span class="line">            people += mid // time</span><br><span class="line">            <span class="comment"># 모든 심사관을 거치지 않아도 mid분 동안 n명 이상의 심사를 할 수 있다면 반복문을 나간다.</span></span><br><span class="line">            <span class="keyword">if</span> people &gt;= n:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 심사한 사람의 수가 심사 받아야할 사람의 수(n)보다 많거나 같은 경우</span></span><br><span class="line">        <span class="keyword">if</span> people &gt;= n:</span><br><span class="line">            answer = mid</span><br><span class="line">            right = mid - <span class="number">1</span></span><br><span class="line">        <span class="comment"># 심사한 사람의 수가 심사 받아야할 사람의 수(n)보다 적은 경우</span></span><br><span class="line">        <span class="keyword">elif</span> people &lt; n:</span><br><span class="line">            left = mid + <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+<h3 id="입출력-예에-대한-설명"><a href="#입출력-예에-대한-설명" class="headerlink" title="입출력 예에 대한 설명"></a>입출력 예에 대한 설명</h3><p><strong>입출력 예 #1</strong></p>
+<p>문자열을 1개 단위로 잘라 압축했을 때 가장 짧습니다.</p>
+<p><strong>입출력 예 #2</strong></p>
+<p>문자열을 8개 단위로 잘라 압축했을 때 가장 짧습니다.</p>
+<p><strong>입출력 예 #3</strong></p>
+<p>문자열을 3개 단위로 잘라 압축했을 때 가장 짧습니다.</p>
+<p><strong>입출력 예 #4</strong></p>
+<p>문자열을 2개 단위로 자르면 abcabcabcabc6de 가 됩니다.<br>문자열을 3개 단위로 자르면 4abcdededededede 가 됩니다.<br>문자열을 4개 단위로 자르면 abcabcabcabc3dede 가 됩니다.<br>문자열을 6개 단위로 자를 경우 2abcabc2dedede가 되며, 이때의 길이가 14로 가장 짧습니다.</p>
+<p><strong>입출력 예 #5</strong></p>
+<p>문자열은 제일 앞부터 정해진 길이만큼 잘라야 합니다.<br>따라서 주어진 문자열을 x / ababcdcd / ababcdcd 로 자르는 것은 불가능 합니다.<br>이 경우 어떻게 문자열을 잘라도 압축되지 않으므로 가장 짧은 길이는 17이 됩니다.</p>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(s)</span>:</span></span><br><span class="line">    lens = []</span><br><span class="line">    <span class="keyword">if</span> len(s) == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(s) //<span class="number">2</span> +<span class="number">1</span>):</span><br><span class="line">        cnt = <span class="number">1</span></span><br><span class="line">        pre = s[:i]</span><br><span class="line">        result = <span class="string">''</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i,len(s),i):</span><br><span class="line">            <span class="keyword">if</span> pre == s[j:j+i]:</span><br><span class="line">                cnt += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> cnt == <span class="number">1</span>:</span><br><span class="line">                    cnt = <span class="string">''</span>    </span><br><span class="line">                result += str(cnt) + pre</span><br><span class="line">                cnt = <span class="number">1</span></span><br><span class="line">                pre = s[j:j+i]</span><br><span class="line">        <span class="keyword">if</span> cnt == <span class="number">1</span>:</span><br><span class="line">            cnt = <span class="string">''</span>    </span><br><span class="line">        result += str(cnt) + pre</span><br><span class="line">        lens.append(len(result))</span><br><span class="line">    <span class="keyword">return</span> min(lens)</span><br></pre></td></tr></table></figure>
 
-<p>이분 탐색(이진 탐색)으로 알고리즘을 푸는 것이 처음이라서 블로그들의 설명을 요리조리 보면서 이해했다 ㅠㅠ 그래서 주석도 많다</p>
-<p>이분 탐색을 할 때는 <strong>‘이분 탐색의 범위는 무엇으로 할지’</strong> 와 <strong>‘이분 탐색의 기준을 무엇으로 할지’</strong> 을 잡아야한다.</p>
 <ul>
-<li><p>범위 : 심사를 하는데 총 걸리는 시간으로, 1분 부터 가장 비효율적으로 심사를 받았을 때 걸리는 시간(분)으로 하였다.</p>
-</li>
-<li><p>mid : 모든 심사관들에게 주어진 시간이다. 따라서 people 은 모든 심사관들이 mid분 동안 심사한 사람의 수가 된다.</p>
-</li>
-<li><p>기준 :  mid 동안 심사한 사람의 수(people)가 </p>
-<ol>
-<li>심사 받아야할 사람의 수(n)보다 <strong>많거나 같을 경우</strong>에는 시간이 충분했던 것이므로 <strong>주어진 시간을</strong> <strong>줄이고</strong> ( right = mid - 1 -&gt; right 를 줄이면 left와 right의 중간 값인 mid 도 줄어드니까 주어진 시간이 줄어든다.)  </li>
-<li>심사 받아야할 사람의 수(n)보다 <strong>적은 경우</strong>에는 시간이 부족했던 것이므로 <strong>주어진 시간을</strong> <strong>늘린다</strong>. (left = mid + 1)</li>
-</ol>
-</li>
+<li>문자열 길이가 1인 경우에는 for 문을 돌 필요가 없으므로 조건문으로 추가했다. (없으면 문제 하나가 런타임 에러 난다ㅠㅠ)</li>
+<li>cnt가 1인경우에는 ‘’로 초기화 한 후 더한다.</li>
+<li>pre와 s[j:j+1]이 달라지는 타이밍에 <code>result += str(cnt) + pre</code> 를 실행했더니, 마지막 문자열의 경우엔 어떻게 해야 할지 고민됐다. 처음에는 <code>if j==len(s):</code> 조건을 추가하고,  <code>result += str(cnt) + pre</code> 를 실행하도록 하였다. 근데 생각해보니까 2번째 for문이 끝나고 나면 무조건 <code>result += str(cnt) + pre</code> 를 실행면 되는거였당!</li>
+<li>len(s)의 반 이상으로 문자열을 자를 일은 없으므로 len(s) //2 +1 까지 i가 돌게 해야한당 </li>
 </ul>
-<p>이분 탐색은 범위와 기준을 잡는 것이 핵심인 것 같다!</p>
+<hr>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2020/08/27/programmers-%20Immigration/" data-id="ckkwuiz7o005ynzc90xeu30lo"
+      <a data-url="http://yoursite.com/2020/09/24/programmers-str-reduce/" data-id="ckkwv7v2s007c7sc9exeu3uzd"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
@@ -531,7 +1206,7 @@
         
           
 
-<article id="post-programmers-phonebook" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-mac-ssh-terminal" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -539,7 +1214,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/27/programmers-phonebook/">[프로그래머스] 해시- 전화번호 목록 (파이썬/ python)</a>
+      <a class="article-title" href="/2020/09/20/mac-ssh-terminal/">Mac에서 Putty없이 ssh접속하기</a>
     </h2>
   
   
@@ -552,8 +1227,8 @@
 
     
       <div class="article-meta">
-        <a href="/2020/08/27/programmers-phonebook/" class="article-date">
-  <time datetime="2020-08-27T12:10:35.325Z" itemprop="datePublished">2020-08-27</time>
+        <a href="/2020/09/20/mac-ssh-terminal/" class="article-date">
+  <time datetime="2020-09-20T05:04:00.000Z" itemprop="datePublished">2020-09-20</time>
 </a>
         
       </div>
@@ -568,558 +1243,60 @@
       
 
       
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>전화번호부에 적힌 전화번호 중, 한 번호가 다른 번호의 접두어인 경우가 있는지 확인하려 합니다.<br>전화번호가 다음과 같을 경우, 구조대 전화번호는 영석이의 전화번호의 접두사입니다.</p>
-<ul>
-<li>구조대 : 119</li>
-<li>박준영 : 97 674 223</li>
-<li>지영석 : 11 9552 4421</li>
-</ul>
-<p>전화번호부에 적힌 전화번호를 담은 배열 phone_book 이 solution 함수의 매개변수로 주어질 때, 어떤 번호가 다른 번호의 접두어인 경우가 있으면 false를 그렇지 않으면 true를 return 하도록 solution 함수를 작성해주세요.</p>
-<h5 id="제한-사항"><a href="#제한-사항" class="headerlink" title="제한 사항"></a>제한 사항</h5><ul>
-<li>phone_book의 길이는 1 이상 1,000,000 이하입니다.</li>
-<li>각 전화번호의 길이는 1 이상 20 이하입니다.</li>
-</ul>
-<h5 id="입출력-예제"><a href="#입출력-예제" class="headerlink" title="입출력 예제"></a>입출력 예제</h5><table>
-<thead>
-<tr>
-<th>phone_book</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>[119, 97674223, 1195524421]</td>
-<td>false</td>
-</tr>
-<tr>
-<td>[123,456,789]</td>
-<td>true</td>
-</tr>
-<tr>
-<td>[12,123,1235,567,88]</td>
-<td>false</td>
-</tr>
-</tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>입출력 예 #1<br>앞에서 설명한 예와 같습니다.</p>
-<p>입출력 예 #2<br>한 번호가 다른 번호의 접두사인 경우가 없으므로, 답은 true입니다.</p>
-<p>입출력 예 #3<br>첫 번째 전화번호, “12”가 두 번째 전화번호 “123”의 접두사입니다. 따라서 답은 false입니다.</p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(phone_book)</span>:</span></span><br><span class="line">    phone_book.sort()</span><br><span class="line">    answer = <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(phone_book)<span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">if</span> phone_book[i+<span class="number">1</span>].startswith(phone_book[i],<span class="number">0</span>,len(phone_book[i])):</span><br><span class="line">            answer = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+        <h4 id="Mac-에서-Putty를-까는게-복잡해서-터미널을-통해-ssh에-접속하는-방법을-찾아보았다"><a href="#Mac-에서-Putty를-까는게-복잡해서-터미널을-통해-ssh에-접속하는-방법을-찾아보았다" class="headerlink" title="Mac 에서 Putty를 까는게 복잡해서 터미널을 통해 ssh에 접속하는 방법을 찾아보았다."></a>Mac 에서 Putty를 까는게 복잡해서 터미널을 통해 ssh에 접속하는 방법을 찾아보았다.</h4><p>사이트의 접속 정보가</p>
+<p><strong>호스트: 106.10.56.164</strong></p>
+<p><strong>아이디: root</strong></p>
+<p><strong>비밀번호: abc</strong></p>
+<p><strong>포트: 3000</strong></p>
+<p>위와 같은 경우</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh root@106.10.56.164 -p 3000</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><p>새로 알게 된 것 </p>
-<ul>
-<li><p>find() =&gt; 인덱스 위치 반환</p>
-</li>
-<li><p>startswith(확인하고자하는 문자, 시작위치, 끝위치) =&gt; True/ False 여부 반환</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'1'</span>)) <span class="comment"># True</span></span><br><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'2'</span>)) <span class="comment"># False</span></span><br><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'4'</span>,<span class="number">2</span>)) <span class="comment"># False</span></span><br><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'4'</span>,<span class="number">3</span>,<span class="number">4</span>)) <span class="comment"># True</span></span><br><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'1'</span>,<span class="number">2</span>,<span class="number">4</span>)) <span class="comment"># False</span></span><br><span class="line">print(<span class="string">'12345'</span>.startswith(<span class="string">'1'</span>,<span class="number">0</span>,<span class="number">2</span>)) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>endswith()</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'12345'</span>.endswith(<span class="string">'5'</span>)) <span class="comment"># True</span></span><br><span class="line">print(<span class="string">'12345'</span>.endswith(<span class="string">'2'</span>,<span class="number">0</span>,<span class="number">2</span>)) <span class="comment"># True '12'</span></span><br><span class="line">print(<span class="string">'12345'</span>.endswith(<span class="string">'4'</span>,<span class="number">0</span>,<span class="number">5</span>)) <span class="comment"># False '12345'</span></span><br><span class="line">print(<span class="string">'12345'</span>.endswith(<span class="string">'5'</span>,<span class="number">4</span>,<span class="number">5</span>)) <span class="comment"># True '45'</span></span><br></pre></td></tr></table></figure>
-
-<p>위 예제들에서 알 수 있다싶이, 배열은 두번째 인수의 인덱스 부터 세번째 인수의 인덱스-1까지 자른 후 검사한다 ! </p>
-<p>default 는 배열 전체.</p>
-</li>
-</ul>
-</li>
-<li><p>phone_book.sort() 를 하면 스트링 sort이기 때문에</p>
-<p><code>[&#39;119&#39;, &#39;97674223&#39;, &#39;1195524421&#39;]</code>-&gt; <code>[&#39;119&#39;, &#39;1195524421&#39;, &#39;97674223&#39;]</code>  이러한 형식으로 sort 된다.</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2020/08/27/programmers-phonebook/" data-id="ckkwuiz820070nzc997qyf6in"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-priority-queue" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/27/programmers-priority-queue/">[프로그래머스] 이중 우선순위 큐 - 파이썬(python)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/27/programmers-priority-queue/" class="article-date">
-  <time datetime="2020-08-27T09:14:00.000Z" itemprop="datePublished">2020-08-27</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제설명"><a href="#문제설명" class="headerlink" title="문제설명"></a>문제설명</h1><p>이중 우선순위 큐는 다음 연산을 할 수 있는 자료구조를 말합니다.</p>
-<table>
-<thead>
-<tr>
-<th>명령어</th>
-<th>수신 탑(높이)</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>I 숫자</td>
-<td>큐에 주어진 숫자를 삽입합니다.</td>
-</tr>
-<tr>
-<td>D 1</td>
-<td>큐에서 최댓값을 삭제합니다.</td>
-</tr>
-<tr>
-<td>D -1</td>
-<td>큐에서 최솟값을 삭제합니다.</td>
-</tr>
-</tbody></table>
-<p>이중 우선순위 큐가 할 연산 operations가 매개변수로 주어질 때, 모든 연산을 처리한 후 큐가 비어있으면 [0,0] 비어있지 않으면 [최댓값, 최솟값]을 return 하도록 solution 함수를 구현해주세요.</p>
-<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
-<li>operations는 길이가 1 이상 1,000,000 이하인 문자열 배열입니다.</li>
-<li>operations의 원소는 큐가 수행할 연산을 나타냅니다.<ul>
-<li>원소는 “명령어 데이터” 형식으로 주어집니다.- 최댓값/최솟값을 삭제하는 연산에서 최댓값/최솟값이 둘 이상인 경우, 하나만 삭제합니다.</li>
-</ul>
-</li>
-<li>빈 큐에 데이터를 삭제하라는 연산이 주어질 경우, 해당 연산은 무시합니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>operations</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>[I 16,D 1]</td>
-<td>[0,0]</td>
-</tr>
-<tr>
-<td>[I 7,I 5,I -5,D -1]</td>
-<td>[7,5]</td>
-</tr>
-</tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>16을 삽입 후 최댓값을 삭제합니다. 비어있으므로 [0,0]을 반환합니다.<br>7,5,-5를 삽입 후 최솟값을 삭제합니다. 최대값 7, 최소값 5를 반환합니다.</p>
-<p><a href="http://icpckorea.org/problems/2013/onlineset.pdf" target="_blank" rel="noopener">출처</a></p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><blockquote>
-<p>코드</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(operations)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> heapq</span><br><span class="line">    answer = []</span><br><span class="line">    priority_queue = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> operation <span class="keyword">in</span> operations:</span><br><span class="line">        op = operation[:<span class="number">1</span>]</span><br><span class="line">        num = int(operation[<span class="number">2</span>:])</span><br><span class="line">        <span class="keyword">if</span> op == <span class="string">"D"</span> <span class="keyword">and</span> priority_queue:</span><br><span class="line">            <span class="keyword">if</span> num == <span class="number">1</span>:</span><br><span class="line">                priority_queue.pop(priority_queue.index(max(priority_queue)))</span><br><span class="line">            <span class="keyword">elif</span> num == <span class="number">-1</span>:</span><br><span class="line">                heapq.heappop(priority_queue)</span><br><span class="line">        <span class="keyword">elif</span> op == <span class="string">"I"</span>:</span><br><span class="line">            heapq.heappush(priority_queue, num)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> priority_queue:</span><br><span class="line">        answer = [max(priority_queue),heapq.heappop(priority_queue)]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        answer = [<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line">                                   </span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-
-
+<p>터미널에 위 명령어를 입력한다. </p>
+<p>그럼 password를 입력하라고 뜨고 abc를 입력하면 ssh 접속에 성공한다.</p>
+<hr>
 <blockquote>
-<p>새로 알게 된 점</p>
+<p>이 외에 나중에 참고할 만한 사항들</p>
 </blockquote>
-<ol>
-<li>문자열 인덱싱(슬라이싱) <ul>
-<li>슬라이싱을 통해 operation 과 숫자를 나눴다.</li>
-</ul>
+<h3 id="ssh-키-발급하기"><a href="#ssh-키-발급하기" class="headerlink" title="ssh 키 발급하기"></a>ssh 키 발급하기</h3><ol>
+<li>발급하기 전 키가 있는지 확인한다.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>또는 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~&#x2F;.ssh</span><br><span class="line">$ ls</span><br></pre></td></tr></table></figure>
+
+<p>첫번째 터미널 입력 방법의 경우 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat: &#x2F;...&#x2F;.ssh&#x2F;id_rsa.pub: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>위와 같이 뜨면 SSH 키가 없는 것이다.</p>
+<ol start="2">
+<li><p>키 쌍 만들기</p>
+<p>방법은 간단하다. 아래 명령어를 입력한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
 </li>
-<li><code>priority_queue.index(max(priority_queue))</code><ul>
-<li>위 코드를 통해 priority_queue에서 가장 큰 값의 인덱스를 얻어올 수 있었다. 매우 편하다!</li>
-</ul>
-</li>
-<li><code>heapq.heappush(priority_queue, num)</code> <ul>
-<li>위 코드는 최소힙(우선순위큐)을 만족하도록 num을 push한다.</li>
-</ul>
-</li>
-<li><code>heapq.heappop(priority_queue)</code><ul>
-<li>위 코드는 최소 값을 pop한다.</li>
-</ul>
+<li><p>키 복사하기</p>
+<p>아래 명령어 입력</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pbcopy &lt; ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
-<blockquote>
-<p>어려웠던 점</p>
-</blockquote>
-<p> 사실 생각보단 금방 풀었지만 ! 맨 처음 코드가 아래와 같을 때,</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> operation <span class="keyword">in</span> operations:</span><br><span class="line">    <span class="keyword">if</span> operation == <span class="string">"D 1"</span> <span class="keyword">and</span> priority_queue:</span><br><span class="line">        data = max(priority_queue)</span><br><span class="line">        priority_queue.pop(priority_queue.index(data))</span><br><span class="line">    <span class="keyword">elif</span> operation == <span class="string">"D -1"</span> <span class="keyword">and</span> priority_queue:</span><br><span class="line">        data = min(priority_queue)</span><br><span class="line">        priority_queue.pop(priority_queue.index(data))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        num = operation[<span class="number">2</span>:]</span><br><span class="line">        heapq.heappush(priority_queue, int(num))</span><br></pre></td></tr></table></figure>
+<h3 id="ssh-port-변경"><a href="#ssh-port-변경" class="headerlink" title="ssh port 변경"></a>ssh port 변경</h3><p>port를 아예 변경하고 싶을 때 사용한다.</p>
+<ol>
+<li>아래 명령어를 통해 port를 변경할 수 있는 파일을 연다.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano &#x2F;etc&#x2F;services</span><br></pre></td></tr></table></figure>
 
-<p>입력값이 <code>[&quot;I 16&quot;, &quot;I -5643&quot;, &quot;D -1&quot;, &quot;D 1&quot;, &quot;D 1&quot;, &quot;I 123&quot;, &quot;D -1&quot;]</code> 인 경우,</p>
-<p>세번 째 <code>&quot;D 1&quot;</code> 에서 <code>priority_queue</code>가 비어있으니  <code>else</code>로 넘어가면서 1이 push 되는 문제가 발생하였다. </p>
-<p>그래서 <code>op</code> 와 <code>num</code>으로 나눠서 검사를 했더니 문제가 해결되었다. </p>
-<p><code>and priority_queue</code>를 넣지 않으면 ValueError : <strong>max() arg is an empty sequence</strong> 등의 문제가 발생한다.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2020/08/27/programmers-priority-queue/" data-id="ckkwuiz830072nzc95jt3gq1v"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-python-heapq" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/27/python-heapq/">[파이썬] heapq 모듈</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/27/python-heapq/" class="article-date">
-  <time datetime="2020-08-27T09:12:00.000Z" itemprop="datePublished">2020-08-27</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <blockquote>
-<p> heapq 모듈에 대해 간략히 알아보자 ! </p>
-</blockquote>
-<h3 id="Heap-이란"><a href="#Heap-이란" class="headerlink" title="Heap 이란 ?"></a>Heap 이란 ?</h3><p>힙(heap)은 최댓값 및 최솟값을 찾아내는 연산을 빠르게 하기 위해 고안된 완전이진트리(complete binary tree)를 기본으로 한 자료구조(tree-based structure)로서 다음과 같은 힙 속성(property)을 만족한다.</p>
-<ul>
-<li>A가 B의 부모노드(parent node)이면, A의 키(key)값과 B의 키값 사이에는 대소관계가 성립한다.</li>
-</ul>
-<p>힙에는 두가지 종류가 있으며, 부모노드의 키값이 자식노드의 키값보다 항상 큰 힙을 ‘최대 힙’, 부모노드의 키값이 자식노드의 키값보다 항상 작은 힙을 ‘최소 힙’이라고 부른다. 아래 사진은 <strong>최대 힙</strong>의 예시이다.</p>
-<img src="../image/image-20200827173046492.png" alt="image-20200827173046492" style="zoom:50%;" />
-
-<p>출처 : <a href="https://ko.wikipedia.org/wiki/%ED%9E%99_(%EC%9E%90%EB%A3%8C_%EA%B5%AC%EC%A1%B0)" target="_blank" rel="noopener">위키백과 ‘힙 (자료 구조)’</a></p>
-<h2 id="heapq"><a href="#heapq" class="headerlink" title="heapq"></a>heapq</h2><p><strong>완전 이진트리 기반의 최소 힙 자료구조</strong>이다. heapq의 첫번째 인덱스 값은 최소값이다.</p>
-<p>부모 노드의 key 값은 자식 노드의 key 값보다 작거나 같다.</p>
-<p>heapq 모듈은 큐 알고리즘이라고도 하는 힙(heap) 큐 알고리즘의 구현을 제공한다.</p>
-<h3 id="python에-쓰이는-heapq-코드"><a href="#python에-쓰이는-heapq-코드" class="headerlink" title="python에 쓰이는 heapq 코드"></a>python에 쓰이는 heapq 코드</h3><ul>
-<li><code>import heapq</code> : heapq 모듈을 사용하기 위해 써주어야한다.</li>
-<li><code>heapq.heapify(x)</code> : 값이 들어있는 리스트 x를 최소 힙으로 변환하는 코드이다. 이 때 주의할 점은 최소 힙을 만족시키는리스트가 아닌 최소 힙(리스트x)으로 변경된다는 사실이다.</li>
-<li><code>heapq.heappush(heap, item)</code> : item 값을 힙으로 푸시한다.</li>
-<li><code>heapq.heappushpop(heap, item)</code> : 힙에 item을 푸시한 다음, heap에서 가장 작은 항목을 팝하고 반환한다. ( <code>heapq.heappush(heap)</code> =&gt; <code>heapq.heappop(heap)</code>)</li>
-<li><code>heapq.heapreplace(heap, item)</code> : heap에서 가장 작은 항목을 팝하고 반환하며, 새로운 item도 푸시한다. heap 이 비어있을 시에 IndexError가 발생한다. ( <code>heapq.heappop(heap)</code> =&gt; <code>heapq.heappush(heap)</code>)</li>
-</ul>
-<p>주의할 점 ! sort 와 달리 전체를 정렬하는 것이 아니므로 맨앞의 값이 최소값인 것은 확실하지만 두번째 값이 두번째로 작은 값임은 확신할 수 없다. </p>
-<p>이 경우 heapq.heappop(heap)을 한 다음 heap[0] 으로 접근한다.</p>
-<p>참고: <a href="https://python.flowdas.com/library/heapq.html" target="_blank" rel="noopener">https://python.flowdas.com/library/heapq.html</a> </p>
+<ol start="2">
+<li>ssh에 해당하는 port를 찾아 원하는 숫자로 변경한 후, 저장하면 끝.</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2020/08/27/python-heapq/" data-id="ckkwuiz8e0089nzc927r27lc0"
+      <a data-url="http://yoursite.com/2020/09/20/mac-ssh-terminal/" data-id="ckkwv7v29005q7sc99t9ih26h"
          class="article-share-link">공유</a>
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-func-develop" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/27/programmers-func-develop/">[프로그래머스] 기능개발 (파이썬/python)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/27/programmers-func-develop/" class="article-date">
-  <time datetime="2020-08-26T17:17:22.488Z" itemprop="datePublished">2020-08-27</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>프로그래머스 팀에서는 기능 개선 작업을 수행 중입니다. 각 기능은 진도가 100%일 때 서비스에 반영할 수 있습니다.</p>
-<p>또, 각 기능의 개발속도는 모두 다르기 때문에 뒤에 있는 기능이 앞에 있는 기능보다 먼저 개발될 수 있고, 이때 뒤에 있는 기능은 앞에 있는 기능이 배포될 때 함께 배포됩니다.</p>
-<p>먼저 배포되어야 하는 순서대로 작업의 진도가 적힌 정수 배열 progresses와 각 작업의 개발 속도가 적힌 정수 배열 speeds가 주어질 때 각 배포마다 몇 개의 기능이 배포되는지를 return 하도록 solution 함수를 완성하세요.</p>
-<h5 id="제한-사항"><a href="#제한-사항" class="headerlink" title="제한 사항"></a>제한 사항</h5><ul>
-<li>작업의 개수(progresses, speeds배열의 길이)는 100개 이하입니다.</li>
-<li>작업 진도는 100 미만의 자연수입니다.</li>
-<li>작업 속도는 100 이하의 자연수입니다.</li>
-<li>배포는 하루에 한 번만 할 수 있으며, 하루의 끝에 이루어진다고 가정합니다. 예를 들어 진도율이 95%인 작업의 개발 속도가 하루에 4%라면 배포는 2일 뒤에 이루어집니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>progresses</th>
-<th>speeds</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>[93,30,55]</td>
-<td>[1,30,5]</td>
-<td>[2,1]</td>
-</tr>
-</tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><p>첫 번째 기능은 93% 완료되어 있고 하루에 1%씩 작업이 가능하므로 7일간 작업 후 배포가 가능합니다.<br>두 번째 기능은 30%가 완료되어 있고 하루에 30%씩 작업이 가능하므로 3일간 작업 후 배포가 가능합니다. 하지만 이전 첫 번째 기능이 아직 완성된 상태가 아니기 때문에 첫 번째 기능이 배포되는 7일째 배포됩니다.<br>세 번째 기능은 55%가 완료되어 있고 하루에 5%씩 작업이 가능하므로 9일간 작업 후 배포가 가능합니다.</p>
-<p>따라서 7일째에 2개의 기능, 9일째에 1개의 기능이 배포됩니다.</p>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(progresses, speeds)</span>:</span></span><br><span class="line">    day = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(progresses))]</span><br><span class="line">    answer = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(progresses)):</span><br><span class="line">        day[i] = math.ceil((<span class="number">100</span> - progresses[i]) / speeds[i])</span><br><span class="line">        </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> day:</span><br><span class="line">        out = day.pop(<span class="number">0</span>)</span><br><span class="line">        count = <span class="number">1</span></span><br><span class="line">        index = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> len(day) &gt; <span class="number">0</span> <span class="keyword">and</span> out &gt;= day[index]:</span><br><span class="line">            day.pop(<span class="number">0</span>)</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">        answer.append(count)    </span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span>(answer)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>새로 알게 된 것<ul>
-<li>math의 올림 사용하기 (ceil) </li>
-</ul>
-</li>
-<li>스택/큐 를 이용하는 문제 !</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2020/08/27/programmers-func-develop/" data-id="ckkwuiz7q0063nzc963njhtvb"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-python-ceil" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/27/python-ceil/">[파이썬] 올림, 내림, 반올림</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/27/python-ceil/" class="article-date">
-  <time datetime="2020-08-26T17:08:41.863Z" itemprop="datePublished">2020-08-27</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p><strong>올림: ceil</strong></p>
-<p><strong>내림: floor</strong></p>
-<p><strong>반올림: round</strong></p>
-<p>예시</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line">print(math.ceil(<span class="number">100</span>/<span class="number">33</span>)) <span class="comment"># 4</span></span><br><span class="line">print(math.ceil(<span class="number">0.3</span>)) <span class="comment"># 1</span></span><br><span class="line"></span><br><span class="line">print(math.floor(<span class="number">100</span>/<span class="number">33</span>)) <span class="comment"># 3</span></span><br><span class="line">print(math.floor(<span class="number">0.6</span>)) <span class="comment"># 0</span></span><br><span class="line"></span><br><span class="line">print(round(<span class="number">98</span>/<span class="number">6</span>)) <span class="comment">#16 (몫: 16 나머지: 2 -&gt; 나머지가 6의 반인 3보다 작은 값이기 때문에 내림 !)</span></span><br><span class="line">print(round(<span class="number">100</span>/<span class="number">6</span>)) <span class="comment"># 17 (몫: 16 나머지: 4 -&gt; 나머지가 6의 반인 3보다 큰 값이기 때문에 올림!)</span></span><br><span class="line">print(round(<span class="number">0.6</span>)) <span class="comment"># 1</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2020/08/27/python-ceil/" data-id="ckkwuiz8f008bnzc9cxq66y4e"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-price-of-stock" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/27/programmers-price-of-stock/">[프로그래머스] 주식가격 (파이썬/pyhton)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/27/programmers-price-of-stock/" class="article-date">
-  <time datetime="2020-08-26T16:00:35.447Z" itemprop="datePublished">2020-08-27</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><p>초 단위로 기록된 주식가격이 담긴 배열 prices가 매개변수로 주어질 때, 가격이 떨어지지 않은 기간은 몇 초인지를 return 하도록 solution 함수를 완성하세요.</p>
-<h5 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h5><ul>
-<li>prices의 각 가격은 1 이상 10,000 이하인 자연수입니다.</li>
-<li>prices의 길이는 2 이상 100,000 이하입니다.</li>
-</ul>
-<h5 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h5><table>
-<thead>
-<tr>
-<th>prices</th>
-<th>return</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>[1, 2, 3, 2, 3]</td>
-<td>[4, 3, 1, 1, 0]</td>
-</tr>
-</tbody></table>
-<h5 id="입출력-예-설명"><a href="#입출력-예-설명" class="headerlink" title="입출력 예 설명"></a>입출력 예 설명</h5><ul>
-<li><p>1초 시점의 ₩1은 끝까지 가격이 떨어지지 않았습니다.</p>
-</li>
-<li><p>2초 시점의 ₩2은 끝까지 가격이 떨어지지 않았습니다.</p>
-</li>
-<li><p>3초 시점의 ₩3은 1초뒤에 가격이 떨어집니다. 따라서 1초간 가격이 떨어지지 않은 것으로 봅니다.</p>
-</li>
-<li><p>4초 시점의 ₩2은 1초간 가격이 떨어지지 않았습니다.</p>
-</li>
-<li><p>5초 시점의 ₩3은 0초간 가격이 떨어지지 않았습니다.</p>
-</li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(prices)</span>:</span></span><br><span class="line">    answer = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(prices))]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(prices)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>, len(prices)):</span><br><span class="line">            <span class="keyword">if</span> prices[i] &gt; prices[j]:</span><br><span class="line">                answer[i] += <span class="number">1</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">else</span>: </span><br><span class="line">                answer[i] += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2020/08/27/programmers-price-of-stock/" data-id="ckkwuiz830074nzc975il5e1x"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li></ul>
 
     </footer>
 
@@ -1169,6 +1346,10 @@
   <button class="navbar-toggle"></button>
 <nav class="navbar">
   
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="IT&#39;s easy if you try"></a>
+    </div>
+  
   <ul class="nav nav-main">
     
       <li class="nav-item">
@@ -1180,11 +1361,11 @@
       </li>
     
       <li class="nav-item">
-        <a class="nav-item-link" href="/tags">Tags</a>
+        <a class="nav-item-link" href="/gallery">Gallery</a>
       </li>
     
       <li class="nav-item">
-        <a class="nav-item-link" href="/atom.xml">rss</a>
+        <a class="nav-item-link" href="/about">About</a>
       </li>
     
     <li class="nav-item">
@@ -1203,6 +1384,10 @@
 </div>
     </li>
     <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
       
     </li>
   </ul>

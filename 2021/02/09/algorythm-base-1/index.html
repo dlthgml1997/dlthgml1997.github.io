@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    [실전 알고리즘] 기초 코드 작성 요령 1 정리 (시간복잡도, 공간복잡도) |
+    
+    IT&#39;s easy if you try</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-algorythm-base-1" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [실전 알고리즘] 기초 코드 작성 요령 1 정리 (시간복잡도, 공간복잡도)
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/02/09/algorythm-base-1/" class="article-date">
+  <time datetime="2021-02-08T17:43:57.320Z" itemprop="datePublished">2021-02-09</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>바킹독이라는 블로그의 실전알고리즘 ‘0x01강- 기초 코드 작성 요령 1’ 을 보고 정리한 글이다.</p>
+<p>출처: <a href="https://blog.encrypted.gg/922" target="_blank" rel="noopener">https://blog.encrypted.gg/922</a></p>
+<h1 id="시간복잡도-공간복잡도"><a href="#시간복잡도-공간복잡도" class="headerlink" title="시간복잡도, 공간복잡도"></a>시간복잡도, 공간복잡도</h1><p>컴퓨터는 1초에 3-5억의 연산을 할 수 있다. (복잡한 연산인지 아닌지에 따라 횟수 차이가 있다.) </p>
+<ul>
+<li><p>빅오표기법</p>
+<p>주어진 식을 값이 가장 큰 대표항만 남겨서 나타내는 방법이다.</p>
+<img src="../image/2020-09-089.00.04.png" alt="2020-09-089.00.04" style="zoom:50%;" />
+</li>
+<li><p>시간복잡도: 입력의 크기와 문제를 해결하는데 걸리는 상관관계<br><img src="../image/2020-09-088.58.10.png" alt="2020-09-088.58.10"><br>수행시간은 O(1)이 가장 짧고 O(N!)가 가장 길다. </p>
+<ul>
+<li><p>예제 1<br>N 이하의 자연수 중에서 3의 배수이거나 5의 배수인 수를 모두 합한 값을 반환하는 함수 func(int N)를 작성하라. N은 10만 이하의 자연수이다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(n)</span>:</span></span><br><span class="line">  answer = <span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(n+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">if</span> i%<span class="number">3</span> == <span class="number">0</span> <span class="keyword">or</span> i%<span class="number">5</span> == <span class="number">0</span>:</span><br><span class="line">      answer += i</span><br><span class="line">      </span><br><span class="line">  <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure>
+
+<p> 이 때의 시간복잡도는 O(N) 이다. i 가 1부터 N까지 돌기 때문</p>
+</li>
+<li><p>예제 2</p>
+<p>주어진 길이 N의 int 배열 arr에서 합이 100인 서로 다른 위치의 두 원소가 존재하면 1을, 존재하지 않으면 0을 반환하는 함수 func(int arr[],int n) 을 작성하라. arr의 각 수는 0 이상 100 이하이고 N은 1000 이하이다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(nums, n)</span>:</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>,n):</span><br><span class="line">      <span class="keyword">if</span>(nums[i]+ nums[j] == <span class="number">100</span>) <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>이 경우에는 i가 0일 때 N-1개의 수에 대해 합을 100과 비교하고,<br>i가 1일 때 N-2개의 수에 대해 합을 100과 비교하고,<br>이런식으로 쭉쭉쭉 가다가 i가 N-2일 때 1개의 수에 대해 합을 100과 비교하니 다 더하면 연산은 (N²-N)/2번 일어나고, 이걸 빅오표기법으로 나타내기 위해 상수 떼고 더 낮은 항을 없애고나면 O(N²)인걸 알 수 있다. </p>
+</li>
+<li><p>예제 3</p>
+<p>N이 제곱수이면 1을 반환하고 제곱수가 아니면 0을 반환하는 함수 func3(int N)을 작성하라. N은 10억 이하의 자연수이다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func3</span><span class="params">(N)</span>:</span></span><br><span class="line">    i = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> i*i &lt;= N:</span><br><span class="line">        <span class="keyword">if</span> i* i == N:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        i+= <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">print(func3(<span class="number">756580036</span>))</span><br></pre></td></tr></table></figure>
+
+<p>i는 최대 √N 까지 올라간다. 시간복잡도는 O(√N)이다.</p>
+</li>
+<li><p>예제 4</p>
+<p>N 이하의 수 중에서 가장 큰 2의 거듭제곱수를 반환하는 함수를 작성하라. N은 10억 이하의 자연수이다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func4</span><span class="params">(N)</span>:</span></span><br><span class="line">    i = <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> i*<span class="number">2</span> &lt;= N:</span><br><span class="line">        i *= <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> i</span><br><span class="line"></span><br><span class="line">print(func4(<span class="number">97615282</span>))</span><br></pre></td></tr></table></figure>
+
+<p>이 경우에는 N이 2^k 이상 2^k+1 미만이라고 할 때, while 문 안에서 i 는 k번 2배가 된다. 이 때, 시간복잡도는 O(k)이고 k = lgN 이기 때문에 O(lgN)이다. </p>
+</li>
+</ul>
+</li>
+<li><p>공간복잡도: 입력의 크기와 문제를 해결하는데 필요한 공간의 상관관계</p>
+<ul>
+<li>예) 512MB = 1.2억개의 int</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/09/algorythm-base-1/" data-id="ckkwv7v0c00057sc9gyjq6ph1"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2021/02/09/android-google-map-api(%EB%AF%B8%EC%99%84)/" class="article-nav-link">
+        <strong class="article-nav-caption">최신</strong>
+        <div class="article-nav-title">
+          
+            android-google-map-api(미완)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/02/08/boj-2564/" class="article-nav-link">
+        <strong class="article-nav-caption">이전</strong>
+        <div class="article-nav-title">[boj] 2564:경비원 - 구현 (java)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2021 IT&#39;s easy if you try</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="IT&#39;s easy if you try"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="검색">
+        <i class="fe fe-search"></i>
+        검색
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>

@@ -64,7 +64,7 @@
         
           
 
-<article id="post-swea-1221" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-boj-10866" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -72,7 +72,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/21/swea-1221/">[SW Expert Academy] 1221: GNS (JAVA)</a>
+      <a class="article-title" href="/2021/02/02/boj-10866/">[boj] 10866: 덱(java)</a>
     </h2>
   
   
@@ -85,8 +85,8 @@
 
     
       <div class="article-meta">
-        <a href="/2021/01/21/swea-1221/" class="article-date">
-  <time datetime="2021-01-21T14:46:00.000Z" itemprop="datePublished">2021-01-21</time>
+        <a href="/2021/02/02/boj-10866/" class="article-date">
+  <time datetime="2021-02-02T12:14:00.000Z" itemprop="datePublished">2021-02-02</time>
 </a>
         
       </div>
@@ -102,29 +102,15 @@
 
       
         <ul>
-<li>문제: <a href="https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14jJh6ACYCFAYD" target="_blank" rel="noopener">https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14jJh6ACYCFAYD</a> &gt; 로그인</li>
+<li>문제링크: <a href="https://www.acmicpc.net/problem/10866" target="_blank" rel="noopener">https://www.acmicpc.net/problem/10866</a></li>
 </ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sohee.algo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.util.StringTokenizer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution1221</span> </span>&#123;</span><br><span class="line"><span class="keyword">static</span> String[] numbers = <span class="keyword">new</span> String[]&#123;<span class="string">"ZRO"</span>, <span class="string">"ONE"</span>, <span class="string">"TWO"</span>, <span class="string">"THR"</span>, <span class="string">"FOR"</span>, <span class="string">"FIV"</span>, <span class="string">"SIX"</span>, <span class="string">"SVN"</span>, <span class="string">"EGT"</span>, <span class="string">"NIN"</span>&#125;;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> [] cnt;</span><br><span class="line">	<span class="keyword">static</span> String testCase;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> N;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">// System.setIn(new FileInputStream("GNS_test_input.txt")); </span></span><br><span class="line">		BufferedReader br= <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">		<span class="keyword">int</span> T = stoi(br.readLine());</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> t = <span class="number">0</span>; t &lt; T; t++) &#123;</span><br><span class="line">      cnt = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">			</span><br><span class="line">      StringTokenizer st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">			testCase = st.nextToken();</span><br><span class="line">			N = stoi(st.nextToken());</span><br><span class="line">			</span><br><span class="line">			StringTokenizer st2 = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">			countNums(st2);</span><br><span class="line">			printNums();	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">countNums</span><span class="params">(StringTokenizer st)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt; N; i++) &#123;</span><br><span class="line">			String input = st.nextToken();</span><br><span class="line">			<span class="keyword">if</span> (input.equals(<span class="string">"ZRO"</span>)) cnt[<span class="number">0</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"ONE"</span>)) cnt[<span class="number">1</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"TWO"</span>)) cnt[<span class="number">2</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"THR"</span>)) cnt[<span class="number">3</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"FOR"</span>)) cnt[<span class="number">4</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"FIV"</span>)) cnt[<span class="number">5</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"SIX"</span>)) cnt[<span class="number">6</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"SVN"</span>)) cnt[<span class="number">7</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"EGT"</span>)) cnt[<span class="number">8</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"NIN"</span>)) cnt[<span class="number">9</span>]++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printNums</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(testCase+<span class="string">" "</span>);</span><br><span class="line">		<span class="keyword">int</span> now = <span class="number">0</span>; <span class="comment">// 0 부터 시작</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> num : cnt) &#123;</span><br><span class="line">			<span class="keyword">while</span>(num &gt; <span class="number">0</span>) &#123;</span><br><span class="line">				System.out.print(numbers[now]+<span class="string">" "</span>);</span><br><span class="line">				num--;</span><br><span class="line">			&#125;</span><br><span class="line">			now++;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.valueOf(input);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> BufferedWriter bw = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> OutputStreamWriter(System.out));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> T;</span><br><span class="line">	<span class="keyword">static</span> Deque&lt;Integer&gt; deque = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		T = stoi(br.readLine());</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span> ; i &lt; T; i++) &#123;</span><br><span class="line">			st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">			String doing = st.nextToken();</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">switch</span>(doing) &#123;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"push_front"</span> :</span><br><span class="line">					deque.addFirst(stoi(st.nextToken())); </span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"push_back"</span> :</span><br><span class="line">					deque.addLast(stoi(st.nextToken())); </span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"pop_front"</span> :</span><br><span class="line">					<span class="keyword">if</span>(deque.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="string">"-1\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					bw.append(deque.pollFirst()+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"pop_back"</span> :</span><br><span class="line">					<span class="keyword">if</span>(deque.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="string">"-1\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					bw.append(deque.pollLast()+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"size"</span> :</span><br><span class="line">					bw.append(deque.size()+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"empty"</span>:</span><br><span class="line">					<span class="keyword">if</span>(deque.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="number">1</span>+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">						bw.append(<span class="number">0</span>+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"front"</span> :</span><br><span class="line">					<span class="keyword">if</span>(deque.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="string">"-1\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					bw.append(deque.peekFirst()+<span class="string">"\n"</span>);<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"back"</span> :</span><br><span class="line">					<span class="keyword">if</span>(deque.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="string">"-1\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					bw.append(deque.peekLast()+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		bw.flush();</span><br><span class="line">		bw.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><p><strong>input</strong>은 아래와 같은 형식으로 들어온다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line">#1 11</span><br><span class="line">SVN FOR ZRO NIN FOR EGT EGT TWO FOR FIV FIV</span><br><span class="line">#2 20</span><br><span class="line">ONE SVN ONE ONE FIV TWO SVN SIX ONE FOR TWO THR TWO TWO ONE SIX EGT FIV SVN SIX</span><br></pre></td></tr></table></figure>
-
-<p>이 때, <strong>output(정답)</strong>은 아래와 같다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#1 </span><br><span class="line">ZRO TWO FOR FOR FOR FIV FIV SVN EGT EGT NIN </span><br><span class="line">#2 </span><br><span class="line">ONE ONE ONE ONE ONE TWO TWO TWO TWO THR FOR FIV FIV SIX SIX SIX SVN SVN SVN EGT</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>String  배열인 <code>numbers</code>를 행성에서 <code>0~9</code>로 사용되는 값인 <code>&quot;ZRO&quot;, &quot;ONE&quot;, &quot;TWO&quot;, &quot;THR&quot;, &quot;FOR&quot;, &quot;FIV&quot;, &quot;SIX&quot;, &quot;SVN&quot;, &quot;EGT&quot;, &quot;NIN&quot;</code> 로 초기화한다.</p>
-</li>
-<li><p><code>countNums()</code>: int 배열 <code>cnt</code>는 크기를 <code>10</code>으로 하고 input으로 들어오는 <code>ZRO</code> 부터 <code>NIN</code>까지 해당하는 값에 따라 해당 인덱스에 1씩 더한다.</p>
-</li>
-<li><p><code>printNums()</code> : 먼저 <code>now</code> 는 <code>0~9</code> 를 의미하며 오름차순으로 <code>sort</code>해야하기 때문에 <code>0</code>부터 시작해 while문이 종료될 때마다 <code>1</code>씩 증가시켰다. for문에서는 <code>cnt</code> 배열에서 순서대로 count(<code>num</code>) 값을 받아오고, while문에서는 count값(<code>num</code>)을 하나씩 빼가며 모든 <code>now</code> 인덱스에 해당하는 <code>numbers</code> 객체를 출력(<code>num == 0</code>)한 후 종료 된다.</p>
-</li>
-</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/01/21/swea-1221/" data-id="ckkwuiz8s008tnzc924z11xiz"
+      <a data-url="http://yoursite.com/2021/02/02/boj-10866/" data-id="ckkwv7v1z004n7sc978g4bol0"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
@@ -144,7 +130,7 @@
         
           
 
-<article id="post-swea-1217" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-swea-1208" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -152,7 +138,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/19/swea-1217/">[SW Expert Academy] 1217: 거듭 제곱 (파이썬) / 재귀</a>
+      <a class="article-title" href="/2021/02/02/swea-1208/">[SW Expert Academy] 1208: Flatten - D3 (java)</a>
     </h2>
   
   
@@ -165,8 +151,8 @@
 
     
       <div class="article-meta">
-        <a href="/2021/01/19/swea-1217/" class="article-date">
-  <time datetime="2021-01-19T13:00:00.000Z" itemprop="datePublished">2021-01-19</time>
+        <a href="/2021/02/02/swea-1208/" class="article-date">
+  <time datetime="2021-02-02T04:55:42.000Z" itemprop="datePublished">2021-02-02</time>
 </a>
         
       </div>
@@ -182,25 +168,21 @@
 
       
         <ul>
-<li>문제: <a href="https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14dUIaAAUCFAYD" target="_blank" rel="noopener">https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14dUIaAAUCFAYD</a> (로그인해야 보임)</li>
+<li>문제 링크(로그인 해야함) : <a href="https://swexpertacademy.com/main/solvingProblem/solvingProblem.do" target="_blank" rel="noopener">https://swexpertacademy.com/main/solvingProblem/solvingProblem.do</a></li>
 </ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">multiple</span><span class="params">(answer, num, cnt, limit)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> cnt == limit:</span><br><span class="line">        <span class="keyword">return</span> answer</span><br><span class="line">    <span class="keyword">return</span> multiple(answer * num, num, cnt + <span class="number">1</span>, limit)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    t = input()</span><br><span class="line">    a, b = map(int, input().split())</span><br><span class="line">    print(<span class="string">"#"</span>+t+<span class="string">" "</span>+str(multiple(a, a, <span class="number">1</span>, b)))</span><br></pre></td></tr></table></figure>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.StringTokenizer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution_D3_1208_Flatten</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> N;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span>[] boxes = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> t = <span class="number">1</span>; t &lt;=<span class="number">10</span>; t++) &#123;</span><br><span class="line">			input();</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">				dump();</span><br><span class="line">			&#125;</span><br><span class="line">			Arrays.sort(boxes);</span><br><span class="line">			System.out.printf(<span class="string">"#%d %d\n"</span>, t, boxes[<span class="number">99</span>]-boxes[<span class="number">0</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		N = stoi(br.readLine());</span><br><span class="line">		st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">			boxes[i] = stoi(st.nextToken());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">dump</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Arrays.sort(boxes);</span><br><span class="line">		boxes[<span class="number">0</span>]++;</span><br><span class="line">		boxes[<span class="number">99</span>]--;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>나는 minNum 과 maxNum을 구해서 계속 빼고 더하고 갱신하는 방식으로 풀려고 했는데 잘 안됐다.</p>
+<p>위와 같이 풀면 훨씬 간단하고 복잡도도 적어진다.</p>
 <ul>
-<li>테스트케이스 넘버와 함께 a의 b 제곱 값을 출력하는 문제이다.</li>
-<li><strong><code>multiple(answer, num, cnt, limit)</code></strong><ul>
-<li><strong><code>answer</code></strong>: 재귀 호출시마다 <code>num</code>(== <code>a</code>) 을 곱한다.</li>
-<li><strong><code>num</code></strong>: <code>a</code> 를 의미한다.</li>
-<li><strong><code>cnt</code></strong>: 현재 몇 제곱인지를 의미하며 재귀호출 시마다 <code>1</code> 더한다.er</li>
-<li><strong><code>limit</code></strong>: <code>b</code>를 의미하고 <code>cnt</code>에 <code>1</code>을 더해가다가 <code>limit</code>과 같아지면 종료한다.</li>
-</ul>
-</li>
+<li>dump의 수 만큼 Arrays.sort()를 이용해 최솟값은 boxes[0] 에 위치시켜 +1 하고, 최댓값은 boxes[99]에 위치시켜 -1 한다.</li>
+<li>마지막 dump 수행 후, 한번더 sort해주어야한다. boxes[0]이 -1,  boxes[99]에 +1 한 상태로 끝났기 때문에 이들이 최소, 최댓값이 아닐수도 있기 때문이다.</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/01/19/swea-1217/" data-id="ckkwuiz8s008rnzc922d7cjxt"
+      <a data-url="http://yoursite.com/2021/02/02/swea-1208/" data-id="ckkwv7v34008i7sc99yn44s5y"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
@@ -220,7 +202,7 @@
         
           
 
-<article id="post-programmers-target-number-02" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-boj-1244" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -228,7 +210,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/19/programmers-target-number-02/">[프로그래머스] 타켓 넘버- DFS/BFS (파이썬) - Packing / Unpacking / 곱집합(product)</a>
+      <a class="article-title" href="/2021/02/01/boj-1244/">[boj] 1244: 스위치 켜고 끄기 (java)</a>
     </h2>
   
   
@@ -241,8 +223,8 @@
 
     
       <div class="article-meta">
-        <a href="/2021/01/19/programmers-target-number-02/" class="article-date">
-  <time datetime="2021-01-18T16:19:00.000Z" itemprop="datePublished">2021-01-19</time>
+        <a href="/2021/02/01/boj-1244/" class="article-date">
+  <time datetime="2021-02-01T12:44:00.000Z" itemprop="datePublished">2021-02-01</time>
 </a>
         
       </div>
@@ -258,226 +240,242 @@
 
       
         <ul>
-<li>문제 링크: <a href="https://programmers.co.kr/learn/courses/30/lessons/43165" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/lessons/43165</a></li>
+<li>문제 링크: <a href="https://www.acmicpc.net/problem/1244" target="_blank" rel="noopener">https://www.acmicpc.net/problem/1244</a></li>
 </ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>기존에 재귀를 이용한 풀이를 했었는데, 새로운 내용을 배울 수 있는 풀이가 있어서 다시 풀어봤다. 먼저 코드를 보자.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> product</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(numbers, target)</span>:</span></span><br><span class="line">    <span class="comment"># 1</span></span><br><span class="line">    case = [[i, -i] <span class="keyword">for</span> i <span class="keyword">in</span> numbers]</span><br><span class="line">    <span class="comment"># 2</span></span><br><span class="line">    result = list(map(sum, product(*case)))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 3</span></span><br><span class="line">    <span class="keyword">return</span> result.count(target)</span><br></pre></td></tr></table></figure>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> T, N;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span>[] switches;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		input();</span><br><span class="line">		N = stoi(br.readLine());</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n &lt; N; n++) &#123;</span><br><span class="line">			st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">			<span class="keyword">int</span> sex = stoi(st.nextToken());</span><br><span class="line">			<span class="keyword">int</span> switchNum = stoi(st.nextToken());</span><br><span class="line">			reverseSwitch(switchNum, sex);</span><br><span class="line">		&#125;</span><br><span class="line">		printAnswer();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">reverseSwitch</span><span class="params">(<span class="keyword">int</span> sn, <span class="keyword">int</span> s)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> tempSn = sn;</span><br><span class="line">		<span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span> (s == <span class="number">1</span>) &#123; <span class="comment">// 남</span></span><br><span class="line">			<span class="keyword">while</span> (sn &lt;= T) &#123;</span><br><span class="line">				switches[sn] = switches[sn] == <span class="number">1</span> ? <span class="number">0</span> : <span class="number">1</span>; <span class="comment">// sn 이 0이면 1, 1이면 0으로 reverse</span></span><br><span class="line">				num++;</span><br><span class="line">				sn = tempSn * num; <span class="comment">// sn은 sn의 배수가 된다. </span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123; <span class="comment">// 여</span></span><br><span class="line">			switches[sn] = switches[sn] == <span class="number">1</span> ? <span class="number">0</span> : <span class="number">1</span>; <span class="comment">// 중심은 무조건 reverse</span></span><br><span class="line">      <span class="comment">// 좌우 탐색할 때 범위를 넘지 않고, 좌우 대칭이면</span></span><br><span class="line">			<span class="keyword">while</span> (sn + num &lt;= T &amp;&amp; sn - num &gt; <span class="number">0</span> &amp;&amp; switches[sn + num] == switches[sn - num]) &#123;</span><br><span class="line">				<span class="comment">// 좌우 값 reverse</span></span><br><span class="line">        switches[sn + num] = switches[sn + num] == <span class="number">1</span> ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">				switches[sn - num] = switches[sn - num] == <span class="number">1</span> ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 다음 좌우 탐색을 위해 num++</span></span><br><span class="line">				num++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		T = stoi(br.readLine());</span><br><span class="line">		switches = <span class="keyword">new</span> <span class="keyword">int</span>[T + <span class="number">1</span>];</span><br><span class="line">		st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="number">1</span>; t &lt;= T; t++) &#123;</span><br><span class="line">			switches[t] = stoi(st.nextToken());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printAnswer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="number">1</span>; t &lt;T; t++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (cnt &gt;= <span class="number">20</span>) &#123; <span class="comment">// 20개 출력했으면</span></span><br><span class="line">				System.out.println(switches[t]); <span class="comment">// 개행</span></span><br><span class="line">				cnt = <span class="number">1</span>; <span class="comment">// 다시 카운트 1로 초기화 </span></span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.print(switches[t] + <span class="string">" "</span>);</span><br><span class="line">				cnt++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.print(switches[T]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/01/boj-1244/" data-id="ckkwv7v20004r7sc9dhxe8uwf"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-boj-2164" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/02/01/boj-2164/">[boj] 2164: 카드2 (java)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/02/01/boj-2164/" class="article-date">
+  <time datetime="2021-02-01T12:44:00.000Z" itemprop="datePublished">2021-02-01</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크: <a href="https://www.acmicpc.net/problem/2164" target="_blank" rel="noopener">https://www.acmicpc.net/problem/2164</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> T, N;</span><br><span class="line">	<span class="keyword">static</span> Queue&lt;Integer&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">boolean</span> isFloorTurn = <span class="keyword">true</span>; </span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		input();</span><br><span class="line">		<span class="keyword">while</span>(queue.size()&gt;<span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(isFloorTurn) &#123;</span><br><span class="line">				queue.poll();</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				queue.add(queue.poll());</span><br><span class="line">			&#125;</span><br><span class="line">			isFloorTurn = isFloorTurn ? <span class="keyword">false</span>: <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		printAnswer();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		T = stoi(br.readLine());</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> t = <span class="number">1</span> ; t&lt;=T; t++) &#123;</span><br><span class="line">			queue.add(t);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printAnswer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.print(queue.peek());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>queue 사이즈가 1보다 클동안 (카드가 두개 이상 남아있을 동안) <ul>
+<li>꼭대기 하나를 버릴 순서이면 poll해서 제거해버림</li>
+<li>꼭대기 하나를 버린 상태여서 아래로 넣어야하는 상태이면 poll로 제거한 카드를 add 해서 가장 아래로 깔아준다.</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/01/boj-2164/" data-id="ckkwv7v21004t7sc9b59ufu1i"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-boj-10845" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/02/01/boj-10845/">[boj] 10845: 큐 (java)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/02/01/boj-10845/" class="article-date">
+  <time datetime="2021-02-01T12:41:00.000Z" itemprop="datePublished">2021-02-01</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크: <a href="https://www.acmicpc.net/problem/10845" target="_blank" rel="noopener">https://www.acmicpc.net/problem/10845</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main_BOJ_10845_</span>큐 </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> BufferedWriter bw = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> OutputStreamWriter(System.out));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> T;</span><br><span class="line">	<span class="keyword">static</span> Queue&lt;Integer&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		T = stoi(br.readLine());</span><br><span class="line">		<span class="keyword">int</span> last = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span> ; i &lt; T; i++) &#123;</span><br><span class="line">			st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">			String doing = st.nextToken();</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">switch</span>(doing) &#123;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"push"</span> :</span><br><span class="line">					last = stoi(st.nextToken());</span><br><span class="line">					queue.add(last); </span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"pop"</span> :</span><br><span class="line">					<span class="keyword">if</span>(queue.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="string">"-1\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					bw.append(queue.poll()+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"size"</span> :</span><br><span class="line">					bw.append(queue.size()+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"empty"</span>:</span><br><span class="line">					<span class="keyword">if</span>(queue.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="number">1</span>+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">						bw.append(<span class="number">0</span>+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"front"</span> :</span><br><span class="line">					<span class="keyword">if</span>(queue.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="string">"-1\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					bw.append(queue.peek()+<span class="string">"\n"</span>);<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">"back"</span> :</span><br><span class="line">					<span class="keyword">if</span>(queue.isEmpty()) &#123;</span><br><span class="line">						bw.append(<span class="string">"-1\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					bw.append(last+<span class="string">"\n"</span>); <span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		bw.flush();</span><br><span class="line">		bw.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Queue 클래스를 이용해서 푸는 문제이다. </p>
+<ul>
+<li>BufferedWriter를 이용했다.</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/01/boj-10845/" data-id="ckkwv7v1y004l7sc9gsyog7x6"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-boj-2422" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/01/30/boj-2422/">[boj] 2422: 한윤정이 이탈리아에 가서 아이스크림을 사먹는데 (java)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/30/boj-2422/" class="article-date">
+  <time datetime="2021-01-29T16:32:34.000Z" itemprop="datePublished">2021-01-30</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크: <a href="https://www.acmicpc.net/problem/2422" target="_blank" rel="noopener">https://www.acmicpc.net/problem/2422</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> N, M;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">boolean</span>[][] noMix = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="number">201</span>][<span class="number">201</span>]; <span class="comment">// default : false</span></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> answer = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		input(); <span class="comment">// input 값 받아오기</span></span><br><span class="line">    <span class="comment">// 1.</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N-<span class="number">1</span>; i++) &#123;</span><br><span class="line">			getComb(<span class="number">1</span>, -<span class="number">1</span>, i);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(answer);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">		N = stoi(st.nextToken());</span><br><span class="line">		M = stoi(st.nextToken());</span><br><span class="line">		<span class="keyword">int</span> a,b;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; M; i++) &#123;</span><br><span class="line">			st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">      <span class="comment">// 예: 맛없어 지는 조합 1, 3</span></span><br><span class="line">			a = stoi(st.nextToken());</span><br><span class="line">			b = stoi(st.nextToken());</span><br><span class="line">			noMix[a][b] = <span class="keyword">true</span>; <span class="comment">// 섞으면 맛없어 지는 조합은 true (예: noMix[1][3])</span></span><br><span class="line">			noMix[b][a] = <span class="keyword">true</span>; <span class="comment">// (예: noMix[3][1])</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(input);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 2. </span></span><br><span class="line">  <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getComb</span><span class="params">(<span class="keyword">int</span> depth, <span class="keyword">int</span> pre, <span class="keyword">int</span> now)</span> </span>&#123; <span class="comment">// 맛있는 조합이면 answer 1 UP</span></span><br><span class="line">		<span class="keyword">if</span> (depth == <span class="number">3</span>) &#123; </span><br><span class="line">			answer++;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = now + <span class="number">1</span>; i &lt;= N; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(noMix[i][now]) <span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">if</span>(pre != -<span class="number">1</span> &amp;&amp; noMix[pre][i]) <span class="keyword">continue</span>;</span><br><span class="line">			getComb(depth + <span class="number">1</span>, now, i);</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ol>
-<li><p><code>case</code>에 <code>numbers</code>에서 숫자를 하나씩 받아오며 양수와 음수인 경우를 이차원 배열로 담는다.</p>
+<li><p>i 는 맛있는 아이스크림 조합의 첫번째 아이스크림이다.  N-2(맛있는 아이스크림 조합은 총 3개의 조합이기 때문에 N-1번, N번째 아이스크림은 첫번째 아이스크림이 될 수 없다. ) 번 아이스크림까지 getComb 함수를 호출한다. </p>
+<ul>
+<li>이때, pre 부분을 -1로 두는 이유는 now로 보내는 i가 세가지 아이스크림 조합 중 첫번째 아이스크림이기 때문이다! 즉, pre가 존재하지 않는다.</li>
+</ul>
 </li>
-<li><p><code>case</code>인자 앞에 <code>Aterisk(*)</code>를 붙여 <code>Unpacking</code>하고, <code>product</code>를 통해 곱집합을 수행해 모든 경우의 수로 더한 결과 값들을 <code>result</code> 배열에 담는다. </p>
+<li><p><code>static void getComb(int depth, int pre, int now)  // 맛있는 조합이면 answer 1 UP</code></p>
+<ul>
+<li><strong>depth</strong>: 현재 맛있는 조합에서 몇 번째 조합을 검사중인지 나타낸다.<ul>
+<li>depth가 3이 됐다는 뜻은 맛있는 조합 3가지가 모두 만들어졌다는 의미가 되기 때문에 answer++을 하고 return해 함수를 종료한다.</li>
+</ul>
 </li>
-<li><p>결과는 <code>result</code> 배열의 값들 중 <code>target</code>과 동일한 값의 갯수이다.</p>
+<li><strong>pre</strong>: 맛있는 조합에서 이전 아이스크림 (3번째 아이스크림(i)의 경우 1번째 아이스크림(pre)과의 조합(noMix) 또한 확인해야 하기 때문에 필요하다.)</li>
+<li><strong>now</strong>: 맛있는 조합에서 현재 아이스크림</li>
+<li><strong>i</strong>: 맛있는 조합에서 다음 아이스크림이 될 후보</li>
+<li>pre가 -1인 경우, 조합 중 첫번째 아이스크림(now)이 왔다는 뜻이므로 now와 i가 맛없는 조합(<code>noMix[i][now]</code>== true)이 아니라면 무조건 getComb를 한번 더 실행한다.<br>그렇지 않은 경우, 이미 현재 아이스크림(now)과 맛있는 조합인 pre가 다음 아이스크림이 될 i 와 맛없는 조합인지 확인해야한다. 맛없는 조합이 아니면, getComb를 실행한다.</li>
+<li>if에서 필터링(continue) 되지 않았다면, 맛있는 조합이므로 ! i를 현재 아이스크림으로 보내고 , now는 이전 아이스크림으로 보낸다. 연결고리가 하나 생겼기 때문에 depth에 +1을 해서 호출한다.</li>
+</ul>
 </li>
 </ol>
-<p><strong>Unpacking</strong>, <strong>product</strong>에 대한 설명은 아래에 있다.</p>
-<br>
-
-<h2 id="01-Packing-vs-Unpacking"><a href="#01-Packing-vs-Unpacking" class="headerlink" title="01. Packing vs Unpacking"></a>01. Packing vs Unpacking</h2><ul>
-<li><p><strong>Packing ?</strong> </p>
-<p>여러개의 값을 하나의 객체로 합쳐서 받을 수 있도록 돕는다. 대표적인 예로 위치인자(<code>*args</code>)와 키워드 인자(<code>**kwargs</code>)가 있다.</p>
-<ul>
-<li><p><code>*args</code></p>
-<p>위치 인자가 패킹하는 매개변수를 만나면 그 이후에 위치인자가 몇개이던지, <code>tuple</code>로 하나의 객체가 되어서 관리된다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(*args)</span>:</span> <span class="comment"># 인자</span></span><br><span class="line">	  print(args)</span><br><span class="line">    print(type(args))</span><br><span class="line">    </span><br><span class="line">func(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="string">'a'</span>,<span class="string">'b'</span>) <span class="comment"># 매개변수</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 출력: (1,2,3,4,'a','b')</span></span><br><span class="line"><span class="comment">#      &lt;class 'tuple'&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>**kwargs</code></p>
-<p>키워드 인자가 패킹하는 매개변수를 만나면 그 이후에 키워드 인자가 몇개이던지, <code>dict(딕셔너리)</code>로 하나의 객체가 되어서 관리된다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">kwpacking</span><span class="params">(**kwargs)</span>:</span></span><br><span class="line">     print(kwargs)</span><br><span class="line">     print(type(kwargs)</span><br><span class="line"></span><br><span class="line">kwpacking(a=<span class="number">1</span>, b=<span class="number">2</span>, c=<span class="number">3</span>)</span><br><span class="line">           </span><br><span class="line"><span class="comment"># 출력: &#123;'a': 1, 'b': 2, 'c': 3&#125;</span></span><br><span class="line"><span class="comment">#      &lt;class 'dict'&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p><strong>Unpacking ?</strong></p>
-<p>여러개의 객체를 포함하고 있는 하나의 객체를 풀어주는 것으로, Packing의 반대 개념이다. </p>
-<p>매개변수가 아닌 인자 앞에 <code>*</code> 을 붙인다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum</span><span class="params">(a, b, c)</span>:</span></span><br><span class="line">  	<span class="keyword">return</span> a+b+c</span><br><span class="line">  </span><br><span class="line">numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">sum(*numbers)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6</span></span><br></pre></td></tr></table></figure>
-
-<p>그냥 <code>sum(numbers)</code> 를 사용하면 에러가 나지만 인자 앞에 Aterisk(<code>*</code>)를 붙여 Unpacking하면 에러가 나지 않는다.</p>
-<p>이 문제에서는 곱집합에 사용 될 수 있도록 객체를 풀어주는 역할을 하고 있다. </p>
-</li>
-</ul>
-<blockquote>
-<p>참고: <a href="https://wikidocs.net/22801" target="_blank" rel="noopener">https://wikidocs.net/22801</a></p>
-</blockquote>
-<br>
-
-<h2 id="02-Product"><a href="#02-Product" class="headerlink" title="02. Product"></a>02. Product</h2><p>곱집합은 아래와 같은 리스트가 있을 때,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A &#x3D; [-1, 1] </span><br><span class="line">B &#x3D; [-2, 2]</span><br><span class="line">C &#x3D; [-3, 3]</span><br></pre></td></tr></table></figure>
-
-<p><code>(-1, -2), (-1, -3), (1, -2), (1, 2), (-2, -3), (-2, 3), •••</code>와 같은 집합으로 묶어주는 것이다.</p>
-<ul>
-<li>이 문제에서는  <code>numbers</code>에서 숫자를 하나씩 받아오며 양수와 음수인 경우를 담은 이차원 배열인  <code>case</code> 의 모든 경우의 수를 구하기 위해 사용되었다. </li>
-</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/01/19/programmers-target-number-02/" data-id="ckkwuiz85007anzc96vyi8qbc"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">파이썬, 알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-java-daily-training-01" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/18/java-daily-training-01/">[Java] 기본 문법 응용: Loop -for, while / 조건문 if, switch</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/01/18/java-daily-training-01/" class="article-date">
-  <time datetime="2021-01-18T13:14:00.000Z" itemprop="datePublished">2021-01-18</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="01-숫자출력-1"><a href="#01-숫자출력-1" class="headerlink" title="01 숫자출력(1)"></a>01 숫자출력(1)</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ssafy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DigitTest1</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">5</span> ; i &gt; <span class="number">0</span> ; i-- )&#123;</span><br><span class="line">			<span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; <span class="number">5</span>-i ; j++ ) &#123;</span><br><span class="line">				System.out.print(<span class="string">"   "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span>( <span class="keyword">int</span> k = <span class="number">1</span> ; k &lt;= i ; k++ )&#123;</span><br><span class="line">				System.out.printf(<span class="string">"%3d"</span>,num++);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println(<span class="string">'\n'</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="출력"><a href="#출력" class="headerlink" title="출력"></a>출력</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span></span><br><span class="line"></span><br><span class="line">   <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span></span><br><span class="line"></span><br><span class="line">     <span class="number">10</span> <span class="number">11</span> <span class="number">12</span></span><br><span class="line"></span><br><span class="line">        <span class="number">13</span> <span class="number">14</span></span><br><span class="line"></span><br><span class="line">           <span class="number">15</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h1 id="02-숫자출력-2"><a href="#02-숫자출력-2" class="headerlink" title="02 숫자출력(2)"></a>02 숫자출력(2)</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ssafy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DigitTest2</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> num2 = <span class="number">5</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>; i &gt; <span class="number">0</span>; i--)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>-i; j++) &#123;</span><br><span class="line">				System.out.print(<span class="string">"   "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; num2; k++)&#123;</span><br><span class="line">				System.out.printf(<span class="string">"%3d"</span>,num++);</span><br><span class="line">			&#125;</span><br><span class="line">			num2-=<span class="number">2</span>;</span><br><span class="line">			System.out.println(<span class="string">'\n'</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		num2 = <span class="number">3</span>;</span><br><span class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">2</span> ; i &gt; <span class="number">0</span> ; i-- )&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">3</span>-i; j &lt; <span class="number">2</span>; j++ ) &#123;</span><br><span class="line">				System.out.print(<span class="string">"   "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">for</span>( <span class="keyword">int</span> k = <span class="number">0</span> ; k &lt; num2  ; k++)&#123;</span><br><span class="line">				System.out.printf(<span class="string">"%3d"</span>,num++);</span><br><span class="line">			&#125;</span><br><span class="line">			num2+=<span class="number">2</span>;</span><br><span class="line">			System.out.println(<span class="string">'\n'</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="출력-1"><a href="#출력-1" class="headerlink" title="출력"></a>출력</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span></span><br><span class="line"></span><br><span class="line">    <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span></span><br><span class="line"></span><br><span class="line">       <span class="number">9</span></span><br><span class="line"></span><br><span class="line">   <span class="number">10</span> <span class="number">11</span> <span class="number">12</span></span><br><span class="line"></span><br><span class="line"><span class="number">13</span> <span class="number">14</span> <span class="number">15</span> <span class="number">16</span> <span class="number">17</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h1 id="03-가위바위보-프로그램"><a href="#03-가위바위보-프로그램" class="headerlink" title="03 가위바위보 프로그램"></a>03 가위바위보 프로그램</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ssafy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GameTest</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Game</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">// 1: 짐</span></span><br><span class="line">		<span class="comment">// 2: 이김 </span></span><br><span class="line">		<span class="comment">// 3: 비김</span></span><br><span class="line">		System.out.print(<span class="string">"가위바위보 중 하나 입력: "</span>);</span><br><span class="line">		String finger = br.readLine();</span><br><span class="line">		<span class="keyword">int</span> comp_finger = (<span class="keyword">int</span>) (Math.random() * <span class="number">3</span>) + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">switch</span>(finger) &#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">"가위"</span>:</span><br><span class="line">				<span class="keyword">if</span>(comp_finger == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(comp_finger == <span class="number">3</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">"바위"</span>:</span><br><span class="line">				<span class="keyword">if</span>(comp_finger == <span class="number">3</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(comp_finger == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">"보"</span>:</span><br><span class="line">				<span class="keyword">if</span>(comp_finger == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(comp_finger == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>:</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NumberFormatException, IOException </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"가위바위보 게임을 시작합니다. 아래 보기 중 하나를 고르세요."</span>);</span><br><span class="line">		System.out.println(<span class="string">"1.5판 3승 \n2.3판 2승 \n3.1판 1승"</span>);</span><br><span class="line">		System.out.print(<span class="string">"번호를 입력하세요: "</span>);</span><br><span class="line">		<span class="keyword">int</span> num = Integer.parseInt(br.readLine());</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> comp_win = <span class="number">0</span>; <span class="comment">// 컴퓨터가 이긴 횟수</span></span><br><span class="line">		<span class="keyword">int</span> user_win = <span class="number">0</span>; <span class="comment">// 사용자가 이긴 횟수 </span></span><br><span class="line">		<span class="keyword">int</span> break_num = <span class="number">0</span>; </span><br><span class="line">		<span class="keyword">boolean</span> isOneRound = <span class="keyword">false</span>;</span><br><span class="line">		<span class="keyword">switch</span>(num) &#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>: <span class="comment">// 5판 3승</span></span><br><span class="line">				break_num = <span class="number">3</span>;</span><br><span class="line">				<span class="keyword">break</span>; </span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>: <span class="comment">// 3판 2승 </span></span><br><span class="line">				break_num = <span class="number">2</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>: <span class="comment">// 1판 1승</span></span><br><span class="line">				break_num = <span class="number">1</span>;</span><br><span class="line">				isOneRound = <span class="keyword">true</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>:</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span>(comp_win &lt; break_num &amp;&amp; user_win &lt; break_num) &#123;</span><br><span class="line">			<span class="keyword">int</span> result = Game();</span><br><span class="line">			<span class="keyword">switch</span> (result) &#123;</span><br><span class="line">				<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">					System.out.println(<span class="string">"졌습니다."</span>); <span class="comment">// 컴퓨터가 이김</span></span><br><span class="line">					comp_win++;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">					System.out.println(<span class="string">"이겼습니다."</span>); <span class="comment">// 사용자가 이김</span></span><br><span class="line">					user_win++;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">					System.out.println(<span class="string">"비겼습니다."</span>);</span><br><span class="line">					<span class="keyword">if</span>(isOneRound) &#123;</span><br><span class="line">						comp_win++; user_win++;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">default</span>:</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(comp_win &gt; user_win) &#123;</span><br><span class="line">			System.out.println(<span class="string">"### 컴퓨터 승!!!"</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (comp_win == user_win) &#123;</span><br><span class="line">			System.out.println(<span class="string">"### 무승부!!!"</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			System.out.println(<span class="string">"### 사용자 승!!!"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="출력-2"><a href="#출력-2" class="headerlink" title="출력"></a>출력</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">가위바위보 게임을 시작합니다. 아래 보기 중 하나를 고르세요.</span><br><span class="line"><span class="number">1.5</span>판 <span class="number">3</span>승 </span><br><span class="line"><span class="number">2.3</span>판 <span class="number">2</span>승 </span><br><span class="line"><span class="number">3.1</span>판 <span class="number">1</span>승</span><br><span class="line">번호를 입력하세요: <span class="number">2</span></span><br><span class="line">가위바위보 중 하나 입력: 가위</span><br><span class="line">졌습니다.</span><br><span class="line">가위바위보 중 하나 입력: 바위</span><br><span class="line">이겼습니다.</span><br><span class="line">가위바위보 중 하나 입력: 보</span><br><span class="line">이겼습니다.</span><br><span class="line">### 사용자 승!!!</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/01/18/java-daily-training-01/" data-id="ckkwuiz7k005hnzc9aftv6zfr"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%9E%90%EB%B0%94/" rel="tag">자바</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-swea-2056" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/16/swea-2056/">[SW Expert Academy] 2056: 연월일 달력</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/01/16/swea-2056/" class="article-date">
-  <time datetime="2021-01-16T06:33:00.000Z" itemprop="datePublished">2021-01-16</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li><p>문제 링크: <a href="https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5QLkdKAz4DFAUq" target="_blank" rel="noopener">https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5QLkdKAz4DFAUq</a></p>
-<p>(로그인해야 볼 수 있음.)</p>
-</li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">T = int(input())</span><br><span class="line"><span class="comment"># 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.</span></span><br><span class="line">days = &#123;<span class="number">1</span>: <span class="number">31</span>, <span class="number">2</span>: <span class="number">28</span>, <span class="number">3</span>: <span class="number">31</span>, <span class="number">4</span>: <span class="number">30</span>, <span class="number">5</span>: <span class="number">31</span>, <span class="number">6</span>: <span class="number">30</span>, <span class="number">7</span>: <span class="number">31</span>, <span class="number">8</span>: <span class="number">31</span>, <span class="number">9</span>: <span class="number">30</span>, <span class="number">10</span>: <span class="number">31</span>, <span class="number">11</span>: <span class="number">30</span>, <span class="number">12</span>: <span class="number">31</span>&#125;</span><br><span class="line"><span class="keyword">for</span> test_case <span class="keyword">in</span> range(<span class="number">1</span>, T + <span class="number">1</span>):</span><br><span class="line">    case = str(input())</span><br><span class="line">    year = case[<span class="number">0</span>:<span class="number">4</span>]</span><br><span class="line">    month = case[<span class="number">4</span>:<span class="number">6</span>]</span><br><span class="line">    day = case[<span class="number">6</span>:<span class="number">8</span>]</span><br><span class="line">    </span><br><span class="line">    answer = <span class="string">''</span></span><br><span class="line">    <span class="keyword">if</span> <span class="number">0</span> &lt; int(month) &lt; <span class="number">13</span> <span class="keyword">and</span> <span class="number">0</span> &lt; int(day) &lt;= days[int(month)]:</span><br><span class="line">        answer = year + <span class="string">'/'</span> + month + <span class="string">'/'</span> + day</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        answer += <span class="string">'-1'</span></span><br><span class="line"></span><br><span class="line">    print(<span class="string">"#"</span> + str(test_case) + <span class="string">" "</span> + answer)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>딕셔너리, 문자열 인덱싱을 통해 풀었다.</p>
-</li>
-<li><p><code>month</code>를 <code>키</code>로, <code>month</code>에 해당하는 <code>day의 최대 값</code> 을 <code>value</code>로 한 딕셔너리 <code>days</code>를 만들었다.</p>
-</li>
-<li><p>테스트 케이스 값을 string으로 전환한 후, 문자열 인덱싱을 통해 <code>year</code>,<code>month</code>,<code>day</code>로 나누었다.</p>
-</li>
-<li><p><code>year</code>는 모든 값이 유효하므로 검사하지 않아도 되고, <code>month</code>의 경우 1~12 중 하나인지, <code>day</code>는 <code>0</code> 보다 크고 <code>month</code>에 해당하는 값보다 작거나 같은지 검사한다.</p>
-<ul>
-<li><p>모든 조건을 만족한다면 <code>&#39;#[test_case] [year]/[month]/[day] &#39;</code>를 출력한다.</p>
-<ul>
-<li>여기서 주의할 점은 1월의 경우 01 과 같은 방식으로 출력되어야 하기 때문에 int 로 바꿨다가(‘01’ -&gt; 1) str(1 -&gt; ‘1’) 로 바꾼 후 출력하면 안된다.</li>
-</ul>
-</li>
-<li><p>만약 하나라도 조건을 만족하지 못하면 <code>&#39;#[test_case] -1&#39;</code>을 출력한다.</p>
-</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/01/16/swea-2056/" data-id="ckkwuiz8u008xnzc92g5dd7aj"
+      <a data-url="http://yoursite.com/2021/01/30/boj-2422/" data-id="ckkwv7v21004v7sc9cnq2hkqs"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
@@ -497,7 +495,7 @@
         
           
 
-<article id="post-backjoon-1931" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-boj-1018" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -505,7 +503,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/14/backjoon-1931/">[백준알고리즘/BOJ] 1931: 회의실 배정</a>
+      <a class="article-title" href="/2021/01/30/boj-1018/">[boj] 1018:체스판 다시 칠하기 (java)</a>
     </h2>
   
   
@@ -518,8 +516,8 @@
 
     
       <div class="article-meta">
-        <a href="/2021/01/14/backjoon-1931/" class="article-date">
-  <time datetime="2021-01-14T14:08:22.000Z" itemprop="datePublished">2021-01-14</time>
+        <a href="/2021/01/30/boj-1018/" class="article-date">
+  <time datetime="2021-01-29T16:06:34.000Z" itemprop="datePublished">2021-01-30</time>
 </a>
         
       </div>
@@ -535,131 +533,45 @@
 
       
         <ul>
-<li><a href="https://www.acmicpc.net/problem/1931" target="_blank" rel="noopener">https://www.acmicpc.net/problem/1931</a></li>
+<li>문제 링크: <a href="https://www.acmicpc.net/problem/1018" target="_blank" rel="noopener">https://www.acmicpc.net/problem/1018</a></li>
 </ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">n = int(input())</span><br><span class="line"></span><br><span class="line">times = []</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">    a, b = map(int, input().split())</span><br><span class="line">    times.append([a, b])</span><br><span class="line"></span><br><span class="line">times.sort()</span><br><span class="line">times.sort(key = <span class="keyword">lambda</span> x: x[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">count = <span class="number">0</span></span><br><span class="line">end_time = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> st, et <span class="keyword">in</span> times:</span><br><span class="line">    <span class="keyword">if</span> end_time &lt;= st:</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">        end_time = et</span><br><span class="line"></span><br><span class="line">print(count)</span><br></pre></td></tr></table></figure>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> N, M;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span>[][] chess;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> minNum = <span class="number">64</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		input();</span><br><span class="line">		<span class="keyword">if</span> (N == <span class="number">8</span> &amp;&amp; M == <span class="number">8</span>) &#123;</span><br><span class="line">			System.out.println(getPaintCount(<span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; M; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (i + <span class="number">7</span> &lt; N &amp;&amp; j + <span class="number">7</span> &lt; M) &#123;</span><br><span class="line">					minNum = Math.min(minNum, getPaintCount(i, j));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		System.out.println(minNum);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">		N = Integer.parseInt(st.nextToken());</span><br><span class="line">		M = Integer.parseInt(st.nextToken());</span><br><span class="line">		chess = <span class="keyword">new</span> <span class="keyword">char</span>[N][M];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">			chess[i] = br.readLine().toCharArray();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getPaintCount</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt; x + <span class="number">8</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = y; j &lt; y + <span class="number">8</span>; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">					<span class="keyword">if</span> (j % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; chess[i][j] == <span class="string">'W'</span>)</span><br><span class="line">						count++;</span><br><span class="line">					<span class="keyword">else</span> <span class="keyword">if</span> (j % <span class="number">2</span> != <span class="number">0</span> &amp;&amp; chess[i][j] == <span class="string">'B'</span>)</span><br><span class="line">						count++;</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="keyword">if</span> (j % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; chess[i][j] == <span class="string">'B'</span>)</span><br><span class="line">						count++;</span><br><span class="line">					<span class="keyword">else</span> <span class="keyword">if</span> (j % <span class="number">2</span> != <span class="number">0</span> &amp;&amp; chess[i][j] == <span class="string">'W'</span>)</span><br><span class="line">						count++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> Math.min(count, <span class="number">64</span> - count);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p>times 배열에 받아온다.</p>
+<li><p>브루트포스(완전 탐색) 문제이다.</p>
 </li>
-<li><p>회의 시간은 시작시간이 빠른 순으로 정렬한 후, 끝나는 시간이 빠른 순으로 정렬한다. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">times.sort()</span><br><span class="line">times.sort(key = <span class="keyword">lambda</span> x: x[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-
-<p>위 코드는 아래 처럼 줄일 수 있다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">times.sort(key = <span class="keyword">lambda</span> x: (x[<span class="number">1</span>], x[<span class="number">2</span>]))</span><br></pre></td></tr></table></figure>
+<li><p>8*8 크기의 체스판이 입력되면 단순히 다른 부분만 체크해서 반환한다.</p>
 </li>
-<li><p>정렬된 <code>times</code> 배열에서 하나씩 뽑아오며  <code>st</code>가 <code>end_time</code> 보다 크거나 같으면 <code>count</code>를 <code>1</code>더한다.</p>
-</li>
-<li><p><code>끝 시간(end_time)</code>에 <code>times 배열의 끝 시간(et)</code>으로 할당한다.<code>et</code>는 다음 회의 시작 시간과 비교할 대상이 되어야 하기 때문이다. </p>
+<li><p>그렇지 않으면 체스 맨 왼쪽, 맨 위 인덱스를 (0,0) 부터 (N-7, N-7) 까지 getPaintCount호출한다.</p>
 <ul>
-<li><code>end_time</code> : 회의 시간이 겹치지 않게 times의 회의 시간과 비교할 시간</li>
-<li><code>st</code>, <code>et</code> : 정렬된 <code>times</code> 배열에서의 시작, 끝 시간 </li>
+<li>getPaintCount로 받아온 x, y 를 함수 내에서는 0, 0 인 것으로 간주하기 위해 i와 j 를 각각 x, y로 초기화했다.</li>
+<li>8*8 크기의 체스판이기 때문에<code>chess[x][y]</code> 부터 <code>chess[x+7][x+7]</code> 까지 검사한다.</li>
 </ul>
 </li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/01/14/backjoon-1931/" data-id="ckkwuiz71003knzc9435296dr"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-joystick" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/14/programmers-joystick/">[프로그래머스] 조이스틱 - 탐욕법(Greedy) (파이썬)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/01/14/programmers-joystick/" class="article-date">
-  <time datetime="2021-01-13T16:07:22.000Z" itemprop="datePublished">2021-01-14</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>문제링크 : <a href="https://programmers.co.kr/learn/courses/30/lessons/42860" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/lessons/42860</a></li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(name)</span>:</span></span><br><span class="line">    name_c = []</span><br><span class="line">    answer = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 1.</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> name:</span><br><span class="line">        name_c.append(min(ord(<span class="string">'Z'</span>) - ord(c) + <span class="number">1</span>, ord(c) - ord(<span class="string">'A'</span>)))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 2.</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">'A'</span> <span class="keyword">not</span> <span class="keyword">in</span> name:</span><br><span class="line">        answer = sum(name_c) + len(name) - <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> answer</span><br><span class="line">    </span><br><span class="line">    cursor = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        <span class="comment"># 3.</span></span><br><span class="line">        answer += name_c[cursor]</span><br><span class="line">        <span class="comment"># 4.</span></span><br><span class="line">        name_c[cursor] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> sum(name_c) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> answer</span><br><span class="line">        <span class="comment"># 5.</span></span><br><span class="line">        left = <span class="number">1</span></span><br><span class="line">        right = <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> name_c[cursor - left] == <span class="number">0</span>:</span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> name_c[cursor + right] == <span class="number">0</span>:</span><br><span class="line">            right += <span class="number">1</span></span><br><span class="line">        <span class="comment"># 6.</span></span><br><span class="line">        <span class="keyword">if</span> left &lt; right:</span><br><span class="line">            cursor -= left</span><br><span class="line">            answer+= left</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            cursor += right</span><br><span class="line">            answer += right</span><br></pre></td></tr></table></figure>
-
+<li><p>이 문제에서 중요한 점 ! 체스판의 첫 인덱스(<code>chess[x][y]</code>)가 W 인경우와 B 인경우로 나눠서 생각해야하는데 생각해보면 </p>
+<p><strong>WBWWB</strong> &lt;= 이와 같은 상황에서 첫인덱스가 W 인경우 다시 칠해야 하는 페인트 수는 2이고, B인경우 다시 칠해야하는 페인트 수는 3이다. 즉 <strong>전체 개수 - B 인 경우 다시 칠해야하는 페인트수 = W 인 경우 다시 칠해야하는 페인트수</strong>가 된다.</p>
+<ul>
+<li><p>그렇기 때문에 두가지 경우의 수에서  minimum 값을 반환하면 된다.</p>
+</li>
+<li><p>체스판의 시작이 ‘B’라고 가정하고 </p>
 <ol>
-<li><p>주어진 이름의 글자 하나씩을 받아오면서 <code>알파벳과 &#39;Z&#39;사이의 거리</code> 와 <code>알파벳과  &#39;A&#39; 사이의 거리</code> 중 더 작은 값을 담는다.</p>
-<ul>
-<li>이때, <code>Z와의 거리</code>에 <code>+1</code> 을 한 이유는 처음 방향에서 스틱을 한번 아래로 움직여야 <code>Z</code>로 가기 때문이다.</li>
-</ul>
-</li>
-<li><p><code>name</code>에 <code>A</code>가 없는 경우에는 조이 스틱의 좌우 방향을 조작할 필요가 없기 때문에 아래 식을 계산해 반환하면 된다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">상하 움직인 총 수(sum(name_c)) + 한 방향으로 쭉 이동 한 수(len(name) <span class="number">-1</span> )</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>이유: <code>A</code>가 있는 경우에는 위,아래 스틱을 조종하지 않아도 되기 때문에 이동하지 않는 것이 더 움직인 수가 적어질 수 있다. <code>A</code>가 있는 경우를 고려하는 코드는 3번에 나온다.</li>
-</ul>
-</li>
-<li><p>먼저 <code>answer</code>에 <code>커서가 가르치고 있는 글자의 상하 방향 움직인 수(name_c[cursor])</code>를 더한다. </p>
-</li>
-<li><p>while 문 종료 조건이 <code>name_c의 총 합이 0(모든 알파벳이 &#39;A&#39;가 됨)</code>인 경우이기 때문에 <code>answer</code>에 더한 값은 <code>0(=&#39;A&#39;)</code>으로 바꿔준다.</p>
-</li>
-<li><p>while 문은 상하 이동 수가 <code>0</code>일 동안 이동하며 left또는 right 의 값을 1씩 증가 시킨다.</p>
-<ul>
-<li>cursor에 -left하는 경우엔 왼쪽 인덱스로, cursor에 +right하는 경우엔 오른쪽 인덱스로 이동한다.<ul>
-<li>파이썬은 리스트에서 list[-1]은 마지막 인덱스를 가리킨다. 따로 처리하지 않아도 된다.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><code>현재 인덱스</code>에서 <code>name_c가 0 (&#39;A&#39;)인 인덱스</code> 까지 왼쪽으로 이동한 수와 오른쪽으로 이동한 수를 비교하는 이유는 <code>상하 이동이 0인 인덱스</code>와 먼 인덱스 쪽으로 좌우를 움직이는 것이 더욱 조작 횟수를 줄이기 때문이다.</p>
-<ul>
-<li>비교한 후, 커서를 왼쪽 또는 오른쪽으로 이동시키고 다시 while문의 처음으로 돌아가 같은 과정을 반복해 모든 <code>0이 아닌 인덱스</code>를 조작해 ‘A’로 바꾸면 실행이 종료된다.</li>
-</ul>
-</li>
+<li>짝수 줄 짝수 번째는 ‘B’</li>
+<li>짝수 줄 홀수 번째는 ‘W’</li>
+<li>홀수 줄 짝수 번째는 ‘W’</li>
+<li>홀수 줄 홀수 번째는 ‘B ‘ </li>
 </ol>
-<p>그리디 너무 어렵당..</p>
+<p>가 아닌 경우에 count 를 증가 시켰다.</p>
+</li>
+</ul>
+</li>
+<li><p>체스판의 첫번째 위치를 계속 바꿔가며 getPaintCount를 통해 얻어온 최솟값을 계속 갱신해낸 후 마지막 값이 답이 된다.</p>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/01/14/programmers-joystick/" data-id="ckkwuiz7t006gnzc9b2z18ftg"
+      <a data-url="http://yoursite.com/2021/01/30/boj-1018/" data-id="ckkwv7v1w004d7sc95ym9ej6x"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
@@ -679,7 +591,7 @@
         
           
 
-<article id="post-macos-zulu-jdk" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-boj-1120" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -687,7 +599,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/13/macos-zulu-jdk/">[Mac OS] Zulu JDK 설치하기</a>
+      <a class="article-title" href="/2021/01/29/boj-1120/">[boj] 1120:문자열 (java)</a>
     </h2>
   
   
@@ -700,333 +612,8 @@
 
     
       <div class="article-meta">
-        <a href="/2021/01/13/macos-zulu-jdk/" class="article-date">
-  <time datetime="2021-01-13T01:42:00.000Z" itemprop="datePublished">2021-01-13</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ol>
-<li><p><strong>brew 업데이트 진행</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew update &amp;&amp; brew upgrade</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>기존 JDK 삭제</strong> </p>
-<p>기존 JDK가 설치되어 있는 폴더로 이동한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd &#x2F;Library&#x2F;Java&#x2F;JavaVirtualMachines&#x2F;</span><br></pre></td></tr></table></figure>
-
-<p>ls 명령어로 삭제할 jdk 명을 확인한 후 아래 명령어를 통해 삭제한다. (‘[‘와 ‘]’는 입력하지 않는다.)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo rm -rf [삭제할 jdk명]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>zulu 로 이동</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew tap mdogan&#x2F;zulu</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>zulu 설치</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew cask install 버전명</span><br></pre></td></tr></table></figure>
-
-<p><strong>버전명</strong> </p>
-<table>
-<thead>
-<tr>
-<th align="left">JDK</th>
-<th align="left">Cask Name</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">OpenJDK7</td>
-<td align="left"><code>zulu-jdk7</code></td>
-</tr>
-<tr>
-<td align="left">OpenJDK8</td>
-<td align="left"><code>zulu-jdk8</code></td>
-</tr>
-<tr>
-<td align="left">OpenJDK11</td>
-<td align="left"><code>zulu-jdk11</code></td>
-</tr>
-<tr>
-<td align="left">OpenJDK12</td>
-<td align="left"><code>zulu-jdk12</code></td>
-</tr>
-<tr>
-<td align="left">OpenJDK13</td>
-<td align="left"><code>zulu-jdk13</code></td>
-</tr>
-<tr>
-<td align="left">OpenJDK14</td>
-<td align="left"><code>zulu-jdk14</code></td>
-</tr>
-<tr>
-<td align="left">OpenJDK15</td>
-<td align="left"><code>zulu-jdk15</code></td>
-</tr>
-<tr>
-<td align="left">Misson Control</td>
-<td align="left"><code>zulu-mc</code></td>
-</tr>
-</tbody></table>
-<p>나는 OpenJDK8을 설치했는데 위 명령어를 입력했을 때 아래와 같은 에러메시지가 떴다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Calling brew cask install is disabled! Use brew install [--cask] instead.</span><br></pre></td></tr></table></figure>
-
-<p> 때문에 cask 를 안쓰고 아래처럼 입력했다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install zulu-jdk8</span><br></pre></td></tr></table></figure>
-
-<p>중간에 비밀번호를 입력하라고하면 입력한다. 아래와 같이 뜨면 성공이다 (맥주 이모티콘 귀엽다!)</p>
-<img src="../image/스크린샷 2021-01-13 오전 10.48.29.png" alt="스크린샷 2021-01-13 오전 10.48.29" style="zoom:50%;" />
-</li>
-<li><p><strong>확인</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ java -version</span><br><span class="line">$ javac -version</span><br></pre></td></tr></table></figure>
-
-<p>아래와 같이 뜨면 된다.</p>
-<img src="../image/스크린샷 2021-01-13 오전 11.04.56.png" alt="스크린샷 2021-01-13 오전 11.04.56" style="zoom:50%;" />
-
-</li>
-</ol>
-<br>
-
-<blockquote>
-<p>출처 : <a href="https://namocom.tistory.com/705" target="_blank" rel="noopener">https://namocom.tistory.com/705</a> , <a href="https://freedeveloper.tistory.com/198" target="_blank" rel="noopener">https://freedeveloper.tistory.com/198</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/01/13/macos-zulu-jdk/" data-id="ckkwuiz7n005tnzc90j7lgda4"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac%EC%84%A4%EC%B9%98/" rel="tag">Mac설치</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-java-inheritance" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/11/java-inheritance/">[Java Programming] 객체지향 핵심 원리 - 상속 / 오버라이딩 / 오버로딩</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/01/11/java-inheritance/" class="article-date">
-  <time datetime="2021-01-11T13:42:22.000Z" itemprop="datePublished">2021-01-11</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="1-상속-Inheritance"><a href="#1-상속-Inheritance" class="headerlink" title="1. 상속(Inheritance)"></a>1. 상속(Inheritance)</h1><p>부모의 클래스를 상속 받아 새로운 클래스를 정의해 부모의 모든것을 물려받는 것</p>
-<ul>
-<li><p>부모 클래스 = 기본 클래스 = 상위 클래스</p>
-</li>
-<li><p>자식 클래스 = 파생 클래스 = 확장된 클래스 = 하위 클래스</p>
-</li>
-<li><p><code>extends</code> 예약어를 사용한다.</p>
-</li>
-<li><p><strong>예시 코드 (상속을 사용하지 않을 때)</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">  String name;</span><br><span class="line">  <span class="keyword">int</span> number;</span><br><span class="line">  <span class="keyword">int</span> age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span></span>&#123;</span><br><span class="line">  String name;</span><br><span class="line">  <span class="keyword">int</span> number;</span><br><span class="line">  <span class="keyword">int</span> age;</span><br><span class="line">  String jobOfManage;</span><br><span class="line">  String boss;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>예시 코드 (상속을 사용할 때)</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">  String name;</span><br><span class="line">  <span class="keyword">int</span> number;</span><br><span class="line">  <span class="keyword">int</span> age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span> <span class="keyword">extends</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">  String jobOfManage;</span><br><span class="line">  String boss;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>상속을 통해 소스코드의 <strong>재사용성</strong>이 보장되며 <strong>가독성</strong>이 높아진다.</p>
-</li>
-<li><p>공통된 기능을 갖는다고 모두 상속할 수 있는 것은 아니다. 부모 클래스와 자식 클래스의 관계가 <strong>일반화와 특별화의 관계, ‘is a~’관계</strong> 에 있어야 한다.</p>
-<ul>
-<li><p>문법적으로 강제되는 것이 아닌 논리적으로 ‘is a~’관계가 성립되어야 한다.</p>
-<blockquote>
-<p>예) 프린터가 부모 클래스일 때 도트 프린터, 잉크젯 프린터, 레이저 프린터는 프린터라는 공통적인 특징을 가지기 때문에 상속 관계가 성립될 수 있지만 N사 카메라와는 기능이 같더라도 상속 관계가 성립될 수 없다.</p>
-</blockquote>
-</li>
-<li><p><strong>부적절한 상속</strong>은 소스코드에 대한 분석과 개발을 어렵게 만든다.</p>
-</li>
-</ul>
-</li>
-<li><p>상속은 부모로부터 물려받은 특징에 <strong><em>자식 클래스에서만 가지는 추가적인 특징을 더해서 만들어진 것</em></strong>이다.</p>
-</li>
-<li><p>자바는 개발의 편의성과 가독성을 위해 문법적으로 <strong>단일 상속</strong>만을 허용한다.</p>
-<ul>
-<li>단일 상속이란, 하나의 클래스는 오직 하나의 부모 클래스만 상속할 수 있다는 것을 의미한다.</li>
-<li>다중 상속은 동일한 변수와 메서드를 상속 되는 문제가 발생한다.</li>
-</ul>
-</li>
-</ul>
-<br>
-
-<h2 id="생성자-자동-호출"><a href="#생성자-자동-호출" class="headerlink" title="생성자 자동 호출"></a>생성자 자동 호출</h2><blockquote>
-<p>상속된 자식 클래스 객체가 생성될 때 부모클래스의 생성자도 자동으로 호출되어 수행되면서 객체 초기화가 이루어지도록 한다.</p>
-</blockquote>
-<ul>
-<li><p>이때, <strong>부모 클래스의 생성자</strong>가 먼저 초기화를 수행한 <strong>다음 자식 클래스의 생성자</strong>가 초기화가 이루어지는 순서를 따르고, 자식 클래스에 의해 자동으로 호출되는 부모 생성자는 별도로 지정하지 않는경우 매개변수가 없는 기본 생성자가 호출된다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SuperClass</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">int</span> num;</span><br><span class="line">  	</span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="title">SuperClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      	System.out.println(<span class="string">"SuperClass 객체 생성"</span>);</span><br><span class="line">      	num1 = <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SubClass</span> <span class="keyword">extends</span> <span class="title">SuperClass</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">int</span> num2;</span><br><span class="line">  	</span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="title">SubClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      	System.out.println(<span class="string">"SubClass 객체 생성"</span>);</span><br><span class="line">      	num2 = <span class="number">10000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConstructorTest</span> </span>&#123;</span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">      	SubClass sub = <span class="keyword">new</span> SubClass();</span><br><span class="line">      	System.out.println(sub.num1);</span><br><span class="line">      	System.out.println(sub.num2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>아래와 같이 출력된다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SuperClass 객체 생성</span><br><span class="line">SubClass 객체 생성</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="number">10000</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>만약 부모 클래스에 기본 생성자가 없으면 자식 클래스는 컴파일이 되지 않는다.</p>
-</li>
-</ul>
-<br>
-
-<h2 id="부모-생성자-super"><a href="#부모-생성자-super" class="headerlink" title="부모 생성자 super()"></a>부모 생성자 super()</h2><ul>
-<li><p><code>this()</code> 생성자 호출: 클래스 안에서 오버로딩 된 또 다른 생성자를 호출하기 위해 사용한다.</p>
-</li>
-<li><p><code>super()</code> 생성자 호출: <strong>부모</strong> 클래스의 생성자가 오버로딩 되어 여러개 존재하는 경우 <strong>특정 생성자를 호출</strong>하기 위해 사용한다. super() 생성자를 호출하지 않으면 부모의 생성자는 매개변수가 없는 기본 생성자가 호출된다.</p>
-</li>
-<li><p><code>super()</code>는 반드시 생성자의 첫 번째 라인에 위치해야 한다.</p>
-</li>
-</ul>
-<h2 id="예약어-super"><a href="#예약어-super" class="headerlink" title="예약어 super"></a>예약어 super</h2><ul>
-<li><p>부모 객체에 접근할 때 사용된다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">super</span>.name</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<br>
-
-<h2 id="변수-상속"><a href="#변수-상속" class="headerlink" title="변수 상속"></a>변수 상속</h2><ul>
-<li>상속에서 제외되는 상황<ul>
-<li><code>private</code>로 정의된 변수는 상속에서 제외된다.</li>
-<li>자식 클래스에서 부모 클래스가 가진 변수와 같은 이름의 변수를 선언하면, 부모 클래스의 변수는 상속되지 않는다.<ul>
-<li>이는 인스턴스 변수, 클래스 변수(<code>static</code>) 모두 동일하다.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<br>
-
-<h2 id="2-메서드-Overloading과-Overriding"><a href="#2-메서드-Overloading과-Overriding" class="headerlink" title="2. 메서드 Overloading과 Overriding"></a>2. 메서드 Overloading과 Overriding</h2><h2 id="메서드-오버라이딩-메서드-재정의"><a href="#메서드-오버라이딩-메서드-재정의" class="headerlink" title="메서드 오버라이딩 (메서드 재정의)"></a>메서드 오버라이딩 (메서드 재정의)</h2><blockquote>
-<p>상속 관계에 있는 두 개의 클래스에서 부모 클래스의 메서드를 재사용하지 않고 새롭게 정의하여 사용하는 것이다.</p>
-</blockquote>
-<ul>
-<li><p>자식 클래스에서 재정의된 메서드는 부모 클래스의 메서드와 메서드 이름, 매개변수의 유형과 개수가 동일해야한다. (동일한 시그니처를 가져야 한다.)</p>
-</li>
-<li><p>예제</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	String name;</span><br><span class="line">  	<span class="keyword">int</span> sheets;</span><br><span class="line">  </span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takePicture</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    		System.out.println(name + <span class="string">"로 "</span> + sheets + <span class="string">"번 사진을 찍는다."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PolaroidCamera</span> <span class="keyword">extends</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">int</span> batteryGage;</span><br><span class="line">  </span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takePicture</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      	<span class="keyword">super</span>.takePicture();</span><br><span class="line">      </span><br><span class="line">      	System.out.println(sheets + <span class="string">"장의 사진을 프린트한다."</span>);</span><br><span class="line">      	System.out.println(<span class="string">"현재 배터리 : "</span> + batteryGage + <span class="string">"%"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>super</code> 예약어를 사용해 메서드를 overriding 하면서 부모 클래스의 메서드를 사용할 수 있다.</li>
-</ul>
-</li>
-<li><p><code>final</code> 예약어와 Overriding</p>
-<ul>
-<li><p><code>final</code> + 변수 =&gt; 상수를 의미한다.</p>
-</li>
-<li><p><code>final</code> + 클래스 =&gt; 자식 클래스를 가질 수 없는 클래스임을 의미한다.</p>
-</li>
-<li><p><strong><code>final</code> + 메서드 =&gt; 오버라이딩을 금지하는 것을 의미한다.</strong></p>
-<ul>
-<li><p>자식 메서드가 부모 메서드를 오버라이딩할 때, 부모 메서드에 존재하는 메서드를 호출하지 않으면 문제가 발생한다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	String name;</span><br><span class="line">  	<span class="keyword">int</span> sheets;</span><br><span class="line">  </span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takePicture</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      	printPicture();</span><br><span class="line">    		System.out.println(name + <span class="string">"로 "</span> + sheets + <span class="string">"번 사진을 찍는다."</span>); 	</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PolaroidCamera</span> <span class="keyword">extends</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">int</span> batteryGage;</span><br><span class="line">  </span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takePicture</span><span class="params">()</span> </span>&#123; <span class="comment">// printPicture() 메서드 호출이 없기 때문에 문제가 발생한다.</span></span><br><span class="line">      	<span class="keyword">super</span>.takePicture();</span><br><span class="line">      </span><br><span class="line">      	System.out.println(sheets + <span class="string">"장의 사진을 프린트한다."</span>);</span><br><span class="line">      	System.out.println(<span class="string">"현재 배터리 : "</span> + batteryGage + <span class="string">"%"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>이를 방지하는 방법이 final 예약어를 사용하는 것이다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	String name;</span><br><span class="line">  	<span class="keyword">int</span> sheets;</span><br><span class="line">  </span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">takePicture</span><span class="params">()</span> </span>&#123; <span class="comment">// 오버라이딩을 하지 못하게 막음.</span></span><br><span class="line">      	printPicture();</span><br><span class="line">    		System.out.println(name + <span class="string">"로 "</span> + sheets + <span class="string">"번 사진을 찍는다."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PolaroidCamera</span> <span class="keyword">extends</span> <span class="title">Camera</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">int</span> batteryGage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="메서드-오버로딩"><a href="#메서드-오버로딩" class="headerlink" title="메서드 오버로딩"></a>메서드 오버로딩</h2><blockquote>
-<p>하나의 클래스에 동일한 이름의 메서드가 여러 개 중복 정의 되어 있는 것이다.</p>
-</blockquote>
-<ul>
-<li>부모 클래스와 메서드 이름이 동일해야 하며, 매개변수의 개수나 타입 중 최소 하나를 다르게 하여 재정의하는 것이다.</li>
-</ul>
-<p><strong>오버라이딩</strong>은 메서드를 새롭게 정의하는 것 ! <strong>오버로딩</strong>은 동일한 이름의 메서드를 여러 개로 정의하는 것!</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/01/11/java-inheritance/" data-id="ckkwuiz7m005onzc9g79z33qs"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%9E%90%EB%B0%94/" rel="tag">자바</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-backjoon-1065" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/11/backjoon-1065/">[백준알고리즘] 1065: 한수 (파이썬)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/01/11/backjoon-1065/" class="article-date">
-  <time datetime="2021-01-11T12:39:00.000Z" itemprop="datePublished">2021-01-11</time>
+        <a href="/2021/01/29/boj-1120/" class="article-date">
+  <time datetime="2021-01-28T15:22:00.000Z" itemprop="datePublished">2021-01-29</time>
 </a>
         
       </div>
@@ -1042,37 +629,214 @@
 
       
         <ul>
-<li>문제링크: <a href="https://www.acmicpc.net/problem/1065" target="_blank" rel="noopener">https://www.acmicpc.net/problem/1065</a></li>
+<li>문제 링크 : <a href="https://www.acmicpc.net/problem/1120" target="_blank" rel="noopener">https://www.acmicpc.net/problem/1120</a></li>
 </ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><ul>
-<li><strong>한수</strong>란?<br>각 자리 수가 등차 수열을 이루는 자연수 하나를 말한다.<br>여기서 등차 수열은 문제에도 나와있다 싶이 연속된 두 개의 수의 차이가 일정한 수열이다.<br>일단 1부터 9는 모두 한수이다. <code>11</code>은 각 자리의 차가 0으로 동일하기 때문에 <strong>동차가 0인 한수</strong>이다. <code>111</code>도 마찬가지이다. <strong>동차가 1인 한수</strong>로는 <code>123</code>, <code>345</code> 등이 있고, <strong>동차가 2인 한수</strong>로는 <code>135</code>, <code>468</code> 등이 있다.</li>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p><strong>내가 푼 풀이</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 클래스 이름 Main으로 바꾸기</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution1120</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		System.out.println(MinimumDiffBetweenAB(sc.next(), sc.next()));</span><br><span class="line">		sc.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">MinimumDiffBetweenAB</span><span class="params">(String A, String B)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(A.length() == B.length()) &#123;</span><br><span class="line">			<span class="keyword">return</span> calcDif(A, B);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> sub = B.length() - A.length();</span><br><span class="line">		<span class="keyword">int</span> aN = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> minNum = <span class="number">50</span>;</span><br><span class="line">		<span class="keyword">while</span>(aN &lt; sub) &#123;</span><br><span class="line">			minNum = Math.min(minNum, getDif(A, B, aN, sub-aN));</span><br><span class="line">			minNum = Math.min(minNum, getDif(A, B, sub-aN, aN));</span><br><span class="line">			aN++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> minNum; <span class="comment">// @return: diff between A and B</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getDif</span><span class="params">(String A, String B, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">		String result = newString(A);</span><br><span class="line">		<span class="keyword">while</span>(i&gt;<span class="number">0</span>) &#123;</span><br><span class="line">			result = B.charAt(i-<span class="number">1</span>) + result;</span><br><span class="line">			i--;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span>(j&gt;<span class="number">0</span>) &#123;</span><br><span class="line">			result = result + B.charAt(B.length()-j);</span><br><span class="line">			j--;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> calcDif(result,B);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">newString</span><span class="params">(String a)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">char</span>[] result = <span class="keyword">new</span> <span class="keyword">char</span>[a.length()];</span><br><span class="line">		<span class="keyword">int</span> i= <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">char</span> c : a.toCharArray()) &#123;</span><br><span class="line">			result[i++] = c;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> String.copyValueOf(result);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">calcDif</span><span class="params">(String A, String B)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>; i&lt; B.length(); i++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(B.charAt(i) != A.charAt(i)) cnt++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> cnt;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>먼저 두 문자열 길이의 차이를 구한다.</p>
+<ul>
+<li><p>두 문자열이 길이가 같다면 calcDif 함수에서 다른 알파벳 수만큼 return하면 된다.</p>
+</li>
+<li><p>두 문자열의 길이가 다르다면 더 긴(B) 문자열에서 짧은 문자열(A) 길이를 뺀다(sub).</p>
+<ul>
+<li><p>A의 왼쪽과 오른쪽에 적절한 알파벳을 추가하며 minNum을 계속 갱신해 나간다.</p>
+<p><strong>getDif(A, B, aN, sub-aN)</strong> </p>
+<ul>
+<li>A: 더 짧은 문자열</li>
+<li>B: 더 긴 문자열</li>
+<li>aN: 왼쪽에 추가할 문자 수</li>
+<li>sub-aN: 오른쪽에 추가할 문자 수</li>
+</ul>
+</li>
+<li><p>깊은 복사를 위해 newString 함수를 만들었다.</p>
+<p>생각해보니까 A의 앞뒤에는 항상 B와 같은 알파벳을 추가하기 때문에 계속해서 문자열을 갱신해 나가며 계산할 필요가 없다. 이 뜻은 B 문자열의 비교 시작 인덱스만 다르게해서 A와 비교하면 된다는 뜻이다.. 아래와 같이 풀면 된다. </p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <br>
 
-<p><strong>첫번째 풀이</strong> (N이 1000 이하인 조건을 만족하는 풀이)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">n = int(input())</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">()</span>:</span></span><br><span class="line">    answer = <span class="number">99</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">100</span>:</span><br><span class="line">        print(n)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>, n+<span class="number">1</span>):</span><br><span class="line">            nums = list(map(int, str(i)))</span><br><span class="line">            <span class="keyword">if</span> nums[<span class="number">1</span>] - nums[<span class="number">0</span>] == nums[<span class="number">2</span>] - nums[<span class="number">1</span>]:</span><br><span class="line">                answer += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    print(answer)</span><br><span class="line"></span><br><span class="line">solution()</span><br></pre></td></tr></table></figure>
+<p><strong>더 나은 풀이</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 클래스 이름 Main으로 바꾸기</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution1120</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		System.out.println(MinimumDiffBetweenAB(sc.next(), sc.next()));</span><br><span class="line">		sc.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">MinimumDiffBetweenAB</span><span class="params">(String A, String B)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(A.length() == B.length()) &#123;</span><br><span class="line">			<span class="keyword">return</span> getDif(A, B, <span class="number">0</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> sub = B.length() - A.length();</span><br><span class="line">		<span class="keyword">int</span> aN = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> minNum = <span class="number">50</span>;</span><br><span class="line">		<span class="keyword">while</span>(aN &lt;= sub) &#123; <span class="comment">// 0부터 문자열 길이 차이까지가 </span></span><br><span class="line">			minNum = Math.min(minNum, getDif(A, B, aN++)); <span class="comment">// B문자열의 비교 시작 인덱스가 된다.</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> minNum;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getDif</span><span class="params">(String A, String B, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i&lt; A.length(); i++, j++) &#123;</span><br><span class="line">				<span class="keyword">if</span>(B.charAt(j) != A.charAt(i)) cnt++;</span><br><span class="line">			&#125;</span><br><span class="line">		<span class="keyword">return</span> cnt;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/29/boj-1120/" data-id="ckkwv7v20004p7sc9b226c7d0"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-boj-2941" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/01/28/boj-2941/">[boj] 2941: 크로아티아 알파벳 (java)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/28/boj-2941/" class="article-date">
+  <time datetime="2021-01-28T14:32:48.000Z" itemprop="datePublished">2021-01-28</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제링크: <a href="https://www.acmicpc.net/problem/2941" target="_blank" rel="noopener">https://www.acmicpc.net/problem/2941</a></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 클래스 이름 Main으로 바꾸기</span></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution2941</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> String[] kroatia = <span class="keyword">new</span> String[] &#123;<span class="string">"c="</span>,<span class="string">"c-"</span>,<span class="string">"dz="</span>,<span class="string">"d-"</span>,<span class="string">"lj"</span>,<span class="string">"nj"</span>,<span class="string">"s="</span>,<span class="string">"z="</span>&#125;;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		printResult(getLengthOfKroatiaWord(makeInput()));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLengthOfKroatiaWord</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// @param word: Make algorithm using variable `word`</span></span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> cursor = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line">		<span class="keyword">while</span>(cursor&lt; word.length()) &#123;</span><br><span class="line">			<span class="keyword">for</span>(String c : kroatia) &#123;</span><br><span class="line">				<span class="keyword">if</span>(word.substring(cursor,word.length()).startsWith(c)) &#123;</span><br><span class="line">					count++;</span><br><span class="line">					cursor += c.length();</span><br><span class="line">					flag =<span class="keyword">true</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(flag) &#123;</span><br><span class="line">				flag =<span class="keyword">false</span>;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				count++;</span><br><span class="line">				cursor++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> count; <span class="comment">// @return: the length Of Kroatia Word</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">makeInput</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">new</span> Scanner(System.in).next();&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printResult</span><span class="params">(<span class="keyword">int</span> lengthOfKroatiaWord)</span> </span>&#123; System.out.println(lengthOfKroatiaWord); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>99까지는 모두 한수이기 때문에 <code>n</code>이 99 이하이면 무조건 <code>n</code>을 출력하고 실행을 종료하도록 구현했다.</li>
-<li><code>n</code> 이 <code>123</code>이면 <code>nums</code> 는 <code>[1,2,3]</code> 이 된다.</li>
-<li>세자리 부터 999까지는 <code>두번째자리수와 첫번째 자리수의 차이값</code>이 <code>세번째 자리수와 두번째 자리수의 차이값</code> 과 같다면 answer에 1을 더하는 방식으로 구현했다.</li>
+<li><p><code>cursor</code>는 인덱스 역할을 한다. <code>cursor</code>부터 끝까지 <code>word</code>를 자르고, <code>cursor</code>번째 위치에서 크로아티아 알파벳으로 시작하는지 검사한다.</p>
+<ul>
+<li>배열(<code>kroatia</code>)에 있는 알파벳으로 시작한다면(<code>startsWith</code>) <code>count(알파벳 수)</code>를 1 증가시키고, <code>cursor</code>는 해당 알파벳 길이만큼 증가시킨다.</li>
+<li>배열에 있는 알파벳으로 시작하지 않는다면, 한글자 알파벳이므로 <code>count</code>, <code>cursor</code> 모두 1 증가시킨다.</li>
 </ul>
 <br>
 
-<p><strong>두번째 풀이</strong> (N이 1001 이상이어도 구할 수 있는 코드)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">n = int(input())</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check</span><span class="params">(nums)</span>:</span></span><br><span class="line">    div = nums[<span class="number">1</span>] - nums[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)<span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">if</span> div != nums[i+<span class="number">1</span>] - nums[i]:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">()</span>:</span></span><br><span class="line">    answer = <span class="number">99</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">100</span>:</span><br><span class="line">        print(n)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>, n+<span class="number">1</span>):</span><br><span class="line">            nums = list(map(int, str(i)))</span><br><span class="line">            answer += check(nums)</span><br><span class="line"></span><br><span class="line">    print(answer)</span><br><span class="line"></span><br><span class="line">solution()</span><br></pre></td></tr></table></figure>
+<p><strong><code>replaceAll</code> 을 사용하면 더욱 깔끔한 코드를 짤 수 있고, 시간도 더 빠르다.</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> String[] kroatia = <span class="keyword">new</span> String[] &#123;<span class="string">"c="</span>,<span class="string">"c-"</span>,<span class="string">"dz="</span>,<span class="string">"d-"</span>,<span class="string">"lj"</span>,<span class="string">"nj"</span>,<span class="string">"s="</span>,<span class="string">"z="</span>&#125;;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		printResult(getLengthOfKroatiaWord(makeInput()));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLengthOfKroatiaWord</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// @param word: Make algorithm using variable `word`</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(String c: kroatia) &#123;</span><br><span class="line">			word = word.replace(c,<span class="string">"."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> word.length();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">makeInput</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">new</span> Scanner(System.in).next();&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printResult</span><span class="params">(<span class="keyword">int</span> lengthOfKroatiaWord)</span> </span>&#123; System.out.println(lengthOfKroatiaWord);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><code>check</code> 함수는 각자리수를 담은 <code>nums</code> 배열을 받는다. </li>
-<li><code>check</code> 함수는 <code>n</code>이 100이상일때만 실행되기 때문에 반드시 <code>nums[1]</code>과 <code>nums[0]</code>이 존재한다. 이를 이용해 동차를 구했다.</li>
-<li><code>nums</code> 배열의 마지막 자리까지 차이를 구하며 동차와 다른 즉시 <code>0</code>을 반환하고 이를 <code>answer</code>에 더한다.</li>
-<li>만약 모든 자리수의 차가 동차와 같다면 <code>1</code>을 반환해 이를 <code>answer</code>에 더한다.</li>
+
+
+</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://dlthgml1997.github.io/2021/01/11/backjoon-1065/" data-id="ckkwuiz6p002jnzc99r7eeolj"
+      <a data-url="http://yoursite.com/2021/01/28/boj-2941/" data-id="ckkwv7v2300517sc914ch7mg3"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
+<article id="post-boj-9657" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/01/28/boj-9657/">[boj] 9657 돌 게임 3 (java)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/28/boj-9657/" class="article-date">
+  <time datetime="2021-01-27T18:13:00.000Z" itemprop="datePublished">2021-01-28</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제링크: <a href="https://www.acmicpc.net/problem/9657" target="_blank" rel="noopener">https://www.acmicpc.net/problem/9657</a> </li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">boolean</span>[] dp;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> rock;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> turn = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">		rock = Integer.valueOf(br.readLine());</span><br><span class="line"></span><br><span class="line">		dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="number">1001</span>];</span><br><span class="line">		dp[<span class="number">1</span>] = dp[<span class="number">3</span>] = dp[<span class="number">4</span>] = <span class="keyword">true</span>;</span><br><span class="line">		dp[<span class="number">2</span>] = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">5</span>; i &lt;= rock; i++) &#123;</span><br><span class="line">			dp[i] = !(dp[i - <span class="number">1</span>] &amp;&amp; dp[i - <span class="number">3</span>] &amp;&amp; dp[i - <span class="number">4</span>]);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (dp[rock])</span><br><span class="line">			System.out.println(<span class="string">"SK"</span>);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			System.out.println(<span class="string">"CY"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>이 문제는 <code>dp</code>를 이용하는 문제이다. 나는 메모이제이션할 배열로(<code>dp</code>) <strong>상근이의 승리 여부</strong>를 사용했다.<br>예를 들어, <code>dp[6]</code>에는 <strong>돌이 6개일 때 상근이가 승리(true)할 지, 패배(false)할지</strong>가 담긴다.</p>
+<ul>
+<li><p>SK(상근이)가 먼저 게임을 시작하고 <code>1개</code> 또는 <code>3개</code> 또는 <code>4개</code>의 돌을 주어갈 수 있으므로,</p>
+<ul>
+<li><code>dp[1]</code>  <code>dp[3]</code>  <code>dp[4]</code> 는 무조건 <strong>SK가 승리(true)</strong>한다.</li>
+<li><code>dp[2]</code>는 SK가 1개 가져간 후, CY(창영이)가 1개 가져가는 방법밖에 없다. 즉, <strong>SK가 패배</strong>하는 것이 확실하므로 <code>dp[2]</code> 는 <strong>false</strong>이다.</li>
+</ul>
+</li>
+<li><p><code>dp[5]</code> 부터는 <code>마지막돌(5)</code> 기준으로 돌맹이 <code>하나 줍기전(4)</code>,<code>세개 줍기전(2)</code>,<code>네개 줍기 전(1)</code> 중에 한번이라도 <code>자신이 진 경우(2:false이다.)</code>가 있다면 !<br><code>진 경우(2)</code>에서 그만큼(<strong>세개</strong>) 주으면 <code>dp[5]</code>에서는 승리할 수 있다는 뜻이 되므로 SK가 무조건 승리할 수 있게 된다.</p>
+<ul>
+<li><p>이를 코드로 바꾸면 아래와 같다</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i] = !(dp[i - <span class="number">1</span>] &amp;&amp; dp[i - <span class="number">3</span>] &amp;&amp; dp[i - <span class="number">4</span>]);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/28/boj-9657/" data-id="ckkwv7v2400557sc91cd17ekj"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
@@ -1125,6 +889,10 @@
   <button class="navbar-toggle"></button>
 <nav class="navbar">
   
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="IT&#39;s easy if you try"></a>
+    </div>
+  
   <ul class="nav nav-main">
     
       <li class="nav-item">
@@ -1136,11 +904,11 @@
       </li>
     
       <li class="nav-item">
-        <a class="nav-item-link" href="/tags">Tags</a>
+        <a class="nav-item-link" href="/gallery">Gallery</a>
       </li>
     
       <li class="nav-item">
-        <a class="nav-item-link" href="/atom.xml">rss</a>
+        <a class="nav-item-link" href="/about">About</a>
       </li>
     
     <li class="nav-item">
@@ -1159,6 +927,10 @@
 </div>
     </li>
     <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
       
     </li>
   </ul>
