@@ -64,6 +64,102 @@
         
           
 
+<article id="post-boj-1018" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/01/30/boj-1018/">[boj] 1018:체스판 다시 칠하기 (java)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/30/boj-1018/" class="article-date">
+  <time datetime="2021-01-29T16:06:34.000Z" itemprop="datePublished">2021-01-30</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크: <a href="https://www.acmicpc.net/problem/1018" target="_blank" rel="noopener">https://www.acmicpc.net/problem/1018</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	<span class="keyword">static</span> StringTokenizer st;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> N, M;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span>[][] chess;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> minNum = <span class="number">64</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		input();</span><br><span class="line">		<span class="keyword">if</span> (N == <span class="number">8</span> &amp;&amp; M == <span class="number">8</span>) &#123;</span><br><span class="line">			System.out.println(getPaintCount(<span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; M; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (i + <span class="number">7</span> &lt; N &amp;&amp; j + <span class="number">7</span> &lt; M) &#123;</span><br><span class="line">					minNum = Math.min(minNum, getPaintCount(i, j));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		System.out.println(minNum);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">input</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">		N = Integer.parseInt(st.nextToken());</span><br><span class="line">		M = Integer.parseInt(st.nextToken());</span><br><span class="line">		chess = <span class="keyword">new</span> <span class="keyword">char</span>[N][M];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">			chess[i] = br.readLine().toCharArray();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getPaintCount</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt; x + <span class="number">8</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = y; j &lt; y + <span class="number">8</span>; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">					<span class="keyword">if</span> (j % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; chess[i][j] == <span class="string">'W'</span>)</span><br><span class="line">						count++;</span><br><span class="line">					<span class="keyword">else</span> <span class="keyword">if</span> (j % <span class="number">2</span> != <span class="number">0</span> &amp;&amp; chess[i][j] == <span class="string">'B'</span>)</span><br><span class="line">						count++;</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="keyword">if</span> (j % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; chess[i][j] == <span class="string">'B'</span>)</span><br><span class="line">						count++;</span><br><span class="line">					<span class="keyword">else</span> <span class="keyword">if</span> (j % <span class="number">2</span> != <span class="number">0</span> &amp;&amp; chess[i][j] == <span class="string">'W'</span>)</span><br><span class="line">						count++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> Math.min(count, <span class="number">64</span> - count);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>브루트포스(완전 탐색) 문제이다.</p>
+</li>
+<li><p>8*8 크기의 체스판이 입력되면 단순히 다른 부분만 체크해서 반환한다.</p>
+</li>
+<li><p>그렇지 않으면 체스 맨 왼쪽, 맨 위 인덱스를 (0,0) 부터 (N-7, N-7) 까지 getPaintCount호출한다.</p>
+<ul>
+<li>getPaintCount로 받아온 x, y 를 함수 내에서는 0, 0 인 것으로 간주하기 위해 i와 j 를 각각 x, y로 초기화했다.</li>
+<li>8*8 크기의 체스판이기 때문에<code>chess[x][y]</code> 부터 <code>chess[x+7][x+7]</code> 까지 검사한다.</li>
+</ul>
+</li>
+<li><p>이 문제에서 중요한 점 ! 체스판의 첫 인덱스(<code>chess[x][y]</code>)가 W 인경우와 B 인경우로 나눠서 생각해야하는데 생각해보면 </p>
+<p><strong>WBWWB</strong> &lt;= 이와 같은 상황에서 첫인덱스가 W 인경우 다시 칠해야 하는 페인트 수는 2이고, B인경우 다시 칠해야하는 페인트 수는 3이다. 즉 <strong>전체 개수 - B 인 경우 다시 칠해야하는 페인트수 = W 인 경우 다시 칠해야하는 페인트수</strong>가 된다.</p>
+<ul>
+<li><p>그렇기 때문에 두가지 경우의 수에서  minimum 값을 반환하면 된다.</p>
+</li>
+<li><p>체스판의 시작이 ‘B’라고 가정하고 </p>
+<ol>
+<li>짝수 줄 짝수 번째는 ‘B’</li>
+<li>짝수 줄 홀수 번째는 ‘W’</li>
+<li>홀수 줄 짝수 번째는 ‘W’</li>
+<li>홀수 줄 홀수 번째는 ‘B ‘ </li>
+</ol>
+<p>가 아닌 경우에 count 를 증가 시켰다.</p>
+</li>
+</ul>
+</li>
+<li><p>체스판의 첫번째 위치를 계속 바꿔가며 getPaintCount를 통해 얻어온 최솟값을 계속 갱신해낸 후 마지막 값이 답이 된다.</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/30/boj-1018/" data-id="ckkiiqihv0000iqc915f0clop"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-boj-1120" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -762,119 +858,6 @@
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-programmers-target-number-02" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/19/programmers-target-number-02/">[프로그래머스] 타켓 넘버- DFS/BFS (파이썬) - Packing / Unpacking / 곱집합(product)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/01/19/programmers-target-number-02/" class="article-date">
-  <time datetime="2021-01-18T16:19:00.000Z" itemprop="datePublished">2021-01-19</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>문제 링크: <a href="https://programmers.co.kr/learn/courses/30/lessons/43165" target="_blank" rel="noopener">https://programmers.co.kr/learn/courses/30/lessons/43165</a></li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><p>기존에 재귀를 이용한 풀이를 했었는데, 새로운 내용을 배울 수 있는 풀이가 있어서 다시 풀어봤다. 먼저 코드를 보자.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> product</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(numbers, target)</span>:</span></span><br><span class="line">    <span class="comment"># 1</span></span><br><span class="line">    case = [[i, -i] <span class="keyword">for</span> i <span class="keyword">in</span> numbers]</span><br><span class="line">    <span class="comment"># 2</span></span><br><span class="line">    result = list(map(sum, product(*case)))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 3</span></span><br><span class="line">    <span class="keyword">return</span> result.count(target)</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li><p><code>case</code>에 <code>numbers</code>에서 숫자를 하나씩 받아오며 양수와 음수인 경우를 이차원 배열로 담는다.</p>
-</li>
-<li><p><code>case</code>인자 앞에 <code>Aterisk(*)</code>를 붙여 <code>Unpacking</code>하고, <code>product</code>를 통해 곱집합을 수행해 모든 경우의 수로 더한 결과 값들을 <code>result</code> 배열에 담는다. </p>
-</li>
-<li><p>결과는 <code>result</code> 배열의 값들 중 <code>target</code>과 동일한 값의 갯수이다.</p>
-</li>
-</ol>
-<p><strong>Unpacking</strong>, <strong>product</strong>에 대한 설명은 아래에 있다.</p>
-<br>
-
-<h2 id="01-Packing-vs-Unpacking"><a href="#01-Packing-vs-Unpacking" class="headerlink" title="01. Packing vs Unpacking"></a>01. Packing vs Unpacking</h2><ul>
-<li><p><strong>Packing ?</strong> </p>
-<p>여러개의 값을 하나의 객체로 합쳐서 받을 수 있도록 돕는다. 대표적인 예로 위치인자(<code>*args</code>)와 키워드 인자(<code>**kwargs</code>)가 있다.</p>
-<ul>
-<li><p><code>*args</code></p>
-<p>위치 인자가 패킹하는 매개변수를 만나면 그 이후에 위치인자가 몇개이던지, <code>tuple</code>로 하나의 객체가 되어서 관리된다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(*args)</span>:</span> <span class="comment"># 인자</span></span><br><span class="line">	  print(args)</span><br><span class="line">    print(type(args))</span><br><span class="line">    </span><br><span class="line">func(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="string">'a'</span>,<span class="string">'b'</span>) <span class="comment"># 매개변수</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 출력: (1,2,3,4,'a','b')</span></span><br><span class="line"><span class="comment">#      &lt;class 'tuple'&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>**kwargs</code></p>
-<p>키워드 인자가 패킹하는 매개변수를 만나면 그 이후에 키워드 인자가 몇개이던지, <code>dict(딕셔너리)</code>로 하나의 객체가 되어서 관리된다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">kwpacking</span><span class="params">(**kwargs)</span>:</span></span><br><span class="line">     print(kwargs)</span><br><span class="line">     print(type(kwargs)</span><br><span class="line"></span><br><span class="line">kwpacking(a=<span class="number">1</span>, b=<span class="number">2</span>, c=<span class="number">3</span>)</span><br><span class="line">           </span><br><span class="line"><span class="comment"># 출력: &#123;'a': 1, 'b': 2, 'c': 3&#125;</span></span><br><span class="line"><span class="comment">#      &lt;class 'dict'&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p><strong>Unpacking ?</strong></p>
-<p>여러개의 객체를 포함하고 있는 하나의 객체를 풀어주는 것으로, Packing의 반대 개념이다. </p>
-<p>매개변수가 아닌 인자 앞에 <code>*</code> 을 붙인다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum</span><span class="params">(a, b, c)</span>:</span></span><br><span class="line">  	<span class="keyword">return</span> a+b+c</span><br><span class="line">  </span><br><span class="line">numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">sum(*numbers)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6</span></span><br></pre></td></tr></table></figure>
-
-<p>그냥 <code>sum(numbers)</code> 를 사용하면 에러가 나지만 인자 앞에 Aterisk(<code>*</code>)를 붙여 Unpacking하면 에러가 나지 않는다.</p>
-<p>이 문제에서는 곱집합에 사용 될 수 있도록 객체를 풀어주는 역할을 하고 있다. </p>
-</li>
-</ul>
-<blockquote>
-<p>참고: <a href="https://wikidocs.net/22801" target="_blank" rel="noopener">https://wikidocs.net/22801</a></p>
-</blockquote>
-<br>
-
-<h2 id="02-Product"><a href="#02-Product" class="headerlink" title="02. Product"></a>02. Product</h2><p>곱집합은 아래와 같은 리스트가 있을 때,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A &#x3D; [-1, 1] </span><br><span class="line">B &#x3D; [-2, 2]</span><br><span class="line">C &#x3D; [-3, 3]</span><br></pre></td></tr></table></figure>
-
-<p><code>(-1, -2), (-1, -3), (1, -2), (1, 2), (-2, -3), (-2, 3), •••</code>와 같은 집합으로 묶어주는 것이다.</p>
-<ul>
-<li>이 문제에서는  <code>numbers</code>에서 숫자를 하나씩 받아오며 양수와 음수인 경우를 담은 이차원 배열인  <code>case</code> 의 모든 경우의 수를 구하기 위해 사용되었다. </li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/01/19/programmers-target-number-02/" data-id="ckk2saumb0000vtc9f3zk9uys"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">파이썬, 알고리즘</a></li></ul>
 
     </footer>
 
