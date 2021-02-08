@@ -64,6 +64,119 @@
         
           
 
+<article id="post-backjoon-7576" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/01/10/backjoon-7576/">[백준알고리즘] 7576: 토마토 (파이썬)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/10/backjoon-7576/" class="article-date">
+  <time datetime="2021-01-10T13:00:00.000Z" itemprop="datePublished">2021-01-10</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제 링크: <a href="https://www.acmicpc.net/problem/7576" target="_blank" rel="noopener">https://www.acmicpc.net/problem/7576</a></li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"></span><br><span class="line">n, m = map(int, input().split())</span><br><span class="line">box = []</span><br><span class="line"></span><br><span class="line">dx = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">1</span>]</span><br><span class="line">dy = [<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span><span class="params">(apples)</span>:</span></span><br><span class="line">    day = <span class="number">-1</span></span><br><span class="line">    <span class="keyword">while</span> apples:</span><br><span class="line">        day += <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(apples)):</span><br><span class="line">            x, y = apples.popleft()</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">                nx = x + dx[i]</span><br><span class="line">                ny = y + dy[i]</span><br><span class="line">                <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; m <span class="keyword">and</span> <span class="number">0</span> &lt;= ny &lt; n <span class="keyword">and</span> box[nx][ny] == <span class="number">0</span>:</span><br><span class="line">                    box[nx][ny] = box[x][y] + <span class="number">1</span></span><br><span class="line">                    apples.append([nx, ny])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> box:</span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> <span class="keyword">in</span> i:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">    <span class="keyword">return</span> day</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">()</span>:</span></span><br><span class="line">    apples = deque()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</span><br><span class="line">        box.append(list(map(int, input().split())))</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> box[i][j] == <span class="number">1</span>:</span><br><span class="line">                apples.append([i, j])</span><br><span class="line">    answer = bfs(apples)</span><br><span class="line">    print(answer)</span><br><span class="line"></span><br><span class="line">solution()</span><br></pre></td></tr></table></figure>
+
+<p>시간 초과의 늪에 빠졌던 문제다. 한 박스에 익은 토마토가 2개 이상일 수 있는 점을 유의해서 bfs를 구현하는 점이 어려웠다.</p>
+<ul>
+<li><p>먼저 첫 날, 익은 토마토(1)의 좌표를 모두 apples에 담는다.</p>
+</li>
+<li><p>bfs를 실행한다.</p>
+<ul>
+<li><p>day 를 -1 로 초기화한 이유</p>
+<ol>
+<li><p>먼저 예외 상황을 생각해보자. <strong>만약 모든 박스가 <code>1</code>과<code>-1</code>로 채워져 있는 경우</strong>에는 주변을 익게 하지 않고도 모든 사과가 익어있는 상황이기 때문에 0이 프린트 되어야한다. 그러나 <code>apples</code>에는 <code>1</code>의 좌표가 모두 담겨있기 때문에 <code>bfs</code> 함수의 while문이 한번은 실행될 것이다. 그렇기 때문에 <code>day</code>는 <code>-1</code>로 초기화 해준다.</p>
+</li>
+<li><p>모든 사과가 익은 날에 마지막 익은 사과는 자신 주변에 안익은 사과가 없어도 <code>apples</code>에 좌표가 담긴다. 그렇기 때문에 마지막 while문이 실행되고 이때 <code>day</code> 가 <code>+ 1</code> 되기 때문에 처음에<code>day</code>를 <code>-1</code>로 초기화해야 정상적인 <code>day</code> 가 출력될 수 있다.</p>
+</li>
+</ol>
+</li>
+<li><p>하루마다 전날 익은 사과는 <code>apples</code>에서 비우고 새롭게 익은 사과들을 <code>apples</code>에 담기도록 구현하기 위해 <code>apples</code>의 길이만큼 for문을 실행한다.</p>
+</li>
+<li><p>모든 <code>1</code>주변 사과를 익게 만든 후, 안익은 사과가 있는지 확인하고 안익은 사과가 있다면 <code>-1</code>을 출력한다.</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>중요 포인트 ! </p>
+</blockquote>
+<ul>
+<li><strong>기존에 사용해왔던 <code>queue = [] , queue.pop(0)</code> 방식으로 하면 O(n)으로 느려지기 때문에 <code>collections</code>의 <code>deque</code>로 구현해 O(1) 이 되도록 해야한다.</strong></li>
+</ul>
+<br>
+
+<p><strong>시간 초과 다른 풀이</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">n, m = map(int, input().split())</span><br><span class="line">box = []</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(m):</span><br><span class="line">    box.append(list(map(int, input().split())))</span><br><span class="line">visited = [[<span class="number">0</span>] * n <span class="keyword">for</span> _ <span class="keyword">in</span> range(m)]</span><br><span class="line">dx = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">1</span>]</span><br><span class="line">dy = [<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(x, y, cnt)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        nx = x + dx[i]</span><br><span class="line">        ny = y + dy[i]</span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; m <span class="keyword">and</span> <span class="number">0</span> &lt;= ny &lt; n <span class="keyword">and</span> box[nx][ny] == <span class="number">0</span>:</span><br><span class="line">            box[nx][ny] = <span class="number">1</span></span><br><span class="line">            visited[nx][ny] = cnt + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        nx = x + dx[i]</span><br><span class="line">        ny = y + dy[i]</span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; m <span class="keyword">and</span> <span class="number">0</span> &lt;= ny &lt; n</span><br><span class="line">        		<span class="keyword">if</span> box[nx][ny] == <span class="number">0</span> <span class="keyword">or</span> box[nx][ny] == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">()</span>:</span></span><br><span class="line">    cnt = <span class="number">0</span></span><br><span class="line">    flag = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        visit_check = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">if</span> box[i][j] == <span class="number">1</span> <span class="keyword">and</span> visited[i][j] == cnt:</span><br><span class="line">                    visit_check = <span class="number">1</span></span><br><span class="line">                    dfs(i, j, cnt)</span><br><span class="line">                <span class="keyword">if</span> flag == <span class="number">0</span> <span class="keyword">and</span> box[i][j] == <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">if</span> check(i, j) == <span class="number">1</span>:</span><br><span class="line">                        print(<span class="number">-1</span>)</span><br><span class="line">                        <span class="keyword">return</span></span><br><span class="line">        flag = <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> visit_check == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            cnt += <span class="number">1</span></span><br><span class="line">    print(cnt - <span class="number">1</span>)</span><br><span class="line">solution()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>이 풀이는 테스트 케이스는 맞았지만 시간 초과가 난 풀이이다. </p>
+<ul>
+<li>하루마다 while 문이 실행되도록 해서 이중 포문을 실행하는 거부터 문제다 ! <ul>
+<li>하루마다 익은 토마토 주변 토마토를 익게하고 <code>visited</code>에 몇일 지났는지를 표시한다.</li>
+<li>그 다음 날, while 문이 실행될 때 <code>visited</code>가 전날인 토마토를 찾아 다시 주변 토마토를 익게하도록 했다.</li>
+</ul>
+</li>
+<li>while 문 종료 조건은 이중 포문을 다 돌았을 때, 한번도 주변 토마토를 익히지 않았을 때이다. (익힐 수 있는 토마토는 다 익힌 상태)</li>
+<li>첫날에 안익은 토마토 주변이 다 비어있으면 -1을 print하고 실행을 종료하는 <code>check</code> 함수를 구현했다.</li>
+</ul>
+</li>
+<li><p>아주 비효율적인 구현이었다.. ! </p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/10/backjoon-7576/" data-id="ckjr9xmyw0000zzc987ig5pp0"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-java-constructor" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -1307,105 +1420,6 @@
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-cloud-computing-type" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/12/17/cloud-computing-type/">[클라우드 컴퓨팅] 클라우드 컴퓨팅의 종류</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/12/17/cloud-computing-type/" class="article-date">
-  <time datetime="2020-12-17T12:21:04.000Z" itemprop="datePublished">2020-12-17</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="클라우드-컴퓨팅의-종류"><a href="#클라우드-컴퓨팅의-종류" class="headerlink" title="클라우드 컴퓨팅의 종류"></a>클라우드 컴퓨팅의 종류</h1><p><strong>어떤 자원을 제공하는지</strong>에 따라 구분한다.</p>
-<h2 id="1-SaaS-Software-as-a-Service"><a href="#1-SaaS-Software-as-a-Service" class="headerlink" title="1. SaaS (Software as a Service)"></a><strong>1. SaaS (Software as a Service)</strong></h2><p>: 클라우드 서비스 중 가장 일반적인 것이다. 서비스 제공자가 <strong>모든 인프라와 소프트웨어 제품</strong>을 제공한다.</p>
-<blockquote>
-<p>주요 특징</p>
-</blockquote>
-<ol>
-<li>사용자는 <strong>웹 기반의 프론트엔드</strong>로 서비스와 상호작용한다.</li>
-<li>필요할 때 <strong>비용만 내면 어디서든</strong> 곧바로 사용이 가능하다.</li>
-<li><strong>소프트웨어 설치</strong>를 위한 비용과 시간이 <strong>불필요</strong>하다.</li>
-<li><strong>중앙에서 해당 소프트웨어를 관리</strong>하기 때문에 사용자가 일일이 업그레이드나 패치 작업을 할 필요가 없다.</li>
-</ol>
-<p>ex&gt; 구글 앱스, 세일즈포스닷컴, MS 오피스365, 드롭박스와 같은 클라우드 스토리지 서비스 등</p>
-<br>
-
-<h2 id="2-PaaS-Platform-as-a-Service"><a href="#2-PaaS-Platform-as-a-Service" class="headerlink" title="2. PaaS (Platform as a Service)"></a>2. <strong>PaaS (Platform as a Service)</strong></h2><p>: 서비스 제공자가 자체 하드웨어 인프라에서 호스트하는 <strong>소프트웨어와 제품 개발 도구</strong>를 제공한다.</p>
-<blockquote>
-<p>주요 특징</p>
-</blockquote>
-<ol>
-<li>서비스 제공을 위해 개발 기술 모듈화, 표준화 능력, 기반에 최적화해 설치하는 기술력, 지원력 등의 <strong>기술요건이 필요</strong>하다.</li>
-<li>모니터링이나 프로비저닝, 비용 처리방식(Billing)이 <strong>솔루션 개발사에 유리하게 구성</strong>되어 있다.</li>
-</ol>
-<p>ex&gt; Google App Engine, 마이크로소프트 Azure</p>
-<br>
-
-<h2 id="3-IaaS-Infrastructure-as-a-Service"><a href="#3-IaaS-Infrastructure-as-a-Service" class="headerlink" title="3. IaaS (Infrastructure as a Service)"></a><strong>3. IaaS (Infrastructure as a Service)</strong></h2><p>: 가상 서버라고도 불리며, 데이터 스토리지 및 데이터베이스와 같은 일련의 <strong>빌딩블록에 대한 엑세스를 제공</strong>한다.</p>
-<blockquote>
-<p>주요 특징</p>
-</blockquote>
-<ol>
-<li><p>서비스 제공을 위해 <strong>대규모 데이터 센터의 서버 구축 및 운용 능력, 자본력, 넓은 대지, 풍부한 전력 환경 등이 필요</strong>하다.</p>
-</li>
-<li><p>가상공간의 서버 자원을 제공하는 서비스로 <strong>서버의 확장이 가능</strong>하며 <strong>윈도우나 리눅스 모두 지원</strong>하므로 몇 분 안에 서버를 만들어 낼 수 있다.</p>
-</li>
-<li><p>사용자는 이러한 빌딩 블록을 결합하거나 계층 구조화하여 <strong>애플리케이션을 실행하는데 필요한 인프라를 구축</strong>할 수 있다.</p>
-</li>
-</ol>
-<p>ex&gt; AWS(Amazon Web Services)와 Rackspace</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/12/17/cloud-computing-type/" data-id="ckisycoo300019bc98jev3zal"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C/" rel="tag">클라우드</a></li></ul>
 
     </footer>
 

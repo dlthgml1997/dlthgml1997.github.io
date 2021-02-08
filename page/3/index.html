@@ -64,6 +64,86 @@
         
           
 
+<article id="post-swea-1221" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2021/01/21/swea-1221/">[SW Expert Academy] 1221: GNS (JAVA)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2021/01/21/swea-1221/" class="article-date">
+  <time datetime="2021-01-21T14:46:00.000Z" itemprop="datePublished">2021-01-21</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <ul>
+<li>문제: <a href="https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14jJh6ACYCFAYD" target="_blank" rel="noopener">https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14jJh6ACYCFAYD</a> &gt; 로그인</li>
+</ul>
+<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sohee.algo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.util.StringTokenizer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution1221</span> </span>&#123;</span><br><span class="line"><span class="keyword">static</span> String[] numbers = <span class="keyword">new</span> String[]&#123;<span class="string">"ZRO"</span>, <span class="string">"ONE"</span>, <span class="string">"TWO"</span>, <span class="string">"THR"</span>, <span class="string">"FOR"</span>, <span class="string">"FIV"</span>, <span class="string">"SIX"</span>, <span class="string">"SVN"</span>, <span class="string">"EGT"</span>, <span class="string">"NIN"</span>&#125;;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> [] cnt;</span><br><span class="line">	<span class="keyword">static</span> String testCase;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> N;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">// System.setIn(new FileInputStream("GNS_test_input.txt")); </span></span><br><span class="line">		BufferedReader br= <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">		<span class="keyword">int</span> T = stoi(br.readLine());</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> t = <span class="number">0</span>; t &lt; T; t++) &#123;</span><br><span class="line">      cnt = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">			</span><br><span class="line">      StringTokenizer st = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">			testCase = st.nextToken();</span><br><span class="line">			N = stoi(st.nextToken());</span><br><span class="line">			</span><br><span class="line">			StringTokenizer st2 = <span class="keyword">new</span> StringTokenizer(br.readLine());</span><br><span class="line">			countNums(st2);</span><br><span class="line">			printNums();	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">countNums</span><span class="params">(StringTokenizer st)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt; N; i++) &#123;</span><br><span class="line">			String input = st.nextToken();</span><br><span class="line">			<span class="keyword">if</span> (input.equals(<span class="string">"ZRO"</span>)) cnt[<span class="number">0</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"ONE"</span>)) cnt[<span class="number">1</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"TWO"</span>)) cnt[<span class="number">2</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"THR"</span>)) cnt[<span class="number">3</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"FOR"</span>)) cnt[<span class="number">4</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"FIV"</span>)) cnt[<span class="number">5</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"SIX"</span>)) cnt[<span class="number">6</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"SVN"</span>)) cnt[<span class="number">7</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"EGT"</span>)) cnt[<span class="number">8</span>]++;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">"NIN"</span>)) cnt[<span class="number">9</span>]++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printNums</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(testCase+<span class="string">" "</span>);</span><br><span class="line">		<span class="keyword">int</span> now = <span class="number">0</span>; <span class="comment">// 0 부터 시작</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> num : cnt) &#123;</span><br><span class="line">			<span class="keyword">while</span>(num &gt; <span class="number">0</span>) &#123;</span><br><span class="line">				System.out.print(numbers[now]+<span class="string">" "</span>);</span><br><span class="line">				num--;</span><br><span class="line">			&#125;</span><br><span class="line">			now++;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">stoi</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Integer.valueOf(input);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>input</strong>은 아래와 같은 형식으로 들어온다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line">#1 11</span><br><span class="line">SVN FOR ZRO NIN FOR EGT EGT TWO FOR FIV FIV</span><br><span class="line">#2 20</span><br><span class="line">ONE SVN ONE ONE FIV TWO SVN SIX ONE FOR TWO THR TWO TWO ONE SIX EGT FIV SVN SIX</span><br></pre></td></tr></table></figure>
+
+<p>이 때, <strong>output(정답)</strong>은 아래와 같다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#1 </span><br><span class="line">ZRO TWO FOR FOR FOR FIV FIV SVN EGT EGT NIN </span><br><span class="line">#2 </span><br><span class="line">ONE ONE ONE ONE ONE TWO TWO TWO TWO THR FOR FIV FIV SIX SIX SIX SVN SVN SVN EGT</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>String  배열인 <code>numbers</code>를 행성에서 <code>0~9</code>로 사용되는 값인 <code>&quot;ZRO&quot;, &quot;ONE&quot;, &quot;TWO&quot;, &quot;THR&quot;, &quot;FOR&quot;, &quot;FIV&quot;, &quot;SIX&quot;, &quot;SVN&quot;, &quot;EGT&quot;, &quot;NIN&quot;</code> 로 초기화한다.</p>
+</li>
+<li><p><code>countNums()</code>: int 배열 <code>cnt</code>는 크기를 <code>10</code>으로 하고 input으로 들어오는 <code>ZRO</code> 부터 <code>NIN</code>까지 해당하는 값에 따라 해당 인덱스에 1씩 더한다.</p>
+</li>
+<li><p><code>printNums()</code> : 먼저 <code>now</code> 는 <code>0~9</code> 를 의미하며 오름차순으로 <code>sort</code>해야하기 때문에 <code>0</code>부터 시작해 while문이 종료될 때마다 <code>1</code>씩 증가시켰다. for문에서는 <code>cnt</code> 배열에서 순서대로 count(<code>num</code>) 값을 받아오고, while문에서는 count값(<code>num</code>)을 하나씩 빼가며 모든 <code>now</code> 인덱스에 해당하는 <code>numbers</code> 객체를 출력(<code>num == 0</code>)한 후 종료 된다.</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/01/21/swea-1221/" data-id="ckk70fi2800019sc906sw8zgf"
+         class="article-share-link">공유</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+        
+          
+
 <article id="post-swea-1217" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -993,119 +1073,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2021/01/11/backjoon-1065/" data-id="ckjskkrsk0000pyc9cu5t0xy5"
-         class="article-share-link">공유</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-        
-          
-
-<article id="post-backjoon-7576" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2021/01/10/backjoon-7576/">[백준알고리즘] 7576: 토마토 (파이썬)</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/01/10/backjoon-7576/" class="article-date">
-  <time datetime="2021-01-10T13:00:00.000Z" itemprop="datePublished">2021-01-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <ul>
-<li>문제 링크: <a href="https://www.acmicpc.net/problem/7576" target="_blank" rel="noopener">https://www.acmicpc.net/problem/7576</a></li>
-</ul>
-<h1 id="풀이"><a href="#풀이" class="headerlink" title="풀이"></a>풀이</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"></span><br><span class="line">n, m = map(int, input().split())</span><br><span class="line">box = []</span><br><span class="line"></span><br><span class="line">dx = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">1</span>]</span><br><span class="line">dy = [<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span><span class="params">(apples)</span>:</span></span><br><span class="line">    day = <span class="number">-1</span></span><br><span class="line">    <span class="keyword">while</span> apples:</span><br><span class="line">        day += <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(apples)):</span><br><span class="line">            x, y = apples.popleft()</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">                nx = x + dx[i]</span><br><span class="line">                ny = y + dy[i]</span><br><span class="line">                <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; m <span class="keyword">and</span> <span class="number">0</span> &lt;= ny &lt; n <span class="keyword">and</span> box[nx][ny] == <span class="number">0</span>:</span><br><span class="line">                    box[nx][ny] = box[x][y] + <span class="number">1</span></span><br><span class="line">                    apples.append([nx, ny])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> box:</span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> <span class="keyword">in</span> i:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">    <span class="keyword">return</span> day</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">()</span>:</span></span><br><span class="line">    apples = deque()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</span><br><span class="line">        box.append(list(map(int, input().split())))</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> box[i][j] == <span class="number">1</span>:</span><br><span class="line">                apples.append([i, j])</span><br><span class="line">    answer = bfs(apples)</span><br><span class="line">    print(answer)</span><br><span class="line"></span><br><span class="line">solution()</span><br></pre></td></tr></table></figure>
-
-<p>시간 초과의 늪에 빠졌던 문제다. 한 박스에 익은 토마토가 2개 이상일 수 있는 점을 유의해서 bfs를 구현하는 점이 어려웠다.</p>
-<ul>
-<li><p>먼저 첫 날, 익은 토마토(1)의 좌표를 모두 apples에 담는다.</p>
-</li>
-<li><p>bfs를 실행한다.</p>
-<ul>
-<li><p>day 를 -1 로 초기화한 이유</p>
-<ol>
-<li><p>먼저 예외 상황을 생각해보자. <strong>만약 모든 박스가 <code>1</code>과<code>-1</code>로 채워져 있는 경우</strong>에는 주변을 익게 하지 않고도 모든 사과가 익어있는 상황이기 때문에 0이 프린트 되어야한다. 그러나 <code>apples</code>에는 <code>1</code>의 좌표가 모두 담겨있기 때문에 <code>bfs</code> 함수의 while문이 한번은 실행될 것이다. 그렇기 때문에 <code>day</code>는 <code>-1</code>로 초기화 해준다.</p>
-</li>
-<li><p>모든 사과가 익은 날에 마지막 익은 사과는 자신 주변에 안익은 사과가 없어도 <code>apples</code>에 좌표가 담긴다. 그렇기 때문에 마지막 while문이 실행되고 이때 <code>day</code> 가 <code>+ 1</code> 되기 때문에 처음에<code>day</code>를 <code>-1</code>로 초기화해야 정상적인 <code>day</code> 가 출력될 수 있다.</p>
-</li>
-</ol>
-</li>
-<li><p>하루마다 전날 익은 사과는 <code>apples</code>에서 비우고 새롭게 익은 사과들을 <code>apples</code>에 담기도록 구현하기 위해 <code>apples</code>의 길이만큼 for문을 실행한다.</p>
-</li>
-<li><p>모든 <code>1</code>주변 사과를 익게 만든 후, 안익은 사과가 있는지 확인하고 안익은 사과가 있다면 <code>-1</code>을 출력한다.</p>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>중요 포인트 ! </p>
-</blockquote>
-<ul>
-<li><strong>기존에 사용해왔던 <code>queue = [] , queue.pop(0)</code> 방식으로 하면 O(n)으로 느려지기 때문에 <code>collections</code>의 <code>deque</code>로 구현해 O(1) 이 되도록 해야한다.</strong></li>
-</ul>
-<br>
-
-<p><strong>시간 초과 다른 풀이</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">n, m = map(int, input().split())</span><br><span class="line">box = []</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(m):</span><br><span class="line">    box.append(list(map(int, input().split())))</span><br><span class="line">visited = [[<span class="number">0</span>] * n <span class="keyword">for</span> _ <span class="keyword">in</span> range(m)]</span><br><span class="line">dx = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">1</span>]</span><br><span class="line">dy = [<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(x, y, cnt)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        nx = x + dx[i]</span><br><span class="line">        ny = y + dy[i]</span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; m <span class="keyword">and</span> <span class="number">0</span> &lt;= ny &lt; n <span class="keyword">and</span> box[nx][ny] == <span class="number">0</span>:</span><br><span class="line">            box[nx][ny] = <span class="number">1</span></span><br><span class="line">            visited[nx][ny] = cnt + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        nx = x + dx[i]</span><br><span class="line">        ny = y + dy[i]</span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> &lt;= nx &lt; m <span class="keyword">and</span> <span class="number">0</span> &lt;= ny &lt; n</span><br><span class="line">        		<span class="keyword">if</span> box[nx][ny] == <span class="number">0</span> <span class="keyword">or</span> box[nx][ny] == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">()</span>:</span></span><br><span class="line">    cnt = <span class="number">0</span></span><br><span class="line">    flag = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        visit_check = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">if</span> box[i][j] == <span class="number">1</span> <span class="keyword">and</span> visited[i][j] == cnt:</span><br><span class="line">                    visit_check = <span class="number">1</span></span><br><span class="line">                    dfs(i, j, cnt)</span><br><span class="line">                <span class="keyword">if</span> flag == <span class="number">0</span> <span class="keyword">and</span> box[i][j] == <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">if</span> check(i, j) == <span class="number">1</span>:</span><br><span class="line">                        print(<span class="number">-1</span>)</span><br><span class="line">                        <span class="keyword">return</span></span><br><span class="line">        flag = <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> visit_check == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            cnt += <span class="number">1</span></span><br><span class="line">    print(cnt - <span class="number">1</span>)</span><br><span class="line">solution()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>이 풀이는 테스트 케이스는 맞았지만 시간 초과가 난 풀이이다. </p>
-<ul>
-<li>하루마다 while 문이 실행되도록 해서 이중 포문을 실행하는 거부터 문제다 ! <ul>
-<li>하루마다 익은 토마토 주변 토마토를 익게하고 <code>visited</code>에 몇일 지났는지를 표시한다.</li>
-<li>그 다음 날, while 문이 실행될 때 <code>visited</code>가 전날인 토마토를 찾아 다시 주변 토마토를 익게하도록 했다.</li>
-</ul>
-</li>
-<li>while 문 종료 조건은 이중 포문을 다 돌았을 때, 한번도 주변 토마토를 익히지 않았을 때이다. (익힐 수 있는 토마토는 다 익힌 상태)</li>
-<li>첫날에 안익은 토마토 주변이 다 비어있으면 -1을 print하고 실행을 종료하는 <code>check</code> 함수를 구현했다.</li>
-</ul>
-</li>
-<li><p>아주 비효율적인 구현이었다.. ! </p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/01/10/backjoon-7576/" data-id="ckjr9xmyw0000zzc987ig5pp0"
          class="article-share-link">공유</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" rel="tag">알고리즘</a></li></ul>
